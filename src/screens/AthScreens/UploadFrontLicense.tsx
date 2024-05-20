@@ -1,50 +1,42 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-  Image,
-  ActivityIndicator,
-} from "react-native";
-import React, { useState, useRef, useEffect } from "react";
-import BackButton from "../../widget/BackButton";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
-import * as MediaLibrary from "expo-media-library";
-import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import React, { useRef, useState, useEffect } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import PreviewPhoto from "../../component/Verification/PreviewPhoto";
+import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import * as MediaLibrary from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
+import PreviewFrontLicense from "../../component/Verification/PreviewFrontLicense";
 
-const UploadProfilePhotoScreen = () => {
-  const [loading, setIsLoading] = useState(false);
-  const [facing, setFacing] = useState("front");
+const UploadFrontLicense = () => {
+  const [facing, setFacing] = useState("back");
   const [photo, setPhoto] = useState() as any;
   const [permission, requestPermission] = useCameraPermissions();
-  const [hasCameraPermision, setHasCameraPermission] = useState(Boolean);
+  const [hasCameraaPermission, setHasCameraPermission] = useState(Boolean);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
+
+  const cameraRef = useRef();
   const navigation = useNavigation();
-  let cameraRef = useRef();
 
   useEffect(() => {
     async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission =
+      const cameraPermession = await Camera.requestCameraPermissionsAsync();
+      const medialibraryPermission =
         await MediaLibrary.requestPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === "granted");
-      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
+      setHasCameraPermission(cameraPermession.status === "granted");
+      setHasMediaLibraryPermission(medialibraryPermission.status === "granted");
     };
   }, []);
+
   function toggleCameraFacing() {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
   const takePic = async () => {
-    setIsLoading(true);
+    //   setIsLoading(true);
     let options = {
       quality: 1,
       base64: true,
@@ -52,41 +44,27 @@ const UploadProfilePhotoScreen = () => {
     };
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     if (newPhoto) {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
     setPhoto(newPhoto);
   };
 
-  if (!permission) {
-    // Camera permissions are still loading.
-    return <View />;
-  }
-
   if (photo) {
     return (
-      <PreviewPhoto
-        hasMediaLibraryPermission={hasMediaLibraryPermission}
-        setPhoto={setPhoto}
+      <PreviewFrontLicense
         photo={photo}
+        setPhoto={setPhoto}
+        hasMediaLibraryPermission={hasMediaLibraryPermission}
       />
-    );
-  }
-
-  if (!permission.granted) {
-    // Camera permissions are not granted yet.
-    return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: "center" }}>
-          We need your permission to show the camera
-        </Text>
-        <Button onPress={requestPermission} title="grant permission" />
-      </View>
     );
   }
   return (
     <View style={styles.container}>
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={{ margin: wp(4) }}
+          onPress={() => navigation.goBack()}
+        >
           <AntDesign
             name="close"
             size={wp(6)}
@@ -95,6 +73,23 @@ const UploadProfilePhotoScreen = () => {
           />
         </TouchableOpacity>
         {/* {loading && <ActivityIndicator />} */}
+        <View style={{ alignItems: "center", marginTop: wp(45) }}>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 1,
+              borderStyle: "dashed",
+              borderColor: "white",
+              height: hp(30),
+              width: wp(90),
+            }}
+          >
+            <Text style={{ fontSize: wp(7), color: "white" }}>
+              Front card here
+            </Text>
+          </View>
+        </View>
         <View style={styles.buttonContainer}></View>
 
         <View
@@ -119,7 +114,7 @@ const UploadProfilePhotoScreen = () => {
   );
 };
 
-export default UploadProfilePhotoScreen;
+export default UploadFrontLicense;
 
 const styles = StyleSheet.create({
   container: {

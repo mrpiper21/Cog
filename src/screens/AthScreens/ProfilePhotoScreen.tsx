@@ -12,21 +12,14 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Btn from "../../widget/Btn";
+import ProgressBar from "../../component/Verification/ProgressBar";
 
 const ProfilePhotoScreen = () => {
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
       <BackButton />
       {/**tracking bar */}
-      <View
-        className="bg-blue-500"
-        style={{
-          width: wp(90),
-          height: wp(2),
-          borderRadius: wp(2),
-          marginVertical: wp(4),
-        }}
-      />
+      <ProgressBar />
       <View>
         <Text style={{ fontSize: wp(4), fontWeight: "800" }}>
           Take a Profile Photo

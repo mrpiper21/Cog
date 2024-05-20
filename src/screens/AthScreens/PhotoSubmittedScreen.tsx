@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import BackButton from "../../widget/BackButton";
@@ -7,8 +7,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Btn from "../../widget/Btn";
+import { useNavigation } from "@react-navigation/native";
 
 const PhotoSubmittedScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <View
       style={{
@@ -31,7 +33,7 @@ const PhotoSubmittedScreen = () => {
         </View>
       </View>
       <View style={{ marginBottom: wp(4) }}>
-        <Btn label={"Go to next step"} />
+        <Btn label={"Go to next step"} route={"License-front"} />
       </View>
     </View>
   );
