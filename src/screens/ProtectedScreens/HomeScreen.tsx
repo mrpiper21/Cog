@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import MapView from "react-native-maps";
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import {
   AntDesign,
@@ -13,14 +13,18 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import SearchScreen from "./SearchScreen";
 
 const HomeScreen = (): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
+  const [searchView, setSearchView] = useState(false);
 
   const snapPoints = useMemo(() => ["12%"], []);
 
-  return (
+  return searchView ? (
+    <SearchScreen setSearch={setSearchView} />
+  ) : (
     <View style={styles.container}>
       <MapView style={styles.map} />
       <View style={{ position: "absolute", marginTop: wp(20) }}></View>
@@ -48,7 +52,7 @@ const HomeScreen = (): React.JSX.Element => {
         <Ionicons name="reorder-two-outline" size={wp(8)} color="black" />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => setSearchView(!searchView)}
         style={styles.searcBar}
       >
         <AntDesign name="search1" size={wp(6)} color="black" />

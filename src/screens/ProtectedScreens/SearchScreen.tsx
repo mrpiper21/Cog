@@ -1,10 +1,52 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View } from "react-native";
+import React, { useState } from "react";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import LocationItem from "../../component/Search/LocationItem";
+import HomeLoactionItem from "../../component/Search/HomeLoactionItem";
+import NearbyLocationContainer from "../../component/Search/NearbyLocationContainer";
+import SearBarContainer from "../../component/Search/SearBarContainer";
 
-const SearchScreen = () => {
+interface searchProps {
+  setSearch: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
+  const [typing, setTyping] = useState(false);
   return (
-    <View>
-      <Text>SearchScreen</Text>
+    <View style={{ flex: 1 }}>
+      {/**SearchContainer */}
+      <SearBarContainer setSearch={setSearch} setTyping={setTyping} />
+      {typing ? (
+        <LocationItem
+          title={"Orchard View"}
+          location={"2335 Orchard View Lane, Escondido CA 92027"}
+        />
+      ) : (
+        <View>
+          {/**Home location item */}
+          <HomeLoactionItem />
+
+          {/**Nearby location item list */}
+          <NearbyLocationContainer />
+          <View style={{ marginTop: wp(2) }}>
+            <LocationItem
+              title={"Pleasanton"}
+              location={"3959 Fairlands Drive, Pleasanton CA 94588"}
+            />
+            <LocationItem
+              title={"Orchard View"}
+              location={"2335 Orchard View Lane, Escondido CA 92027"}
+            />
+            <LocationItem
+              title={"Orchard View"}
+              location={"2335 Orchard View Lane, Escondido CA 92027"}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
