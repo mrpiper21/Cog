@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 import BackButton from "../../widget/BackButton";
 import {
@@ -34,7 +28,6 @@ const ProfilePhotoScreen = () => {
             height: "auto",
             marginLeft: wp(3),
             justifyContent: "center",
-            // flexWrap: "wrap",
           }}
         >
           <Text style={{ fontSize: hp(1.8), marginTop: wp(3.5) }}>

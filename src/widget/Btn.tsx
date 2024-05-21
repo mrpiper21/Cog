@@ -16,13 +16,13 @@ const Btn: React.FC<ButtonProps> = ({ route, label }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(route)}
-      className="bg-blue-500"
       style={{
         width: wp(90),
         height: hp(7.3),
         alignItems: "center",
         justifyContent: "center",
         borderRadius: wp(2),
+        backgroundColor: "#4460EF",
       }}
     >
       <Text

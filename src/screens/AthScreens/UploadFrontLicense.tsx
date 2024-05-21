@@ -18,7 +18,7 @@ const UploadFrontLicense = () => {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
 
-  const cameraRef = useRef();
+  const cameraRef = useRef<CameraView>(null);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const UploadFrontLicense = () => {
       base64: true,
       exit: false,
     };
-    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    let newPhoto = await cameraRef.current?.takePictureAsync(options);
     if (newPhoto) {
       // setIsLoading(false);
     }
@@ -60,7 +60,7 @@ const UploadFrontLicense = () => {
   }
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+      <CameraView style={styles.camera} facing={"back"} ref={cameraRef}>
         <TouchableOpacity
           style={{ margin: wp(4) }}
           onPress={() => navigation.goBack()}
