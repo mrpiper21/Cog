@@ -27,7 +27,7 @@ const UploadProfilePhotoScreen = () => {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
   const navigation = useNavigation();
-  let cameraRef = useRef();
+  let cameraRef = useRef<CameraView>(null);
 
   useEffect(() => {
     async () => {
@@ -49,7 +49,7 @@ const UploadProfilePhotoScreen = () => {
       base64: true,
       exit: false,
     };
-    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    let newPhoto = await cameraRef?.current?.takePictureAsync(options);
     if (newPhoto) {
       setIsLoading(false);
     }

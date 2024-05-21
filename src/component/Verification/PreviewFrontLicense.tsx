@@ -67,12 +67,12 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
       </View>
       <View style={{ alignItems: "center", marginTop: wp(42) }}>
         <TouchableOpacity
-          className="bg-blue-500"
           style={{
             width: wp(90),
             height: hp(7.3),
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "#4460EF",
             borderRadius: wp(2),
           }}
           onPress={handleSubmit}
