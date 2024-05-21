@@ -97,6 +97,7 @@ const UploadFrontLicense = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "flex-end",
+            marginBottom: wp(2),
           }}
         >
           <TouchableOpacity onPress={takePic}>

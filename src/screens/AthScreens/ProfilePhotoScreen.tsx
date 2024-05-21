@@ -11,7 +11,9 @@ import ProgressBar from "../../component/Verification/ProgressBar";
 const ProfilePhotoScreen = () => {
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
-      <BackButton />
+      <View style={{ marginTop: wp(12) }}>
+        <BackButton />
+      </View>
       {/**tracking bar */}
       <ProgressBar />
       <View>

@@ -19,7 +19,9 @@ const PhotoSubmittedScreen = () => {
         justifyContent: "space-between",
       }}
     >
-      <BackButton />
+      <View style={{ marginTop: wp(12) }}>
+        <BackButton />
+      </View>
       <View style={{ alignItems: "center" }}>
         <AntDesign name="checkcircle" size={wp(20)} color="green" />
         <View style={{ alignItems: "center", marginTop: wp(4) }}>

@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   backButton: {
     height: wp(10),
     width: wp(10),
-    marginTop: wp(12),
     borderRadius: wp(10),
     borderWidth: 1,
     borderColor: "lightgray",

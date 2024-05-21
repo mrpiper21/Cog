@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
-import BackButton from "../../widget/BackButton";
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";

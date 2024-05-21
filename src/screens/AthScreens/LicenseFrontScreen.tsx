@@ -11,7 +11,9 @@ import Btn from "../../widget/Btn";
 const LicenseFrontScreen = () => {
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
-      <BackButton />
+      <View style={{ marginTop: wp(12) }}>
+        <BackButton />
+      </View>
       <ProgressBar />
       <View>
         <Text style={{ fontSize: wp(5), fontWeight: "500" }}>

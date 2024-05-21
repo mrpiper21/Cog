@@ -17,7 +17,9 @@ const VerificationScreen = () => {
   return (
     <View style={{ flex: 1, padding: wp(3) }}>
       {/**Back arrow */}
-      <BackButton />
+      <View style={{ marginTop: wp(12) }}>
+        <BackButton />
+      </View>
 
       {/**Welcome text and info */}
       <View style={{ marginBottom: hp(3), marginTop: hp(3) }}>

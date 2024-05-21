@@ -31,7 +31,9 @@ const HomeScreen = (): React.JSX.Element => {
       <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef}>
         <BottomSheetView>
           <View style={styles.bottomSheetContainer}>
-            <Ionicons name="options-outline" size={wp(8)} color="black" />
+            <TouchableOpacity onPress={() => navigation.navigate("Preference")}>
+              <Ionicons name="options-outline" size={wp(8)} color="black" />
+            </TouchableOpacity>
             <View style={{ flexDirection: "row" }}>
               <TouchableOpacity style={styles.goOnlineBtn}>
                 <Text style={{ color: "white" }}>Go Online</Text>
@@ -44,7 +46,11 @@ const HomeScreen = (): React.JSX.Element => {
                 />
               </TouchableOpacity>
             </View>
-            <AntDesign name="bars" size={wp(8)} color="black" />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Recommendation")}
+            >
+              <AntDesign name="bars" size={wp(8)} color="black" />
+            </TouchableOpacity>
           </View>
         </BottomSheetView>
       </BottomSheet>

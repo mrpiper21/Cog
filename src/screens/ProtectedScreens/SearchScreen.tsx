@@ -20,10 +20,12 @@ const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
       {/**SearchContainer */}
       <SearBarContainer setSearch={setSearch} setTyping={setTyping} />
       {typing ? (
-        <LocationItem
-          title={"Orchard View"}
-          location={"2335 Orchard View Lane, Escondido CA 92027"}
-        />
+        <View style={{ marginTop: wp(2) }}>
+          <LocationItem
+            title={"Orchard View"}
+            location={"2335 Orchard View Lane, Escondido CA 92027"}
+          />
+        </View>
       ) : (
         <View>
           {/**Home location item */}
