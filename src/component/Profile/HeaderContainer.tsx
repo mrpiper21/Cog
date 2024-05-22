@@ -5,8 +5,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const HeaderContainer = () => {
+  const navigation = useNavigation() as any;
   return (
     <View
       style={{
@@ -43,6 +45,7 @@ const HeaderContainer = () => {
             Femi Vanzekin
           </Text>
           <TouchableOpacity
+            onPress={() => navigation.navigate("ProfileDetail")}
             style={{
               justifyContent: "center",
               alignItems: "center",
