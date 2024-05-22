@@ -13,7 +13,7 @@ import SearchScreen from "./SearchScreen";
 
 const HomeScreen = (): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
 
   const snapPoints = useMemo(() => ["12%"], []);

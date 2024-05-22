@@ -5,6 +5,7 @@ import PreferenceScreen from "../../screens/ProtectedScreens/PreferenceScreen";
 import RecommendationScreen from "../../screens/ProtectedScreens/RecommendationScreen";
 import DrawStack from "./DrawStack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import ProfileScreen from "../../screens/ProtectedScreens/ProfileScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -15,11 +16,7 @@ const ProtectStack = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Preference" component={PreferenceScreen} />
       <Stack.Screen name="Recommendation" component={RecommendationScreen} />
-      {/* <Stack.Screen
-        options={{ headerShown: false }}
-        name="Drawer"
-        component={DrawStack}
-      /> */}
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };

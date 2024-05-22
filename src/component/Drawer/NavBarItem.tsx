@@ -1,19 +1,23 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   icon: React.ReactNode;
   label: String;
   msg?: Number;
+  route: String;
 }
 
-const NavBarItem: React.FC<Props> = ({ icon, label, msg }) => {
+const NavBarItem: React.FC<Props> = ({ icon, label, msg, route }) => {
+  const navigation = useNavigation() as any;
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate(route)}
       style={{
         flexDirection: "row",
         alignItems: "center",
@@ -39,7 +43,7 @@ const NavBarItem: React.FC<Props> = ({ icon, label, msg }) => {
           <Text style={{ color: "white" }}>3</Text>
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,14 +1,22 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { ProfilerProps } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+interface PofileProps {
+  route: String;
+}
 
-const ProfileItem = () => {
+const ProfileItem: React.FC<PofileProps> = ({ route }) => {
+  const navigation = useNavigation() as any;
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(route)}
+      style={{ flexDirection: "row", alignItems: "center" }}
+    >
       <Image
         style={{
           height: wp(12),
@@ -35,7 +43,7 @@ const ProfileItem = () => {
           <Text>4.6</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

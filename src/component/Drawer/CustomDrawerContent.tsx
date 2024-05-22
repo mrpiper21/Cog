@@ -21,9 +21,10 @@ const CustomDrawerContent = () => {
       <DrawerItem
         label={({ focused, color }) => (
           <View>
-            <ProfileItem />
+            <ProfileItem route={"Profile"} />
             <View style={{ marginTop: hp(3.5) }}>
               <NavBarItem
+                route={""}
                 label={"Messges"}
                 msg={3}
                 icon={
@@ -35,6 +36,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
+                route={""}
                 label={"Opportunities"}
                 icon={
                   <MaterialCommunityIcons
@@ -45,32 +47,38 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
+                route={""}
                 label={"Earnings"}
                 icon={<Feather name="dollar-sign" size={wp(6)} color="black" />}
               />
               <NavBarItem
+                route={""}
                 label={"Wallet"}
                 icon={
                   <Ionicons name="wallet-outline" size={wp(6)} color="black" />
                 }
               />
               <NavBarItem
+                route={""}
                 label={"Account"}
                 icon={
                   <FontAwesome5 name="user-circle" size={wp(6)} color="black" />
                 }
               />
               <NavBarItem
+                route={""}
                 label={"Help"}
                 icon={<Feather name="help-circle" size={wp(6)} color="black" />}
               />
               <NavBarItem
+                route={""}
                 label={"Refer Friends"}
                 icon={<AntDesign name="adduser" size={24} color="black" />}
               />
             </View>
           </View>
         )}
+        onPress={() => {}}
       />
       {/* Add any additional drawer items here, such as a logout button */}
     </DrawerContentScrollView>

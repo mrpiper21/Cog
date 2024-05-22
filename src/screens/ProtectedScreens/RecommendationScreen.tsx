@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import BackButton from "../../widget/BackButton";
+import BarData from "../../widget/BarData";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,15 +9,6 @@ import {
 import { BarChart } from "react-native-gifted-charts";
 
 const RecommendationScreen = () => {
-  const barData = [
-    { value: 250, label: "Mon" },
-    { value: 500, label: "Tue", frontColor: "#177AD5" },
-    { value: 745, label: "Wed", frontColor: "#177AD5" },
-    { value: 320, label: "Thu" },
-    { value: 600, label: "Fri", frontColor: "#177AD5" },
-    { value: 256, label: "Sat" },
-    { value: 300, label: "Sun" },
-  ];
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.recommendedContainer}>
@@ -71,7 +63,7 @@ const RecommendationScreen = () => {
             noOfSections={3}
             barBorderRadius={4}
             frontColor="lightgray"
-            data={barData}
+            data={BarData}
             yAxisThickness={0}
             xAxisThickness={0}
           />
