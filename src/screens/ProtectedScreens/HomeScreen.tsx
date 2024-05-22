@@ -2,22 +2,18 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import MapView from "react-native-maps";
 import React, { useRef, useMemo, useState } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import {
-  AntDesign,
-  MaterialIcons,
-  MaterialCommunityIcons,
-  Ionicons,
-} from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 
 const HomeScreen = (): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const navigation = useNavigation() as any;
+  const navigation = useNavigation();
   const [searchView, setSearchView] = useState(false);
 
   const snapPoints = useMemo(() => ["12%"], []);
@@ -54,7 +50,10 @@ const HomeScreen = (): React.JSX.Element => {
           </View>
         </BottomSheetView>
       </BottomSheet>
-      <TouchableOpacity style={styles.twoBarIcon}>
+      <TouchableOpacity
+        onPress={() => navigation.toggleDrawer()}
+        style={styles.twoBarIcon}
+      >
         <Ionicons name="reorder-two-outline" size={wp(8)} color="black" />
       </TouchableOpacity>
       <TouchableOpacity
