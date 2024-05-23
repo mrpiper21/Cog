@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../../widget/BackButton";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import RideItems from "../../component/Rating/Rides/RideItems";
-import DeliveryItems from "../../component/Rating/Deliveries/DeliveryItems";
+import RideItems from "../../../component/Rating/Rides/RideItems";
+import DeliveryItems from "../../../component/Rating/Deliveries/DeliveryItems";
 
 const RideRatingScreen = () => {
   const [preview, setPreview] = useState({
@@ -59,7 +59,7 @@ const RideRatingScreen = () => {
             }))
           }
           style={{
-            ...styles.rideBtn,
+            ...styles.deliveryBtn,
             backgroundColor: preview.deliveryItems ? "#4460EF" : "#EEEEEE",
           }}
         >
@@ -94,14 +94,14 @@ const styles = StyleSheet.create({
     borderRadius: wp(10),
   },
   rideBtn: {
-    width: wp(22),
+    width: wp(20),
     height: hp(5),
     borderRadius: wp(3),
     alignItems: "center",
     justifyContent: "center",
   },
   deliveryBtn: {
-    width: wp(27),
+    width: wp(28),
     height: hp(5),
     borderRadius: wp(3),
     alignItems: "center",

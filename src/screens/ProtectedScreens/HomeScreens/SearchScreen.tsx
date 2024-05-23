@@ -4,10 +4,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import LocationItem from "../../component/Search/LocationItem";
-import HomeLoactionItem from "../../component/Search/HomeLoactionItem";
-import NearbyLocationContainer from "../../component/Search/NearbyLocationContainer";
-import SearBarContainer from "../../component/Search/SearBarContainer";
+import LocationItem from "../../../component/Search/LocationItem";
+import HomeLoactionItem from "../../../component/Search/HomeLoactionItem";
+import NearbyLocationContainer from "../../../component/Search/NearbyLocationContainer";
+import SearBarContainer from "../../../component/Search/SearBarContainer";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;

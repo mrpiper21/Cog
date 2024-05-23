@@ -26,7 +26,9 @@ const HeaderContainer = () => {
         }}
       >
         <Text style={{ fontSize: wp(5), fontWeight: "600" }}>Profile</Text>
-        <AntDesign name="closecircleo" size={hp(4)} color="black" />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <AntDesign name="closecircleo" size={hp(4)} color="black" />
+        </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "row", marginTop: wp(4) }}>
         <Image

@@ -4,9 +4,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import StatisticCard from "../../component/Profile/StatisticCard";
-import HeaderContainer from "../../component/Profile/HeaderContainer";
-import HightlightsCard from "../../component/Profile/HightlightsCard";
+import StatisticCard from "../../../component/Profile/StatisticCard";
+import HeaderContainer from "../../../component/Profile/HeaderContainer";
+import HightlightsCard from "../../../component/Profile/HightlightsCard";
 
 const ProfileScreen = () => {
   const [driverRatingPreview, setDriverRatingPreview] = useState(false);

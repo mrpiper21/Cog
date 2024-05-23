@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../../widget/BackButton";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import PreferenceItem from "../../component/Prefernce/PreferenceItem";
+import PreferenceItem from "../../../component/Prefernce/PreferenceItem";
 
 const PreferenceScreen = () => {
   const [isChecked, setIsChecked] = useState(false);

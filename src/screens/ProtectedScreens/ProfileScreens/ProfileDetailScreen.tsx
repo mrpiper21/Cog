@@ -17,8 +17,8 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import React from "react";
-import BackButton from "../../widget/BackButton";
-import ReviewCard from "../../component/Profile/ReviewCard";
+import BackButton from "../../../widget/BackButton";
+import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
 
 const ProfileDetailScreen = () => {
@@ -30,9 +30,12 @@ const ProfileDetailScreen = () => {
       <View style={styles.headerContainer}>
         <BackButton />
         <Text style={{ fontSize: wp(5), fontWeight: "500" }}>Profile</Text>
-        <View style={styles.editButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EditProfile")}
+          style={styles.editButton}
+        >
           <Entypo name="edit" size={24} color="black" />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={{ alignItems: "center", marginTop: wp(8) }}>
         <View>
@@ -61,14 +64,20 @@ const ProfileDetailScreen = () => {
           </View>
           <Text>Ratings</Text>
         </TouchableOpacity>
-        <View style={{ alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Acceptance")}
+          style={{ alignItems: "center" }}
+        >
           <Text style={{ fontWeight: "600" }}>87%</Text>
           <Text>Acceptance</Text>
-        </View>
-        <View style={{ alignItems: "center" }}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Cancellation")}
+          style={{ alignItems: "center" }}
+        >
           <Text style={{ fontWeight: "600" }}>2%</Text>
           <Text>Cancellation</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View
         className="space-y-3"
@@ -130,19 +139,19 @@ const ProfileDetailScreen = () => {
           }}
         >
           <View>
-            <Image source={require("../../../assets/anniversary.png")} />
+            <Image source={require("../../../../assets/anniversary.png")} />
             <Text style={{ marginTop: wp(2) }}>Anniversary</Text>
           </View>
           <View>
-            <Image source={require("../../../assets/anniversary.png")} />
+            <Image source={require("../../../../assets/anniversary.png")} />
             <Text style={{ marginTop: wp(2) }}>Top Tipper</Text>
           </View>
           <View>
-            <Image source={require("../../../assets/anniversary.png")} />
+            <Image source={require("../../../../assets/anniversary.png")} />
             <Text style={{ marginTop: wp(2) }}>Marathoner</Text>
           </View>
           <View>
-            <Image source={require("../../../assets/anniversary.png")} />
+            <Image source={require("../../../../assets/anniversary.png")} />
             <Text style={{ marginTop: wp(2) }}>Five-Star Rider</Text>
           </View>
         </View>
