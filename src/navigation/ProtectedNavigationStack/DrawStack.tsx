@@ -1,7 +1,7 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
-import MessageScreen from "../../screens/ProtectedScreens/MessageScreen";
+import MessageScreen from "../../screens/ProtectedScreens/MessageScreens/MessageScreen";
 
 const Drawer = createDrawerNavigator();
 

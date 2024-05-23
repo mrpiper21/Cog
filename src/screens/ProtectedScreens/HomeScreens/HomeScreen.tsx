@@ -7,7 +7,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 

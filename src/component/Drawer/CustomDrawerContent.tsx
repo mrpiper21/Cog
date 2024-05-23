@@ -24,8 +24,8 @@ const CustomDrawerContent = () => {
             <ProfileItem route={"Profile"} />
             <View style={{ marginTop: hp(3.5) }}>
               <NavBarItem
-                route={""}
-                label={"Messges"}
+                route={"Message"}
+                label={"Messages"}
                 msg={3}
                 icon={
                   <Ionicons
