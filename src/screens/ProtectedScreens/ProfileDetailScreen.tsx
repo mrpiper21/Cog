@@ -1,6 +1,11 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React from "react";
-import BackButton from "../../widget/BackButton";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import {
   Entypo,
   AntDesign,
@@ -11,9 +16,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import React from "react";
+import BackButton from "../../widget/BackButton";
 import ReviewCard from "../../component/Profile/ReviewCard";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileDetailScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
@@ -45,13 +54,13 @@ const ProfileDetailScreen = () => {
         </View>
       </View>
       <View style={styles.ratingContainer}>
-        <View>
+        <TouchableOpacity onPress={() => navigation.navigate("RatingDetail")}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <AntDesign name="star" size={24} color="orange" />
             <Text style={{ fontWeight: "600" }}>4.6</Text>
           </View>
-          <Text>Rations</Text>
-        </View>
+          <Text>Ratings</Text>
+        </TouchableOpacity>
         <View style={{ alignItems: "center" }}>
           <Text style={{ fontWeight: "600" }}>87%</Text>
           <Text>Acceptance</Text>

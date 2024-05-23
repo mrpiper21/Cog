@@ -7,6 +7,7 @@ import DrawStack from "./DrawStack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import ProfileScreen from "../../screens/ProtectedScreens/ProfileScreen";
 import ProfileDetailScreen from "../../screens/ProtectedScreens/ProfileDetailScreen";
+import RideRatingScreen from "../../screens/ProtectedScreens/RideRatingScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,7 @@ const ProtectStack = () => {
       <Stack.Screen name="Recommendation" component={RecommendationScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="ProfileDetail" component={ProfileDetailScreen} />
+      <Stack.Screen name="RatingDetail" component={RideRatingScreen} />
     </Stack.Navigator>
   );
 };
