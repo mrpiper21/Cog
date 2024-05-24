@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import BackButton from "../../../widget/BackButton";
+import BackButton from "../../../widget/Buttons/BackButton";
 import BarData from "../../../widget/BarData";
 import {
   widthPercentageToDP as wp,

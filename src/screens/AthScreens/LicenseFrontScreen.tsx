@@ -4,7 +4,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../widget/Buttons/BackButton";
 import ProgressBar from "../../component/Verification/ProgressBar";
 import Btn from "../../widget/Btn";
 

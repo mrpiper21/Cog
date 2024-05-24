@@ -36,7 +36,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                route={""}
+                route={"Opportunity"}
                 label={"Opportunities"}
                 icon={
                   <MaterialCommunityIcons
@@ -47,7 +47,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                route={""}
+                route={"Earnings"}
                 label={"Earnings"}
                 icon={<Feather name="dollar-sign" size={wp(6)} color="black" />}
               />

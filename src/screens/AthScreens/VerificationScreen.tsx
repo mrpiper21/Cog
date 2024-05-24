@@ -11,7 +11,7 @@ import {
 } from "react-native-responsive-screen";
 import React from "react";
 import AuthItem from "../../component/Verification/AuthItem";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../widget/Buttons/BackButton";
 
 const VerificationScreen = () => {
   return (

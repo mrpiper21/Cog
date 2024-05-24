@@ -7,7 +7,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../widget/Buttons/BackButton";
 
 interface PreviewProps {
   photo: any;

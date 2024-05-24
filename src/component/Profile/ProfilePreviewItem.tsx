@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { BarChart } from "react-native-gifted-charts";
 import BarData from "../../widget/BarData";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import BarChartItem from "../../widget/BarChart";
 
 interface ProfilePreviewProps {
   preview: Boolean;
@@ -22,16 +22,7 @@ const ProfilePreviewItem: React.FC<ProfilePreviewProps> = ({ preview }) => {
             indicating excellent service quality.
           </Text>
           <View style={{ alignItems: "center" }}>
-            <BarChart
-              height={hp(30)}
-              barWidth={wp(8)}
-              noOfSections={3}
-              barBorderRadius={4}
-              frontColor="lightgray"
-              data={BarData}
-              yAxisThickness={0}
-              xAxisThickness={0}
-            />
+            <BarChartItem BarData={BarData} />
             <TouchableOpacity
               style={{
                 backgroundColor: "#EEEEEE",

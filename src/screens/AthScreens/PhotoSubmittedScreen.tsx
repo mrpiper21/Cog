@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../widget/Buttons/BackButton";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

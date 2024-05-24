@@ -11,6 +11,8 @@ import CancellationScreen from "../../screens/ProtectedScreens/ProfileScreens/Ca
 import EditProfileScreen from "../../screens/ProtectedScreens/ProfileScreens/EditProfileScreen";
 import MessageScreen from "../../screens/ProtectedScreens/MessageScreens/MessageScreen";
 import TripDetailScreen from "../../screens/ProtectedScreens/MessageScreens/TripDetailScreen";
+import OpportunityScreen from "../../screens/ProtectedScreens/OpportunityScreens/OpportunityScreen";
+import EarningScreen from "../../screens/ProtectedScreens/EarningScreens/EarningScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -25,7 +27,9 @@ const ProtectStack = () => {
       <Stack.Screen name="Acceptance" component={AcceptanceScreen} />
       <Stack.Screen name="Cancellation" component={CancellationScreen} />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="Opportunity" component={OpportunityScreen} />
       <Stack.Screen name="TripDetail" component={TripDetailScreen} />
+      <Stack.Screen name="Earnings" component={EarningScreen} />
       <Stack.Screen name="Message" component={MessageScreen} />
     </Stack.Navigator>
   );

@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import BackButton from "../../widget/BackButton";
+import BackButton from "../../widget/Buttons/BackButton";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
