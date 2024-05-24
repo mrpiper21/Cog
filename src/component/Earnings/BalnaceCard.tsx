@@ -12,7 +12,7 @@ const BalnaceCard = () => {
         </View>
         <EvilIcons name="chevron-right" size={30} color="black" />
       </View>
-      <TouchableOpacity className="flex items-center justify-center w-[146px] h-[48px] bg-[#4460EF] rounded-lg">
+      <TouchableOpacity className="flex items-center justify-center w-[146px] h-[48px] bg-[#4460EF] rounded-lg my-2">
         <Text className="text-white">Cash out</Text>
       </TouchableOpacity>
     </View>

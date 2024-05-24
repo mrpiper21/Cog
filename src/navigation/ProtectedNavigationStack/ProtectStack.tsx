@@ -13,6 +13,7 @@ import MessageScreen from "../../screens/ProtectedScreens/MessageScreens/Message
 import TripDetailScreen from "../../screens/ProtectedScreens/MessageScreens/TripDetailScreen";
 import OpportunityScreen from "../../screens/ProtectedScreens/OpportunityScreens/OpportunityScreen";
 import EarningScreen from "../../screens/ProtectedScreens/EarningScreens/EarningScreen";
+import EarningDeatailScreen from "../../screens/ProtectedScreens/EarningScreens/EarningDeatailScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -29,6 +30,7 @@ const ProtectStack = () => {
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="Opportunity" component={OpportunityScreen} />
       <Stack.Screen name="TripDetail" component={TripDetailScreen} />
+      <Stack.Screen name="EarningDetails" component={EarningDeatailScreen} />
       <Stack.Screen name="Earnings" component={EarningScreen} />
       <Stack.Screen name="Message" component={MessageScreen} />
     </Stack.Navigator>

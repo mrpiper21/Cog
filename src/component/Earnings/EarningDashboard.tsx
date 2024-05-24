@@ -6,8 +6,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
 
 const EarningDashboard = () => {
+  const navigation = useNavigation() as any;
   return (
     <View>
       <View style={{ marginVertical: wp(4) }}>
@@ -41,7 +43,10 @@ const EarningDashboard = () => {
           className="flex items-center border-b-2 border-gray-200"
           style={{ paddingVertical: wp(5) }}
         >
-          <TouchableOpacity className="bg-[#EEEEEE] w-[388px] h-[56px] items-center justify-center rounded-lg">
+          <TouchableOpacity
+            onPress={() => navigation.navigate("EarningDetails")}
+            className="bg-[#EEEEEE] w-[388px] h-[56px] items-center justify-center rounded-lg"
+          >
             <Text>See details</Text>
           </TouchableOpacity>
         </View>
