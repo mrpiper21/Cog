@@ -1,9 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import MapView from "react-native-maps";
 import RouteItem from "../../widget/RouteItem";
+import { useNavigation } from "@react-navigation/native";
 
 const TripCard = () => {
+  const navigation = useNavigation() as any;
   return (
     <View className="p-4 bg-white">
       <View className="flex flex-row items-center justify-between px-6">
@@ -16,7 +18,10 @@ const TripCard = () => {
       <View className="items-center mt-2">
         <MapView className="w-[400px] h-[160px] rounded-t-2 overflow-hidden flex " />
       </View>
-      <View className="flex flex-row space-x-8 m-4">
+      <TouchableOpacity
+        onPress={() => navigation.navigate("EarningTripDetail")}
+        className="flex flex-row space-x-8 m-4"
+      >
         <View className="items-center">
           <RouteItem />
         </View>
@@ -24,7 +29,7 @@ const TripCard = () => {
           <Text>5396 North Reese Avenue, Fresno CA 93722, US</Text>
           <Text>2042 High Street, Oakland CA 94601, US</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
