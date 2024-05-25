@@ -7,8 +7,10 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import BackButton from "../../../widget/Buttons/BackButton";
 import EarningDetailsDashboard from "../../../component/Earnings/EarningDetailsDashboard";
+import { useNavigation } from "@react-navigation/native";
 
 const EarningDeatailScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <View className="flex-1 bg-white px-3">
       <View className="flex flex-row items-center justify-between mt-10">
@@ -21,7 +23,10 @@ const EarningDeatailScreen = () => {
       {/**Earning Darshboard */}
       <EarningDetailsDashboard />
       <View style={{ marginVertical: wp(8) }} className="items-center">
-        <TouchableOpacity className="items-center justify-center h-[56px] w-[388px] bg-[#EEEE] rounded-lg">
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EarningActivity")}
+          className="items-center justify-center h-[56px] w-[388px] bg-[#EEEE] rounded-lg"
+        >
           <Text>See earnings activity</Text>
         </TouchableOpacity>
       </View>
