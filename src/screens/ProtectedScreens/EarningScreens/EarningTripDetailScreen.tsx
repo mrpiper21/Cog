@@ -17,6 +17,7 @@ const EarningTripDetailScreen = () => {
       </View>
       <View className="mt-8">
         <View className=" items-center">
+          {/**Earning Trip details card */}
           <View className="space-y-2 mb-2">
             <Text>Your Earnings</Text>
             <Text className="text-xl font-bold">$230.45</Text>

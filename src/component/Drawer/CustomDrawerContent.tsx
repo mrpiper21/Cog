@@ -52,7 +52,7 @@ const CustomDrawerContent = () => {
                 icon={<Feather name="dollar-sign" size={wp(6)} color="black" />}
               />
               <NavBarItem
-                route={""}
+                route={"Wallet"}
                 label={"Wallet"}
                 icon={
                   <Ionicons name="wallet-outline" size={wp(6)} color="black" />
