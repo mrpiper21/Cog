@@ -22,7 +22,7 @@ const EarningDashboard = () => {
             $196.15
           </Text>
         </View>
-        <View style={{ marginTop: wp(4) }}>
+        <View style={{ marginTop: wp(9) }}>
           <BarChartItem />
         </View>
         <View className="flex gap-8 mt-2">

@@ -10,7 +10,7 @@ import BarData from "./BarData";
 const BarChartItem = () => {
   return (
     <BarChart
-      height={hp(30)}
+      height={hp(20)}
       barWidth={wp(8)}
       noOfSections={3}
       barBorderRadius={4}
