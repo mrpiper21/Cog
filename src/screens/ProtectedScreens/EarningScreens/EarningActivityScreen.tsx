@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import { Ionicons, Entypo, FontAwesome5 } from "@expo/vector-icons";
@@ -6,11 +6,11 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import MapView from "react-native-maps";
+import TripCard from "../../../component/Earnings/TripCard";
 
 const EarningActivityScreen = () => {
   return (
-    <View className="flex-1">
+    <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
       <View className="py-2 bg-white space-y-4 px-6">
         <View
           style={{ marginTop: wp(13) }}
@@ -41,24 +41,24 @@ const EarningActivityScreen = () => {
       <View className="my-4 mx-6">
         <Text className="text-lg font-bold">Wednesday, Mar 6</Text>
       </View>
-      <View>
-        <View className="flex flex-row items-center justify-between px-6">
-          <View>
-            <Text className="text-base font-bold">$230.45</Text>
-            <Text>GlopilotsX . Mar 4 2024 . 04: 16 PM</Text>
-          </View>
-          <Text>3.4</Text>
-        </View>
-        <View className="items-center mt-2">
-          <MapView className="w-[400px] h-[160px] rounded-t-2 overflow-hidden flex " />
-        </View>
-        <View></View>
+      <View className="gap-2">
         <View>
-          <Text>5396 North Reese Avenue, Fresno CA 93722, US</Text>
-          <Text>2042 High Street, Oakland CA 94601, US</Text>
+          <TripCard />
+        </View>
+        <View>
+          <TripCard />
+        </View>
+        <View>
+          <TripCard />
+        </View>
+        <View>
+          <TripCard />
+        </View>
+        <View>
+          <TripCard />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
