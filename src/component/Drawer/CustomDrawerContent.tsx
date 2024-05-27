@@ -66,7 +66,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                route={""}
+                route={"Help"}
                 label={"Help"}
                 icon={<Feather name="help-circle" size={wp(6)} color="black" />}
               />
