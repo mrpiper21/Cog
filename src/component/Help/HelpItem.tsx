@@ -9,8 +9,8 @@ import { useNavigation } from "@react-navigation/native";
 
 interface HelpItemProps {
   children: String;
-  type?: "Trips" | "Fixtures" | "Call support";
-  navigateTo?: "Help-Trip" | "Account_App";
+  type?: "Trips" | "Fixtures" | "Call support" | "forward";
+  navigateTo?: "Help-Trip" | "Account_App" | "Tracking-Acceptance";
 }
 
 const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
@@ -24,7 +24,7 @@ const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
         >
           <View className="flex flex-row items-center">
             <Entypo name="flow-line" size={wp(7)} color="black" />
-            <Text>{children}</Text>
+            <Text className="text-base">{children}</Text>
           </View>
           <Ionicons name="chevron-forward-outline" size={24} color="black" />
         </TouchableOpacity>
@@ -35,7 +35,7 @@ const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
         >
           <View className="flex flex-row items-center space-x-3">
             <AntDesign name="bars" size={wp(7)} color="black" />
-            <Text>{children}</Text>
+            <Text className="text-base">{children}</Text>
           </View>
           <Ionicons name="chevron-forward-outline" size={24} color="black" />
         </TouchableOpacity>
@@ -46,12 +46,20 @@ const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
         >
           <View className="flex flex-row items-center space-x-3">
             <FontAwesome name="phone" size={wp(7)} color="black" />
-            <Text>{children}</Text>
+            <Text className="text-base">{children}</Text>
           </View>
+        </TouchableOpacity>
+      ) : type === "forward" ? (
+        <TouchableOpacity
+          onPress={() => navigateTo && navigation.navigate(navigateTo)}
+          className="flex flex-row items-center justify-between p-4 border-b-2 border-[#EEEE] mt-4"
+        >
+          <Text className="text-base">{children}</Text>
+          <Ionicons name="chevron-forward-outline" size={24} color="black" />
         </TouchableOpacity>
       ) : (
         !type && (
-          <TouchableOpacity className="p-4">
+          <TouchableOpacity className="p-4 border-b-2 border-[#EEEE]">
             <Text className="text-xl font-bold">{children}</Text>
           </TouchableOpacity>
         )

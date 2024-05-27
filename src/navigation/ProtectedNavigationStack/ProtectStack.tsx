@@ -19,6 +19,7 @@ import EarningTripDetailScreen from "../../screens/ProtectedScreens/EarningScree
 import WalletScreen from "../../screens/ProtectedScreens/WalletScreens/WalletScreen";
 import HelpScreen from "../../screens/HelpScreens/HelpScreen";
 import HelpTripScreen from "../../screens/HelpScreens/HelpTripScreen";
+import TrackingAcceptanceScreen from "../../screens/HelpScreens/TrackingAcceptanceScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -46,6 +47,10 @@ const ProtectStack = () => {
       <Stack.Screen name="Wallet" component={WalletScreen} />
       <Stack.Screen name="Help" component={HelpScreen} />
       <Stack.Screen name="Help-Trip" component={HelpTripScreen} />
+      <Stack.Screen
+        name="Tracking-Acceptance"
+        component={TrackingAcceptanceScreen}
+      />
     </Stack.Navigator>
   );
 };
