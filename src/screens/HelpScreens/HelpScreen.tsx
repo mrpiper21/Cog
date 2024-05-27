@@ -29,7 +29,11 @@ const HelpScreen = () => {
         <Text className="text-xl font-bold">All Topics</Text>
       </View>
       <HelpItem type="Trips" children={"Trips"} navigateTo="Help-Trip" />
-      <HelpItem type="Fixtures" children={"Account & App"} />
+      <HelpItem
+        type="Fixtures"
+        children={"Account & App"}
+        navigateTo="Account-App"
+      />
       <HelpItem type="Fixtures" children={"Earnings"} />
       <HelpItem type="Fixtures" children={"Guides"} />
       <HelpItem type="Fixtures" children={"Item Delivery"} />

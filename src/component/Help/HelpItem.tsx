@@ -10,7 +10,12 @@ import { useNavigation } from "@react-navigation/native";
 interface HelpItemProps {
   children: String;
   type?: "Trips" | "Fixtures" | "Call support" | "forward";
-  navigateTo?: "Help-Trip" | "Account_App" | "Tracking-Acceptance";
+  navigateTo?:
+    | "Help-Trip"
+    | "Account-App"
+    | "Tracking-Acceptance"
+    | "ChangeAcc-Setting"
+    | "DeleteDriver-Acc";
 }
 
 const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {

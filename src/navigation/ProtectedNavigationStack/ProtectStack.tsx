@@ -20,6 +20,9 @@ import WalletScreen from "../../screens/ProtectedScreens/WalletScreens/WalletScr
 import HelpScreen from "../../screens/HelpScreens/HelpScreen";
 import HelpTripScreen from "../../screens/HelpScreens/HelpTripScreen";
 import TrackingAcceptanceScreen from "../../screens/HelpScreens/TrackingAcceptanceScreen";
+import AccountAppScreen from "../../screens/HelpScreens/AccountAppScreen";
+import ChangeAccountSettingScreen from "../../screens/HelpScreens/ChangeAccountSettingScreen";
+import DeleteDriverAccountScreen from "../../screens/HelpScreens/DeleteDriverAccountScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -50,6 +53,15 @@ const ProtectStack = () => {
       <Stack.Screen
         name="Tracking-Acceptance"
         component={TrackingAcceptanceScreen}
+      />
+      <Stack.Screen name="Account-App" component={AccountAppScreen} />
+      <Stack.Screen
+        name="ChangeAcc-Setting"
+        component={ChangeAccountSettingScreen}
+      />
+      <Stack.Screen
+        name="DeleteDriver-Acc"
+        component={DeleteDriverAccountScreen}
       />
     </Stack.Navigator>
   );
