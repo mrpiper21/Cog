@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import Header from "../../widget/Header";
+import { useNavigation } from "@react-navigation/native";
 
 const DeleteDriverAccountScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <View className="flex-1 bg-white">
       <Header type="BackButton-Children" children={"Help"} />
@@ -20,7 +22,10 @@ const DeleteDriverAccountScreen = () => {
             <Text className="text-base font-bold">
               Can we help with anything else?
             </Text>
-            <TouchableOpacity className="w-[420px] h-[56px] items-center justify-center bg-[#EEEE] rounded-lg">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Delete-Here")}
+              className="w-[420px] h-[56px] items-center justify-center bg-[#EEEE] rounded-lg"
+            >
               <Text>Yes</Text>
             </TouchableOpacity>
             <TouchableOpacity className="w-[420px] h-[56px] items-center justify-center bg-[#EEEE] rounded-lg">

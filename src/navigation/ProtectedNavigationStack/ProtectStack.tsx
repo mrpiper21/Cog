@@ -23,6 +23,7 @@ import TrackingAcceptanceScreen from "../../screens/HelpScreens/TrackingAcceptan
 import AccountAppScreen from "../../screens/HelpScreens/AccountAppScreen";
 import ChangeAccountSettingScreen from "../../screens/HelpScreens/ChangeAccountSettingScreen";
 import DeleteDriverAccountScreen from "../../screens/HelpScreens/DeleteDriverAccountScreen";
+import DeleteAccountHereScreen from "./../../screens/HelpScreens/DeleteAccountHereScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -63,6 +64,7 @@ const ProtectStack = () => {
         name="DeleteDriver-Acc"
         component={DeleteDriverAccountScreen}
       />
+      <Stack.Screen name="Delete-Here" component={DeleteAccountHereScreen} />
     </Stack.Navigator>
   );
 };

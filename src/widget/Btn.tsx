@@ -15,7 +15,7 @@ const Btn: React.FC<ButtonProps> = ({ route, label }) => {
   const navigation = useNavigation() as any;
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(route)}
+      onPress={() => route && navigation.navigate(route)}
       style={{
         width: wp(90),
         height: hp(7.3),
