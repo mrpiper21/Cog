@@ -24,6 +24,8 @@ import AccountAppScreen from "../../screens/HelpScreens/AccountAppScreen";
 import ChangeAccountSettingScreen from "../../screens/HelpScreens/ChangeAccountSettingScreen";
 import DeleteDriverAccountScreen from "../../screens/HelpScreens/DeleteDriverAccountScreen";
 import DeleteAccountHereScreen from "./../../screens/HelpScreens/DeleteAccountHereScreen";
+import DeleteConfirmScreen from "./../../screens/HelpScreens/DeleteConfirmScreen";
+import DeleteSuccessScreen from "../../screens/HelpScreens/DeleteSuccessScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -65,6 +67,8 @@ const ProtectStack = () => {
         component={DeleteDriverAccountScreen}
       />
       <Stack.Screen name="Delete-Here" component={DeleteAccountHereScreen} />
+      <Stack.Screen name="Delete-Confirm" component={DeleteConfirmScreen} />
+      <Stack.Screen name="Delete-Success" component={DeleteSuccessScreen} />
     </Stack.Navigator>
   );
 };

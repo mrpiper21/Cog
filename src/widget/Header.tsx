@@ -10,7 +10,7 @@ interface HeaderProps {
     | "BackButton-Children"
     | "BackButton-Children-FAQ"
     | "BackButton-Children-Bars";
-  children: String;
+  children?: String;
 }
 const Header: React.FC<HeaderProps> = ({ type, children }) => {
   return (

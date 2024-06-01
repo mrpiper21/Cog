@@ -22,7 +22,7 @@ const DeleteAccountHereScreen = () => {
         <HelpItem type="Check" children={"Prefer not to say"} />
       </View>
       <View className="items-center mb-5">
-        <Btn label={"Continue"} />
+        <Btn label={"Continue"} route={"Delete-Confirm"} />
       </View>
     </View>
   );

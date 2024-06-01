@@ -7,6 +7,10 @@ import {
 import { Ionicons, Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Checkbox from "expo-checkbox";
+import {
+  RoundedCheckbox,
+  PureRoundedCheckbox,
+} from "react-native-rounded-checkbox";
 
 interface HelpItemProps {
   children: String;
@@ -69,10 +73,10 @@ const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
           onPress={() => navigateTo && navigation.navigate(navigateTo)}
           className="flex flex-row items-center space-x-4 p-4 border-b-2 border-[#EEEE] mt-4"
         >
-          <Checkbox
-            style={{ margin: 6 }}
-            value={isChecked}
-            onValueChange={setChecked}
+          <RoundedCheckbox
+            onPress={(checked) => console.log("Checked: ", checked)}
+            checkedColor="blue"
+            text=""
           />
           <Text className="text-base">{children}</Text>
         </TouchableOpacity>
