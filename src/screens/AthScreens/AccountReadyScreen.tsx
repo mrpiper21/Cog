@@ -22,7 +22,7 @@ const AccountReadyScreen = () => {
           </Text>
         </View>
         <View style={{ alignItems: "center", marginBottom: wp(3) }}>
-          <Btn label={"let's go"} />
+          <Btn type="action" label={"let's go"} />
         </View>
       </View>
     </View>

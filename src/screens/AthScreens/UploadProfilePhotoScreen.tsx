@@ -61,6 +61,14 @@ const UploadProfilePhotoScreen = () => {
     return <View />;
   }
 
+  // if (loading) {
+  //   return (
+  //     <View className="flex-1 bg-white items-center justify-center">
+  //       <Text>Processing image...</Text>
+  //     </View>
+  //   );
+  // }
+
   if (photo) {
     return (
       <PreviewPhoto
@@ -84,36 +92,43 @@ const UploadProfilePhotoScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign
-            name="close"
-            size={wp(6)}
-            color="white"
-            style={{ marginTop: wp(5) }}
-          />
-        </TouchableOpacity>
-        {/* {loading && <ActivityIndicator />} */}
-        <View style={styles.buttonContainer}></View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-        >
-          <TouchableOpacity onPress={takePic}>
-            <MaterialIcons name="camera" size={wp(17)} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={toggleCameraFacing}
-            style={{ marginLeft: wp(22), marginRight: wp(8) }}
-          >
-            <Ionicons name="camera-reverse-sharp" size={wp(12)} color="white" />
-          </TouchableOpacity>
+      <View className="flex-1 items-center mt-20">
+        <View className="overflow-hidden w-[400px] h-[410px] rounded-full">
+          <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <AntDesign
+                name="close"
+                size={wp(6)}
+                color="white"
+                style={{ marginTop: wp(5) }}
+              />
+            </TouchableOpacity>
+            {/* {loading && <ActivityIndicator />} */}
+            <View style={styles.buttonContainer}></View>
+          </CameraView>
         </View>
-      </CameraView>
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        <TouchableOpacity
+          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 h-[85px] w-[85px]"
+          onPress={takePic}
+        >
+          <View className="h-[75px] w-[75px] bg-[#4460EF] rounded-full" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={toggleCameraFacing}
+          style={{ marginLeft: wp(22), marginRight: wp(8) }}
+        >
+          <Ionicons name="camera-reverse-sharp" size={wp(10)} color="#4460EF" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

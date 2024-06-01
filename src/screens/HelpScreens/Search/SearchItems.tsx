@@ -34,6 +34,16 @@ const SearchItems = [
     item: <HelpItem type="forward" children={"Unable to sign in"} />,
   },
   {
+    children: "Remove vehicle",
+    item: (
+      <HelpItem
+        type="forward"
+        children={"Remove vehice"}
+        navigateTo="Remove-Vehicle"
+      />
+    ),
+  },
+  {
     children: "Changing account settings",
     item: (
       <HelpItem

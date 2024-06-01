@@ -49,7 +49,7 @@ const LicenseFrontScreen = () => {
         <Image source={require("../../../assets/Maskgroup.png")} />
       </View>
       <View style={{ marginTop: wp(8), alignItems: "center" }}>
-        <Btn label={"Take photo"} route={"upload-front"} />
+        <Btn type="action" label={"Take photo"} route={"upload-front"} />
       </View>
     </View>
   );

@@ -34,8 +34,8 @@ const PhotoSubmittedScreen = () => {
           <Text>complete the process.</Text>
         </View>
       </View>
-      <View style={{ marginBottom: wp(4) }}>
-        <Btn label={"Go to next step"} route={"License-front"} />
+      <View style={{ marginBottom: wp(4), alignItems: "center" }}>
+        <Btn type="action" label={"Go to next step"} route={"License-front"} />
       </View>
     </View>
   );

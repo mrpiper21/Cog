@@ -52,7 +52,11 @@ const ProfilePhotoScreen = () => {
         />
       </View>
       <View style={{ alignItems: "center", marginTop: wp(7) }}>
-        <Btn label={"Take Photo"} route={"Upload-profile-photo"} />
+        <Btn
+          type="action"
+          label={"Take Photo"}
+          route={"Upload-profile-photo"}
+        />
       </View>
     </View>
   );

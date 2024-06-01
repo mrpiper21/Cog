@@ -60,7 +60,7 @@ const UploadFrontLicense = () => {
   }
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={"back"} ref={cameraRef}>
+      <View>
         <TouchableOpacity
           style={{ margin: wp(4) }}
           onPress={() => navigation.goBack()}
@@ -68,49 +68,40 @@ const UploadFrontLicense = () => {
           <AntDesign
             name="close"
             size={wp(6)}
-            color="white"
+            color="black"
             style={{ marginTop: wp(5) }}
           />
         </TouchableOpacity>
-        {/* {loading && <ActivityIndicator />} */}
-        <View style={{ alignItems: "center", marginTop: wp(45) }}>
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              borderWidth: 1,
-              borderStyle: "dashed",
-              borderColor: "white",
-              height: hp(30),
-              width: wp(90),
-            }}
-          >
-            <Text style={{ fontSize: wp(7), color: "white" }}>
-              Front card here
-            </Text>
+        <View className="items-center mt-10">
+          <View className="overflow-hidden h-[270px] w-[450px]">
+            <CameraView style={styles.camera} facing={"back"} ref={cameraRef}>
+              {/* {loading && <ActivityIndicator />} */}
+              <View style={styles.buttonContainer}></View>
+            </CameraView>
           </View>
         </View>
-        <View style={styles.buttonContainer}></View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            marginBottom: wp(2),
-          }}
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          marginBottom: wp(2),
+        }}
+      >
+        <TouchableOpacity
+          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 h-[85px] w-[85px]"
+          onPress={takePic}
         >
-          <TouchableOpacity onPress={takePic}>
-            <MaterialIcons name="camera" size={wp(17)} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={toggleCameraFacing}
-            style={{ marginLeft: wp(22), marginRight: wp(8) }}
-          >
-            <Ionicons name="camera-reverse-sharp" size={wp(12)} color="white" />
-          </TouchableOpacity>
-        </View>
-      </CameraView>
+          <View className="h-[75px] w-[75px] bg-[#4460EF] rounded-full" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={toggleCameraFacing}
+          style={{ marginLeft: wp(22), marginRight: wp(8) }}
+        >
+          <Ionicons name="camera-reverse-sharp" size={wp(12)} color="#4460EF" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

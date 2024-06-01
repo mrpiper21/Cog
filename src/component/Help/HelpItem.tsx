@@ -20,7 +20,8 @@ interface HelpItemProps {
     | "Account-App"
     | "Tracking-Acceptance"
     | "ChangeAcc-Setting"
-    | "DeleteDriver-Acc";
+    | "DeleteDriver-Acc"
+    | "Remove-Vehicle";
 }
 
 const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
