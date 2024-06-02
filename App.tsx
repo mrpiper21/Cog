@@ -7,7 +7,7 @@ import CustomDrawerContent from "./src/component/Drawer/CustomDrawerContent";
 import { useActiveCategory } from "./src/Context";
 import { ActiveCategoryContext } from "./src/Context";
 const Drawer = createDrawerNavigator();
-const isAthenticated = true;
+const isAthenticated = false;
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState("");

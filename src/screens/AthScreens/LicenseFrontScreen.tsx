@@ -7,8 +7,10 @@ import {
 import BackButton from "../../widget/Buttons/BackButton";
 import ProgressBar from "../../component/Verification/ProgressBar";
 import Btn from "../../widget/Btn";
+import { useNavigation } from "@react-navigation/native";
 
 const LicenseFrontScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
       <View style={{ marginTop: wp(12) }}>
@@ -49,7 +51,11 @@ const LicenseFrontScreen = () => {
         <Image source={require("../../../assets/Maskgroup.png")} />
       </View>
       <View style={{ marginTop: wp(8), alignItems: "center" }}>
-        <Btn type="action" label={"Take photo"} route={"upload-front"} />
+        <Btn
+          type="action"
+          label={"Take photo"}
+          callback={() => navigation.navigate("upload-front")}
+        />
       </View>
     </View>
   );

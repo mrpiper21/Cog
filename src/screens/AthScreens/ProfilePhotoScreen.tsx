@@ -7,8 +7,10 @@ import {
 } from "react-native-responsive-screen";
 import Btn from "../../widget/Btn";
 import ProgressBar from "../../component/Verification/ProgressBar";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfilePhotoScreen = () => {
+  const navigation = useNavigation() as any;
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
       <View style={{ marginTop: wp(12) }}>
@@ -55,7 +57,7 @@ const ProfilePhotoScreen = () => {
         <Btn
           type="action"
           label={"Take Photo"}
-          route={"Upload-profile-photo"}
+          callback={() => navigation.navigate("Upload-profile-photo")}
         />
       </View>
     </View>

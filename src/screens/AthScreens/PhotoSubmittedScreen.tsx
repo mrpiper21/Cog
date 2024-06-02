@@ -35,7 +35,11 @@ const PhotoSubmittedScreen = () => {
         </View>
       </View>
       <View style={{ marginBottom: wp(4), alignItems: "center" }}>
-        <Btn type="action" label={"Go to next step"} route={"License-front"} />
+        <Btn
+          type="action"
+          label={"Go to next step"}
+          callback={() => navigation.navigate("License-front")}
+        />
       </View>
     </View>
   );

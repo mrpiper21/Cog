@@ -1,5 +1,12 @@
-import { View, Text, TouchableOpacity, Image, Button } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Button,
+  StyleSheet,
+} from "react-native";
+import React, { useState } from "react";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import {
@@ -8,7 +15,9 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../widget/Buttons/BackButton";
-
+import axios from "axios";
+import { baseURL, config } from "../../Services/authorization";
+import Btn from "../../widget/Btn";
 interface PreviewProps {
   photo: any;
   setPhoto: (value: any) => void;
@@ -20,6 +29,8 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
   setPhoto,
   hasMediaLibraryPermission,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [license, setLicense] = useState({ driversLicense: "" });
   const navigation = useNavigation() as any;
   let sharePhoto = () => {
     shareAsync(photo.uri).then(() => {
@@ -32,11 +43,43 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
       setPhoto(undefined);
     });
   };
-  function handleSubmit() {
-    setPhoto(undefined);
-    navigation.navigate("Account-ready");
-  }
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    const formData = new FormData();
 
+    formData.append("driversLicense", {
+      uri: photo.uri,
+      name: "driversLicense.jpg",
+      type: "image/jpeg",
+    });
+
+    formData.append("Content-Type", "image/jpeg");
+
+    try {
+      const res = await axios.post(
+        baseURL + "user/upload/drivers-license",
+        formData,
+        config
+      );
+
+      console.log(res.headers);
+      setIsLoading(false);
+      setPhoto(undefined);
+      navigation.navigate("Account-ready");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setPhoto(undefined);
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-white items-center justify-center">
+        <Text>Please wait...</Text>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
       <BackButton />
@@ -66,36 +109,19 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
         </Text>
       </View>
       <View style={{ alignItems: "center", marginTop: wp(42) }}>
-        <TouchableOpacity
-          style={{
-            width: wp(90),
-            height: hp(7.3),
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#4460EF",
-            borderRadius: wp(2),
-          }}
-          onPress={handleSubmit}
-        >
-          <Text style={{ color: "white" }}>Submit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setPhoto(undefined)}
-          className="bg-slate-300"
-          style={{
-            width: wp(90),
-            height: hp(7.3),
-            marginTop: wp(3),
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: wp(2),
-          }}
-        >
-          <Text>Retake</Text>
-        </TouchableOpacity>
+        <View className="mb-2">
+          <Btn type="action" label={"Submit"} callback={handleSubmit} />
+        </View>
+        <Btn
+          type="cancel"
+          label={"Retake"}
+          callback={() => setPhoto(undefined)}
+        />
       </View>
     </View>
   );
 };
 
 export default PreviewFrontLicense;
+
+const styles = StyleSheet.create({});

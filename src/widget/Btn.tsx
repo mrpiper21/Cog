@@ -10,15 +10,20 @@ interface ButtonProps {
   label: String;
   route?: String;
   type?: "action" | "cancel";
+  callback?: () => void;
 }
 
-const Btn: React.FC<ButtonProps> = ({ route, label, type }) => {
+const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {
   const navigation = useNavigation() as any;
+  // const handleCallback = () => {
+  //   route && navigation.navigate(route);
+  //   callback && callback();
+  // };
   return (
     <>
       {type === "action" ? (
         <TouchableOpacity
-          onPress={() => route && navigation.navigate(route)}
+          onPress={() => callback && callback()}
           style={{
             width: wp(90),
             height: hp(7.3),
@@ -38,7 +43,7 @@ const Btn: React.FC<ButtonProps> = ({ route, label, type }) => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
-          onPress={() => route && navigation.navigate(route)}
+          onPress={() => callback && callback()}
           style={{
             width: wp(90),
             height: hp(7.3),
