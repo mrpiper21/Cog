@@ -7,5 +7,5 @@ interface InitialState {
 
 export const useInitialStore = create<InitialState>()((set) => ({
     DriverLicense: false,
-    uploadLicense: ()=> set((state)=> ({ DriverLicense: state.DriverLicense = true}))
+    uploadLicense: ()=> set((state)=> ({ DriverLicense: true}))
 }))

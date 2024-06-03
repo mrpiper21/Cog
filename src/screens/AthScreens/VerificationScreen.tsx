@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,8 +6,11 @@ import {
 import React from "react";
 import AuthItem from "../../component/Verification/AuthItem";
 import BackButton from "../../widget/Buttons/BackButton";
+import { useInitialStore } from "../../Context/Upload";
 
 const VerificationScreen = () => {
+  const completed = useInitialStore((state) => state.DriverLicense);
+  completed && console.log(completed);
   return (
     <View style={{ flex: 1, padding: wp(3) }}>
       {/**Back arrow */}
@@ -32,11 +29,31 @@ const VerificationScreen = () => {
       </View>
 
       {/**Items */}
-      <AuthItem title={"CNIC Front Side"} route={"front-side"} />
-      <AuthItem title={"CNIC Back Side"} route={"back-side"} />
-      <AuthItem title={"Profile Photo"} route={"Profile-photo"} />
-      <AuthItem title={"Driving License"} route={"license-auth"} />
-      <AuthItem title={"Velicle Registeration"} route={"vehicle-reg"} />
+      <AuthItem
+        title={"CNIC Front Side"}
+        route={"front-side"}
+        completed={completed}
+      />
+      <AuthItem
+        title={"CNIC Back Side"}
+        route={"back-side"}
+        completed={completed}
+      />
+      <AuthItem
+        title={"Profile Photo"}
+        route={"Profile-photo"}
+        completed={completed}
+      />
+      <AuthItem
+        title={"Driving License"}
+        route={"license-auth"}
+        completed={completed}
+      />
+      <AuthItem
+        title={"Velicle Registeration"}
+        route={"vehicle-reg"}
+        completed={completed}
+      />
     </View>
   );
 };

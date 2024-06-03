@@ -6,7 +6,7 @@ import {
   Button,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import {
@@ -18,6 +18,14 @@ import BackButton from "../../widget/Buttons/BackButton";
 import axios from "axios";
 import { baseURL, config } from "../../Services/authorization";
 import Btn from "../../widget/Btn";
+import { useStore } from "zustand";
+import { useInitialStore } from "../../Context/Upload";
+import {
+  Context,
+  useInitialContext,
+  useVerificationContext,
+} from "../../Context";
+
 interface PreviewProps {
   photo: any;
   setPhoto: (value: any) => void;
@@ -29,8 +37,8 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
   setPhoto,
   hasMediaLibraryPermission,
 }) => {
+  const { uploadPhoto } = useVerificationContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [license, setLicense] = useState({ driversLicense: "" });
   const navigation = useNavigation() as any;
   let sharePhoto = () => {
     shareAsync(photo.uri).then(() => {
@@ -43,6 +51,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
       setPhoto(undefined);
     });
   };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     const formData = new FormData();
@@ -54,7 +63,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
     });
 
     formData.append("Content-Type", "image/jpeg");
-
+    console.log(formData);
     try {
       const res = await axios.post(
         baseURL + "user/upload/drivers-license",
@@ -62,7 +71,11 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
         config
       );
 
-      console.log(res.headers);
+      // console.log(res.headers);
+      // if (res.status === 201) {
+      //
+      // }
+      uploadPhoto();
       setIsLoading(false);
       setPhoto(undefined);
       navigation.navigate("Account-ready");

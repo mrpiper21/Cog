@@ -10,7 +10,7 @@ interface ButtonProps {
   label: String;
   route?: String;
   type?: "action" | "cancel";
-  callback?: () => void;
+  callback?: (value?: any) => void;
 }
 
 const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {

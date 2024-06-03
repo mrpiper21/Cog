@@ -1,7 +1,6 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
+import { VerifyContext } from '../Global/VerificationContext';
 
-export const ActiveCategoryContext = createContext('');
-
-export const useActiveCategory = () => {
-  return useContext(ActiveCategoryContext);
+export const useVerificationContext = () => {
+  return useContext(VerifyContext);
 };

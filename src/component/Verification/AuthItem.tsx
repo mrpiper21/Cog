@@ -8,38 +8,38 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface AuthProps {
+  completed: boolean;
   title: String;
   route: String;
 }
 
-const AuthItem: React.FC<AuthProps> = ({ title, route }) => {
+const AuthItem: React.FC<AuthProps> = ({ title, route, completed }) => {
   const navigation = useNavigation() as any;
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(route)}
-      style={styles.authContainer}
-    >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Entypo
-          style={{ marginRight: wp(2) }}
-          name="text-document-inverted"
-          size={wp(8)}
-          color="black"
-        />
-        <View>
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: wp(3.4),
-            }}
-          >
-            {title}
-          </Text>
-          <Text>Get Started</Text>
-        </View>
-      </View>
-      <Ionicons name="chevron-forward" size={24} color="black" />
-    </TouchableOpacity>
+    <>
+      {!completed ? (
+        <TouchableOpacity
+          onPress={() => route && navigation.navigate(route)}
+          style={styles.authContainer}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Entypo
+              style={{ marginRight: wp(2) }}
+              name="text-document-inverted"
+              size={wp(8)}
+              color="black"
+            />
+            <View>
+              <Text style={styles.txt}>{title}</Text>
+              <Text>Get Started</Text>
+            </View>
+          </View>
+          <Ionicons name="chevron-forward" size={24} color="black" />
+        </TouchableOpacity>
+      ) : (
+        <View>hi</View>
+      )}
+    </>
   );
 };
 
@@ -63,5 +63,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     paddingVertical: wp(4),
     borderBottomColor: "lightgray",
+  },
+  txt: {
+    fontWeight: "600",
+    fontSize: wp(3.4),
   },
 });
