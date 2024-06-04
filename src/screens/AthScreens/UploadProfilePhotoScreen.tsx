@@ -53,14 +53,6 @@ const UploadProfilePhotoScreen = () => {
     return <View />;
   }
 
-  // if (loading) {
-  //   return (
-  //     <View className="flex-1 bg-white items-center justify-center">
-  //       <Text>Processing image...</Text>
-  //     </View>
-  //   );
-  // }
-
   if (photo) {
     return (
       <PreviewPhoto
@@ -68,15 +60,8 @@ const UploadProfilePhotoScreen = () => {
         setPhoto={setPhoto}
         photo={photo}
         setIsLoading={setIsLoading}
+        isLoading={loading}
       />
-    );
-  }
-
-  {
-    loading && (
-      <View className="flex-1 bg-white items-center justify-center">
-        <Text>Please wait</Text>
-      </View>
     );
   }
 

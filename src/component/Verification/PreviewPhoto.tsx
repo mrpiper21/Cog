@@ -14,6 +14,7 @@ interface PreviewProps {
   photo: any;
   setPhoto: (value: any) => void;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
   hasMediaLibraryPermission: any;
 }
 
@@ -22,6 +23,7 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
   setPhoto,
   hasMediaLibraryPermission,
   setIsLoading,
+  isLoading,
 }) => {
   const navigation = useNavigation() as any;
   const { handleProfilePhotoSubmit } = useVerificationContext();
@@ -36,6 +38,14 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
       setPhoto(undefined);
     });
   };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-white items-center justify-center">
+        <Text>Processing image please wait...</Text>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginTop: wp(20) }}>

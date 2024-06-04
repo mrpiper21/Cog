@@ -73,20 +73,18 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
     const formData = new FormData();
 
-    formData.append("driversLicense", {
-      uri: photo.uri,
-      name: "driversLicense.jpg",
-      type: "image/jpeg",
-    });
-
-    formData.append("Content-Type", "image/jpeg");
-    // console.log(formData);
     try {
-      await axios.post(
-        baseURL + "user/upload/drivers-license",
-        formData,
-        config
-      );
+      formData.append("driversLicense", {
+        uri: photo.uri,
+        name: "driversLicense.jpg",
+        type: "image/jpeg",
+      });
+
+      formData.append("Content-Type", "image/jpeg");
+      // console.log(formData);
+      await axios
+        .post(baseURL + "user/upload/drivers-license", formData, config)
+        .then((res) => console.log(res.headers));
       // console.log(res.headers);
 
       await uploadLicense();
@@ -99,6 +97,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
     }
   };
+
   const handleProfilePhotoSubmit = async (
     setIsLoading: (value: boolean) => void,
     setPhoto: (value: any) => void,
