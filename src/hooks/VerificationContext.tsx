@@ -19,6 +19,12 @@ interface VerifyState {
     photo: any,
     value?: any
   ) => void;
+  handleProfilePhotoSubmit: (
+    setIsloading: React.Dispatch<React.SetStateAction<boolean>>,
+    setPhoto: React.Dispatch<React.SetStateAction<boolean>>,
+    photo: any,
+    value?: any
+  ) => void;
 }
 
 type verState = {
@@ -93,6 +99,36 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
     }
   };
+  const handleProfilePhotoSubmit = async (
+    setIsLoading: (value: boolean) => void,
+    setPhoto: (value: any) => void,
+    photo: any
+  ) => {
+    setIsLoading(true);
+    const formData = new FormData();
+
+    formData.append("driversLicense", {
+      uri: photo.uri,
+      name: "driversLicense.jpg",
+      type: "image/jpeg",
+    });
+
+    // formData.append("Content-Type", "image/jpeg");
+    // console.log(formData);
+    try {
+      await axios.patch(baseURL + "user/profile-pic", formData, config);
+      // console.log(res.headers);
+
+      await uploadProfilePhoto();
+      setIsLoading(false);
+      setPhoto(undefined);
+      navigation.navigate("Account-ready");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setPhoto(undefined);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <VerifyContext.Provider
@@ -101,6 +137,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         uploadProfilePhoto,
         uploadLicense,
         handleLicenseSubmit,
+        handleProfilePhotoSubmit,
       }}
     >
       {children}

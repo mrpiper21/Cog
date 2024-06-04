@@ -7,10 +7,13 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import { useVerificationContext } from "../../Context";
+import Btn from "../../widget/Btn";
 
 interface PreviewProps {
   photo: any;
   setPhoto: (value: any) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   hasMediaLibraryPermission: any;
 }
 
@@ -18,8 +21,10 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
   photo,
   setPhoto,
   hasMediaLibraryPermission,
+  setIsLoading,
 }) => {
   const navigation = useNavigation() as any;
+  const { handleProfilePhotoSubmit } = useVerificationContext();
   let sharePhoto = () => {
     shareAsync(photo.uri).then(() => {
       setPhoto(undefined);
@@ -31,11 +36,6 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
       setPhoto(undefined);
     });
   };
-  function handleSubmit() {
-    setPhoto(undefined);
-    navigation.navigate("Photo-submitted");
-  }
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginTop: wp(20) }}>
@@ -60,19 +60,13 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
         </Text>
       </View>
       <View style={{ alignItems: "center", marginTop: wp(30) }}>
-        <TouchableOpacity
-          className="bg-blue-500"
-          style={{
-            width: wp(90),
-            height: hp(7.3),
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: wp(2),
-          }}
-          onPress={handleSubmit}
-        >
-          <Text style={{ color: "white" }}>Submit</Text>
-        </TouchableOpacity>
+        <Btn
+          type="action"
+          callback={() =>
+            handleProfilePhotoSubmit(setIsLoading, setPhoto, photo)
+          }
+          label={"Submit"}
+        />
         <TouchableOpacity
           onPress={() => setPhoto(undefined)}
           className="bg-slate-300"

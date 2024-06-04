@@ -1,16 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -75,7 +67,16 @@ const UploadProfilePhotoScreen = () => {
         hasMediaLibraryPermission={hasMediaLibraryPermission}
         setPhoto={setPhoto}
         photo={photo}
+        setIsLoading={setIsLoading}
       />
+    );
+  }
+
+  {
+    loading && (
+      <View className="flex-1 bg-white items-center justify-center">
+        <Text>Please wait</Text>
+      </View>
     );
   }
 

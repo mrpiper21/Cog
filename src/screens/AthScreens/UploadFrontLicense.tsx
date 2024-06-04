@@ -9,6 +9,7 @@ import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import * as MediaLibrary from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
 import PreviewFrontLicense from "./PreviewFrontLicense";
+import { useVerificationContext } from "../../Context";
 
 const UploadFrontLicense = () => {
   const [facing, setFacing] = useState("back");
@@ -17,6 +18,7 @@ const UploadFrontLicense = () => {
   const [hasCameraaPermission, setHasCameraPermission] = useState(Boolean);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
+  const { handleProfilePhotoSubmit } = useVerificationContext();
 
   const cameraRef = useRef<CameraView>(null);
   const navigation = useNavigation();
@@ -81,14 +83,7 @@ const UploadFrontLicense = () => {
           </View>
         </View>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          marginBottom: wp(2),
-        }}
-      >
+      <View style={styles.shutterContainer}>
         <TouchableOpacity
           className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 h-[85px] w-[85px]"
           onPress={takePic}
@@ -131,5 +126,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "white",
+  },
+  shutterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginBottom: wp(2),
   },
 });
