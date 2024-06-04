@@ -2,7 +2,6 @@ import React, { createContext, useCallback, useState } from "react";
 import { baseURL, config } from "../Services/authorization";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import { AUTH_TOKEN } from "react-native-dotenv";
 
 interface VerifyState {
   isVerified: {
@@ -117,7 +116,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     // console.log(formData);
     try {
       await axios
-        .patchForm(baseURL + "user/profile-pic/" + AUTH_TOKEN, formData)
+        .patchForm(baseURL + "user/profile-pic", formData)
         .then((res) => console.log(res.headers));
       // console.log(res.headers);
 

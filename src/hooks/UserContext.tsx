@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import { baseURL, config } from "../Services/authorization";
 
 interface UserState {
   user: { id: string; name: string; email: string };
@@ -29,6 +31,19 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
       }));
     }
   };
+  React.useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(baseURL + "user/get-user", config)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+    getUser();
+  }, [user, setUser, updateUser]);
+
   return (
     <useUserContext.Provider value={{ updateUser, user }}>
       {children}

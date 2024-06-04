@@ -4,6 +4,7 @@ import AuthNavigation from "./src/navigation/authNavigationStack/AuthNavigation"
 import VerificationContext from "./src/hooks/VerificationContext";
 import DrawerNavigation from "./src/navigation/ProtectedNavigationStack/DrawNavigation";
 import { UserContext } from "./src/hooks/UserContext";
+import { registerRootComponent } from "expo";
 const isAthenticated = true;
 
 export default function App() {
@@ -17,3 +18,5 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+registerRootComponent(App);

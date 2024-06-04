@@ -20,9 +20,11 @@ import React from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
+import { UserInfoContext } from "../../../Context";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;
+  const { user } = UserInfoContext();
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
@@ -51,9 +53,9 @@ const ProfileDetailScreen = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            Femi Vanzekin
+            {user.name ? user.name : "User"}
           </Text>
-          <Text>Femivanzekin@gmail.com</Text>
+          <Text>{user.email ? user.email : "email"}</Text>
         </View>
       </View>
       <View style={styles.ratingContainer}>
