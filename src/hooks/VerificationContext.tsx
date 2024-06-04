@@ -1,7 +1,8 @@
-import React, { createContext, Dispatch, useCallback, useState } from "react";
+import React, { createContext, useCallback, useState } from "react";
 import { baseURL, config } from "../Services/authorization";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { AUTH_TOKEN } from "react-native-dotenv";
 
 interface VerifyState {
   isVerified: {
@@ -106,16 +107,18 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
     const formData = new FormData();
 
-    formData.append("driversLicense", {
+    formData.append("profile-pic", {
       uri: photo.uri,
-      name: "driversLicense.jpg",
+      name: "profilePicture.jpg",
       type: "image/jpeg",
     });
 
     // formData.append("Content-Type", "image/jpeg");
     // console.log(formData);
     try {
-      await axios.patch(baseURL + "user/profile-pic", formData, config);
+      await axios
+        .patchForm(baseURL + "user/profile-pic/" + AUTH_TOKEN, formData)
+        .then((res) => console.log(res.headers));
       // console.log(res.headers);
 
       await uploadProfilePhoto();

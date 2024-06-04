@@ -3,14 +3,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigation from "./src/navigation/authNavigationStack/AuthNavigation";
 import VerificationContext from "./src/hooks/VerificationContext";
 import DrawerNavigation from "./src/navigation/ProtectedNavigationStack/DrawNavigation";
-const isAthenticated = false;
+import { UserContext } from "./src/hooks/UserContext";
+const isAthenticated = true;
 
 export default function App() {
   return (
     <NavigationContainer>
-      <VerificationContext>
-        {isAthenticated ? <DrawerNavigation /> : <AuthNavigation />}
-      </VerificationContext>
+      <UserContext>
+        <VerificationContext>
+          {isAthenticated ? <DrawerNavigation /> : <AuthNavigation />}
+        </VerificationContext>
+      </UserContext>
     </NavigationContainer>
   );
 }

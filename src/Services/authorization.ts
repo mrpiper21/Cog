@@ -1,6 +1,5 @@
 import axios from "axios"
-
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVsQGdtYWlsLmNvbSIsImlhdCI6MTcwMTY5NjEwNCwiZXhwIjoxNzMzMjUzNzA0fQ.sX9RqJM6hPdyRrYolPOzDa1lddPMhP0HVdwPg5pbKIQ"
+import {  AUTH_TOKEN } from 'react-native-dotenv';
 
 // axios.defaults.baseURL = "http://bookish-octo-barnacle-2.onrender.com/"
 
@@ -12,7 +11,7 @@ export const baseURL = "https://bookish-octo-barnacle-2.onrender.com/"
 
 export const config = {
     headers: {
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${AUTH_TOKEN}`,
         "Content-Type": "multipart/form-data",
         'accept': 'application/json'
     }
