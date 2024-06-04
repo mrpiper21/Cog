@@ -23,12 +23,12 @@ const HeaderContainer = () => {
         <Image
           style={styles.userImage}
           source={{
-            uri: "https://th.bing.com/th/id/R.049f9f762cce429ac653cb14beb6d6cd?rik=xYCBCJErYOUW7A&pid=ImgRaw&r=0",
+            uri: user?.profilePic,
           }}
         />
         <View>
           <Text style={{ fontWeight: "500", fontSize: wp(4) }}>
-            {user.name ? user.name : "User"}
+            {user?.email}
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("ProfileDetail")}

@@ -13,6 +13,7 @@ interface PofileProps {
 
 const ProfileItem: React.FC<PofileProps> = ({ route }) => {
   const { user } = UserInfoContext();
+  console.log("profile: item", user?.email);
   const navigation = useNavigation() as any;
   return (
     <TouchableOpacity
@@ -27,7 +28,7 @@ const ProfileItem: React.FC<PofileProps> = ({ route }) => {
       />
       <View>
         <Text style={{ fontWeight: "500", fontSize: wp(4) }}>
-          {user.name ? user.name : "User"}
+          {user?.email}
         </Text>
         <View style={styles.ratingContainer}>
           <AntDesign name="star" size={wp(4)} color="orange" />

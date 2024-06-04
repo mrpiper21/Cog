@@ -1,23 +1,20 @@
 import axios from "axios";
-import React from "react";
-import { baseURL, config } from "../Services/authorization";
+import React, { useEffect } from "react";
+import { baseURL, config, getUserConfig } from "../Services/authorization";
+import UserInterface, { initialUserState } from "../Global/UserInterface";
 
 interface UserState {
-  user: { id: string; name: string; email: string };
+  user: UserInterface;
   updateUser: (name: string, email: string) => void;
 }
-type User = { id: string; name: string; email: string };
 
-export const useUserContext = React.createContext<UserState>(UserContext);
+export const useUserContext = React.createContext<UserState>(useUserContext);
 
 export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = React.useState<User>({
-    id: "",
-    name: "",
-    email: "",
-  });
+  const [user, setUser] = React.useState<UserInterface>(initialUserState);
+
   const updateUser = (name: string, email: string) => {
     if (name) {
       setUser((prevState) => ({
@@ -31,18 +28,20 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
       }));
     }
   };
-  React.useEffect(() => {
-    const getUser = async () => {
-      await axios
-        .get(baseURL + "user/get-user", config)
-        .then((res) => {
-          setUser(res.data);
-        })
-        .catch((err) => console.log(err));
-    };
 
+  const getUser = async () => {
+    try {
+      const res = await axios.get(baseURL + "user/get-user", getUserConfig);
+      setUser(res.data);
+      console.log(user);
+    } catch (err) {
+      console.error("Error fetching user data:", err);
+    }
+  };
+
+  useEffect(() => {
     getUser();
-  }, [user, setUser, updateUser]);
+  }, []);
 
   return (
     <useUserContext.Provider value={{ updateUser, user }}>

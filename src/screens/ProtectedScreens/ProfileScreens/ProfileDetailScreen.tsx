@@ -53,9 +53,9 @@ const ProfileDetailScreen = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            {user.name ? user.name : "User"}
+            {user?.email}
           </Text>
-          <Text>{user.email ? user.email : "email"}</Text>
+          <Text>{user?.email}</Text>
         </View>
       </View>
       <View style={styles.ratingContainer}>
