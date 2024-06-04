@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { VerifyContext } from '../Global/VerificationContext';
+import { VerifyContext } from '../hooks/VerificationContext';
 
 export const useVerificationContext = () => {
   return useContext(VerifyContext);

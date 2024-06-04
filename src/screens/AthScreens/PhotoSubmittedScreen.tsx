@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const PhotoSubmittedScreen = () => {
   const navigation = useNavigation() as any;
+  function handleNavigation() {}
   return (
     <View
       style={{
@@ -38,7 +39,7 @@ const PhotoSubmittedScreen = () => {
         <Btn
           type="action"
           label={"Go to next step"}
-          callback={() => navigation.navigate("License-front")}
+          callback={() => navigation.navigate("Verification")}
         />
       </View>
     </View>

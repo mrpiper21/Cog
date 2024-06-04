@@ -94,7 +94,7 @@ const UploadProfilePhotoScreen = () => {
     <View style={styles.container}>
       <View className="flex-1 items-center mt-20">
         <View className="overflow-hidden w-[400px] h-[410px] rounded-full">
-          <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+          <CameraView style={styles.camera} facing={"front"} ref={cameraRef}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <AntDesign
                 name="close"

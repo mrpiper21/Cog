@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,16 +8,16 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface AuthProps {
-  completed: boolean;
+  isVerified: "Submitted" | "Completed" | "unCompleted";
   title: String;
   route: String;
 }
 
-const AuthItem: React.FC<AuthProps> = ({ title, route, completed }) => {
+const AuthItem: React.FC<AuthProps> = ({ title, route, isVerified }) => {
   const navigation = useNavigation() as any;
   return (
     <>
-      {!completed ? (
+      {isVerified === "unCompleted" ? (
         <TouchableOpacity
           onPress={() => route && navigation.navigate(route)}
           style={styles.authContainer}
@@ -36,8 +36,46 @@ const AuthItem: React.FC<AuthProps> = ({ title, route, completed }) => {
           </View>
           <Ionicons name="chevron-forward" size={24} color="black" />
         </TouchableOpacity>
+      ) : isVerified === "Submitted" ? (
+        <View>
+          <Text className="text-lg font-bold">Submitted</Text>
+          <View style={styles.submittedContainer}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <AntDesign
+                style={{ marginRight: wp(2) }}
+                name="clockcircle"
+                size={wp(8)}
+                color="gray"
+              />
+              <View>
+                <Text style={styles.txt}>{title}</Text>
+                <Text className="text-gray-500">under review</Text>
+              </View>
+            </View>
+            <Ionicons name="chevron-forward" size={24} color="black" />
+          </View>
+        </View>
       ) : (
-        <View>hi</View>
+        isVerified === "Completed" && (
+          <View>
+            <Text className="text-lg font-bold">Completed</Text>
+            <View style={styles.authContainer}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <AntDesign
+                  style={{ marginRight: wp(2) }}
+                  name="clockcircle"
+                  size={wp(8)}
+                  color="gray"
+                />
+                <View>
+                  <Text style={styles.txt}>{title}</Text>
+                  <Text className="text-green-300">approved by Glopilot</Text>
+                </View>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="black" />
+            </View>
+          </View>
+        )
       )}
     </>
   );
@@ -67,5 +105,13 @@ const styles = StyleSheet.create({
   txt: {
     fontWeight: "600",
     fontSize: wp(3.4),
+  },
+  submittedContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomWidth: 1.5,
+    paddingVertical: wp(6),
+    borderBottomColor: "lightgray",
   },
 });

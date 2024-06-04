@@ -3,14 +3,16 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import React from "react";
+import React, { useState } from "react";
 import AuthItem from "../../component/Verification/AuthItem";
 import BackButton from "../../widget/Buttons/BackButton";
-import { useInitialStore } from "../../Context/Upload";
+import { useVerificationContext } from "../../Context";
 
 const VerificationScreen = () => {
-  const completed = useInitialStore((state) => state.DriverLicense);
-  completed && console.log(completed);
+  const [verificationState, setVerifictionState] = useState({});
+  const { isVerified } = useVerificationContext();
+
+  isVerified && console.log(isVerified);
   return (
     <View style={{ flex: 1, padding: wp(3) }}>
       {/**Back arrow */}
@@ -32,27 +34,27 @@ const VerificationScreen = () => {
       <AuthItem
         title={"CNIC Front Side"}
         route={"front-side"}
-        completed={completed}
+        isVerified={isVerified.CNIC_FRONT}
       />
       <AuthItem
         title={"CNIC Back Side"}
         route={"back-side"}
-        completed={completed}
+        isVerified={isVerified.CNIC_BACK}
       />
       <AuthItem
         title={"Profile Photo"}
         route={"Profile-photo"}
-        completed={completed}
+        isVerified={isVerified.Profile_Photo}
       />
       <AuthItem
         title={"Driving License"}
-        route={"license-auth"}
-        completed={completed}
+        route={"License-front"}
+        isVerified={isVerified.Driving_License}
       />
       <AuthItem
         title={"Velicle Registeration"}
         route={"vehicle-reg"}
-        completed={completed}
+        isVerified={isVerified.Velicle_Registeration}
       />
     </View>
   );

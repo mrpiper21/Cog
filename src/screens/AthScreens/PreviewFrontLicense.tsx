@@ -1,12 +1,5 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Button,
-  StyleSheet,
-} from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, Text, Image, Button, StyleSheet } from "react-native";
+import React, { useState } from "react";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import {
@@ -15,16 +8,8 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../widget/Buttons/BackButton";
-import axios from "axios";
-import { baseURL, config } from "../../Services/authorization";
 import Btn from "../../widget/Btn";
-import { useStore } from "zustand";
-import { useInitialStore } from "../../Context/Upload";
-import {
-  Context,
-  useInitialContext,
-  useVerificationContext,
-} from "../../Context";
+import { useVerificationContext } from "../../Context";
 
 interface PreviewProps {
   photo: any;
@@ -37,7 +22,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
   setPhoto,
   hasMediaLibraryPermission,
 }) => {
-  const { uploadPhoto } = useVerificationContext();
+  const { uploadLicense, handleLicenseSubmit } = useVerificationContext();
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation() as any;
   let sharePhoto = () => {
@@ -50,40 +35,6 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
     MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
       setPhoto(undefined);
     });
-  };
-
-  const handleSubmit = async () => {
-    setIsLoading(true);
-    const formData = new FormData();
-
-    formData.append("driversLicense", {
-      uri: photo.uri,
-      name: "driversLicense.jpg",
-      type: "image/jpeg",
-    });
-
-    formData.append("Content-Type", "image/jpeg");
-    console.log(formData);
-    try {
-      const res = await axios.post(
-        baseURL + "user/upload/drivers-license",
-        formData,
-        config
-      );
-
-      // console.log(res.headers);
-      // if (res.status === 201) {
-      //
-      // }
-      uploadPhoto();
-      setIsLoading(false);
-      setPhoto(undefined);
-      navigation.navigate("Account-ready");
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setPhoto(undefined);
-      setIsLoading(false);
-    }
   };
 
   if (isLoading) {
@@ -123,7 +74,11 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
       </View>
       <View style={{ alignItems: "center", marginTop: wp(42) }}>
         <View className="mb-2">
-          <Btn type="action" label={"Submit"} callback={handleSubmit} />
+          <Btn
+            type="action"
+            label={"Submit"}
+            callback={() => handleLicenseSubmit(setIsLoading, setPhoto, photo)}
+          />
         </View>
         <Btn
           type="cancel"

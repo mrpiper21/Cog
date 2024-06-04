@@ -8,7 +8,7 @@ import {
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import * as MediaLibrary from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
-import PreviewFrontLicense from "../../component/Verification/PreviewFrontLicense";
+import PreviewFrontLicense from "./PreviewFrontLicense";
 
 const UploadFrontLicense = () => {
   const [facing, setFacing] = useState("back");
