@@ -5,6 +5,7 @@ import VerificationContext from "./src/hooks/VerificationContext";
 import DrawerNavigation from "./src/navigation/ProtectedNavigationStack/DrawNavigation";
 import { UserContext } from "./src/hooks/UserContext";
 import { registerRootComponent } from "expo";
+import { AppRegistry } from "react-native";
 const isAthenticated = true;
 
 export default function App() {
@@ -19,4 +20,6 @@ export default function App() {
   );
 }
 
-registerRootComponent(App);
+// registerRootComponent(App)
+
+AppRegistry.registerComponent("main", () => App);

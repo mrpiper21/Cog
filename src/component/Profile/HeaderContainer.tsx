@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,10 +7,12 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../Context";
+import { useUserContext } from "../../hooks/UserContext";
+import { baseURL } from "../../Services/authorization";
 
 const HeaderContainer = () => {
   const navigation = useNavigation() as any;
-  const { user } = UserInfoContext();
+  const User = useContext(useUserContext);
   return (
     <View style={styles.headerContainer}>
       <View style={styles.userContainer}>
@@ -23,12 +25,12 @@ const HeaderContainer = () => {
         <Image
           style={styles.userImage}
           source={{
-            uri: user?.profilePic,
+            uri: `${baseURL}${User?.user.user.profilePic}`,
           }}
         />
         <View>
           <Text style={{ fontWeight: "500", fontSize: wp(4) }}>
-            {user?.email}
+            {User?.user.user.email}
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("ProfileDetail")}

@@ -1,62 +1,70 @@
-export default interface UserInterface {
-    _id: string;
-    email: string;
-    profilePic: string;
-    gender: string;
-    password: string;
-    walletBalance: number;
-    userType: string;
-    otp: string;
-    otpExpires: string;
-    emailVerified: boolean;
-    userAgent: string[];
-    referrals: any[]; // You can replace 'any' with a more specific type if needed
-    likedVendors: any[]; // Same here
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    homeLocation: {
+export interface UserInterface {
+  user: {
+    user: {
+      __v: number;
+      _id: string;
+      createdAt: string;
+      currentLocation: {
+        coordinates: number[];
         type: string;
-        coordinates: [number, number];
-    };
-    workLocation: {
+      };
+      email: string;
+      emailVerified: boolean;
+      gender: string;
+      homeLocation: {
+        coordinates: number[];
         type: string;
-        coordinates: [number, number];
-    };
-    currentLocation: {
+      };
+      likedVendors: string[];
+      otp: string;
+      otpExpires: string;
+      password: string;
+      profilePic: string;
+      referrals: string[];
+      updatedAt: string;
+      userAgent: string[];
+      userType: string;
+      walletBalance: number;
+      workLocation: {
+        coordinates: number[];
         type: string;
-        coordinates: [number, number];
-    };
+      };
+    }
+  };
 }
 
 
 export const  initialUserState: UserInterface = {
-    _id: "",
-    email: "",
-    profilePic: "",
-    gender: "",
-    password: "",
-    walletBalance: 0,
-    userType: "",
-    otp: "",
-    otpExpires: "",
-    emailVerified: false,
-    userAgent: [],
-    referrals: [],
-    likedVendors: [],
-    createdAt: "",
-    updatedAt: "",
-    __v: 0,
-    homeLocation: {
+  user: {
+    user: {
+      __v: 0,
+      _id: "",
+      createdAt: "",
+      currentLocation: {
+        coordinates: [],
         type: "",
-        coordinates: [0, 0],
-    },
-    workLocation: {
+      },
+      email: "",
+      emailVerified: false,
+      gender: "",
+      homeLocation: {
+        coordinates: [],
         type: "",
-        coordinates: [0, 0],
-    },
-    currentLocation: {
+      },
+      likedVendors: [],
+      otp: "",
+      otpExpires: "",
+      password: "",
+      profilePic: "",
+      referrals: [],
+      updatedAt: "",
+      userAgent: [],
+      userType: "",
+      walletBalance: 0,
+      workLocation: {
+        coordinates: [],
         type: "",
-        coordinates: [0, 0],
+      },
     },
+  },
 };

@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import {
   widthPercentageToDP as wp,
@@ -11,8 +11,11 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import EditBtn from "../../../component/Profile/EditBtn";
+import { useUserContext } from "../../../hooks/UserContext";
+import { baseURL } from "../../../Services/authorization";
 
 const EditProfileScreen = () => {
+  const User = useContext(useUserContext);
   return (
     <View>
       <View
@@ -35,7 +38,7 @@ const EditProfileScreen = () => {
           <Image
             style={styles.ImageItem}
             source={{
-              uri: "https://th.bing.com/th/id/R.049f9f762cce429ac653cb14beb6d6cd?rik=xYCBCJErYOUW7A&pid=ImgRaw&r=0",
+              uri: `${baseURL}${User?.user.user.email}`,
             }}
           />
           <View style={styles.cameraIcon}>
@@ -44,7 +47,7 @@ const EditProfileScreen = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            Femi Vanzekin
+            {User?.user.user.email}
           </Text>
         </View>
       </View>

@@ -21,6 +21,7 @@ import BackButton from "../../../widget/Buttons/BackButton";
 import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../../Context";
+import { baseURL } from "../../../Services/authorization";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;
@@ -44,7 +45,7 @@ const ProfileDetailScreen = () => {
           <Image
             style={styles.ImageItem}
             source={{
-              uri: "https://th.bing.com/th/id/R.049f9f762cce429ac653cb14beb6d6cd?rik=xYCBCJErYOUW7A&pid=ImgRaw&r=0",
+              uri: `${baseURL}${user?.user.profilePic}`,
             }}
           />
           <View style={styles.cameraIcon}>
@@ -53,9 +54,9 @@ const ProfileDetailScreen = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            {user?.email}
+            {user?.user.email}
           </Text>
-          <Text>{user?.email}</Text>
+          <Text>{user?.user.email}</Text>
         </View>
       </View>
       <View style={styles.ratingContainer}>

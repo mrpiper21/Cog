@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { baseURL, config, getUserConfig } from "../Services/authorization";
-import UserInterface, { initialUserState } from "../Global/UserInterface";
+import { initialUserState, UserInterface } from "../Global/UserInterface";
+import { writeImageAsync } from "../Global/UploadImage";
 
-interface UserState {
-  user: UserInterface;
-  updateUser: (name: string, email: string) => void;
-}
+// interface UserStateHooks extends UserInterface {
+//   updateUser: (name: string, email: string) => void;
+// }
 
-export const useUserContext = React.createContext<UserState>(useUserContext);
+export const useUserContext =
+  React.createContext<UserInterface>(initialUserState);
 
 export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -32,8 +33,17 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   const getUser = async () => {
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
+      console.log("Response data:", res.data);
       setUser(res.data);
-      console.log(user);
+
+      if (res.data && res.data.user && res.data.user.profilePic) {
+        const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
+        console.log("profile........", profilePicUrl);
+        await writeImageAsync(profilePicUrl, "profile-Pic");
+        console.log("Image saved successfully");
+      } else {
+        console.log("User data or profilePic not found in response");
+      }
     } catch (err) {
       console.error("Error fetching user data:", err);
     }
@@ -42,9 +52,9 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     getUser();
   }, []);
-
+  console.log("User before provider", user);
   return (
-    <useUserContext.Provider value={{ updateUser, user }}>
+    <useUserContext.Provider value={{ user, updateUser }}>
       {children}
     </useUserContext.Provider>
   );

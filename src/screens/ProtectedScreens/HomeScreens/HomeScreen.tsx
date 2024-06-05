@@ -56,7 +56,7 @@ const HomeScreen = (): React.JSX.Element => {
         showsUserLocation={true}
         followsUserLocation={true}
         userLocationPriority="high"
-        // provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
         region={mapRegion}
         style={styles.map}
         ref={mapRef}

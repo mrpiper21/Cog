@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,6 +7,7 @@ import {
 import StatisticCard from "../../../component/Profile/StatisticCard";
 import HeaderContainer from "../../../component/Profile/HeaderContainer";
 import HightlightsCard from "../../../component/Profile/HightlightsCard";
+import { useUserContext } from "../../../hooks/UserContext";
 
 const ProfileScreen = () => {
   const [driverRatingPreview, setDriverRatingPreview] = useState(false);
@@ -15,6 +16,7 @@ const ProfileScreen = () => {
   const [acceptanceRatePreview, setAcceptanceRatePreview] = useState(false);
   const [cancellationRatingPreview, setCancellationRationPreview] =
     useState(false);
+  // const User = useContext(useUserContext)
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
       {/**Profile header container */}
