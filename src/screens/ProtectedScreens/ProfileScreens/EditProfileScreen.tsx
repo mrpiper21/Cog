@@ -11,7 +11,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import EditBtn from "../../../component/Profile/EditBtn";
-import { useUserContext } from "../../../hooks/UserContext";
+import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../../Services/authorization";
 
 const EditProfileScreen = () => {

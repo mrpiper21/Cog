@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { VerifyContext } from '../hooks/VerificationContext';
-import { useUserContext } from '../hooks/UserContext';
+import { VerifyContext } from '../hooks/Verificationcontext/VerificationContext';
+import { useUserContext } from '../hooks/Usercontext/UserContext';
 
 // export const useUserContext = React.createContext(UserContext);
 export const useVerificationContext = () => {

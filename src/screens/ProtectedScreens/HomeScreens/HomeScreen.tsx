@@ -1,4 +1,11 @@
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
@@ -9,39 +16,18 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
-import * as Location from "expo-location";
+import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
 
 const HomeScreen = (): React.JSX.Element => {
+  const mapRegion = React.useContext(LocationContext);
   const mapRef = useRef<MapView>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
-  const [mapRegion, setMapRegion] = useState({
-    longitude: 37.78825,
-    latitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
 
   const userLocation = async () => {
-    mapRef.current?.animateToRegion(mapRegion);
+    mapRef.current?.animateToRegion(mapRegion.mapRegion);
   };
-
-  useEffect(() => {
-    const func = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.prompt("Error", "There was an error getting your location");
-      }
-      let location = await Location.getCurrentPositionAsync();
-      setMapRegion((prev) => ({
-        ...prev,
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      }));
-    };
-    func();
-  }, [setMapRegion]);
 
   const snapPoints = useMemo(() => ["12%"], []);
 
@@ -53,16 +39,18 @@ const HomeScreen = (): React.JSX.Element => {
         showsTraffic={true}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
-        showsUserLocation={true}
+        // showsUserLocation={true}
         followsUserLocation={true}
         userLocationPriority="high"
-        provider={PROVIDER_GOOGLE}
-        region={mapRegion}
+        // provider={PROVIDER_GOOGLE}
+        region={mapRegion.mapRegion}
         style={styles.map}
         ref={mapRef}
         // showsMyLocationButton
       >
-        <Marker coordinate={mapRegion} title="Marker" />
+        <Marker coordinate={mapRegion.mapRegion} title="Marker">
+          <Image source={require("../../../../assets/userNavigator.png")} />
+        </Marker>
       </MapView>
       <View style={{ position: "absolute", marginTop: wp(20) }}></View>
       <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef}>

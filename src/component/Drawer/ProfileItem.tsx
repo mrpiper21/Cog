@@ -6,7 +6,7 @@ import {
 } from "react-native-responsive-screen";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useUserContext } from "../../hooks/UserContext";
+import { useUserContext } from "../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../Services/authorization";
 interface PofileProps {
   route: String;

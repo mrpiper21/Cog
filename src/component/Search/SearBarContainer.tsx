@@ -5,6 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { MaterialIcons } from "@expo/vector-icons";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,11 +20,16 @@ const SearBarContainer: React.FC<searchProps> = ({ setSearch, setTyping }) => {
           <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
         </TouchableOpacity>
         <View>
-          <TextInput
-            onFocus={() => setTyping(true)}
-            // onChange={() => setTyping(true)}
-            style={styles.searchInput}
-            placeholder="Search for location"
+          <GooglePlacesAutocomplete
+            placeholder="Search"
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              console.log(data, details);
+            }}
+            query={{
+              key: "YOUR API KEY",
+              language: "en",
+            }}
           />
         </View>
       </View>

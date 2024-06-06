@@ -1,31 +1,11 @@
 import React, { createContext, useCallback, useState } from "react";
-import { baseURL, config } from "../Services/authorization";
-import axios from "axios";
+import { baseURL, config, mytoken, token } from "../../Services/authorization";
 import { useNavigation } from "@react-navigation/native";
-
-interface VerifyState {
-  isVerified: {
-    CNIC_FRONT: "Submitted" | "Completed" | "unCompleted";
-    CNIC_BACK: "Submitted" | "Completed" | "unCompleted";
-    Profile_Photo: "Submitted" | "Completed" | "unCompleted";
-    Driving_License: "Submitted" | "Completed" | "unCompleted";
-    Velicle_Registeration: "Submitted" | "Completed" | "unCompleted";
-  };
-  uploadProfilePhoto: () => void;
-  uploadLicense: () => void;
-  handleLicenseSubmit: (
-    setIsloading: React.Dispatch<React.SetStateAction<boolean>>,
-    setPhoto: React.Dispatch<React.SetStateAction<boolean>>,
-    photo: any,
-    value?: any
-  ) => void;
-  handleProfilePhotoSubmit: (
-    setIsloading: React.Dispatch<React.SetStateAction<boolean>>,
-    setPhoto: React.Dispatch<React.SetStateAction<boolean>>,
-    photo: any,
-    value?: any
-  ) => void;
-}
+import {
+  VerificationInterface,
+  initialVerificationState,
+} from "./VerifyInitialState";
+import { writeImageAsync } from "../../Global/UploadImage";
 
 type verState = {
   CNIC_FRONT: "Submitted" | "Completed" | "unCompleted";
@@ -43,7 +23,9 @@ const IsVerified: verState = {
   Velicle_Registeration: "unCompleted",
 };
 
-export const VerifyContext = createContext<VerifyState>(VerifyContext);
+export const VerifyContext = createContext<VerificationInterface>(
+  initialVerificationState
+);
 
 export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -56,6 +38,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       ...prev,
       Profile_Photo: "Submitted",
     }));
+    navigation.navigate("Verification");
   }, [isVerified]);
 
   const uploadLicense = useCallback(() => {
@@ -63,6 +46,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       ...prev,
       Driving_License: "Submitted",
     }));
+    navigation.navigate("Verification");
   }, [isVerified]);
 
   const handleLicenseSubmit = async (
@@ -72,26 +56,35 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     setIsLoading(true);
     const formData = new FormData();
-
+    console.log(photo.uri);
     try {
-      formData.append("driversLicense", {
+      formData.append("file", {
         uri: photo.uri,
-        name: "driversLicense.jpg",
         type: "image/jpeg",
+        name: "driversLicense.jpg",
       });
 
-      formData.append("Content-Type", "image/jpeg");
-      // console.log(formData);
-      await axios
-        .post(baseURL + "user/upload/drivers-license", formData, config)
-        .then((res) => console.log(res.headers));
-      // console.log(res.headers);
+      const response = await fetch(baseURL + "user/upload/drivers-license", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${mytoken}`,
+        },
+        body: formData,
+      });
 
-      await uploadLicense();
-      setIsLoading(false);
-      setPhoto(undefined);
-      navigation.navigate("Account-ready");
+      if (!response.ok) {
+        console.error(`Error uploading image: ${response.status}`);
+        setIsLoading(false);
+        setPhoto(undefined);
+      } else {
+        console.log("Image uploaded successfully!");
+        setIsLoading(false);
+        await uploadLicense();
+      }
     } catch (error) {
+      console.log();
       console.error("Error uploading image:", error);
       setPhoto(undefined);
       setIsLoading(false);
@@ -106,24 +99,40 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
     const formData = new FormData();
 
-    formData.append("profile-pic", {
-      uri: photo.uri,
-      name: "profilePicture.jpg",
-      type: "image/jpeg",
-    });
+    // formData.append("driversLicense", photo.uri, photo.name);
+    // formData.append("Content-Type", "image/jpeg");
 
     // formData.append("Content-Type", "image/jpeg");
     // console.log(formData);
     try {
-      await axios
-        .patchForm(baseURL + "user/profile-pic", formData)
-        .then((res) => console.log(res.headers));
-      // console.log(res.headers);
+      formData.append("file", {
+        uri: photo?.uri,
+        type: "image/jpeg",
+        name: "profile_picture.jpg",
+      });
 
-      await uploadProfilePhoto();
-      setIsLoading(false);
-      setPhoto(undefined);
-      navigation.navigate("Account-ready");
+      const response = await fetch(baseURL + "user/profile-pic", {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${mytoken}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log(response.headers);
+        setIsLoading(false);
+        setPhoto(undefined);
+        await writeImageAsync(photo.uri, "Profile-Photo");
+        uploadProfilePhoto();
+      } else {
+        // console.log(response.headers);
+        console.log("There was an error uploading image");
+        setIsLoading(false);
+        setPhoto(undefined);
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
       setPhoto(undefined);

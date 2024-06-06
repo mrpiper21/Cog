@@ -13,14 +13,28 @@
     },
     "ios": {
       "supportsTablet": true,
-      "permissions": ["PHOTO_LIBRARY_WRITE_ONLY"]
+      "permissions": [
+        "PHOTO_LIBRARY_WRITE_ONLY"
+      ]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff",
-        "permissions": ["WRITE_EXTERNAL_STORAGE"]
-      }
+        "permissions": [
+          "WRITE_EXTERNAL_STORAGE"
+        ]
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.anonymous.COG"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,12 +57,23 @@
         }
       ],
       [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow car location to use your location."
+        }
+      ],
+      [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ],
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d523090d-232c-41fe-a04b-a849cfed68f0"
+      }
+    }
   }
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { baseURL, config, getUserConfig } from "../Services/authorization";
-import { initialUserState, UserInterface } from "../Global/UserInterface";
-import { writeImageAsync } from "../Global/UploadImage";
+import { baseURL, getUserConfig } from "../../Services/authorization";
+import { initialUserState, UserInterface } from "./UserInterface";
+// import { writeImageAsync } from "../../Global/UploadImage";
 
 // interface UserStateHooks extends UserInterface {
 //   updateUser: (name: string, email: string) => void;
@@ -30,16 +30,29 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const updateUserProfile = async (UserData: UserInterface) => {
+    try {
+      const res = await axios.put(
+        baseURL + "user/get-user" + user.user.user._id,
+        UserData,
+        getUserConfig
+      );
+      console.log("Response data:", res.data);
+      setUser(res.data);
+    } catch (err) {
+      console.error("Error updating user data:", err);
+    }
+  };
+
   const getUser = async () => {
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
-      console.log("Response data:", res.data);
+      // console.log("Response data:", res.data);
       setUser(res.data);
 
       if (res.data && res.data.user && res.data.user.profilePic) {
         const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
-        console.log("profile........", profilePicUrl);
-        await writeImageAsync(profilePicUrl, "profile-Pic");
+        // await writeImageAsync(profilePicUrl, "profile-Pic");
         console.log("Image saved successfully");
       } else {
         console.log("User data or profilePic not found in response");
@@ -52,9 +65,8 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     getUser();
   }, []);
-  console.log("User before provider", user);
   return (
-    <useUserContext.Provider value={{ user, updateUser }}>
+    <useUserContext.Provider value={{ user, updateUser, updateUserProfile }}>
       {children}
     </useUserContext.Provider>
   );
