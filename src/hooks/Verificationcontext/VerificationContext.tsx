@@ -33,21 +33,26 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   const [isVerified, setIsVerified] = useState<verState>(IsVerified);
   const navigation = useNavigation() as any;
 
-  const uploadProfilePhoto = useCallback(() => {
+  React.useEffect(() => {
+    setIsVerified(IsVerified);
+  }, []);
+
+  const uploadProfilePhoto = () => {
     setIsVerified((prev) => ({
       ...prev,
       Profile_Photo: "Submitted",
     }));
-    navigation.navigate("Verification");
-  }, [isVerified]);
+    console.log("Verifying photo...", isVerified.Profile_Photo);
+    // navigation.navigate("Verification");
+  };
 
   const uploadLicense = useCallback(() => {
     setIsVerified((prev) => ({
       ...prev,
       Driving_License: "Submitted",
     }));
-    navigation.navigate("Verification");
-  }, [isVerified]);
+    // navigation.navigate("Verification");
+  }, []);
 
   const handleLicenseSubmit = async (
     setIsLoading: (value: boolean) => void,
@@ -82,6 +87,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         console.log("Image uploaded successfully!");
         setIsLoading(false);
         await uploadLicense();
+        navigation.navigate("Verification");
       }
     } catch (error) {
       console.log();
@@ -127,6 +133,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         setPhoto(undefined);
         await writeImageAsync(photo.uri, "Profile-Photo");
         uploadProfilePhoto();
+        navigation.navigate("Verification");
       } else {
         // console.log(response.headers);
         console.log("There was an error uploading image");

@@ -10,14 +10,14 @@ interface Props {
   icon: React.ReactNode;
   label: String;
   msg?: Number;
-  route: String;
+  route?: String;
 }
 
 const NavBarItem: React.FC<Props> = ({ icon, label, msg, route }) => {
   const navigation = useNavigation() as any;
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(route)}
+      onPress={() => route && navigation.navigate(route)}
       style={{
         flexDirection: "row",
         alignItems: "center",

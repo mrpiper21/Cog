@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../../screens/ProtectedScreens/HomeScreens/HomeScreen";
 import PreferenceScreen from "../../screens/ProtectedScreens/HomeScreens/PreferenceScreen";
 import RecommendationScreen from "../../screens/ProtectedScreens/HomeScreens/RecommendationScreen";
@@ -29,6 +30,7 @@ import DeleteSuccessScreen from "../../screens/HelpScreens/DeleteSuccessScreen";
 import RemoveVehicleScreen from "../../screens/HelpScreens/RemoveVehicleScreen";
 import RemoveVehicleConfirm from "../../screens/HelpScreens/RemoveVehicleConfirm";
 import RemoveVehicleSuccessScreen from "../../screens/HelpScreens/RemoveVehicleSuccessScreen";
+import ProfileStack from "./ProfileNavigationSack/ProfileStack";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -37,8 +39,7 @@ const ProtectStack = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Preference" component={PreferenceScreen} />
       <Stack.Screen name="Recommendation" component={RecommendationScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="ProfileDetail" component={ProfileDetailScreen} />
+      <Stack.Screen name="Profile" component={ProfileStack} />
       <Stack.Screen name="RatingDetail" component={RideRatingScreen} />
       <Stack.Screen name="Acceptance" component={AcceptanceScreen} />
       <Stack.Screen name="Cancellation" component={CancellationScreen} />

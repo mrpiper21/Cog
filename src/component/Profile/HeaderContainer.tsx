@@ -13,6 +13,7 @@ import { baseURL } from "../../Services/authorization";
 const HeaderContainer = () => {
   const navigation = useNavigation() as any;
   const User = useContext(useUserContext);
+  console.log("My details.....", User);
   return (
     <View style={styles.headerContainer}>
       <View style={styles.userContainer}>
@@ -25,12 +26,12 @@ const HeaderContainer = () => {
         <Image
           style={styles.userImage}
           source={{
-            uri: `${baseURL}${User?.user.user.profilePic}`,
+            uri: `${baseURL}${User?.user.profilePic}`,
           }}
         />
         <View>
           <Text style={{ fontWeight: "500", fontSize: wp(4) }}>
-            {User?.user.user.email}
+            {User?.user.email}
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("ProfileDetail")}

@@ -4,16 +4,18 @@ import { baseURL, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
 // import { writeImageAsync } from "../../Global/UploadImage";
 
-// interface UserStateHooks extends UserInterface {
-//   updateUser: (name: string, email: string) => void;
-// }
+interface UserContextProps {
+  user: UserInterface;
+  updateUser: (name: string, email: string) => void;
+  updateUserProfile: (UserData: UserInterface) => Promise<void>;
+  getUser: () => Promise<void>;
+}
 
-export const useUserContext =
-  React.createContext<UserInterface>(initialUserState);
+export const useUserContext = React.createContext<UserContextProps | undefined>(
+  undefined
+);
 
-export const UserContext: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const UserContext: React.FC<UserContextProps | React.ReactNode> = () => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
 
   const updateUser = (name: string, email: string) => {
@@ -33,12 +35,12 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   const updateUserProfile = async (UserData: UserInterface) => {
     try {
       const res = await axios.put(
-        baseURL + "user/get-user" + user.user.user._id,
+        baseURL + "user/get-user" + user._id,
         UserData,
         getUserConfig
       );
       console.log("Response data:", res.data);
-      setUser(res.data);
+      setUser(res.data.user);
     } catch (err) {
       console.error("Error updating user data:", err);
     }
@@ -48,7 +50,8 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
-      setUser(res.data);
+      setUser(res.data.user);
+      console.log("User from state manager.....", user);
 
       if (res.data && res.data.user && res.data.user.profilePic) {
         const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
@@ -66,8 +69,10 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     getUser();
   }, []);
   return (
-    <useUserContext.Provider value={{ user, updateUser, updateUserProfile }}>
-      {children}
+    <useUserContext.Provider
+      value={{ user, updateUser, updateUserProfile, getUser }}
+    >
+      {/* {children} */}
     </useUserContext.Provider>
   );
 };

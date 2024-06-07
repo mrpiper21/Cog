@@ -5,8 +5,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Btn from "../../widget/Btn";
+import { UserInfoContext, useVerificationContext } from "../../Context";
 
 const AccountReadyScreen = () => {
+  const Verification = useVerificationContext();
+  const User = UserInfoContext();
   return (
     <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginTop: hp(25) }}>
@@ -15,14 +18,18 @@ const AccountReadyScreen = () => {
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View style={{ alignItems: "center" }}>
           <Text style={{ fontSize: wp(4), fontWeight: "600" }}>
-            Hi Femi, your account is almost ready
+            Hi {User?.user.email}, your account is almost ready
           </Text>
           <Text style={{ fontSize: wp(4) }}>
             Start connecting with passengers and enjoy driving.
           </Text>
         </View>
         <View style={{ alignItems: "center", marginBottom: wp(3) }}>
-          <Btn type="action" label={"let's go"} />
+          <Btn
+            type="action"
+            label={"let's go"}
+            callback={Verification.uploadProfilePhoto}
+          />
         </View>
       </View>
     </View>

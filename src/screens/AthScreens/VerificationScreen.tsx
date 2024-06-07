@@ -3,16 +3,20 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthItem from "../../component/Verification/AuthItem";
 import BackButton from "../../widget/Buttons/BackButton";
-import { useVerificationContext } from "../../Context";
+import Btn from "../../widget/Btn";
+import { VerifyContext } from "../../hooks/Verificationcontext/VerificationContext";
+import { useNavigation } from "@react-navigation/native";
 
 const VerificationScreen = () => {
   const [verificationState, setVerifictionState] = useState({});
-  const { isVerified } = useVerificationContext();
+  const Verification = useContext(VerifyContext);
+  const navigation = useNavigation() as any;
+  // User.
 
-  isVerified && console.log(isVerified);
+  // isVerified && console.log(Verification?.isVerified.);
   return (
     <View style={{ flex: 1, padding: wp(3) }}>
       {/**Back arrow */}
@@ -34,28 +38,38 @@ const VerificationScreen = () => {
       <AuthItem
         title={"CNIC Front Side"}
         route={"front-side"}
-        isVerified={isVerified.CNIC_FRONT}
+        isVerified={Verification?.isVerified.CNIC_FRONT}
       />
       <AuthItem
         title={"CNIC Back Side"}
         route={"back-side"}
-        isVerified={isVerified.CNIC_BACK}
+        isVerified={Verification?.isVerified.CNIC_BACK}
       />
       <AuthItem
         title={"Profile Photo"}
         route={"Profile-photo"}
-        isVerified={isVerified.Profile_Photo}
+        isVerified={Verification?.isVerified.Profile_Photo}
       />
       <AuthItem
         title={"Driving License"}
         route={"License-front"}
-        isVerified={isVerified.Driving_License}
+        isVerified={Verification?.isVerified.Driving_License}
       />
       <AuthItem
         title={"Velicle Registeration"}
         route={"vehicle-reg"}
-        isVerified={isVerified.Velicle_Registeration}
+        isVerified={Verification?.isVerified.Velicle_Registeration}
       />
+
+      {Verification?.isVerified.Profile_Photo === "Submitted" && (
+        <View className="flex-1 items-center justify-center">
+          <Btn
+            type="action"
+            label={"Continue later"}
+            callback={() => navigation.navigate("Account-ready")}
+          />
+        </View>
+      )}
     </View>
   );
 };

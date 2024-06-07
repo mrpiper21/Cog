@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 import VerificationScreen from "../../screens/AthScreens/VerificationScreen";
 import ProfilePhotoScreen from "../../screens/AthScreens/ProfilePhotoScreen";
 import UploadProfilePhotoScreen from "../../screens/AthScreens/UploadProfilePhotoScreen";

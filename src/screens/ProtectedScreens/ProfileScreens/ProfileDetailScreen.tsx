@@ -25,7 +25,8 @@ import { baseURL } from "../../../Services/authorization";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;
-  const { user } = UserInfoContext();
+  const user = UserInfoContext();
+  console.log("profile pic in profile screen", baseURL + user?.user.email);
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
@@ -45,7 +46,7 @@ const ProfileDetailScreen = () => {
           <Image
             style={styles.ImageItem}
             source={{
-              uri: `${baseURL}${user?.user.profilePic}`,
+              uri: `${baseURL}"/"${user?.user.profilePic}`,
             }}
           />
           <View style={styles.cameraIcon}>
