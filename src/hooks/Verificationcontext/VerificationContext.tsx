@@ -5,7 +5,8 @@ import {
   VerificationInterface,
   initialVerificationState,
 } from "./VerifyInitialState";
-import { writeImageAsync } from "../../Global/UploadImage";
+// import { writeImageAsync } from "../../Global/UploadImage";
+import { useQuery } from "react-query";
 
 type verState = {
   CNIC_FRONT: "Submitted" | "Completed" | "unCompleted";
@@ -62,6 +63,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
     const formData = new FormData();
     console.log(photo.uri);
+
     try {
       formData.append("file", {
         uri: photo.uri,
@@ -131,8 +133,9 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         console.log(response.headers);
         setIsLoading(false);
         setPhoto(undefined);
-        await writeImageAsync(photo.uri, "Profile-Photo");
-        uploadProfilePhoto();
+        // await writeImageAsync(photo.uri, "Profile-Photo");
+        // uploadProfilePhoto();
+        uploadLicense();
         navigation.navigate("Verification");
       } else {
         // console.log(response.headers);

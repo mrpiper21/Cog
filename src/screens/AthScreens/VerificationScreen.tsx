@@ -9,13 +9,18 @@ import BackButton from "../../widget/Buttons/BackButton";
 import Btn from "../../widget/Btn";
 import { VerifyContext } from "../../hooks/Verificationcontext/VerificationContext";
 import { useNavigation } from "@react-navigation/native";
+import { useVerificationContext } from "../../Context";
 
 const VerificationScreen = () => {
   const [verificationState, setVerifictionState] = useState({});
-  const Verification = useContext(VerifyContext);
+  const Verification = useVerificationContext();
   const navigation = useNavigation() as any;
   // User.
 
+  console.log(
+    "Verify the photo... verification screen",
+    Verification.isVerified.Profile_Photo
+  );
   // isVerified && console.log(Verification?.isVerified.);
   return (
     <View style={{ flex: 1, padding: wp(3) }}>
@@ -61,7 +66,7 @@ const VerificationScreen = () => {
         isVerified={Verification?.isVerified.Velicle_Registeration}
       />
 
-      {Verification?.isVerified.Profile_Photo === "Submitted" && (
+      {Verification?.isVerified.Driving_License === "Submitted" && (
         <View className="flex-1 items-center justify-center">
           <Btn
             type="action"

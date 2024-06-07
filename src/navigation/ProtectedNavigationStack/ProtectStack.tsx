@@ -4,8 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../../screens/ProtectedScreens/HomeScreens/HomeScreen";
 import PreferenceScreen from "../../screens/ProtectedScreens/HomeScreens/PreferenceScreen";
 import RecommendationScreen from "../../screens/ProtectedScreens/HomeScreens/RecommendationScreen";
-import ProfileScreen from "../../screens/ProtectedScreens/ProfileScreens/ProfileScreen";
-import ProfileDetailScreen from "../../screens/ProtectedScreens/ProfileScreens/ProfileDetailScreen";
 import RideRatingScreen from "../../screens/ProtectedScreens/ProfileScreens/RideRatingScreen";
 import AcceptanceScreen from "../../screens/ProtectedScreens/ProfileScreens/AcceptanceScreen";
 import CancellationScreen from "../../screens/ProtectedScreens/ProfileScreens/CancellationScreen";
@@ -31,6 +29,7 @@ import RemoveVehicleScreen from "../../screens/HelpScreens/RemoveVehicleScreen";
 import RemoveVehicleConfirm from "../../screens/HelpScreens/RemoveVehicleConfirm";
 import RemoveVehicleSuccessScreen from "../../screens/HelpScreens/RemoveVehicleSuccessScreen";
 import ProfileStack from "./ProfileNavigationSack/ProfileStack";
+// import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
