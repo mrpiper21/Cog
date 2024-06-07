@@ -12,7 +12,7 @@ const AppNavigation = () => {
     Verification?.isVerified.Profile_Photo
   );
 
-  return Verification?.isVerified.Profile_Photo === "Submitted" ? (
+  return Verification.isVerified.isAuthentication ? (
     <LocationHook>
       <DrawerNavigation />
     </LocationHook>

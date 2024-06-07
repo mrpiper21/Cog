@@ -28,7 +28,7 @@ const AccountReadyScreen = () => {
           <Btn
             type="action"
             label={"let's go"}
-            callback={Verification.uploadProfilePhoto}
+            callback={Verification.AuthenticateUser}
           />
         </View>
       </View>

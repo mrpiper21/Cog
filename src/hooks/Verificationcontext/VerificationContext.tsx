@@ -14,6 +14,7 @@ type verState = {
   Profile_Photo: "Submitted" | "Completed" | "unCompleted";
   Driving_License: "Submitted" | "Completed" | "unCompleted";
   Velicle_Registeration: "Submitted" | "Completed" | "unCompleted";
+  isAuthentication: true | false;
 };
 
 const IsVerified: verState = {
@@ -22,6 +23,7 @@ const IsVerified: verState = {
   Profile_Photo: "unCompleted",
   Driving_License: "unCompleted",
   Velicle_Registeration: "unCompleted",
+  isAuthentication: false,
 };
 
 export const VerifyContext = createContext<VerificationInterface>(
@@ -37,6 +39,13 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   React.useEffect(() => {
     setIsVerified(IsVerified);
   }, []);
+
+  const AuthenticateUser = () => {
+    setIsVerified((prevState) => ({
+      ...prevState,
+      isAuthentication: true,
+    }));
+  };
 
   const uploadProfilePhoto = () => {
     setIsVerified((prev) => ({
@@ -153,6 +162,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   return (
     <VerifyContext.Provider
       value={{
+        AuthenticateUser,
         isVerified,
         uploadProfilePhoto,
         uploadLicense,
