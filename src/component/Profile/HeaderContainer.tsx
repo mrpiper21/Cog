@@ -26,7 +26,7 @@ const HeaderContainer = () => {
         <Image
           style={styles.userImage}
           source={{
-            uri: `${baseURL}${User?.user.profilePic}`,
+            uri: `${baseURL}${User?.user.email}`,
           }}
         />
         <View>

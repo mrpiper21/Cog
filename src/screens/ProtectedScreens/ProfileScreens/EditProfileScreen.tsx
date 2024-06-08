@@ -38,7 +38,7 @@ const EditProfileScreen = () => {
           <Image
             style={styles.ImageItem}
             source={{
-              uri: `${baseURL}${User?.user.user.email}`,
+              uri: `${baseURL}${User?.user.email}`,
             }}
           />
           <View style={styles.cameraIcon}>
@@ -47,7 +47,7 @@ const EditProfileScreen = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            {User?.user.user.email}
+            {User?.user.email}
           </Text>
         </View>
       </View>

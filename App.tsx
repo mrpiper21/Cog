@@ -4,13 +4,16 @@ import { registerRootComponent } from "expo";
 import AppNavigation from "./src/navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { useVerificationContext } from "./src/Context";
+import { UserContext } from "./src/hooks/Usercontext/UserContext";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <VerificationContext>
-        <AppNavigation />
-      </VerificationContext>
+      <UserContext>
+        <VerificationContext>
+          <AppNavigation />
+        </VerificationContext>
+      </UserContext>
     </NavigationContainer>
   );
 }

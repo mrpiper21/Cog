@@ -15,7 +15,9 @@ export const useUserContext = React.createContext<UserContextProps | undefined>(
   undefined
 );
 
-export const UserContext: React.FC<UserContextProps | React.ReactNode> = () => {
+export const UserContext: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
 
   const updateUser = (name: string, email: string) => {
@@ -51,10 +53,12 @@ export const UserContext: React.FC<UserContextProps | React.ReactNode> = () => {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
       setUser(res.data.user);
-      console.log("User from state manager.....", user);
+
+      res.data && setUser(res.data.user);
 
       if (res.data && res.data.user && res.data.user.profilePic) {
         const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
+        console.log("user in my context...", user);
         // await writeImageAsync(profilePicUrl, "profile-Pic");
         console.log("Image saved successfully");
       } else {
@@ -72,7 +76,7 @@ export const UserContext: React.FC<UserContextProps | React.ReactNode> = () => {
     <useUserContext.Provider
       value={{ user, updateUser, updateUserProfile, getUser }}
     >
-      {/* {children} */}
+      {children}
     </useUserContext.Provider>
   );
 };

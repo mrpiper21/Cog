@@ -8,6 +8,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useUserContext } from "../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../Services/authorization";
+import { EvilIcons } from "@expo/vector-icons";
 interface PofileProps {
   route: String;
 }
@@ -17,21 +18,25 @@ const ProfileItem: React.FC<PofileProps> = ({ route }) => {
   console.log("User In my Context: ", User);
   // console.log("my email", User?.user.user.email);
 
-  console.log("Profile Pic", User?.user.user.profilePic);
+  console.log("Profile Pic url...", baseURL + User?.user.profilePic);
   const navigation = useNavigation() as any;
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(route)}
       style={{ flexDirection: "row", alignItems: "center" }}
     >
-      <Image
-        style={styles.userImag}
-        source={{
-          uri: `${baseURL}${User?.user.user.profilePic}`,
-        }}
-      />
+      {User?.user.profilePic ? (
+        <Image
+          style={styles.userImag}
+          source={{
+            uri: `${baseURL}${User?.user.profilePic}`,
+          }}
+        />
+      ) : (
+        <EvilIcons name="user" size={24} color="black" />
+      )}
       <View>
-        <Text className="text-base font-bold">{User?.user.user.email}</Text>
+        <Text className="text-base font-bold">{User?.user.email}</Text>
         <View style={styles.ratingContainer}>
           <AntDesign name="star" size={wp(4)} color="orange" />
           <Text>4.6</Text>

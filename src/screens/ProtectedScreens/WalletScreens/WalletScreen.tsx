@@ -6,15 +6,20 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import HeaderFAQ from "../../../widget/Header/HeaderFAQ";
+import {
+  UserContext,
+  useUserContext,
+} from "../../../hooks/Usercontext/UserContext";
 
 const WalletScreen = () => {
+  const User = React.useContext(useUserContext);
   return (
     <View className="flex-1 bg-white justify-between">
       <View>
         <HeaderFAQ title={"Cash Out"} />
         <View className="m-4 space-y-2">
           <Text>Current balance</Text>
-          <Text className="text-xl font-bold">$196.15</Text>
+          <Text className="text-xl font-bold">{User?.user.walletBalance}</Text>
         </View>
         <View className="space-y-4 mx-4">
           <View className="flex flex-row items-center space-x-4 py-3 border-b-2 border-[#EEEE]">
