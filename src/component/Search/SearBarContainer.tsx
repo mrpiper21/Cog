@@ -6,33 +6,42 @@ import {
 } from "react-native-responsive-screen";
 import { MaterialIcons } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { API_KEY } from "../../Services/authorization";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  setTyping: React.Dispatch<React.SetStateAction<boolean>>;
+  // setTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SearBarContainer: React.FC<searchProps> = ({ setSearch, setTyping }) => {
+const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
   return (
-    <View style={styles.searchContainer}>
-      <View style={styles.searchSubContainer}>
-        <TouchableOpacity onPress={() => setSearch(false)}>
-          <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
-        </TouchableOpacity>
-        <View>
-          <GooglePlacesAutocomplete
-            placeholder="Search"
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
-            }}
-            query={{
-              key: "YOUR API KEY",
-              language: "en",
-            }}
-          />
-        </View>
-      </View>
+    <View style={{ zIndex: 1, flex: 0.5, marginTop: 40 }}>
+      <GooglePlacesAutocomplete
+        placeholder="Search places"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(JSON.stringify(data));
+          console.log(JSON.stringify(details?.geometry?.location));
+          console.log(data, details);
+          // setTyping(true);
+        }}
+        query={{
+          key: API_KEY,
+          language: "en",
+        }}
+        onFail={(error) => console.log(error)}
+        styles={{
+          textInputContainer: {
+            width: "auto",
+          },
+          textInput: {
+            height: 38,
+
+            color: "#5d5d5d",
+            fontSize: 16,
+          },
+        }}
+      />
     </View>
   );
 };
@@ -44,6 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     height: hp(13),
+    marginTop: 30,
   },
   searchSubContainer: {
     flexDirection: "row",
@@ -61,3 +71,9 @@ const styles = StyleSheet.create({
     height: hp(4),
   },
 });
+
+{
+  /* <TouchableOpacity onPress={() => setSearch(false)}>
+  <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
+</TouchableOpacity>; */
+}

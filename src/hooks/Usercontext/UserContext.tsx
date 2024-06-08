@@ -52,7 +52,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
-      setUser(res.data.user);
+      setUser(res?.data.user);
 
       res.data && setUser(res.data.user);
 

@@ -8,6 +8,9 @@ import LocationItem from "../../../component/Search/LocationItem";
 import HomeLoactionItem from "../../../component/Search/HomeLoactionItem";
 import NearbyLocationContainer from "../../../component/Search/NearbyLocationContainer";
 import SearBarContainer from "../../../component/Search/SearBarContainer";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { API_KEY } from "../../../Services/authorization";
+import { StatusBar } from "expo-status-bar";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +21,14 @@ const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
   return (
     <View style={{ flex: 1 }}>
       {/**SearchContainer */}
-      <SearBarContainer setSearch={setSearch} setTyping={setTyping} />
+      <StatusBar
+        style="dark"
+        backgroundColor="gray"
+        translucent={true}
+        animated={true}
+      />
+      <SearBarContainer setSearch={setTyping} />
+
       {typing ? (
         <View style={{ marginTop: wp(2) }}>
           <LocationItem
