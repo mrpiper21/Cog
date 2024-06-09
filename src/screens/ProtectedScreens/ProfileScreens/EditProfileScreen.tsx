@@ -9,6 +9,7 @@ import {
   AntDesign,
   Ionicons,
   MaterialCommunityIcons,
+  EvilIcons,
 } from "@expo/vector-icons";
 import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
@@ -35,12 +36,13 @@ const EditProfileScreen = () => {
       </View>
       <View style={{ alignItems: "center", marginTop: wp(8) }}>
         <View>
-          <Image
+          {/* <Image
             style={styles.ImageItem}
             source={{
               uri: `${baseURL}${User?.user.email}`,
             }}
-          />
+          /> */}
+          <EvilIcons name="user" size={150} color="black" />
           <View style={styles.cameraIcon}>
             <AntDesign name="camera" size={24} color="black" />
           </View>

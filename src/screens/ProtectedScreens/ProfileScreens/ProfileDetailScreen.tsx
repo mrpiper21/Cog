@@ -11,6 +11,7 @@ import {
   AntDesign,
   SimpleLineIcons,
   Foundation,
+  EvilIcons,
 } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
@@ -22,6 +23,7 @@ import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../../Context";
 import { baseURL } from "../../../Services/authorization";
+import STATUSBAR from "../../../widget/STATUSBAR";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;
@@ -31,6 +33,7 @@ const ProfileDetailScreen = () => {
     <ScrollView
       style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
     >
+      <STATUSBAR />
       <View style={styles.headerContainer}>
         <BackButton />
         <Text style={{ fontSize: wp(5), fontWeight: "500" }}>Profile</Text>
@@ -43,12 +46,13 @@ const ProfileDetailScreen = () => {
       </View>
       <View style={{ alignItems: "center", marginTop: wp(8) }}>
         <View>
-          <Image
+          {/* <Image
             style={styles.ImageItem}
             source={{
               uri: `${baseURL}"/"${user?.user.profilePic}`,
             }}
-          />
+          /> */}
+          <EvilIcons name="user" size={150} color="black" />
           <View style={styles.cameraIcon}>
             <AntDesign name="camera" size={24} color="black" />
           </View>

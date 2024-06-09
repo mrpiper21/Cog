@@ -4,7 +4,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../Context";
 import { useUserContext } from "../../hooks/Usercontext/UserContext";
@@ -22,13 +22,16 @@ const HeaderContainer = () => {
           <AntDesign name="closecircleo" size={hp(4)} color="black" />
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: "row", marginTop: wp(4) }}>
-        <Image
+      <View
+        style={{ flexDirection: "row", marginTop: wp(4), alignItems: "center" }}
+      >
+        {/* <Image
           style={styles.userImage}
           source={{
             uri: `${baseURL}${User?.user.email}`,
           }}
-        />
+        /> */}
+        <EvilIcons name="user" size={80} color="black" />
         <View>
           <Text style={{ fontWeight: "500", fontSize: wp(4) }}>
             {User?.user.email}

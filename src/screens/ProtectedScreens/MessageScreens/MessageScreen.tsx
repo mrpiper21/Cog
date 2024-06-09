@@ -13,6 +13,8 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MessageCard from "../../../component/Message/MessageCard";
+import { StatusBar } from "expo-status-bar";
+import STATUSBAR from "../../../widget/STATUSBAR";
 
 const MessageScreen = () => {
   const navigation = useNavigation();
@@ -21,6 +23,7 @@ const MessageScreen = () => {
       style={{ backgroundColor: "white" }}
       showsVerticalScrollIndicator={false}
     >
+      <STATUSBAR />
       <View style={styles.headerContainer}>
         <Text style={{ fontWeight: "600", fontSize: wp(5) }}>Message</Text>
         <TouchableOpacity onPress={() => navigation.goBack()}>

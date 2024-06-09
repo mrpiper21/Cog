@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import {
   widthPercentageToDP as wp,
@@ -11,6 +11,8 @@ import SearBarContainer from "../../../component/Search/SearBarContainer";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { API_KEY } from "../../../Services/authorization";
 import { StatusBar } from "expo-status-bar";
+import { MaterialIcons } from "@expo/vector-icons";
+import STATUSBAR from "../../../widget/STATUSBAR";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,17 +21,12 @@ interface searchProps {
 const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
   const [typing, setTyping] = useState(false);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       {/**SearchContainer */}
-      <StatusBar
-        style="dark"
-        backgroundColor="gray"
-        translucent={true}
-        animated={true}
-      />
-      <SearBarContainer setSearch={setTyping} />
+      <STATUSBAR />
+      <SearBarContainer setSearch={setSearch} />
 
-      {typing ? (
+      {/* {typing ? (
         <View style={{ marginTop: wp(2) }}>
           <LocationItem
             title={"Orchard View"}
@@ -38,10 +35,8 @@ const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
         </View>
       ) : (
         <View>
-          {/**Home location item */}
           <HomeLoactionItem />
 
-          {/**Nearby location item list */}
           <NearbyLocationContainer />
           <View style={{ marginTop: wp(2) }}>
             <LocationItem
@@ -58,7 +53,7 @@ const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
             />
           </View>
         </View>
-      )}
+      )} */}
     </View>
   );
 };

@@ -138,7 +138,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         body: formData,
       });
 
-      if (response.ok) {
+      if (response.status === 201) {
         console.log(response.headers);
         setIsLoading(false);
         setPhoto(undefined);

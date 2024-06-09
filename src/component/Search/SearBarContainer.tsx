@@ -15,30 +15,45 @@ interface searchProps {
 
 const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
   return (
-    <View style={{ zIndex: 1, flex: 0.5, marginTop: 40 }}>
+    <View
+      style={{
+        zIndex: 1,
+        // flex: 1,
+        marginTop: 40,
+        alignItems: "flex-start",
+        flexDirection: "row",
+        // borderWidth: 1,
+        // borderColor: "gray",
+      }}
+    >
+      <TouchableOpacity className="mr-4" onPress={() => setSearch(false)}>
+        <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
+      </TouchableOpacity>
       <GooglePlacesAutocomplete
-        placeholder="Search places"
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log(JSON.stringify(data));
-          console.log(JSON.stringify(details?.geometry?.location));
-          console.log(data, details);
-          // setTyping(true);
-        }}
+        placeholder="Enter Location"
+        minLength={2}
+        // autoFocus={false}
+        // returnKeyType={"default"}
+        fetchDetails={true}
         query={{
           key: API_KEY,
           language: "en",
         }}
-        onFail={(error) => console.log(error)}
         styles={{
           textInputContainer: {
-            width: "auto",
+            // backgroundColor: "grey",
+            // height: 60,
           },
           textInput: {
             height: 38,
-
             color: "#5d5d5d",
             fontSize: 16,
+            borderWidth: 1,
+            borderColor: "gray",
+            width: "50%",
+          },
+          predefinedPlacesDescription: {
+            color: "#1faadb",
           },
         }}
       />
@@ -72,8 +87,5 @@ const styles = StyleSheet.create({
   },
 });
 
-{
-  /* <TouchableOpacity onPress={() => setSearch(false)}>
-  <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
-</TouchableOpacity>; */
-}
+// {
+// }

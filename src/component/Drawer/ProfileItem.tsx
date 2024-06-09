@@ -25,7 +25,7 @@ const ProfileItem: React.FC<PofileProps> = ({ route }) => {
       onPress={() => navigation.navigate(route)}
       style={{ flexDirection: "row", alignItems: "center" }}
     >
-      {User?.user.profilePic ? (
+      {/* {User?.user.profilePic ? (
         <Image
           style={styles.userImag}
           source={{
@@ -33,8 +33,9 @@ const ProfileItem: React.FC<PofileProps> = ({ route }) => {
           }}
         />
       ) : (
-        <EvilIcons name="user" size={24} color="black" />
-      )}
+        <EvilIcons name="user" size={35} color="black" />
+      )} */}
+      <EvilIcons name="user" size={60} color="black" />
       <View>
         <Text className="text-base font-bold">{User?.user.email}</Text>
         <View style={styles.ratingContainer}>
