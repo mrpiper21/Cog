@@ -17,13 +17,12 @@ const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
   return (
     <View
       style={{
-        zIndex: 1,
+        // zIndex: 1,
         // flex: 1,
         marginTop: 40,
         alignItems: "flex-start",
         flexDirection: "row",
-        // borderWidth: 1,
-        // borderColor: "gray",
+        paddingHorizontal: 10,
       }}
     >
       <TouchableOpacity className="mr-4" onPress={() => setSearch(false)}>
@@ -40,10 +39,7 @@ const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
           language: "en",
         }}
         styles={{
-          textInputContainer: {
-            // backgroundColor: "grey",
-            // height: 60,
-          },
+          textInputContainer: {},
           textInput: {
             height: 38,
             color: "#5d5d5d",
