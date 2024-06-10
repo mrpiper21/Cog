@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
@@ -43,6 +44,13 @@ const UploadProfilePhotoScreen = () => {
     };
     let newPhoto = await cameraRef?.current?.takePictureAsync(options);
     if (newPhoto) {
+      // const response = await fetch(newPhoto.uri);
+      // const blob = await response.blob();
+
+      // let reader = new FileReader();
+      // blob && reader.readAsDataURL(blob);
+      // console.log("data:image/jpg;base64" + photo.base64);
+
       setIsLoading(false);
     }
     setPhoto(newPhoto);

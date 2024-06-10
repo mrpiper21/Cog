@@ -5,13 +5,16 @@ import AppNavigation from "./src/navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { useVerificationContext } from "./src/Context";
 import { UserContext } from "./src/hooks/Usercontext/UserContext";
+import LocationHook from "./src/hooks/Usercontext/LocationHook";
 
 export default function App() {
   return (
     <NavigationContainer>
       <UserContext>
         <VerificationContext>
-          <AppNavigation />
+          <LocationHook>
+            <AppNavigation />
+          </LocationHook>
         </VerificationContext>
       </UserContext>
     </NavigationContainer>

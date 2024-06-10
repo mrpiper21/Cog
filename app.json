@@ -13,17 +13,12 @@
     },
     "ios": {
       "supportsTablet": true,
-      "permissions": [
-        "PHOTO_LIBRARY_WRITE_ONLY"
-      ]
+      "bundleIdentifier": "com.anonymous.COG"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "permissions": [
-          "WRITE_EXTERNAL_STORAGE"
-        ]
+        "backgroundColor": "#ffffff"
       },
       "permissions": [
         "android.permission.CAMERA",
@@ -74,6 +69,12 @@
       "eas": {
         "projectId": "d523090d-232c-41fe-a04b-a849cfed68f0"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d523090d-232c-41fe-a04b-a849cfed68f0"
     }
   }
 }

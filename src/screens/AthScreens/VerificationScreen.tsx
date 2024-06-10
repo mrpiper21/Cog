@@ -66,7 +66,7 @@ const VerificationScreen = () => {
         isVerified={Verification?.isVerified.Velicle_Registeration}
       />
 
-      {Verification?.isVerified.Driving_License === "Submitted" && (
+      {Verification?.isVerified.Profile_Photo === "Submitted" && (
         <View className="flex-1 items-center justify-center">
           <Btn
             type="action"

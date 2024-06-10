@@ -15,6 +15,7 @@ type verState = {
   Driving_License: "Submitted" | "Completed" | "unCompleted";
   Velicle_Registeration: "Submitted" | "Completed" | "unCompleted";
   isAuthentication: true | false;
+  ProfilePhoto_Url: string;
 };
 
 const IsVerified: verState = {
@@ -24,6 +25,7 @@ const IsVerified: verState = {
   Driving_License: "unCompleted",
   Velicle_Registeration: "unCompleted",
   isAuthentication: false,
+  ProfilePhoto_Url: "",
 };
 
 export const VerifyContext = createContext<VerificationInterface>(
@@ -64,6 +66,8 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     // navigation.navigate("Verification");
   }, []);
 
+  let ProfilePhoto_Url: string = "";
+
   const handleLicenseSubmit = async (
     setIsLoading: (value: boolean) => void,
     setPhoto: (value: any) => void,
@@ -71,20 +75,17 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     setIsLoading(true);
     const formData = new FormData();
-    console.log(photo.uri);
 
     try {
-      formData.append("file", {
-        uri: photo.uri,
-        type: "image/jpeg",
-        name: "driversLicense.jpg",
-      });
+      const buffer = Buffer.from(photo.base64, "base64");
+      const blob = new Blob([buffer.buffer], { type: "image/jpeg" });
+      formData.append("driversLicense", blob, "driversLicense.jpg");
 
       const response = await fetch(baseURL + "user/upload/drivers-license", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "form-data",
           Authorization: `Bearer ${mytoken}`,
         },
         body: formData,
@@ -115,15 +116,12 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     setIsLoading(true);
     const formData = new FormData();
+    // console.log("base....", photo.base64);
 
-    // formData.append("driversLicense", photo.uri, photo.name);
-    // formData.append("Content-Type", "image/jpeg");
-
-    // formData.append("Content-Type", "image/jpeg");
-    // console.log(formData);
     try {
+      ProfilePhoto_Url = "data:image/jpg;base64" + photo.base64;
       formData.append("file", {
-        uri: photo?.uri,
+        uri: photo.uri,
         type: "image/jpeg",
         name: "profile_picture.jpg",
       });
@@ -144,7 +142,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         setPhoto(undefined);
         // await writeImageAsync(photo.uri, "Profile-Photo");
         // uploadProfilePhoto();
-        uploadLicense();
+        uploadProfilePhoto();
         navigation.navigate("Verification");
       } else {
         // console.log(response.headers);
@@ -168,6 +166,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         uploadLicense,
         handleLicenseSubmit,
         handleProfilePhotoSubmit,
+        ProfilePhoto_Url,
       }}
     >
       {children}

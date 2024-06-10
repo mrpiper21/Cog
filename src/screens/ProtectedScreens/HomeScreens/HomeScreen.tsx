@@ -36,10 +36,10 @@ const HomeScreen = (): React.JSX.Element => {
   ) : (
     <View style={styles.container}>
       <MapView
-        showsTraffic={true}
+        // showsTraffic={true}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
-        // showsUserLocation={true}
+        showsUserLocation={true}
         followsUserLocation={true}
         userLocationPriority="high"
         // provider={PROVIDER_GOOGLE}
@@ -49,7 +49,7 @@ const HomeScreen = (): React.JSX.Element => {
         // showsMyLocationButton
       >
         <Marker coordinate={mapRegion.mapRegion} title="Marker">
-          <Image source={require("../../../../assets/userNavigator.png")} />
+          {/* <Image source={require("../../../../assets/userNavigator.png")} /> */}
         </Marker>
       </MapView>
       <View style={{ position: "absolute", marginTop: wp(20) }}></View>

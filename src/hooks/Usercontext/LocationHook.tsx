@@ -63,7 +63,7 @@ export const LocationHook: React.FC<{ children: React.ReactNode }> = ({
       }));
     };
     func();
-  }, [setMapRegion]);
+  }, []);
   return (
     <LocationContext.Provider value={{ mapRegion, setMapRegion }}>
       {children}

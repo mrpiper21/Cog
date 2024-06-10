@@ -8,9 +8,6 @@ import LocationItem from "../../../component/Search/LocationItem";
 import HomeLoactionItem from "../../../component/Search/HomeLoactionItem";
 import NearbyLocationContainer from "../../../component/Search/NearbyLocationContainer";
 import SearBarContainer from "../../../component/Search/SearBarContainer";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { API_KEY } from "../../../Services/authorization";
-import { StatusBar } from "expo-status-bar";
 import { MaterialIcons } from "@expo/vector-icons";
 import STATUSBAR from "../../../widget/STATUSBAR";
 

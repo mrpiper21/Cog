@@ -6,7 +6,9 @@ export interface VerificationInterface {
     Driving_License: "Submitted" | "Completed" | "unCompleted";
     Velicle_Registeration: "Submitted" | "Completed" | "unCompleted";
     isAuthentication: true | false
+    
   };
+  ProfilePhoto_Url: string
   uploadProfilePhoto: () => void;
   uploadLicense: () => void;
   handleLicenseSubmit: (
@@ -31,8 +33,10 @@ export const initialVerificationState: VerificationInterface = {
     Profile_Photo: "unCompleted",
     Driving_License: "unCompleted",
     Velicle_Registeration: "unCompleted",
-    isAuthentication: false
+    isAuthentication: false,
+    
   },
+  ProfilePhoto_Url: "",
   uploadProfilePhoto: () => {},
   uploadLicense: () => {},
   handleLicenseSubmit: () => {},

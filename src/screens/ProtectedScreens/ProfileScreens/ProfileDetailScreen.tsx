@@ -27,6 +27,7 @@ import STATUSBAR from "../../../widget/STATUSBAR";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;
+
   const user = UserInfoContext();
   console.log("profile pic in profile screen", baseURL + user?.user.email);
   return (
