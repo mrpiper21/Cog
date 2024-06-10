@@ -6,10 +6,10 @@ import {
   Alert,
   Image,
 } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { AntDesign, MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -24,12 +24,65 @@ const HomeScreen = (): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
+  const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
 
   const userLocation = async () => {
     mapRef.current?.animateToRegion(mapRegion.mapRegion);
   };
 
+  let locationOfInterest = [
+    {
+      title: "First",
+      loaction: {
+        latitude: 5.65531261192447,
+        longitude: -0.1846793107688,
+      },
+      description: "My first marker",
+    },
+    {
+      title: "second",
+      loaction: {
+        latitude: 5.652918042212605,
+        longitude: -0.18952036276,
+      },
+      description: "My second marker",
+    },
+    {
+      title: "third",
+      loaction: {
+        latitude: 5.65730212914574,
+        longitude: -0.181071739643,
+      },
+      description: "My third marker",
+    },
+    {
+      title: "third",
+      loaction: {
+        latitude: 5.643699360367113,
+        longitude: -0.181071739643,
+      },
+      description: "My third marker",
+    },
+  ];
+
+  const showLocationOfInterest = () => {
+    return locationOfInterest.map((item, index) => {
+      return (
+        <Marker
+          key={index}
+          coordinate={item.loaction}
+          title={item.title}
+          description={item.description}
+        />
+      );
+    });
+  };
+
   const snapPoints = useMemo(() => ["12%"], []);
+
+  const onRegionChange = (region: any) => {
+    console.log(region);
+  };
 
   return searchView ? (
     <SearchScreen setSearch={setSearchView} />
@@ -37,6 +90,8 @@ const HomeScreen = (): React.JSX.Element => {
     <View style={styles.container}>
       <MapView
         // showsTraffic={true}
+        initialRegion={mapRegion.mapRegion}
+        onRegionChange={onRegionChange}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
         showsUserLocation={true}
@@ -48,9 +103,19 @@ const HomeScreen = (): React.JSX.Element => {
         ref={mapRef}
         // showsMyLocationButton
       >
-        <Marker coordinate={mapRegion.mapRegion} title="Marker">
-          {/* <Image source={require("../../../../assets/userNavigator.png")} /> */}
+        <Marker
+          pinColor="#0000ff"
+          coordinate={mapRegion.mapRegion}
+          title="Marker"
+          onDragEnd={(e) => setDragableMarker(e.nativeEvent.coordinate)}
+        >
+          <Callout>
+            {/* <MaterialIcons name="location-city" size={24} color="black" /> */}
+            <Entypo name="home" size={30} color="#028391" />
+          </Callout>
         </Marker>
+        {showLocationOfInterest()}
+        {/* <Image source={require("../../../../assets/userNavigator.png")} /> */}
       </MapView>
       <View style={{ position: "absolute", marginTop: wp(20) }}></View>
       <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef}>
@@ -169,3 +234,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
 });
+
+//248632

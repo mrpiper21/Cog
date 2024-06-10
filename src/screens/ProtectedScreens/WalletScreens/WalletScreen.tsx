@@ -10,6 +10,7 @@ import {
   UserContext,
   useUserContext,
 } from "../../../hooks/Usercontext/UserContext";
+import Btn from "../../../widget/Btn";
 
 const WalletScreen = () => {
   const User = React.useContext(useUserContext);
@@ -42,9 +43,7 @@ const WalletScreen = () => {
           </View>
         </View>
         <View className="items-center mt-4">
-          <TouchableOpacity className="w-[388px] h-[56px] bg-[#EEEE] rounded-lg items-center justify-center">
-            <Text>Manage payment methods</Text>
-          </TouchableOpacity>
+          <Btn label={"Manage payment methods"} type="cancel" />
         </View>
       </View>
       <View className="mb-4 space-y-3">
@@ -56,9 +55,7 @@ const WalletScreen = () => {
           <Text className="text-base font-bold">$195.15</Text>
         </View>
         <View className="items-center ">
-          <TouchableOpacity className="rounded-lg w-[388px] h-[56px] bg-[#4460EF] items-center justify-center">
-            <Text className="text-white">Confirm</Text>
-          </TouchableOpacity>
+          <Btn label={"confirm"} type="action" />
         </View>
       </View>
     </View>

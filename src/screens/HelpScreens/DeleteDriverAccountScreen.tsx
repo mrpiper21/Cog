@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import Header from "../../widget/Header";
 import { useNavigation } from "@react-navigation/native";
+import Btn from "../../widget/Btn";
 
 const DeleteDriverAccountScreen = () => {
   const navigation = useNavigation() as any;
@@ -22,15 +23,16 @@ const DeleteDriverAccountScreen = () => {
             <Text className="text-base font-bold">
               Can we help with anything else?
             </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Delete-Here")}
-              className="w-[420px] h-[56px] items-center justify-center bg-[#EEEE] rounded-lg"
-            >
-              <Text>Yes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="w-[420px] h-[56px] items-center justify-center bg-[#EEEE] rounded-lg">
-              <Text>No</Text>
-            </TouchableOpacity>
+            <View style={{ alignItems: "center" }}>
+              <Btn
+                label={"Yes"}
+                type="cancel"
+                callback={() => navigation.navigate("Delete-Here")}
+              />
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Btn label={"No"} type="cancel" />
+            </View>
           </View>
         </View>
       </View>

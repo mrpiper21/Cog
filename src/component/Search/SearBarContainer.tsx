@@ -12,6 +12,7 @@ interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
   // setTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
+// console.log("api key...", process.env.API_KEY);
 
 const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
   return (

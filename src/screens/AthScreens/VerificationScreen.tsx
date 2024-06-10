@@ -67,7 +67,10 @@ const VerificationScreen = () => {
       />
 
       {Verification?.isVerified.Profile_Photo === "Submitted" && (
-        <View className="flex-1 items-center justify-center">
+        <View
+          style={{ marginTop: wp(30) }}
+          className="flex-1 items-center justify-center"
+        >
           <Btn
             type="action"
             label={"Continue later"}

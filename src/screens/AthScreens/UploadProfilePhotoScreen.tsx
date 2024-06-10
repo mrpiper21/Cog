@@ -87,8 +87,11 @@ const UploadProfilePhotoScreen = () => {
   return (
     <View style={styles.container}>
       <View className="flex-1 items-center mt-20">
-        <View className="overflow-hidden w-[400px] h-[410px] rounded-full">
-          <CameraView style={styles.camera} facing={"front"} ref={cameraRef}>
+        <View
+          style={{ width: wp(95), height: wp(100) }}
+          className="overflow-hidden rounded-full"
+        >
+          <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <AntDesign
                 name="close"
@@ -111,13 +114,17 @@ const UploadProfilePhotoScreen = () => {
         }}
       >
         <TouchableOpacity
-          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 h-[85px] w-[85px]"
+          style={{ width: wp(20), height: wp(20) }}
+          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 mb-4"
           onPress={takePic}
         >
-          <View className="h-[75px] w-[75px] bg-[#4460EF] rounded-full" />
+          <View
+            style={{ width: wp(17), height: wp(17) }}
+            className=" bg-[#4460EF] rounded-full"
+          />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={toggleCameraFacing}
+          onPress={() => toggleCameraFacing()}
           style={{ marginLeft: wp(22), marginRight: wp(8) }}
         >
           <Ionicons name="camera-reverse-sharp" size={wp(10)} color="#4460EF" />

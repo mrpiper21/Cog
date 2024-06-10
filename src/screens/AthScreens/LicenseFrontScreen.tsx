@@ -18,29 +18,29 @@ const LicenseFrontScreen = () => {
       </View>
       <ProgressBar />
       <View>
-        <Text style={{ fontSize: wp(5), fontWeight: "500" }}>
+        <Text className="text-xl" style={{ fontWeight: "500" }}>
           Take a picture of your driving license (Front Side)
         </Text>
         <View style={{ flexDirection: "row", marginTop: wp(3) }}>
-          <Text style={{ fontSize: wp(4) }}>1.</Text>
-          <Text style={{ fontSize: wp(4) }}>
+          <Text className="text-base">1.</Text>
+          <Text className="text-base">
             Upload the N.O.C. (Notary Lease Agreement or Sales Agreement) first
             if the name on the vehicle document doesn't match the name on the
             DL/Pan Card. Then, upload the RC, Insurance, and Permit documents.
           </Text>
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ fontSize: wp(4) }}>2.</Text>
-          <Text style={{ fontSize: wp(4) }}>
+        <View style={{ flexDirection: "row", marginTop: wp(2) }}>
+          <Text className="text-base">2.</Text>
+          <Text className="text-base">
             Ensure that all details such as the Model number, Vehicle number,
             Chassis number, Registration name, Start date, Expiry Date, and
             financier/company name on the commercial insurance are clearly
             visible in the photo without any blurring.
           </Text>
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ fontSize: wp(4) }}>3.</Text>
-          <Text style={{ fontSize: wp(4) }}>
+        <View style={{ flexDirection: "row", marginTop: wp(2) }}>
+          <Text className="text-base">3.</Text>
+          <Text className="text-base">
             Ensure the registration certificate photo clearly displays the Fuel
             type, Model, Year, Vehicle number, Chassis number, Registration
             name, Expiry date, and government logo without blurring.
@@ -50,7 +50,7 @@ const LicenseFrontScreen = () => {
       <View style={{ alignItems: "center", marginTop: wp(5) }}>
         <Image source={require("../../../assets/Maskgroup.png")} />
       </View>
-      <View style={{ marginTop: wp(8), alignItems: "center" }}>
+      <View style={{ marginTop: wp(12), alignItems: "center" }}>
         <Btn
           type="action"
           label={"Take photo"}

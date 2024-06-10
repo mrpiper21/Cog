@@ -75,7 +75,10 @@ const UploadFrontLicense = () => {
           />
         </TouchableOpacity>
         <View className="items-center mt-10">
-          <View className="overflow-hidden h-[270px] w-[450px]">
+          <View
+            style={{ width: wp(95), height: wp(60) }}
+            className="overflow-hidden"
+          >
             <CameraView style={styles.camera} facing={"back"} ref={cameraRef}>
               {/* {loading && <ActivityIndicator />} */}
               <View style={styles.buttonContainer}></View>
@@ -85,10 +88,14 @@ const UploadFrontLicense = () => {
       </View>
       <View style={styles.shutterContainer}>
         <TouchableOpacity
-          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 h-[85px] w-[85px]"
+          style={{ width: wp(20), height: wp(20) }}
+          className="items-center justify-center border-2 border-[#4460EF] rounded-full m-2 mb-4"
           onPress={takePic}
         >
-          <View className="h-[75px] w-[75px] bg-[#4460EF] rounded-full" />
+          <View
+            style={{ width: wp(17), height: wp(17) }}
+            className=" bg-[#4460EF] rounded-full"
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={toggleCameraFacing}
