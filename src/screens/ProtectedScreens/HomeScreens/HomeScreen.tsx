@@ -122,7 +122,11 @@ const HomeScreen = (): React.JSX.Element => {
         <BottomSheetView>
           <View style={styles.bottomSheetContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("Preference")}>
-              <Ionicons name="options-outline" size={wp(8)} color="black" />
+              {/* <Ionicons name="options-outline" size={wp(8)} color="black" /> */}
+              <Image
+                source={require("../../../../assets/preferenceIcon.png")}
+                style={{ width: 40, height: 30 }}
+              />
             </TouchableOpacity>
             <View style={{ flexDirection: "row" }}>
               <TouchableOpacity style={styles.goOnlineBtn}>

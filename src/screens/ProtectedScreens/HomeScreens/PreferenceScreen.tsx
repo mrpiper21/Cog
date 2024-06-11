@@ -7,9 +7,38 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import PreferenceItem from "../../../component/Prefernce/PreferenceItem";
+import { PreferenceContext } from "../../../hooks/PrefrenceContext/PreferenceContext";
+import { usePreferenceContext } from "../../../Context";
+
+interface Preference {
+  title: string;
+  checked: boolean;
+}
 
 const PreferenceScreen = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const pr = usePreferenceContext();
+
+  const toggleCheck = (index?: number) => {
+    pr?.setPreferences((PrevState) =>
+      PrevState.map((item, i) =>
+        i === index ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+
+  const handleSaveChanges = () => {};
+
+  const handleReset = () => {
+    pr?.setPreferences((prevState) =>
+      prevState.map((item, i) => {
+        if (item.checked === true) {
+          item.checked = false;
+        }
+        return item;
+      })
+    );
+  };
+
   return (
     <View style={{ flex: 1, paddingHorizontal: wp(3) }}>
       <View
@@ -32,50 +61,34 @@ const PreferenceScreen = () => {
           Services
         </Text>
         <View style={{ gap: wp(4), marginTop: wp(3) }}>
-          <PreferenceItem
-            title={"GlopilotsX"}
-            icon={
-              <MaterialIcons
-                style={{ marginRight: wp(4) }}
-                name="person"
-                size={wp(8)}
-                color="black"
-              />
-            }
-          />
-          <PreferenceItem
-            title={"Car hourly"}
-            icon={
-              <MaterialIcons
-                style={{ marginRight: wp(4) }}
-                name="person"
-                size={wp(8)}
-                color="black"
-              />
-            }
-          />
-          <PreferenceItem
-            title={"Rides"}
-            icon={
-              <MaterialIcons
-                style={{ marginRight: wp(4) }}
-                name="person"
-                size={wp(8)}
-                color="black"
-              />
-            }
-          />
-          <PreferenceItem
-            title={"Packages"}
-            icon={
-              <MaterialCommunityIcons
-                style={{ marginRight: wp(4) }}
-                name="package-variant"
-                size={wp(8)}
-                color="black"
-              />
-            }
-          />
+          {pr?.preferences.map((item, index) => (
+            <PreferenceItem
+              key={index}
+              title={item.title}
+              isChecked={item.checked}
+              index={index}
+              toggleCheck={() => toggleCheck(index)}
+              icon={
+                item.title === "GlopilotX" ||
+                item.title === "Car hourly" ||
+                item.title === "Rides" ? (
+                  <MaterialIcons
+                    style={{ marginRight: 10 }}
+                    name="person"
+                    size={24}
+                    color="black"
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    style={{ marginRight: wp(4) }}
+                    name="package-variant"
+                    size={wp(8)}
+                    color="black"
+                  />
+                )
+              }
+            />
+          ))}
         </View>
       </View>
       <View
@@ -88,7 +101,7 @@ const PreferenceScreen = () => {
         <TouchableOpacity style={styles.saveChangesBtn}>
           <Text style={{ color: "white" }}>Save Changes</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.resetBtn}>
+        <TouchableOpacity onPress={() => handleReset()} style={styles.resetBtn}>
           <Text style={{ color: "black" }}>Reset</Text>
         </TouchableOpacity>
       </View>

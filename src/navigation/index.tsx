@@ -3,6 +3,7 @@ import LocationHook from "../hooks/Usercontext/LocationHook";
 import DrawerNavigation from "./ProtectedNavigationStack/DrawNavigation";
 import AuthNavigation from "./authNavigationStack/AuthNavigation";
 import { useVerificationContext } from "../Context";
+import PreferenceProvider from "../hooks/PrefrenceContext/PreferenceContext";
 // import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 const AppNavigation = () => {
@@ -12,13 +13,21 @@ const AppNavigation = () => {
     Verification?.isVerified.Profile_Photo
   );
 
-  return Verification.isVerified.isAuthentication ? (
+  return (
     <LocationHook>
-      <DrawerNavigation />
+      <PreferenceProvider>
+        <DrawerNavigation />
+      </PreferenceProvider>
     </LocationHook>
-  ) : (
-    <AuthNavigation />
   );
 };
 
 export default AppNavigation;
+
+// return Verification.isVerified.isAuthentication ? (
+//   <LocationHook>
+//     <DrawerNavigation />
+//   </LocationHook>
+// ) : (
+//   <AuthNavigation />
+// );
