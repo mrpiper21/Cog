@@ -7,6 +7,7 @@ import {
 } from "react-native-responsive-screen";
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
 import { useNavigation } from "@react-navigation/native";
 import PreviewFrontLicense from "./PreviewFrontLicense";
 import { useVerificationContext } from "../../Context";
@@ -46,9 +47,11 @@ const UploadFrontLicense = () => {
     };
     let newPhoto = await cameraRef.current?.takePictureAsync(options);
     if (newPhoto) {
+      const fileInfo = await FileSystem.getInfoAsync(newPhoto.uri);
+      console.log("File info:", fileInfo);
+      setPhoto(newPhoto);
       // setIsLoading(false);
     }
-    setPhoto(newPhoto);
   };
 
   if (photo) {

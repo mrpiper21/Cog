@@ -75,20 +75,26 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     setIsLoading(true);
     const formData = new FormData();
+    let uri = photo.uri;
+
+    let uriParts = uri.split(".");
+    console.log("uri parts...", uriParts);
+    let fileType = uriParts[uriParts.length - 1];
 
     try {
-      const buffer = Buffer.from(photo.base64, "base64");
-      const blob = new Blob([buffer.buffer], { type: "image/jpeg" });
-      formData.append("driversLicense", blob, "driversLicense.jpg");
+      formData.append("photo", {
+        uri,
+        name: `driversLicense.${fileType}`,
+        type: `image/${fileType}`,
+      });
 
       const response = await fetch(baseURL + "user/upload/drivers-license", {
         method: "POST",
+        body: formData,
         headers: {
-          Accept: "application/json",
-          "Content-Type": "form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${mytoken}`,
         },
-        body: formData,
       });
 
       if (!response.ok) {

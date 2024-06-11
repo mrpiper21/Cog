@@ -13,21 +13,15 @@ const AppNavigation = () => {
     Verification?.isVerified.Profile_Photo
   );
 
-  return (
+  return Verification.isVerified.isAuthentication ? (
     <LocationHook>
       <PreferenceProvider>
         <DrawerNavigation />
       </PreferenceProvider>
     </LocationHook>
+  ) : (
+    <AuthNavigation />
   );
 };
 
 export default AppNavigation;
-
-// return Verification.isVerified.isAuthentication ? (
-//   <LocationHook>
-//     <DrawerNavigation />
-//   </LocationHook>
-// ) : (
-//   <AuthNavigation />
-// );

@@ -14,6 +14,7 @@ import {
 } from "react-native-responsive-screen";
 import ProfileItem from "./ProfileItem";
 import NavBarItem from "./NavBarItem";
+// import { *asFileSystem } from 'expo-file-system';
 
 const CustomDrawerContent = () => {
   return (
@@ -49,13 +50,19 @@ const CustomDrawerContent = () => {
               <NavBarItem
                 route={"Earnings"}
                 label={"Earnings"}
-                icon={<Feather name="dollar-sign" size={wp(6)} color="black" />}
+                icon={
+                  <Image
+                    source={require("../../../assets/icons/*asFileSystem")}
+                  />
+                }
               />
               <NavBarItem
                 route={"Wallet"}
                 label={"Wallet"}
                 icon={
-                  <Ionicons name="wallet-outline" size={wp(6)} color="black" />
+                  <Image
+                    source={require("../../../assets/icons/walletIcon.png")}
+                  />
                 }
               />
               <NavBarItem
@@ -73,7 +80,11 @@ const CustomDrawerContent = () => {
               <NavBarItem
                 route={""}
                 label={"Refer Friends"}
-                icon={<AntDesign name="adduser" size={24} color="black" />}
+                icon={
+                  <Image
+                    source={require("../../../assets/icons/referAfriendIcon.png")}
+                  />
+                }
               />
             </View>
           </View>
