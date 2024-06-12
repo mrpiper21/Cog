@@ -77,11 +77,10 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     const formData = new FormData();
     let uri = photo.uri;
 
-    let uriParts = uri.split(".");
-    console.log("uri parts...", uriParts);
-    let fileType = uriParts[uriParts.length - 1];
-
     try {
+      let uriParts = uri.split(".");
+      let fileType = uriParts[uriParts.length - 1];
+
       formData.append("photo", {
         uri,
         name: `driversLicense.${fileType}`,
@@ -97,15 +96,15 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         },
       });
 
-      if (!response.ok) {
+      if (response.status === 200) {
+        console.log("Image uploaded successfully!");
+        setIsLoading(false);
+        uploadLicense();
+        navigation.navigate("Verification");
+      } else {
         console.error(`Error uploading image: ${response.status}`);
         setIsLoading(false);
         setPhoto(undefined);
-      } else {
-        console.log("Image uploaded successfully!");
-        setIsLoading(false);
-        await uploadLicense();
-        navigation.navigate("Verification");
       }
     } catch (error) {
       console.log();

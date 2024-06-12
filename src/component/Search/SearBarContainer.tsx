@@ -7,14 +7,23 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { API_KEY } from "../../Services/authorization";
+import { useNavigation } from "@react-navigation/native";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  // setTyping: React.Dispatch<React.SetStateAction<boolean>>;
+  // searchLocation:
+  // setSearchLoction: React.Dispatch<
+  //   React.SetStateAction<{ lat: number; lng: number }>
+  // >;
+  setTyping?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 // console.log("api key...", process.env.API_KEY);
 
-const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
+const SearBarContainer: React.FC<searchProps> = ({
+  setSearch,
+  // setSearchLoction,
+}) => {
+  const nav = useNavigation() as any;
   return (
     <View
       style={{
@@ -34,6 +43,14 @@ const SearBarContainer: React.FC<searchProps> = ({ setSearch }) => {
         minLength={2}
         // autoFocus={false}
         // returnKeyType={"default"}
+        onPress={(data, details = null) => {
+          const loc = details?.geometry.location;
+          console.log("marker coordinate...", loc?.lat, loc?.lng);
+
+          // setSearchLoction({ lat: loc?.lat, lng: loc?.lng });
+          setSearch(false);
+          console.log(JSON.stringify(details));
+        }}
         fetchDetails={true}
         query={{
           key: API_KEY,

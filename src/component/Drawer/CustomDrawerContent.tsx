@@ -52,7 +52,8 @@ const CustomDrawerContent = () => {
                 label={"Earnings"}
                 icon={
                   <Image
-                    source={require("../../../assets/icons/*asFileSystem")}
+                    style={{ height: 22, width: 22 }}
+                    source={require("../../../assets/icons/dollarIcon.png")}
                   />
                 }
               />
@@ -61,6 +62,7 @@ const CustomDrawerContent = () => {
                 label={"Wallet"}
                 icon={
                   <Image
+                    style={{ height: 22, width: 22 }}
                     source={require("../../../assets/icons/walletIcon.png")}
                   />
                 }
@@ -82,6 +84,7 @@ const CustomDrawerContent = () => {
                 label={"Refer Friends"}
                 icon={
                   <Image
+                    style={{ height: 25, width: 22 }}
                     source={require("../../../assets/icons/referAfriendIcon.png")}
                   />
                 }

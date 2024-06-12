@@ -13,15 +13,24 @@ import STATUSBAR from "../../../widget/STATUSBAR";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  // setSearchLoction: React.Dispatch<
+  //   React.SetStateAction<{ latitude: number; longitude: number }>
+  // >;
 }
 
-const SearchScreen: React.FC<searchProps> = ({ setSearch }) => {
+const SearchScreen: React.FC<searchProps> = ({
+  setSearch,
+  // setSearchLoction,
+}) => {
   const [typing, setTyping] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       {/**SearchContainer */}
       <STATUSBAR />
-      <SearBarContainer setSearch={setSearch} />
+      <SearBarContainer
+        // setSearchLoction={setSearchLoction}
+        setSearch={setSearch}
+      />
 
       {/* {typing ? (
         <View style={{ marginTop: wp(2) }}>

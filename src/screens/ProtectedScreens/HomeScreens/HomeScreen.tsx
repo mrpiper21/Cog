@@ -25,6 +25,11 @@ const HomeScreen = (): React.JSX.Element => {
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
   const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
+  const [isOnline, setIsOnline] = useState(false);
+  const [searchedLocation, setSearchedLocation] = useState({
+    lat: 0,
+    lng: 0,
+  });
 
   const userLocation = async () => {
     mapRef.current?.animateToRegion(mapRegion.mapRegion);
@@ -80,21 +85,28 @@ const HomeScreen = (): React.JSX.Element => {
 
   const snapPoints = useMemo(() => ["12%"], []);
 
-  const onRegionChange = (region: any) => {
-    console.log(region);
+  // const onRegionChange = (region: any) => {
+  //   console.log(region);
+  // };
+
+  const goOnline = () => {
+    setIsOnline(!isOnline);
   };
 
   return searchView ? (
-    <SearchScreen setSearch={setSearchView} />
+    <SearchScreen
+      // setSearchLoction={setSearchedLocation}
+      setSearch={setSearchView}
+    />
   ) : (
     <View style={styles.container}>
       <MapView
         // showsTraffic={true}
         initialRegion={mapRegion.mapRegion}
-        onRegionChange={onRegionChange}
+        // onRegionChange={onRegionChange}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
-        showsUserLocation={true}
+        showsUserLocation={isOnline ? false : true}
         followsUserLocation={true}
         userLocationPriority="high"
         // provider={PROVIDER_GOOGLE}
@@ -114,8 +126,15 @@ const HomeScreen = (): React.JSX.Element => {
             <Entypo name="home" size={30} color="#028391" />
           </Callout>
         </Marker>
-        {showLocationOfInterest()}
-        {/* <Image source={require("../../../../assets/userNavigator.png")} /> */}
+        {/* {showLocationOfInterest()} */}
+        {isOnline && (
+          <Marker coordinate={mapRegion.mapRegion}>
+            <Callout>
+              <Image source={require("../../../../assets/userNavigator.png")} />
+            </Callout>
+          </Marker>
+        )}
+        {/* <Marker coordinate={searchedLocation} /> */}
       </MapView>
       <View style={{ position: "absolute", marginTop: wp(20) }}></View>
       <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef}>
@@ -129,10 +148,25 @@ const HomeScreen = (): React.JSX.Element => {
               />
             </TouchableOpacity>
             <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity style={styles.goOnlineBtn}>
-                <Text style={{ color: "white" }}>Go Online</Text>
+              <TouchableOpacity
+                onPress={() => goOnline()}
+                style={
+                  isOnline
+                    ? [styles.goOnlineBtn, { backgroundColor: "red" }]
+                    : styles.goOnlineBtn
+                }
+              >
+                <Text style={{ color: "white" }}>
+                  {isOnline ? "Go Offline" : "Go Online"}
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.arrowBtn}>
+              <TouchableOpacity
+                style={
+                  isOnline
+                    ? [styles.arrowBtn, { backgroundColor: "red" }]
+                    : styles.arrowBtn
+                }
+              >
                 <MaterialIcons
                   name="arrow-outward"
                   size={wp(8)}

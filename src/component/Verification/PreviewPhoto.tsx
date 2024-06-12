@@ -45,8 +45,8 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
       <View className="flex-1 bg-white items-center justify-center">
         <LottieView
           style={{
-            width: 100,
-            height: 100,
+            width: 300,
+            height: 300,
           }}
           source={require("../../../assets/loaders/loader.json")}
           autoPlay
