@@ -84,7 +84,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
 
       formData.append("driversLicense", {
         uri: uri,
-        type: `image/${fileType}`,
+        type: "image/jpg",
         name: `driversLicense.${fileType}`,
       });
 

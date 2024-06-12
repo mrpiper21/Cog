@@ -47,7 +47,8 @@
     "react-native-responsive-screen": "^1.4.2",
     "react-native-rounded-checkbox": "^0.3.3",
     "react-native-svg": "15.2.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "expo-updates": "~0.25.16"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
