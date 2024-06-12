@@ -1,5 +1,5 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React, { useContext } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useContext, useState } from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import {
   widthPercentageToDP as wp,
@@ -14,9 +14,73 @@ import {
 import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../../Services/authorization";
+import * as ImagePicker from "expo-image-picker";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
+  const [image, setImage] = useState<string>();
+
+  const upload = async (mode: any) => {
+    try {
+      let result;
+
+      {
+        /**Choose from library */
+      }
+      if (mode === "gallery") {
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        });
+
+        if (!result?.canceled) {
+          saveImage(result?.assets[0].uri);
+          await setImage(result?.assets[0].uri);
+        }
+      }
+
+      {
+        /**Take a picture */
+      }
+      // await ImagePicker.requestCameraPermissionsAsync();
+      // result = await ImagePicker.launchCameraAsync({
+      //   cameraType: ImagePicker.CameraType.front,
+      //   allowsEditing: true,
+      //   aspect: [1, 1],
+      //   quality: 1,
+      // });
+      // if (!result?.canceled) {
+      //   saveImage(result?.assets[0].uri);
+      //   // await setImage(result?.assets[0].uri);
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const saveImage = async (image: any) => {
+    try {
+      setImage(image);
+      console.log("image uri...", image);
+      // setModalVisible(false);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  {
+    /**remove Image */
+  }
+  const removeImage = async () => {
+    try {
+      saveImage(null);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <View>
       <View
@@ -42,10 +106,22 @@ const EditProfileScreen = () => {
               uri: `${baseURL}${User?.user.email}`,
             }}
           /> */}
-          <EvilIcons name="user" size={150} color="black" />
-          <View style={styles.cameraIcon}>
+          {image ? (
+            <Image
+              style={styles.ImageItem}
+              source={{
+                uri: image,
+              }}
+            />
+          ) : (
+            <EvilIcons name="user" size={150} color="black" />
+          )}
+          <TouchableOpacity
+            onPress={() => upload("gallery")}
+            style={styles.cameraIcon}
+          >
             <AntDesign name="camera" size={24} color="black" />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={{ alignItems: "center", marginTop: wp(2) }}>
           <Text style={{ fontSize: wp(5), fontWeight: "600" }}>

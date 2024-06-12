@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Camera, CameraView, useCameraPermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
@@ -15,10 +16,12 @@ const UploadProfilePhotoScreen = () => {
   const [loading, setIsLoading] = useState(false);
   const [facing, setFacing] = useState("front");
   const [photo, setPhoto] = useState() as any;
+  const [image, setImage] = useState<string>();
   const [permission, requestPermission] = useCameraPermissions();
   const [hasCameraPermision, setHasCameraPermission] = useState(Boolean);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
+  const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   let cameraRef = useRef<CameraView>(null);
 
@@ -44,17 +47,20 @@ const UploadProfilePhotoScreen = () => {
     };
     let newPhoto = await cameraRef?.current?.takePictureAsync(options);
     if (newPhoto) {
-      // const response = await fetch(newPhoto.uri);
-      // const blob = await response.blob();
-
-      // let reader = new FileReader();
-      // blob && reader.readAsDataURL(blob);
-      // console.log("data:image/jpg;base64" + photo.base64);
-
       setIsLoading(false);
     }
     setPhoto(newPhoto);
   };
+
+  // const saveImage = async (image: any) => {
+  //   try {
+  //     setImage(image);
+  //     console.log("image uri...", image);
+  //     setModalVisible(false);
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
 
   if (!permission) {
     // Camera permissions are still loading.

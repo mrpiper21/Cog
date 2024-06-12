@@ -60,7 +60,8 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
       <View style={{ alignItems: "center", marginTop: wp(20) }}>
         <Image
           style={{ height: wp(80), width: wp(80), borderRadius: hp(70) }}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
+          source={{ uri: photo.uri }}
+          // "data:image/jpg;base64," + photo.base64
         />
       </View>
       {hasMediaLibraryPermission ? (

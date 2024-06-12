@@ -7,6 +7,7 @@ import {
 } from "./VerifyInitialState";
 // import { writeImageAsync } from "../../Global/UploadImage";
 import { useQuery } from "react-query";
+import axios from "axios";
 
 type verState = {
   CNIC_FRONT: "Submitted" | "Completed" | "unCompleted";
@@ -31,6 +32,8 @@ const IsVerified: verState = {
 export const VerifyContext = createContext<VerificationInterface>(
   initialVerificationState
 );
+
+const formData = global.FormData;
 
 export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -75,29 +78,39 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     setIsLoading(true);
     const formData = new FormData();
-    let uri = photo.uri;
+    let uri = photo?.uri;
+    console.log("phooottooo...", uri);
 
     try {
       let uriParts = uri.split(".");
       let fileType = uriParts[uriParts.length - 1];
 
-      formData.append("photo", {
-        uri,
-        name: `driversLicense.${fileType}`,
+      formData.append("driversLicense", {
+        uri: uri,
         type: `image/${fileType}`,
+        name: `driversLicense.${fileType}`,
       });
 
-      const response = await fetch(baseURL + "user/upload/drivers-license", {
-        method: "POST",
-        body: formData,
+      const config = {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${mytoken}`,
         },
-      });
+        transformRequest: () => {
+          return formData;
+        },
+      };
 
-      if (response.status === 200) {
+      const response = await axios.post(
+        baseURL + "user/upload/drivers-license",
+        formData,
+        config
+      );
+
+      if (response.status === 201) {
         console.log("Image uploaded successfully!");
+        console.log(response.headers);
+        alert("Image uploaded successfully!");
         setIsLoading(false);
         uploadLicense();
         navigation.navigate("Verification");
