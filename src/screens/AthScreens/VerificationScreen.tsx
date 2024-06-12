@@ -10,6 +10,7 @@ import Btn from "../../widget/Btn";
 import { VerifyContext } from "../../hooks/Verificationcontext/VerificationContext";
 import { useNavigation } from "@react-navigation/native";
 import { useVerificationContext } from "../../Context";
+import ProgressBar from "../../component/Verification/ProgressBar";
 
 const VerificationScreen = () => {
   const [verificationState, setVerifictionState] = useState({});
@@ -31,6 +32,8 @@ const VerificationScreen = () => {
       <View style={{ marginTop: wp(12) }}>
         <BackButton />
       </View>
+
+      <ProgressBar />
 
       {/**Welcome text and info */}
       <View style={{ marginBottom: hp(3), marginTop: hp(3) }}>

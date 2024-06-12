@@ -8,6 +8,12 @@ import { useVerificationContext } from "../../Context";
 
 const ProgressBar = () => {
   const Verification = useVerificationContext();
+  const totalProperties = Object.keys(Verification.isVerified).length;
+  const submittedProperties = Object.values(Verification.isVerified).filter(
+    (value) => value === "Submitted"
+  ).length;
+  const progress = (submittedProperties / totalProperties) * 100;
+
   return (
     <View
       style={{
@@ -21,15 +27,7 @@ const ProgressBar = () => {
       <View
         className="bg-blue-500"
         style={{
-          width: wp(
-            Verification.isVerified.Profile_Photo === "Submitted" ||
-              Verification.isVerified.Driving_License === "Submitted" ||
-              Verification.isVerified.Velicle_Registeration === "Submitted" ||
-              Verification.isVerified.CNIC_BACK === "Submitted" ||
-              Verification.isVerified.CNIC_FRONT === "Submitted"
-              ? 18
-              : 0
-          ),
+          width: `${progress}%`,
           height: wp(2),
           borderRadius: wp(2),
         }}

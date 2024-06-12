@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../widget/Buttons/BackButton";
 import Btn from "../../widget/Btn";
 import { useVerificationContext } from "../../Context";
+import LottieView from "lottie-react-native";
 
 interface PreviewProps {
   photo: any;
@@ -40,7 +41,15 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
   if (isLoading) {
     return (
       <View className="flex-1 bg-white items-center justify-center">
-        <Text>Please wait...</Text>
+        <LottieView
+          style={{
+            width: 300,
+            height: 300,
+          }}
+          source={require("../../../assets/loaders/loader.json")}
+          autoPlay
+          loop
+        />
       </View>
     );
   }

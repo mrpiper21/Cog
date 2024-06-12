@@ -79,7 +79,6 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading(true);
     const formData = new FormData();
     let uri = photo?.uri;
-    console.log("phooottooo...", uri);
 
     try {
       let uriParts = uri.split(".");
@@ -154,12 +153,12 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         body: formData,
       });
 
-      if (response.status === 201) {
+      if (response.ok) {
         console.log(response.headers);
         setIsLoading(false);
         setPhoto(undefined);
         // await writeImageAsync(photo.uri, "Profile-Photo");
-        // uploadProfilePhoto();
+        alert("Image Submitted successfully");
         uploadProfilePhoto();
         navigation.navigate("Verification");
       } else {
