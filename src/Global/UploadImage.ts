@@ -1,6 +1,5 @@
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
-import * as Permissions from 'expo-permissions'
 
 export const writeImageAsync = async (imageUrl: string, filename?: string) => {
   try {

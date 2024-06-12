@@ -5,8 +5,6 @@ import {
   VerificationInterface,
   initialVerificationState,
 } from "./VerifyInitialState";
-// import { writeImageAsync } from "../../Global/UploadImage";
-import { useQuery } from "react-query";
 import axios from "axios";
 
 type verState = {

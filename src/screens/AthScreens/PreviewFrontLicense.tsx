@@ -46,7 +46,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
             width: 300,
             height: 300,
           }}
-          source={require("../../../assets/loaders/loader.json")}
+          source={require("../../../assets/loaders/loader2.json")}
           autoPlay
           loop
         />
