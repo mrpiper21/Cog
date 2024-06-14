@@ -31,8 +31,6 @@ export const VerifyContext = createContext<VerificationInterface>(
   initialVerificationState
 );
 
-const formData = global.FormData;
-
 export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -127,7 +125,8 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
   const handleProfilePhotoSubmit = async (
     setIsLoading: (value: boolean) => void,
     setPhoto: (value: any) => void,
-    photo: any
+    photo: any,
+    edit?: boolean
   ) => {
     setIsLoading(true);
     const formData = new FormData();
@@ -151,8 +150,8 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         body: formData,
       });
 
-      if (response.ok) {
-        console.log(response.headers);
+      if (response.status === 201) {
+        console.log(response.json());
         setIsLoading(false);
         setPhoto(undefined);
         // await writeImageAsync(photo.uri, "Profile-Photo");

@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import React, { useContext, useState } from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import {
@@ -15,10 +22,12 @@ import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../../Services/authorization";
 import * as ImagePicker from "expo-image-picker";
+import ModalView from "../../../component/Profile/ModalView";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
   const [image, setImage] = useState<string>();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const upload = async (mode: any) => {
     try {
@@ -82,7 +91,7 @@ const EditProfileScreen = () => {
   };
 
   return (
-    <View>
+    <View className="flex-1 bg-white">
       <View
         style={{
           marginTop: wp(12),
@@ -117,7 +126,8 @@ const EditProfileScreen = () => {
             <EvilIcons name="user" size={150} color="black" />
           )}
           <TouchableOpacity
-            onPress={() => upload("gallery")}
+            onPress={() => setModalVisible(true)}
+            // onPress={() => upload("gallery")}
             style={styles.cameraIcon}
           >
             <AntDesign name="camera" size={24} color="black" />
@@ -129,18 +139,7 @@ const EditProfileScreen = () => {
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: wp(4),
-          marginTop: wp(5),
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderColor: "lightgray",
-        }}
-      >
+      <View style={styles.editLanguageContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons
             style={{ marginRight: wp(3) }}
@@ -157,16 +156,7 @@ const EditProfileScreen = () => {
         </View>
         <EditBtn />
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: wp(4),
-          borderBottomWidth: 1,
-          borderColor: "lightgray",
-        }}
-      >
+      <View style={styles.editCountryContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <MaterialCommunityIcons
             name="home-variant"
@@ -183,6 +173,10 @@ const EditProfileScreen = () => {
         </View>
         <EditBtn />
       </View>
+      <ModalView
+        VisibleModal={modalVisible}
+        setVisibleModal={setModalVisible}
+      />
     </View>
   );
 };
@@ -230,5 +224,23 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#F5F5F5",
+  },
+  editCountryContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: wp(4),
+    borderBottomWidth: 1,
+    borderColor: "lightgray",
+  },
+  editLanguageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: wp(4),
+    marginTop: wp(5),
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: "lightgray",
   },
 });
