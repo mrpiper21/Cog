@@ -20,75 +20,30 @@ import {
 } from "@expo/vector-icons";
 import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
-import { baseURL } from "../../../Services/authorization";
-import * as ImagePicker from "expo-image-picker";
+import LottieView from "lottie-react-native";
 import ModalView from "../../../component/Profile/ModalView";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
   const [image, setImage] = useState<string>();
   const [modalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const upload = async (mode: any) => {
-    try {
-      let result;
-
-      {
-        /**Choose from library */
-      }
-      if (mode === "gallery") {
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-        result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-
-        if (!result?.canceled) {
-          saveImage(result?.assets[0].uri);
-          await setImage(result?.assets[0].uri);
-        }
-      }
-
-      {
-        /**Take a picture */
-      }
-      // await ImagePicker.requestCameraPermissionsAsync();
-      // result = await ImagePicker.launchCameraAsync({
-      //   cameraType: ImagePicker.CameraType.front,
-      //   allowsEditing: true,
-      //   aspect: [1, 1],
-      //   quality: 1,
-      // });
-      // if (!result?.canceled) {
-      //   saveImage(result?.assets[0].uri);
-      //   // await setImage(result?.assets[0].uri);
-      // }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const saveImage = async (image: any) => {
-    try {
-      setImage(image);
-      console.log("image uri...", image);
-      // setModalVisible(false);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  {
-    /**remove Image */
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-white items-center justify-center">
+        <LottieView
+          style={{
+            width: 300,
+            height: 300,
+          }}
+          source={require("../../../../assets/loaders/loader2.json")}
+          autoPlay
+          loop
+        />
+      </View>
+    );
   }
-  const removeImage = async () => {
-    try {
-      saveImage(null);
-    } catch (error) {
-      alert(error);
-    }
-  };
 
   return (
     <View className="flex-1 bg-white">
@@ -176,6 +131,7 @@ const EditProfileScreen = () => {
       <ModalView
         VisibleModal={modalVisible}
         setVisibleModal={setModalVisible}
+        setIsLoading={setIsLoading}
       />
     </View>
   );

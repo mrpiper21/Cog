@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { baseURL, getUserConfig } from "../../Services/authorization";
+import { baseURL, config, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
 // import { writeImageAsync } from "../../Global/UploadImage";
 
 interface UserContextProps {
   user: UserInterface;
   updateUser: (name: string, email: string) => void;
-  updateUserProfile: (UserData: UserInterface) => Promise<void>;
+  updateUserProfile: (
+    UserData: UserInterface,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => Promise<void>;
   getUser: () => Promise<void>;
 }
 
@@ -34,15 +37,23 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const updateUserProfile = async (UserData: UserInterface) => {
+  const updateUserProfile = async (
+    UserData: UserInterface,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
     try {
-      const res = await axios.put(
-        baseURL + "user/get-user" + user._id,
-        UserData,
-        getUserConfig
-      );
-      console.log("Response data:", res.data);
-      setUser(res.data.user);
+      setIsLoading(true);
+      await axios
+        .put(baseURL + "user/update-user/" + user._id, UserData, config)
+        .then((res) => {
+          setUser(res.data.user);
+          setIsLoading(false);
+          console.log("User profile updated", res.data);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.log("There was an Error: ", err);
+        });
     } catch (err) {
       console.error("Error updating user data:", err);
     }

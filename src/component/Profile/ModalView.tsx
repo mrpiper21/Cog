@@ -2,17 +2,24 @@ import React, { useState } from "react";
 import { Modal, View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { useVerificationContext } from "../../Context";
+import {
+  UserContext,
+  useUserContext,
+} from "../../hooks/Usercontext/UserContext";
 
 interface ModalProps {
   VisibleModal: boolean;
   setVisibleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalView: React.FC<ModalProps> = ({ VisibleModal, setVisibleModal }) => {
-  const [image, setImage] = useState(null);
-  const [isloading, setIsLoading] = useState(false);
-  const Verification = useVerificationContext();
+const ModalView: React.FC<ModalProps> = ({
+  VisibleModal,
+  setVisibleModal,
+  setIsLoading,
+}) => {
+  const [image, setImage] = useState<string>();
+  const User = React.useContext(useUserContext);
 
   const pickImage = async (mode: string) => {
     // ... your image picking code here ...
@@ -26,8 +33,8 @@ const ModalView: React.FC<ModalProps> = ({ VisibleModal, setVisibleModal }) => {
       });
 
       if (!result?.canceled) {
-        // saveImage(result?.assets[0].uri);
-        // await setImage(result?.assets[0].uri);
+        setImage(result?.assets[0].uri);
+        User?.updateUserProfile({ profilePic: image }, setIsLoading);
       }
       setVisibleModal(false);
     }
@@ -43,20 +50,12 @@ const ModalView: React.FC<ModalProps> = ({ VisibleModal, setVisibleModal }) => {
       quality: 1,
     });
 
-    console.log(result?.assets[0]?.uri);
     if (!result?.canceled) {
-      // saveImage(result?.assets[0].uri);
-      // await setImage(result?.assets[0].uri);
+      setImage(result?.assets[0].uri);
+      User?.updateUserProfile({ profilePic: image }, setIsLoading);
     }
     setVisibleModal(false);
   };
-
-  if (isloading)
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <Text>Please wait</Text>
-      </View>
-    );
   return (
     <View style={{}}>
       <Modal
@@ -73,28 +72,36 @@ const ModalView: React.FC<ModalProps> = ({ VisibleModal, setVisibleModal }) => {
         >
           <View
             style={{
-              flexDirection: "row",
               width: "80%",
               backgroundColor: "#EEEE",
               padding: 20,
+              paddingBottom: 40,
               borderRadius: 10,
-              marginTop: 150,
+              marginTop: 200,
             }}
           >
             <TouchableOpacity
-              onPress={() => pickImage("gallery")}
-              style={{ flex: 1, alignItems: "center" }}
+              onPress={() => setVisibleModal(false)}
+              className="items-end"
             >
-              <Ionicons name="images" size={40} color="black" />
-              <Text>Library</Text>
+              <Ionicons name="close" size={20} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={takePicture}
-              style={{ flex: 1, alignItems: "center" }}
-            >
-              <Ionicons name="camera" size={40} color="black" />
-              <Text>Camera</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                onPress={() => pickImage("gallery")}
+                style={{ flex: 1, alignItems: "center" }}
+              >
+                <Ionicons name="images" size={40} color="black" />
+                <Text>Library</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={takePicture}
+                style={{ flex: 1, alignItems: "center" }}
+              >
+                <Ionicons name="camera" size={40} color="black" />
+                <Text>Camera</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
