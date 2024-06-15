@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { Entypo } from "@expo/vector-icons";
 import {
@@ -8,9 +8,9 @@ import {
 
 const EditBtn = () => {
   return (
-    <TouchableOpacity style={styles.editButton}>
+    <View style={styles.editButton}>
       <Entypo name="edit" size={24} color="black" />
-    </TouchableOpacity>
+    </View>
   );
 };
 

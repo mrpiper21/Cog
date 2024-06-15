@@ -1,12 +1,12 @@
 import {
   View,
   Text,
-  Modal,
   Image,
   StyleSheet,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo, useRef } from "react";
 import BackButton from "../../../widget/Buttons/BackButton";
 import {
   widthPercentageToDP as wp,
@@ -22,12 +22,17 @@ import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 import LottieView from "lottie-react-native";
 import ModalView from "../../../component/Profile/ModalView";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import Btn from "../../../widget/Btn";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
   const [image, setImage] = useState<string>();
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const snapPoints = useMemo(() => ["70%", "80%"], []);
 
   if (isLoading) {
     return (
@@ -109,7 +114,11 @@ const EditProfileScreen = () => {
             </Text>
           </View>
         </View>
-        <EditBtn />
+        <TouchableOpacity
+          onPress={() => bottomSheetRef.current?.snapToIndex(1)}
+        >
+          <EditBtn />
+        </TouchableOpacity>
       </View>
       <View style={styles.editCountryContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -133,6 +142,25 @@ const EditProfileScreen = () => {
         setVisibleModal={setModalVisible}
         setIsLoading={setIsLoading}
       />
+      <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef} index={-1}>
+        <BottomSheetView>
+          <TouchableOpacity
+            onPress={() => bottomSheetRef.current?.close()}
+            className="items-end m-5"
+          >
+            <Ionicons name="close" size={24} color="black" />
+          </TouchableOpacity>
+          <View className="border-2 border-gray-200 rounded-xl mx-2">
+            <TextInput
+              className="py-4 px-3"
+              placeholder="Enter preferred language"
+            />
+          </View>
+          <View className="items-center mt-10">
+            <Btn type="action" label={"submit"} />
+          </View>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
 };
