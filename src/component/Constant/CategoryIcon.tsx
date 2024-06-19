@@ -1,11 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { useActiveCategory } from "../../Context";
 import { MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
 
-const CategoryIcon = (category: any) => {
-  const { activeCategory } = useActiveCategory();
-
+const CategoryIcon = (category: any, activeCategory: String) => {
   return (
     <View>
       {category === "Promotion" ? (

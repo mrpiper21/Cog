@@ -15,12 +15,11 @@ import {
 import SortButton from "../../../component/Opportunity/SortButton";
 import OpportunityCard from "../../../component/Opportunity/OpportunityCard";
 import { useNavigation } from "@react-navigation/native";
-import { useActiveCategory } from "../../../Context";
 import PromotionScreen from "./PromotionScreen";
 
 const OpportunityScreen = () => {
-  const { activeCategory, setActiveCategory } = useActiveCategory();
   const navigation = useNavigation() as any;
+  const [activeCategory, setActiveCategory] = useState<String>("New");
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -35,7 +34,10 @@ const OpportunityScreen = () => {
               <AntDesign name="close" size={24} color="black" />
             </TouchableOpacity>
           </View>
-          <SortButton />
+          <SortButton
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
         </View>
       </View>
       {activeCategory === "New" ? (

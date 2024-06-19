@@ -37,7 +37,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                // route={"Opportunity"}
+                route={"Opportunity"}
                 label={"Opportunities"}
                 icon={
                   <MaterialCommunityIcons

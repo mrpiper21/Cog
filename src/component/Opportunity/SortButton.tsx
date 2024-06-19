@@ -3,17 +3,22 @@ import React, { useState } from "react";
 import { MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
 import { categories } from "../Constant/categories";
 import CategoryIcon from "../Constant/CategoryIcon";
-import { useActiveCategory } from "../../Context";
 
 interface SortButton {
   children?: String;
   isActive?: Boolean;
   buttonType?: "navigate" | "cancel" | "callToAction";
   sortType?: "New" | "Saved" | "promotion" | "Ready";
+  setActiveCategory: React.Dispatch<React.SetStateAction<String>>;
+  activeCategory: String;
 }
 
-const SortButton: React.FC<SortButton> = ({ children, isActive }) => {
-  const { activeCategory, setActiveCategory } = useActiveCategory();
+const SortButton: React.FC<SortButton> = ({
+  children,
+  isActive,
+  setActiveCategory,
+  activeCategory,
+}) => {
   return (
     <View className="flex-row gap-2 px-4">
       {categories.map((category) => {
@@ -24,7 +29,7 @@ const SortButton: React.FC<SortButton> = ({ children, isActive }) => {
               activeCategory === category.text ? "bg-blue-500" : "bg-slate-200"
             } px-6 py-3 rounded-lg`}
           >
-            <View>{CategoryIcon(category.text)}</View>
+            <View>{CategoryIcon(category.text, activeCategory)}</View>
             <Text
               className={`${activeCategory === category.text && "text-white"}`}
             >
