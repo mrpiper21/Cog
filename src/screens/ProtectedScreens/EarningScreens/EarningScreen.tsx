@@ -2,7 +2,6 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 
 import { ScrollView } from "react-native";
-import { useFonts, OpenSans_400Regular } from "@expo-google-fonts/dev";
 import EarningDashboard from "../../../component/Earnings/EarningDashboard";
 import BalnaceCard from "../../../component/Earnings/BalnaceCard";
 import EarningPromotionCard from "../../../component/Earnings/EarningPromotionCard";
@@ -14,7 +13,6 @@ import {
 } from "react-native-responsive-screen";
 
 const EarningScreen = () => {
-  let [fontLoaded] = useFonts({ OpenSans_400Regular });
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
