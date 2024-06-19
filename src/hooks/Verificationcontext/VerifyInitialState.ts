@@ -12,7 +12,7 @@ export interface VerificationInterface {
   uploadProfilePhoto: () => void;
   uploadLicense: () => void;
   handleLicenseSubmit: (
-    setIsloading: React.Dispatch<React.SetStateAction<boolean>>,
+    setLicenseState: React.Dispatch<React.SetStateAction<boolean>>,
     setPhoto: React.Dispatch<React.SetStateAction<any>>,
     photo: any,
     value?: any

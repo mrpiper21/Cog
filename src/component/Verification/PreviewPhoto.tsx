@@ -6,10 +6,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useNavigation } from "@react-navigation/native";
 import { useVerificationContext } from "../../Context";
 import Btn from "../../widget/Btn";
-import LottieView from "lottie-react-native";
+import Loading from "../../widget/Loading";
 
 interface PreviewProps {
   photo: any;
@@ -26,7 +25,6 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
   setIsLoading,
   isLoading,
 }) => {
-  const navigation = useNavigation() as any;
   const { handleProfilePhotoSubmit } = useVerificationContext();
   let sharePhoto = () => {
     shareAsync(photo.uri).then(() => {
@@ -40,21 +38,7 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
     });
   };
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 bg-white items-center justify-center">
-        <LottieView
-          style={{
-            width: 300,
-            height: 300,
-          }}
-          source={require("../../../assets/loaders/loader2.json")}
-          autoPlay
-          loop
-        />
-      </View>
-    );
-  }
+  if (isLoading) return <Loading />;
   return (
     <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginTop: wp(20) }}>

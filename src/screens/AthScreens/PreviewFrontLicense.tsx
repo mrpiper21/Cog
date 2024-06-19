@@ -11,6 +11,7 @@ import BackButton from "../../widget/Buttons/BackButton";
 import Btn from "../../widget/Btn";
 import { useVerificationContext } from "../../Context";
 import LottieView from "lottie-react-native";
+import Loading from "../../widget/Loading";
 
 interface PreviewProps {
   photo: any;
@@ -38,21 +39,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
     });
   };
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 bg-white items-center justify-center">
-        <LottieView
-          style={{
-            width: 300,
-            height: 300,
-          }}
-          source={require("../../../assets/loaders/loader2.json")}
-          autoPlay
-          loop
-        />
-      </View>
-    );
-  }
+  if (isLoading) return <Loading />;
   return (
     <View style={{ flex: 1 }}>
       <BackButton />

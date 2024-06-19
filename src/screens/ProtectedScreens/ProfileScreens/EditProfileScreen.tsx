@@ -24,6 +24,7 @@ import LottieView from "lottie-react-native";
 import ModalView from "../../../component/Profile/ModalView";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Btn from "../../../widget/Btn";
+import Loading from "../../../widget/Loading";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
@@ -35,19 +36,7 @@ const EditProfileScreen = () => {
   const snapPoints = useMemo(() => ["70%", "80%"], []);
 
   if (isLoading) {
-    return (
-      <View className="flex-1 bg-white items-center justify-center">
-        <LottieView
-          style={{
-            width: 300,
-            height: 300,
-          }}
-          source={require("../../../../assets/loaders/loader2.json")}
-          autoPlay
-          loop
-        />
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

@@ -6,6 +6,7 @@ import {
   initialVerificationState,
 } from "./VerifyInitialState";
 import axios from "axios";
+import { Alert } from "react-native";
 
 type verState = {
   CNIC_FRONT: "Submitted" | "Completed" | "unCompleted";
@@ -105,17 +106,17 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       if (response.status === 201) {
         console.log("Image uploaded successfully!");
         console.log(response.headers);
-        alert("Image uploaded successfully!");
+        Alert.alert("Success", "Image uploaded successfully!");
         setIsLoading(false);
         uploadLicense();
         navigation.navigate("Verification");
       } else {
-        console.error(`Error uploading image: ${response.status}`);
+        alert(`Error uploading image try again`);
         setIsLoading(false);
         setPhoto(undefined);
       }
     } catch (error) {
-      console.log();
+      alert(`Error uploading image try again`);
       console.error("Error uploading image:", error);
       setPhoto(undefined);
       setIsLoading(false);
@@ -154,18 +155,24 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
         console.log(response.json());
         setIsLoading(false);
         setPhoto(undefined);
-        // await writeImageAsync(photo.uri, "Profile-Photo");
-        alert("Image Submitted successfully");
+
+        Alert.alert("Submitted", "Image submitted succefully");
         uploadProfilePhoto();
         navigation.navigate("Verification");
       } else {
         // console.log(response.headers);
-        console.log("There was an error uploading image");
+        Alert.alert(
+          "Error",
+          "There was an error while uploading your photo, Please try again"
+        );
         setIsLoading(false);
         setPhoto(undefined);
       }
     } catch (error) {
-      console.error("Error uploading image:", error);
+      Alert.alert(
+        "Error",
+        "There was an error while uploading your photo, Please try again"
+      );
       setPhoto(undefined);
       setIsLoading(false);
     }
