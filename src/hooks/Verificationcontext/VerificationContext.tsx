@@ -92,8 +92,8 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${mytoken}`,
         },
-        transformRequest: (data: any) => {
-          return data;
+        transformRequest: () => {
+          return formData;
         },
       };
 

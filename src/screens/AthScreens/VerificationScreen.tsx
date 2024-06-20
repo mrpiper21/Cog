@@ -72,19 +72,18 @@ const VerificationScreen = () => {
         isVerified={Verification?.isVerified.Velicle_Registeration}
       />
 
-      {Verification?.isVerified.Profile_Photo === "Submitted" ||
-        (Verification.isVerified.Driving_License === "Submitted" && (
-          <View
-            style={{ marginTop: wp(10) }}
-            className="flex-1 items-center justify-center"
-          >
-            <Btn
-              type="action"
-              label={"Continue later"}
-              callback={() => navigation.navigate("Account-ready")}
-            />
-          </View>
-        ))}
+      {Verification?.isVerified.Profile_Photo === "Submitted" && (
+        <View
+          style={{ marginTop: wp(10) }}
+          className="flex-1 items-center justify-center"
+        >
+          <Btn
+            type="action"
+            label={"Continue later"}
+            callback={() => navigation.navigate("Account-ready")}
+          />
+        </View>
+      )}
     </ScrollView>
   );
 };
