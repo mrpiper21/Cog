@@ -6,7 +6,7 @@ import {
   Alert,
   Image,
 } from "react-native";
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, Marker } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
@@ -101,25 +101,23 @@ const HomeScreen = (): React.JSX.Element => {
   ) : (
     <View style={styles.container}>
       <MapView
-        // showsTraffic={true}
         initialRegion={mapRegion.mapRegion}
-        // onRegionChange={onRegionChange}
+        followsUserLocation={true}
+         // onRegionChange={onRegionChange}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
         showsUserLocation={isOnline ? false : true}
-        followsUserLocation={true}
+        showsCompass={false}
         userLocationPriority="high"
-        // provider={PROVIDER_GOOGLE}
         region={mapRegion.mapRegion}
         style={styles.map}
         ref={mapRef}
-        // showsMyLocationButton
       >
         <Marker
           pinColor="#0000ff"
           coordinate={mapRegion.mapRegion}
           title="Marker"
-          onDragEnd={(e) => setDragableMarker(e.nativeEvent.coordinate)}
+          onDragEnd={(e: any) => setDragableMarker(e.nativeEvent.coordinate)}
         >
           <Callout>
             {/* <MaterialIcons name="location-city" size={24} color="black" /> */}

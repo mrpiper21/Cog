@@ -13,15 +13,15 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MessageCard from "../../../component/Message/MessageCard";
-import { StatusBar } from "expo-status-bar";
 import STATUSBAR from "../../../widget/STATUSBAR";
 
 const MessageScreen = () => {
   const navigation = useNavigation();
   return (
     <ScrollView
-      style={{ backgroundColor: "white" }}
+      style={{ flex: 1, backgroundColor: "white"  }}
       showsVerticalScrollIndicator={false}
+      nestedScrollEnabled={true}
     >
       <STATUSBAR />
       <View style={styles.headerContainer}>
