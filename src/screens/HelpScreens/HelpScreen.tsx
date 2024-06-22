@@ -26,7 +26,6 @@ const HelpScreen = () => {
       showsVerticalScrollIndicator={false}
       className="flex-1 bg-white"
     >
-      <Header type="Close-Children" children={"Help"} />
       <View className="items-center mt-5">
         <View
           style={{ width: wp(95) }}

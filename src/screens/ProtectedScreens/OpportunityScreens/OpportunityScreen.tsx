@@ -25,15 +25,6 @@ const OpportunityScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
         <View className="bg-white py-2 border-b-2 border-gray-200">
-          <View style={styles.headerContainer}>
-            <Text className="text-xl font-semibold">Opportunities</Text>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={styles.cancelBtn}
-            >
-              <AntDesign name="close" size={24} color="black" />
-            </TouchableOpacity>
-          </View>
           <SortButton
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}

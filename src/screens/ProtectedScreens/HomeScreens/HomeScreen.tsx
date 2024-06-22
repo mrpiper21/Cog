@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  SafeAreaView,
 } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
@@ -17,6 +18,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
+import STATUSBAR from "../../../widget/STATUSBAR";
 
 const HomeScreen = (): React.JSX.Element => {
   const mapRegion = React.useContext(LocationContext);
@@ -100,6 +102,8 @@ const HomeScreen = (): React.JSX.Element => {
     />
   ) : (
     <View style={styles.container}>
+      <SafeAreaView>
+        <STATUSBAR />
       <MapView
         initialRegion={mapRegion.mapRegion}
         followsUserLocation={true}
@@ -195,6 +199,7 @@ const HomeScreen = (): React.JSX.Element => {
       <TouchableOpacity onPress={userLocation} style={styles.locationIcon}>
         <MaterialIcons name="my-location" size={wp(8)} color="black" />
       </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };

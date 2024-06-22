@@ -7,8 +7,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface MessageCardProps {
-  mesageText: String;
-  date: String;
+  mesageText: string;
+  date: string;
   icon: React.ReactNode;
 }
 

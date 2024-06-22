@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -13,7 +14,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MessageCard from "../../../component/Message/MessageCard";
-import STATUSBAR from "../../../widget/STATUSBAR";
 
 const MessageScreen = () => {
   const navigation = useNavigation();
@@ -23,13 +23,7 @@ const MessageScreen = () => {
       showsVerticalScrollIndicator={false}
       nestedScrollEnabled={true}
     >
-      <STATUSBAR />
-      <View style={styles.headerContainer}>
-        <Text style={{ fontWeight: "600", fontSize: wp(5) }}>Message</Text>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="closecircleo" size={hp(4)} color="black" />
-        </TouchableOpacity>
-      </View>
+      <SafeAreaView>
       <View style={{ marginVertical: wp(4), paddingHorizontal: wp(3) }}>
         <Text>All messages</Text>
       </View>
@@ -89,6 +83,7 @@ const MessageScreen = () => {
         mesageText={"You receive a $3.00 tip!"}
         date={"03/04/2024"}
       />
+      </SafeAreaView>
     </ScrollView>
   );
 };

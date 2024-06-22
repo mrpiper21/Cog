@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import HelpScreen from "../../../screens/HelpScreens/HelpScreen";
 import React from "react";
+import { TouchableOpacity } from "react-native";
 import HelpTripScreen from "../../../screens/HelpScreens/HelpTripScreen";
 import TrackingAcceptanceScreen from "../../../screens/HelpScreens/TrackingAcceptanceScreen";
 import AccountAppScreen from "../../../screens/HelpScreens/AccountAppScreen";
@@ -12,13 +13,23 @@ import DeleteSuccessScreen from "../../../screens/HelpScreens/DeleteSuccessScree
 import RemoveVehicleScreen from "../../../screens/HelpScreens/RemoveVehicleScreen";
 import RemoveVehicleConfirm from "../../../screens/HelpScreens/RemoveVehicleConfirm";
 import RemoveVehicleSuccessScreen from "../../../screens/HelpScreens/RemoveVehicleSuccessScreen";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 const HelpStack = createStackNavigator();
 
 const HelpNavigator = () => {
+  const navigation = useNavigation();
   return (
     <HelpStack.Navigator screenOptions={{ headerShown: false }}>
-      <HelpStack.Screen name="Helproute" component={HelpScreen} />
+      <HelpStack.Screen options={{headerShown: true, headerRight: ()=> (
+        <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        className="p-3 border-2 border-[#EEEEEE] rounded-full mr-3"
+      >
+        <Ionicons name="close-outline" size={24} color="black" />
+      </TouchableOpacity>
+      )}} name="Help" component={HelpScreen} />
       <HelpStack.Screen name="Help-Trip" component={HelpTripScreen} />
       <HelpStack.Screen
         name="Tracking-Acceptance"

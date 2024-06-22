@@ -22,7 +22,7 @@ const CustomDrawerContent = () => {
       <DrawerItem
         label={({ focused, color }) => (
           <View>
-            <ProfileItem route={"Profile"} />
+            <ProfileItem route={"Profiles"} />
             <View style={{ marginTop: hp(3.5) }}>
               <NavBarItem
                 route={"Message"}
@@ -75,7 +75,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                route={"Help"}
+                route={"Helproute"}
                 label={"Help"}
                 icon={<Feather name="help-circle" size={wp(6)} color="black" />}
               />

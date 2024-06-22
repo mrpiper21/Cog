@@ -1,14 +1,12 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useContext } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { UserInfoContext } from "../../Context";
 import { useUserContext } from "../../hooks/Usercontext/UserContext";
-import { baseURL } from "../../Services/authorization";
 
 const HeaderContainer = () => {
   const navigation = useNavigation() as any;
@@ -16,14 +14,8 @@ const HeaderContainer = () => {
   console.log("My details.....", User);
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.userContainer}>
-        <Text style={{ fontSize: wp(5), fontWeight: "600" }}>Profile</Text>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="closecircleo" size={hp(4)} color="black" />
-        </TouchableOpacity>
-      </View>
       <View
-        style={{ flexDirection: "row", marginTop: wp(4), alignItems: "center" }}
+        style={{ flexDirection: "row", alignItems: "center" }}
       >
         {/* <Image
           style={styles.userImage}
@@ -60,7 +52,7 @@ const styles = StyleSheet.create({
   viewBtn: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: wp(1),
+    marginTop: wp(2),
     backgroundColor: "#EEEEEE",
     height: wp(8),
     width: wp(20),
@@ -74,7 +66,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "white",
     padding: wp(3),
-    height: hp(21),
     justifyContent: "flex-end",
   },
 });

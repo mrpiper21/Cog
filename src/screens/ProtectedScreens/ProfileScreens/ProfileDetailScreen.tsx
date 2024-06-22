@@ -34,17 +34,6 @@ const ProfileDetailScreen = () => {
     <ScrollView
       style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
     >
-      <STATUSBAR />
-      <View style={styles.headerContainer}>
-        <BackButton />
-        <Text style={{ fontSize: wp(5), fontWeight: "500" }}>Profile</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("EditProfile")}
-          style={styles.editButton}
-        >
-          <Entypo name="edit" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
       <View style={{ alignItems: "center", marginTop: wp(8) }}>
         <View>
           {/* <Image
