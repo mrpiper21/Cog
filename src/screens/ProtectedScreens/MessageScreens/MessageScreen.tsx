@@ -23,7 +23,6 @@ const MessageScreen = () => {
       showsVerticalScrollIndicator={false}
       nestedScrollEnabled={true}
     >
-      <SafeAreaView>
       <View style={{ marginVertical: wp(4), paddingHorizontal: wp(3) }}>
         <Text>All messages</Text>
       </View>
@@ -83,7 +82,6 @@ const MessageScreen = () => {
         mesageText={"You receive a $3.00 tip!"}
         date={"03/04/2024"}
       />
-      </SafeAreaView>
     </ScrollView>
   );
 };
