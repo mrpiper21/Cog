@@ -16,7 +16,7 @@ const ReviewCard: React.FC<ReviewProps> = ({ label, lastReviewed }) => {
     <View
       style={{
         padding: wp(3),
-        height: hp(17),
+        height: hp(15),
         width: wp(75),
         borderWidth: 1,
         borderColor: "lightgray",

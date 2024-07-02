@@ -31,10 +31,10 @@ const ProfileDetailScreen = () => {
   const user = UserInfoContext();
   console.log("profile pic in profile screen", baseURL + user?.user.email);
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
+    <View
+      style={{ flex: 1, backgroundColor: "white" }}
     >
-      <View style={{ alignItems: "center", marginTop: wp(8) }}>
+      <View style={{ alignItems: "center", marginTop: wp(5) }}>
         <View>
           {/* <Image
             style={styles.ImageItem}
@@ -170,7 +170,7 @@ const ProfileDetailScreen = () => {
           </View>
         </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

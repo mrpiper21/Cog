@@ -15,43 +15,43 @@ interface searchProps {
   // setSearchLoction: React.Dispatch<
   //   React.SetStateAction<{ lat: number; lng: number }>
   // >;
-  setTyping?: React.Dispatch<React.SetStateAction<boolean>>;
+  setTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
 // console.log("api key...", process.env.API_KEY);
 
 const SearBarContainer: React.FC<searchProps> = ({
   setSearch,
+  setTyping
   // setSearchLoction,
 }) => {
+  const autoCompleteRef = React.useRef(null)
   const nav = useNavigation() as any;
+  const handleTypingChange = (text: string) => {
+    console.log("typing...")
+    setTyping(true);
+  };
+
   return (
     <View
-      style={{
-        // zIndex: 1,
-        // flex: 1,
-        marginTop: 40,
-        alignItems: "flex-start",
-        flexDirection: "row",
-        paddingHorizontal: 10,
-      }}
+      style={styles.searchContainer}
+      className="space-x-2"
     >
-      <TouchableOpacity className="mr-4" onPress={() => setSearch(false)}>
-        <MaterialIcons name="keyboard-backspace" size={wp(6)} color="black" />
-      </TouchableOpacity>
       <GooglePlacesAutocomplete
+        ref={autoCompleteRef}
         placeholder="Enter Location"
         minLength={2}
         // autoFocus={false}
         // returnKeyType={"default"}
+        // onTextInput={handleTypingChange}
         onPress={(data, details = null) => {
           const loc = details?.geometry.location;
           console.log("marker coordinate...", loc?.lat, loc?.lng);
-
           // setSearchLoction({ lat: loc?.lat, lng: loc?.lng });
           setSearch(false);
           console.log(JSON.stringify(details));
         }}
         fetchDetails={true}
+        isRowScrollable={true}
         query={{
           key: API_KEY,
           language: "en",
@@ -71,6 +71,9 @@ const SearBarContainer: React.FC<searchProps> = ({
           },
         }}
       />
+      <TouchableOpacity onPress={() => setSearch(false)}>
+        <MaterialIcons name="cancel" size={wp(6)} color="black" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -79,10 +82,13 @@ export default SearBarContainer;
 
 const styles = StyleSheet.create({
   searchContainer: {
-    alignItems: "center",
-    backgroundColor: "white",
-    height: hp(13),
-    marginTop: 30,
+    marginTop: wp(7),
+    alignItems: "flex-start",
+    justifyContent: 'center',
+    flexDirection: "row",
+    paddingHorizontal: wp(2),
+    paddingTop: wp(5),
+    backgroundColor: 'white'
   },
   searchSubContainer: {
     flexDirection: "row",

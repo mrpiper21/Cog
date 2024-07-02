@@ -22,7 +22,7 @@ const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {
   return (
     <TouchableOpacity
       onPress={() => callback && callback()}
-        style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEEE" }]}
+        style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEE" }]}
       >
         <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
           {label}

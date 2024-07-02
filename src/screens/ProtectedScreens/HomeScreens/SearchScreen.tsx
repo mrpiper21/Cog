@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import {
   widthPercentageToDP as wp,
@@ -24,23 +24,17 @@ const SearchScreen: React.FC<searchProps> = ({
 }) => {
   const [typing, setTyping] = useState(false);
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1 }}>
       {/**SearchContainer */}
       <STATUSBAR />
       <SearBarContainer
         // setSearchLoction={setSearchLoction}
         setSearch={setSearch}
+        setTyping={setTyping}
       />
 
-      {/* {typing ? (
-        <View style={{ marginTop: wp(2) }}>
-          <LocationItem
-            title={"Orchard View"}
-            location={"2335 Orchard View Lane, Escondido CA 92027"}
-          />
-        </View>
-      ) : (
-        <View>
+      {!typing && 
+        <ScrollView showsVerticalScrollIndicator={false}>
           <HomeLoactionItem />
 
           <NearbyLocationContainer />
@@ -58,8 +52,7 @@ const SearchScreen: React.FC<searchProps> = ({
               location={"2335 Orchard View Lane, Escondido CA 92027"}
             />
           </View>
-        </View>
-      )} */}
+        </ScrollView>}
     </View>
   );
 };
