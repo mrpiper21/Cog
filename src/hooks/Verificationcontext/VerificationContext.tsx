@@ -68,7 +68,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
 
   let ProfilePhoto_Url: string = "";
 
-  const handleLicenseSubmit = async (
+  const handleLicenseSubmit = useCallback(async (
     setIsLoading: (value: boolean) => void,
     setPhoto: (value: any) => void,
     photo: any
@@ -121,9 +121,9 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       setPhoto(undefined);
       setIsLoading(false);
     }
-  };
+  },[])
 
-  const handleProfilePhotoSubmit = async (
+  const handleProfilePhotoSubmit = useCallback(async (
     setIsLoading: (value: boolean) => void,
     setPhoto: (value: any) => void,
     photo: any,
@@ -176,7 +176,7 @@ export const VerificationContext: React.FC<{ children: React.ReactNode }> = ({
       setPhoto(undefined);
       setIsLoading(false);
     }
-  };
+  },[])
 
   return (
     <VerifyContext.Provider

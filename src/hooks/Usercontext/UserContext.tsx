@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { baseURL, config, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
 // import { writeImageAsync } from "../../Global/UploadImage";
@@ -23,7 +23,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
 
-  const updateUser = (name: string, email: string) => {
+  const updateUser = useCallback((name: string, email: string) => {
     if (name) {
       setUser((prevState) => ({
         ...prevState,
@@ -35,9 +35,9 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
         email: email,
       }));
     }
-  };
+  },[])
 
-  const updateUserProfile = async (
+  const updateUserProfile = useCallback(async (
     UserData: UserInterface,
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
@@ -57,7 +57,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     } catch (err) {
       console.error("Error updating user data:", err);
     }
-  };
+  },[])
 
   const getUser = async () => {
     try {

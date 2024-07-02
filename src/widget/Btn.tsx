@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import React from "react";
 import {
   widthPercentageToDP as wp,
@@ -20,44 +20,29 @@ const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {
   //   callback && callback();
   // };
   return (
-    <>
-      {type === "action" ? (
-        <TouchableOpacity
-          onPress={() => callback && callback()}
-          style={{
-            width: wp(90),
-            height: hp(7.3),
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: wp(2),
-            backgroundColor: "#4460EF",
-          }}
-        >
-          <Text
-            style={{
-              color: "white",
-            }}
-          >
-            {label}
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={() => callback && callback()}
-          style={{
-            width: wp(90),
-            height: hp(7.3),
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: wp(2),
-            backgroundColor: "#EEEE",
-          }}
-        >
-          <Text>{label}</Text>
-        </TouchableOpacity>
-      )}
-    </>
+    <TouchableOpacity
+      onPress={() => callback && callback()}
+        style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEEE" }]}
+      >
+        <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
+          {label}
+        </Text>
+    </TouchableOpacity>
   );
 };
 
 export default Btn;
+
+const styles = StyleSheet.create({
+  button: {
+    width: wp(90),
+    height: hp(7.3),
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: wp(2),
+    backgroundColor: "#EEEE", /*"#4460EF"*/
+  },
+  labeltxt: {
+    color: "black"
+  }
+})

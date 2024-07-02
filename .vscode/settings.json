@@ -1,4 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "diffEditor.experimental.showMoves": true,
+    "diffEditor.ignoreTrimWhitespace": false
 }
