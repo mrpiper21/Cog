@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import Responsiveness from "../../widget/helpers/Responsiveness";
+import Responsiveness from "../../helpers/Responsiveness";
 
 const PromotionCard = () => {
   return (

@@ -15,6 +15,7 @@ import RemoveVehicleConfirm from "../../../screens/HelpScreens/RemoveVehicleConf
 import RemoveVehicleSuccessScreen from "../../../screens/HelpScreens/RemoveVehicleSuccessScreen";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import Responsiveness from "../../../helpers/Responsiveness";
 
 const HelpStack = createStackNavigator();
 
@@ -25,7 +26,8 @@ const HelpNavigator = () => {
       <HelpStack.Screen options={{headerShown: true, headerRight: ()=> (
         <TouchableOpacity
         onPress={() => navigation.goBack()}
-        className="p-3 border-2 border-[#EEEEEE] rounded-full mr-3"
+        style={{height: Responsiveness.getResponsiveWidth(8), width: Responsiveness.getResponsiveWidth(8)}}
+        className="border-2 border-[#EEEEEE] rounded-full mr-3 items-center justify-center"
       >
         <Ionicons name="close-outline" size={24} color="black" />
       </TouchableOpacity>
