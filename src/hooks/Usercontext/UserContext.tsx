@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useEffect } from "react";
 import { baseURL, config, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
+import { ToastAndroid } from "react-native";
 // import { writeImageAsync } from "../../Global/UploadImage";
 
 interface UserContextProps {
@@ -12,6 +13,7 @@ interface UserContextProps {
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   getUser: () => Promise<void>;
+  loginUser: (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>)=> Promise<void>;
 }
 
 export const useUserContext = React.createContext<UserContextProps | undefined>(
@@ -80,12 +82,31 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const loginUser = async (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+    console.log(email)
+      try {
+        setIsLoading(true)
+        const response = await axios.post(baseURL + "user/login", {email: email})
+        if(response.status === 200){
+          setIsLoading(false)
+          console.log("login succeful")
+          ToastAndroid.show("Login succeful", ToastAndroid.SHORT)
+        }  else if(response.status === 404){
+          console.log("user Not found")
+          setIsLoading(false)
+        }
+      } catch (error) {
+        setIsLoading(false)
+        console.log("Error: ", error)
+      }
+  }
+
   useEffect(() => {
     getUser();
   }, []);
   return (
     <useUserContext.Provider
-      value={{ user, updateUser, updateUserProfile, getUser }}
+      value={{ user, updateUser, updateUserProfile, getUser, loginUser }}
     >
       {children}
     </useUserContext.Provider>

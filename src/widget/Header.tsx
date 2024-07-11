@@ -21,13 +21,13 @@ const Header: React.FC<HeaderProps> = ({ type, children }) => {
           <CancelBtn />
         </View>
       ) : type === "BackButton-Children" ? (
-        <View className="flex flex-row mt-10 px-4 space-x-28 items-center">
+        <View className="flex flex-row mt-10 space-x-20 items-center">
           <BackButton />
           <Text className="text-xl font-bold">{children}</Text>
         </View>
       ) : (
         <View>
-          <View className="flex flex-row items-center mt-10 space-x-28 px-4">
+          <View className="flex flex-row items-center mt-10 space-x-28">
             <BackButton />
             <Text className="text-xl font-bold">{children}</Text>
           </View>

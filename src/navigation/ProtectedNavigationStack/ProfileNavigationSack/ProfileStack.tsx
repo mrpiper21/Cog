@@ -45,7 +45,7 @@ const ProfileStack = () => {
           <TouchableOpacity
           onPress={() => navigation.navigate("EditProfile")}
           style={styles.editButton}
-          className="mr-33"
+          className="mr-3"
         >
           <Entypo name="edit" size={24} color="black" />
         </TouchableOpacity>

@@ -1,11 +1,13 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 
-const STATUSBAR = () => {
+// type StatusbarProps
+
+const STATUSBAR = (color?: string) => {
   return (
     <StatusBar
       style="dark"
-      backgroundColor="white"
+      backgroundColor={color ? color: "white"}
       translucent={true}
       animated={true}
     />

@@ -68,7 +68,7 @@ const CustomDrawerContent = () => {
                 }
               />
               <NavBarItem
-                route={""}
+                route={"Accountroute"}
                 label={"Account"}
                 icon={
                   <FontAwesome5 name="user-circle" size={wp(6)} color="black" />

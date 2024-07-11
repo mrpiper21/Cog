@@ -7,13 +7,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface ButtonProps {
-  label: String;
+  label?: String;
   route?: String;
   type?: "action" | "cancel";
   callback?: (value?: any) => void;
+  loader?: React.ReactNode
 }
 
-const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {
+const Btn: React.FC<ButtonProps> = ({ route, label, type, callback, loader }) => {
   const navigation = useNavigation() as any;
   // const handleCallback = () => {
   //   route && navigation.navigate(route);
@@ -21,12 +22,13 @@ const Btn: React.FC<ButtonProps> = ({ route, label, type, callback }) => {
   // };
   return (
     <TouchableOpacity
+      disabled={loader && type == "cancel" ? true : false}
       onPress={() => callback && callback()}
         style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEE" }]}
       >
-        <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
+        {label ? <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
           {label}
-        </Text>
+        </Text> : loader}
     </TouchableOpacity>
   );
 };

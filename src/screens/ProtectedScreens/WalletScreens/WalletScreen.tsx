@@ -1,65 +1,39 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import {
-  Ionicons,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import HeaderFAQ from "../../../widget/Header/HeaderFAQ";
-import {
-  UserContext,
-  useUserContext,
-} from "../../../hooks/Usercontext/UserContext";
-import Btn from "../../../widget/Btn";
+import { View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import Header from '../../../widget/Header'
+import { Ionicons, AntDesign, FontAwesome6 } from '@expo/vector-icons';
+import Responsiveness from '../../../helpers/Responsiveness';
+import { useNavigation } from '@react-navigation/native';
+import BalanceCard from '../../../component/Wallet/BalanceCard';
+import PayoutItems from '../../../component/Wallet/PayoutItems';
 
 const WalletScreen = () => {
-  const User = React.useContext(useUserContext);
+    const navigation = useNavigation() as any;
   return (
-    <View className="flex-1 bg-white justify-between">
-      <View>
-        <HeaderFAQ title={"Cash Out"} />
-        <View className="m-4 space-y-2">
-          <Text>Current balance</Text>
-          <Text className="text-xl font-bold">{User?.user.walletBalance}</Text>
+    <View className='flex flex-1 bg-white'>
+      <Header type='Close-Children' children={"Wallet"}/>
+      <View className='px-4'>
+        <BalanceCard />
+        <View style={{marginTop: Responsiveness.getResponsiveHeight(4)}} className='flex flex-row items-center justify-between'>
+            <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Recent Payouts</Text>
+            <Text className='text-blue-500'>See all</Text>
         </View>
-        <View className="space-y-4 mx-4">
-          <View className="flex flex-row items-center space-x-4 py-3 border-b-2 border-[#EEEE]">
-            <View className="p-3 bg-[#EEEE] rounded-full ">
-              <MaterialIcons name="bolt" size={30} color="black" />
-            </View>
-            <View>
-              <Text className="text-base font-bold">Instant-$1.00 fee</Text>
-              <Text>Funds transferred in minutes</Text>
-            </View>
-          </View>
-          <View className="flex flex-row items-center justify-between py-3 border-b-2 border-[#EEEE]">
-            <View className="flex flex-row items-center space-x-4">
-              <View className="p-3 bg-blue-100 rounded-full">
-                <MaterialCommunityIcons name="bank" size={30} color="blue" />
-              </View>
-              <Text className="text-base font-bold">Bank account - 88789</Text>
-            </View>
-            <Ionicons name="chevron-forward-outline" size={24} color="black" />
-          </View>
+        <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}}>
+            <PayoutItems amount={"$210.45"} date={"Apr 01, 2024"}/>
         </View>
-        <View className="items-center mt-4">
-          <Btn label={"Manage payment methods"} type="cancel" />
+        <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}} className='py-5 border-b-[1.5px] border-[#EEEE]'>
+            <TouchableOpacity onPress={()=> navigation.navigate("payment-method")} className='flex flex-row items-center space-x-2'>
+                <Ionicons name="card" size={24} color="black" />
+                <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5)}}>Payments Methods</Text>
+            </TouchableOpacity>
         </View>
-      </View>
-      <View className="mb-4 space-y-3">
-        <View className="flex flex-row mx-4 items-center justify-between">
-          <View className="flex flex-row items-center space-x-2">
-            <Text className="text-base font-bold">You receive</Text>
-            <Ionicons name="alert-circle" size={24} color="black" />
-          </View>
-          <Text className="text-base font-bold">$195.15</Text>
-        </View>
-        <View className="items-center ">
-          <Btn label={"confirm"} type="action" />
+        <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}} className='flex flex-row items-center space-x-2'>
+            <AntDesign name="questioncircle" size={24} color="black" />
+            <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5)}}>Help</Text>
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default WalletScreen;
+export default WalletScreen
