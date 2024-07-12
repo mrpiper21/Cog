@@ -70,7 +70,7 @@ const PreviewCertificatePhoto: React.FC<PreviewProps> = ({photo, setPhoto, hasMe
         <Btn
           type="action"
           label={"Submit"}
-          callback={() => console.log("click")}
+          callback={() => navigation.navigate("car-underReview")}
         />
       </View>
       <View>

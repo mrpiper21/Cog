@@ -11,20 +11,23 @@ import {
   RoundedCheckbox,
   PureRoundedCheckbox,
 } from "react-native-rounded-checkbox";
+import Responsiveness from "../../helpers/Responsiveness";
 
 interface HelpItemProps {
-  children: String;
-  type?: "Trips" | "Fixtures" | "Call support" | "forward" | "Check";
+  children: String | string | undefined;
+  title?: String;
+  type?: "Trips" | "Fixtures" | "Call support" | "forward" | "Check" | "forward-title-children";
   navigateTo?:
     | "Help-Trip"
     | "Account-App"
     | "Tracking-Acceptance"
     | "ChangeAcc-Setting"
     | "DeleteDriver-Acc"
-    | "Remove-Vehicle";
+    | "Remove-Vehicle" 
+    | "acountPhone-number";
 }
 
-const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
+const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo, title }) => {
   const navigation = useNavigation() as any;
   const [isChecked, setChecked] = useState(false);
   return (
@@ -80,6 +83,17 @@ const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo }) => {
             text=""
           />
           <Text className="text-base">{children}</Text>
+        </TouchableOpacity>
+      ) : type === "forward-title-children" ? (
+        <TouchableOpacity
+          onPress={() => navigateTo && navigation.navigate(navigateTo)}
+          className="flex flex-row items-center justify-between p-3 border-b-2 border-[#EEEE] mt-4"
+        >
+          <View>
+            <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>{title}</Text>
+            <Text className="text-base">{children}</Text>
+          </View>
+          <Ionicons name="chevron-forward-outline" size={24} color="black" />
         </TouchableOpacity>
       ) : (
         !type && (

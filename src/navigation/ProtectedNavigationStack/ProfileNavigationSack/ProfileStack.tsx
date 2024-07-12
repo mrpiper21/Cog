@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
 import React from "react";
 import ProfileScreen from "../../../screens/ProtectedScreens/ProfileScreens/ProfileScreen";
 import ProfileDetailScreen from "../../../screens/ProtectedScreens/ProfileScreens/ProfileDetailScreen";
@@ -7,6 +7,7 @@ import RideRatingScreen from "../../../screens/ProtectedScreens/ProfileScreens/R
 import AcceptanceScreen from "../../../screens/ProtectedScreens/ProfileScreens/AcceptanceScreen";
 import CancellationScreen from "../../../screens/ProtectedScreens/ProfileScreens/CancellationScreen";
 import EditProfileScreen from "../../../screens/ProtectedScreens/ProfileScreens/EditProfileScreen";
+import BackButton from "../../../widget/Buttons/BackButton";
 import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
@@ -62,10 +63,7 @@ const ProfileStack = () => {
         name="Cancellation"
         component={CancellationScreen}
       />
-      <ProfileNavigator.Screen
-        name="EditProfile"
-        component={EditProfileScreen}
-      />
+        <ProfileNavigator.Screen options={{ headerShown: true, headerTitle: 'Profile', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="EditProfile" component={EditProfileScreen}/>
     </ProfileNavigator.Navigator>
   );
 };

@@ -20,11 +20,13 @@ import {
 } from "@expo/vector-icons";
 import EditBtn from "../../../component/Profile/EditBtn";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 import ModalView from "../../../component/Profile/ModalView";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Btn from "../../../widget/Btn";
 import Loading from "../../../widget/Loading";
+import Responsiveness from "../../../helpers/Responsiveness";
+import ProfileView from "../../../component/Profile/ProfileView";
 
 const EditProfileScreen = () => {
   const User = useContext(useUserContext);
@@ -41,52 +43,8 @@ const EditProfileScreen = () => {
 
   return (
     <View className="flex-1 bg-white">
-      <View
-        style={{
-          marginTop: wp(12),
-          flexDirection: "row",
-          alignItems: "center",
-          marginHorizontal: wp(3),
-        }}
-      >
-        <BackButton />
-        <Text
-          style={{ fontWeight: "600", fontSize: wp(4), marginLeft: wp(28) }}
-        >
-          Edit Profile
-        </Text>
-      </View>
-      <View style={{ alignItems: "center", marginTop: wp(8) }}>
-        <View>
-          {/* <Image
-            style={styles.ImageItem}
-            source={{
-              uri: `${baseURL}${User?.user.email}`,
-            }}
-          /> */}
-          {image ? (
-            <Image
-              style={styles.ImageItem}
-              source={{
-                uri: image,
-              }}
-            />
-          ) : (
-            <EvilIcons name="user" size={150} color="black" />
-          )}
-          <TouchableOpacity
-            onPress={() => setModalVisible(true)}
-            // onPress={() => upload("gallery")}
-            style={styles.cameraIcon}
-          >
-            <AntDesign name="camera" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ alignItems: "center", marginTop: wp(2) }}>
-          <Text style={{ fontSize: wp(5), fontWeight: "600" }}>
-            {User?.user.email}
-          </Text>
-        </View>
+      <View style={{ alignItems: "center", marginTop: Responsiveness.getResponsiveHeight(4) }}>
+       <ProfileView setModalVisible={setModalVisible} image={image} />
       </View>
       <View style={styles.editLanguageContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>

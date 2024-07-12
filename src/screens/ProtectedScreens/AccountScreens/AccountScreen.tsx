@@ -22,13 +22,13 @@ const AccountScreen = () => {
           <Ionicons name="chevron-forward" size={24} color="black" />
         </TouchableOpacity>
       {AccountItemData.map((data)=> (
-        <View className='flex flex-row items-center justify-between px-4 py-5 border-b-[1px] border-gray-300'>
+        <TouchableOpacity onPress={()=> navigation.navigate(data.route)} className='flex flex-row items-center justify-between px-4 py-5 border-b-[1px] border-gray-300'>
             <View className='flex flex-row space-x-3 items-center'>
                 <View>{data.iconLeft}</View>
                 <Text className={`${data.name === "Logout" && "text-red-500 font-semibold"}`}>{data.name}</Text>
             </View>
             <View>{data.iconRight}</View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   )

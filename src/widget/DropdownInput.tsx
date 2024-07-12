@@ -48,7 +48,7 @@ const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color
 
   return (
     <View style={{marginTop: Responsiveness.getResponsiveWidth(3)}}>
-        <Text className='text-lg font-bold'>{label}</Text>
+        <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5)}} className='font-bold'>{label}</Text>
         <View className='flex items-center' style={styles.container}>
         {renderLabel()}
         <Dropdown
