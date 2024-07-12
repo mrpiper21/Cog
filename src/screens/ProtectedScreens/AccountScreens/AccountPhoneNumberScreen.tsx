@@ -3,6 +3,7 @@ import React, {useState, useRef} from 'react'
 import Responsiveness from '../../../helpers/Responsiveness'
 import PhoneInput from "react-native-phone-number-input";
 import Btn from '../../../widget/Btn';
+import { useNavigation } from '@react-navigation/native';
 
 const AccountPhoneNumberScreen = () => {
     const [value, setValue] = useState("");
@@ -10,6 +11,7 @@ const AccountPhoneNumberScreen = () => {
   const [valid, setValid] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const phoneInput = useRef<PhoneInput>(null);
+  const navigation = useNavigation() as any;
 
   return (
     <View className='flex-1 bg-white px-4'>
@@ -39,7 +41,7 @@ const AccountPhoneNumberScreen = () => {
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveHeight(3)}} className='flex items-center'>
-        <Btn type='action' label={"Continue"} />
+        <Btn type='action' label={"Continue"} callback={()=> navigation.navigate('otp-verification')} />
       </View>
     </View>
   )

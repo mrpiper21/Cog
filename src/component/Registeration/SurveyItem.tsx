@@ -134,6 +134,7 @@ export const ApplyToDriveWihtOtherApp = [
 ]
 
 const SurveyItem: React.FC<SurverProps> = ({type, children, isChecked, callback, id}) => {
+    const [checkedBox, setCheckedBox] = useState<boolean>(false)
   return (
     <View style={{borderBottomWidth: 2, borderColor: "#EEEE"}} className='flex flex-row items-center space-x-4 py-6'>
         {type === "rounded" ? <BouncyCheckbox
@@ -145,10 +146,10 @@ const SurveyItem: React.FC<SurverProps> = ({type, children, isChecked, callback,
             // innerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
         /> : <Checkbox
                 style={styles.checkbox}
-                value={isChecked}
-                // onValueChange={handleValueChange}
-                color={isChecked ? "#4630EB" : undefined}
-                // onChange={callback}
+                value={true}
+                onValueChange={()=>setCheckedBox(!checkedBox)}
+                color={checkedBox ? "blue" : undefined}
+                // onChange={()=> setCheckedBox(false)}
         />}
         <Text>{children}</Text>
       </View>

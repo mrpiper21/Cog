@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import {TouchableOpacity, StyleSheet} from 'react-native'
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -32,6 +33,7 @@ import VehicleOwnerShipScreen from "../../screens/AthScreens/AuthrizationScreens
 import AddCarDetailsScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/AddCarDetailsScreen";
 import AddPersonalCarScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/AddPersonalCarScreen";
 import SelectColorScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen";
+import BackButton from "../../widget/Buttons/BackButton";
 
 const AuthStack = createStackNavigator();
 
@@ -52,7 +54,7 @@ const AuthNavigation = () => {
       <AuthStack.Screen name="account-type" component={AccountTypeScreen} />
       <AuthStack.Screen name="inputDriver-location" component={InputDriveLocation} />
       <AuthStack.Screen name="vehicle-type" component={VehicleTypeScreen} />
-      <AuthStack.Screen name="driver-survey" component={DriverSurverScreen} />
+      <AuthStack.Screen options={{headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerShown: true, headerTitle: ""}} name="driver-survey" component={DriverSurverScreen} />
       <AuthStack.Screen name="vehicle-ownership" component={VehicleOwnerShipScreen} />
       <AuthStack.Screen name="addCar-details" component={AddCarDetailsScreen} />
       <AuthStack.Screen name="addPersonalCar" component={AddPersonalCarScreen} />

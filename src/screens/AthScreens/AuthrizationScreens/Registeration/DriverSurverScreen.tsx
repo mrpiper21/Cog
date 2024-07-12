@@ -56,9 +56,6 @@ const DriverSurverScreen = () => {
       
   return (
     <ScrollView showsVerticalScrollIndicator={false} className='flex flex-1 bg-white px-4'>
-      <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
-        <Header type='Back-Button' />
-      </View>
       <ProgressBar/>
       <View>
         <Text style={{fontWeight: '600', fontSize: Responsiveness.getResponsiveWidth(5)}}>

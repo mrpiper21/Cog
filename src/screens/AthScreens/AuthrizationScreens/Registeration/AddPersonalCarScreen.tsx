@@ -9,10 +9,12 @@ import { Dropdown } from 'react-native-element-dropdown';
 import DropdownInput from '../../../../widget/DropdownInput';
 import Btn from '../../../../widget/Btn';
 import { ColorOptions, MakeOptions, YearOptions } from '../../../../Data/Options';
+import { useNavigation } from '@react-navigation/native';
 
 const AddPersonalCarScreen = () => {
     const [image, setImage] = useState<string | any>(null)
     const [imageArr, setImagArr] = useState<string[]>([]);
+    const navigation = useNavigation() as any;
 
     // const addImage = (newImage: string) => {
     //     setImagArr([...imageArr, newImage]);
@@ -30,15 +32,13 @@ const AddPersonalCarScreen = () => {
         <View>
             <Text className='font-bold'>Car Images</Text>
         </View>
-        <View className={`${image && "flex flex-row space-x-2 mt-4"}`}>
+        <View className={`${image && "flex flex-row space-x-2 mt-4"} mt-4`}>
             <View className='flex flex-row gap-4'>
-                {imageArr.length > 1 && imageArr.map((imgUrl)=> (
-                        <Image className='rounded-lg' style={{width: Responsiveness.getResponsiveWidth(15), height: Responsiveness.getResponsiveWidth(15)}} source={{uri: image}} />
-                    ))}
-            </View>
+                {image && <Image className='rounded-lg' style={{width: Responsiveness.getResponsiveWidth(15), height: Responsiveness.getResponsiveWidth(15)}} source={{uri: image}} />}
             <TouchableOpacity disabled={imageArr.length >= 3 && true} onPress={()=> pickImage('gallery', setImage)} className='flex items-center justify-center bg-[#EEEE] rounded-lg' style={{width: Responsiveness.getResponsiveWidth(15), height: Responsiveness.getResponsiveWidth(15)}}>
                 <FontAwesome name="camera" size={24} color="black" />
             </TouchableOpacity>
+            </View>
         </View>
 
         <DropdownInput placeholder='Select Make' label={"Make"} data={MakeOptions} />
@@ -50,7 +50,7 @@ const AddPersonalCarScreen = () => {
         <DropdownInput placeholder='Vehicle has a Wheelchair Accessible Ramp' label={"Select Wheelchair Accessible Ramp "}/>
 
         <View style={{marginVertical: Responsiveness.getResponsiveWidth(5)}} className='items-center mx-5'>
-            <Btn type='action' label={"Next"} />
+            <Btn type='action' label={"Next"} callback={()=> navigation.navigate("Verification")}/>
         </View>
     </ScrollView>
   )

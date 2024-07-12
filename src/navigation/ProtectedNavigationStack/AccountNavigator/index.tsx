@@ -22,6 +22,9 @@ import AddCardScreen from "../../../screens/ProtectedScreens/AccountScreens/AddC
 import TaxInformationScreen from "../../../screens/ProtectedScreens/AccountScreens/TaxInformationScreen";
 import ManageAccountScreen from "../../../screens/ProtectedScreens/AccountScreens/ManageAccountScreen";
 import AccountPhoneNumberScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountPhoneNumberScreen";
+import AccountPhoneNumberOPTScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountPhoneNumberOPTScreen";
+import AccountSecurityScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountSecurityScreen";
+import TwoStepVerificationScreen from "../../../screens/ProtectedScreens/AccountScreens/TwoStepVerificationScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -42,6 +45,9 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'Tax Information', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="tax-info" component={TaxInformationScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Account', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="manage-account" component={ManageAccountScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="acountPhone-number" component={AccountPhoneNumberScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="otp-verification" component={AccountPhoneNumberOPTScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Security', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="security" component={AccountSecurityScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="twoStep-verification" component={TwoStepVerificationScreen}/>
     </AccountNavigator.Navigator>
 }
 
