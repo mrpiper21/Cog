@@ -5,7 +5,7 @@ import Btn from '../../../widget/Btn'
 import { useNavigation } from '@react-navigation/native'
 
 const TwoStepVerificationScreen = ({ route }: any) => {
-  const { type, title, message } = route.params;
+  const { type, title, message, btnText } = route.params;
   const navigation = useNavigation() as any;
   return (
     <View className='flex-1 bg-white px-4 justify-between mb-4'>
@@ -18,9 +18,9 @@ const TwoStepVerificationScreen = ({ route }: any) => {
             <Text>{message}</Text>
         </View>
       </View>
-      {type === "password" && <View className='items-center'>
-        <Btn type='action' label={"Set up now"} />
-      </View>}
+      <View className='items-center'>
+        <Btn type='action' label={btnText ? btnText : "Set up now"} />
+      </View>
     </View>
   )
 }

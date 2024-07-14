@@ -1,16 +1,18 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Responsiveness from '../../../../helpers/Responsiveness'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const VerifyTextMessageScreen = () => {
+    const navigation = useNavigation() as any;
   return (
     <View className='flex flex-1 bg-white px-4'>
         <View style={{marginVertical: Responsiveness.getResponsiveHeight(3)}}>
             <Text style={{fontSize: Responsiveness.getResponsiveHeight(2.5), fontWeight: '700'}}>How would you like to receive
             verification code?</Text>
         </View>
-        <View className='flex flex-row items-center justify-between'>
+        <TouchableOpacity onPress={()=> navigation.navigate("twoStep-verification", {title: "Great job! Your account is nowmore secure.", message: "2-Step Verification is ON. Now, when you sign in toyour account, you’ll be asked for your password and a verification code.", btnText: "Done"})} className='flex flex-row items-center justify-between'>
             <View className='flex flex-row items-center'>
                 <View className='items-center justify-center rounded-full' style={{height: Responsiveness.getResponsiveWidth(15), width: Responsiveness.getResponsiveWidth(15), backgroundColor: '#EEEE', marginRight: Responsiveness.getResponsiveWidth(3)}}>
                     <Image source={require("../../../../../assets/icons/PoneSecureSM.png")} />
@@ -26,7 +28,7 @@ const VerifyTextMessageScreen = () => {
                 </View>
             </View>
             <Ionicons name="chevron-forward-sharp" size={24} color="black" />
-        </View>
+        </TouchableOpacity>
     </View>
   )
 }
