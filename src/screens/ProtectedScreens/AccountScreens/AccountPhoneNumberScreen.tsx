@@ -41,7 +41,7 @@ const AccountPhoneNumberScreen = () => {
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveHeight(3)}} className='flex items-center'>
-        <Btn type='action' label={"Continue"} callback={()=> navigation.navigate('otp-verification')} />
+        <Btn type='action' label={"Continue"} callback={()=> navigation.navigate("otp-verification")} />
       </View>
     </View>
   )

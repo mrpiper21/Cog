@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import Responsiveness from '../../../helpers/Responsiveness';
 import Btn from '../../../widget/Btn';
 
-
 const AccountPhoneNumberOPTScreen = () => {
     const navigation = useNavigation() as any;
     const [inputOnActive, setInputOnActive] = useState({
