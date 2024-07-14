@@ -29,6 +29,8 @@ import AccountVerificationPassword from "../../../screens/ProtectedScreens/Accou
 import VerifyTextMessageScreen from "../../../screens/ProtectedScreens/AccountScreens/Security/VerifyTextMessageScreen";
 import PrivacyScreen from "../../../screens/ProtectedScreens/AccountScreens/Privacy/PrivacyScreen";
 import AddressScreen from './../../../screens/ProtectedScreens/AccountScreens/Address/AddressScreen';
+import AppSettingScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/AppSettingScreen";
+import SoundScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SoundScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -55,6 +57,8 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="verifyText-Message" component={VerifyTextMessageScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Privacy', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="privacy-center" component={PrivacyScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Address', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="edit-address" component={AddressScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'App Settings', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="app-settings" component={AppSettingScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Sounds', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="sound" component={SoundScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>
 }
