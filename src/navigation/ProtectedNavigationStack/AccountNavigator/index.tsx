@@ -31,6 +31,7 @@ import PrivacyScreen from "../../../screens/ProtectedScreens/AccountScreens/Priv
 import AddressScreen from './../../../screens/ProtectedScreens/AccountScreens/Address/AddressScreen';
 import AppSettingScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/AppSettingScreen";
 import SoundScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SoundScreen";
+import NavigationScreen from './../../../screens/ProtectedScreens/AccountScreens/Navigation/NavigationScreen';
 
 const AccountNavigator = createStackNavigator();
 
@@ -59,6 +60,7 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'Address', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="edit-address" component={AddressScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'App Settings', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="app-settings" component={AppSettingScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Sounds', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="sound" component={SoundScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Navigation', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="navigate" component={NavigationScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>
 }
