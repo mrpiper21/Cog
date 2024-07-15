@@ -36,6 +36,12 @@
     },
     "plugins": [
       [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow COG to access your contacts."
+        }
+      ],
+      [
         "expo-camera",
         {
           "cameraPermission": "Allow COG to access your camera",
@@ -46,8 +52,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
-          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "photosPermission": "Allow COG to access your photos.",
+          "savePhotosPermission": "Allow COG to save photos.",
           "isAccessMediaLocationEnabled": true
         }
       ],

@@ -53,7 +53,8 @@
     "react-native-svg": "15.2.0",
     "react-native-vision-camera": "^4.4.1",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
-    "rn-country-dropdown-picker": "^2.1.8"
+    "rn-country-dropdown-picker": "^2.1.8",
+    "expo-contacts": "~13.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

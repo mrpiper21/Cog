@@ -32,6 +32,14 @@ import AddressScreen from './../../../screens/ProtectedScreens/AccountScreens/Ad
 import AppSettingScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/AppSettingScreen";
 import SoundScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SoundScreen";
 import NavigationScreen from './../../../screens/ProtectedScreens/AccountScreens/Navigation/NavigationScreen';
+import AccessibilityScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/AccessibilityScreen";
+import NotificationScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/NotificationScreen";
+import NightModeScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/NightModeScreen";
+import CommunicationScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/CommunicationScreen";
+import FollowMyRideScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/FollowMyRideScreen";
+import ContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/ContactScreen";
+import SetEmengencyContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SetEmengencyContactScreen";
+import SpeedLimitScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SpeedLimitScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -61,6 +69,14 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'App Settings', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="app-settings" component={AppSettingScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Sounds', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="sound" component={SoundScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Navigation', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="navigate" component={NavigationScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Accessibility', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="accessibility" component={AccessibilityScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Notifications', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="notification" component={NotificationScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Communication', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="communication" component={CommunicationScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Follow My Ride', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="locate-ride" component={FollowMyRideScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Contacts', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="contact" component={ContactScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Emergency Contacts', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="e-contact" component={SetEmengencyContactScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Speed Limit', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="speed-limit" component={SpeedLimitScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Night Mode', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="theme" component={NightModeScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>
 }
