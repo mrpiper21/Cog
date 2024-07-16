@@ -3,15 +3,18 @@ import React from 'react'
 import Responsiveness from '../../helpers/Responsiveness'
 import Checkebox from '../Checkebox'
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 interface Cardprops {
     status?: "Submitted" | "unCompleted" | "completed" |  undefined,
+    route?: String
     profilePic?: String
     check: boolean,
     requirements: String
 }
 
-const RequirementCard: React.FC<Cardprops> = ({status, check, requirements, profilePic}) => {
+const RequirementCard: React.FC<Cardprops> = ({status, check, requirements, profilePic, route}) => {
+  const navigation = useNavigation() as any;
   return (
     <>
       {status === "completed" ? (
@@ -23,7 +26,7 @@ const RequirementCard: React.FC<Cardprops> = ({status, check, requirements, prof
       <Checkebox type='check' color='#04AA6D' isChecked={check} />
       </View>
       ) : status === "unCompleted" ? (
-        <TouchableOpacity style={{height: Responsiveness.getResponsiveHeight(10)}} className='flex flex-row justify-between items-center bg-red-200 p-4 rounded-xl'>
+        <TouchableOpacity onPress={()=> route && navigation.navigate(route)} style={{height: Responsiveness.getResponsiveHeight(10)}} className='flex flex-row justify-between items-center bg-red-200 p-4 rounded-xl'>
           <View>
               <Text>{status}</Text>
               <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '700'}}>{requirements}</Text>

@@ -19,13 +19,13 @@ const DocumentScreen = () => {
                 <RequirementCard check={check} status={"unCompleted"} requirements={"Background Check"} />
               </View>
               <View>
-                <RequirementCard check={check} status={User?.user.cnicFrontStatus === "Submitted" && User.user.cnicBackStatus === "Submitted" ? "Submitted"  : User?.user.cnicBackStatus === "unCompleted"  && User.user.cnicFrontStatus === "unCompleted"  ? "unCompleted" : "Submitted"} requirements={"Computerized National Identity Card"} />
+                <RequirementCard route={"front-side"} check={check} status={User?.user.cnicFrontStatus === "Submitted" && User.user.cnicBackStatus === "Submitted" ? "Submitted"  : User?.user.cnicBackStatus === "unCompleted"  && User.user.cnicFrontStatus === "unCompleted"  ? "unCompleted" : "Submitted"} requirements={"Computerized National Identity Card"} />
               </View>
               <View>
-                <RequirementCard check={check} status={User?.user.driversLicenseStatus} requirements={"Driver’s License"} />
+                <RequirementCard check={check} status={User?.user.driversLicenseStatus} requirements={"Driver’s License"} route={"License-front"} />
               </View>
               <View>
-                <RequirementCard check={check} profilePic={User?.user.profilePic} requirements={"Profile Photo"} />
+                <RequirementCard check={check} profilePic={User?.user.profilePic} route={"Profile-photo"} requirements={"Profile Photo"} />
               </View>
           </View>
         </View>

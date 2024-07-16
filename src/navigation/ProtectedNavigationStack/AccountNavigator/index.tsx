@@ -41,6 +41,12 @@ import ContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppS
 import SetEmengencyContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SetEmengencyContactScreen";
 import SpeedLimitScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SpeedLimitScreen";
 import RideCheckScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/RideCheckScreen";
+import UploadProfilePhotoScreen from "../../../screens/AthScreens/Verificationscreens/UploadProfilePhotoScreen";
+import ProfilePhotoScreen from "../../../screens/AthScreens/Verificationscreens/ProfilePhotoScreen";
+import PhotoSubmittedScreen from "../../../screens/AthScreens/Verificationscreens/PhotoSubmittedScreen";
+import LicenseFrontScreen from "../../../screens/AthScreens/Verificationscreens/LicenseFrontScreen";
+import UploadFrontLicense from "../../../screens/AthScreens/Verificationscreens/UploadFrontLicense";
+import CNICFrontCameraScreen from "../../../screens/AthScreens/Verificationscreens/CNICFrontCameraScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -55,6 +61,18 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'Documents', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerRight: ()=> <TouchableOpacity style={styles.helpIcon}>
           <AntDesign name="questioncircle" size={24} color="black" />
         </TouchableOpacity>}} name="documents" component={DocumentScreen}/>
+        <AccountNavigator.Screen name="Profile-photo" component={ProfilePhotoScreen} />
+      <AccountNavigator.Screen
+        name="Upload-profile-photo"
+        component={UploadProfilePhotoScreen}
+      />
+      <AccountNavigator.Screen
+        name="Photo-submitted"
+        component={PhotoSubmittedScreen}
+      />
+      <AccountNavigator.Screen name="License-front" component={LicenseFrontScreen} />
+      <AccountNavigator.Screen name="upload-front" component={UploadFrontLicense} />
+      <AccountNavigator.Screen name="front-side" component={CNICFrontCameraScreen} />
         <AccountNavigator.Screen options={{ headerTitle: 'Payment', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="payments" component={PaymentScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Add Payment Method', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="add-payment" component={AddPaymentScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Add Card', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="add-card" component={AddCardScreen}/>

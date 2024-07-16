@@ -9,14 +9,12 @@ import { useNavigation } from "@react-navigation/native";
 import { useUserContext } from "../../hooks/Usercontext/UserContext";
 import { baseURL } from "../../Services/authorization";
 import { EvilIcons } from "@expo/vector-icons";
-import { useVerificationContext } from "../../Context";
 interface PofileProps {
   route: String;
 }
 
 const ProfileItem: React.FC<PofileProps> = ({ route }) => {
   const User = useContext(useUserContext);
-  const ver = useVerificationContext();
   console.log("User In my Context: ", User);
   // console.log("my email", User?.user.user.email);
 
@@ -27,11 +25,11 @@ const ProfileItem: React.FC<PofileProps> = ({ route }) => {
       onPress={() => navigation.navigate(route)}
       style={{ flexDirection: "row", alignItems: "center" }}
     >
-      {ver.ProfilePhoto_Url.length > 1 ? (
+      {User?.user.profilePic ? (
         <Image
           style={styles.userImag}
           source={{
-            uri: ver.ProfilePhoto_Url,
+            uri: User?.user.profilePic ,
           }}
         />
       ) : (
