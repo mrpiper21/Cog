@@ -10,7 +10,6 @@ import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import { useNavigation } from "@react-navigation/native";
 import PreviewFrontLicense from "./PreviewFrontLicense";
-import { useVerificationContext } from "../../../Context";
 
 const UploadFrontLicense = () => {
   const [facing, setFacing] = useState("back");
@@ -19,7 +18,6 @@ const UploadFrontLicense = () => {
   const [hasCameraaPermission, setHasCameraPermission] = useState(Boolean);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
-  const { handleProfilePhotoSubmit } = useVerificationContext();
 
   const cameraRef = useRef<CameraView>(null);
   const navigation = useNavigation();

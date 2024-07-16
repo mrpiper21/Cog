@@ -11,7 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 
 const PhotoSubmittedScreen = () => {
   const navigation = useNavigation() as any;
-  function handleNavigation() {}
   return (
     <View
       style={{

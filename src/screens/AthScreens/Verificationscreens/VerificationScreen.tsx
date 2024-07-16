@@ -4,29 +4,22 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import React, { useContext, useState } from "react";
-import AuthItem from "../../../component/Verification/AuthItem";
+import SatusItem from "../../../component/Verification/SatusItem";
 import BackButton from "../../../widget/Buttons/BackButton";
 import Btn from "../../../widget/Btn";
-import { VerifyContext } from "../../../hooks/Verificationcontext/VerificationContext";
 import { useNavigation } from "@react-navigation/native";
-import { useVerificationContext } from "../../../Context";
 import ProgressBar from "../../../component/Verification/ProgressBar";
+import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 
 const VerificationScreen = () => {
-  const [verificationState, setVerifictionState] = useState({});
-  const Verification = useVerificationContext();
+  const User = useContext(useUserContext)
   const navigation = useNavigation() as any;
   // User.
-
-  console.log(
-    "Verify the photo... verification screen",
-    Verification.isVerified.Profile_Photo
-  );
   // isVerified && console.log(Verification?.isVerified.);
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={{ flex: 1, padding: wp(3) }}
+      style={{ flex: 1, padding: wp(3), backgroundColor: 'white' }}
     >
       {/**Back arrow */}
       <View style={{ marginTop: wp(12) }}>
@@ -46,34 +39,34 @@ const VerificationScreen = () => {
       </View>
 
       {/**Items */}
-      <AuthItem
+      <SatusItem
         title={"CNIC Front Side"}
         route={"front-side"}
-        isVerified={Verification?.isVerified.CNIC_FRONT}
+        status={User?.user.cnicFrontStatus}
       />
-      <AuthItem
+      <SatusItem
         title={"CNIC Back Side"}
         route={"back-side"}
-        isVerified={Verification?.isVerified.CNIC_BACK}
+        status={User?.user.cnicBackStatus}
       />
-      <AuthItem
+      <SatusItem
         title={"Profile Photo"}
         route={"Profile-photo"}
-        isVerified={Verification?.isVerified.Profile_Photo}
+        profilePic={User?.user.profilePic}
       />
-      <AuthItem
+      <SatusItem
         title={"Driving License"}
         route={"License-front"}
-        isVerified={Verification?.isVerified.Driving_License}
+        status={User?.user.driversLicenseStatus}
       />
-      <AuthItem
+      <SatusItem
         title={"Velicle Registeration"}
         route={"vehicle-reg"}
-        isVerified={Verification?.isVerified.Velicle_Registeration}
+        status={User?.user.vehicleRegistrationStatus}
       />
 
-      {Verification?.isVerified.Profile_Photo === "Submitted" &&
-        Verification.isVerified.Driving_License === "Submitted" && (
+      {User?.user.profilePic &&
+        User.user.driversLicenseStatus === "Submitted" && (
           <View
             style={{ marginTop: wp(10) }}
             className="flex-1 items-center justify-center"

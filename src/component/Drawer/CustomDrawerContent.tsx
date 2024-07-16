@@ -80,7 +80,7 @@ const CustomDrawerContent = () => {
                 icon={<Feather name="help-circle" size={wp(6)} color="black" />}
               />
               <NavBarItem
-                route={""}
+                route={"referral"}
                 label={"Refer Friends"}
                 icon={
                   <Image

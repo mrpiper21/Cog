@@ -34,6 +34,7 @@ import AddCarDetailsScreen from "../../screens/AthScreens/AuthrizationScreens/Re
 import AddPersonalCarScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/AddPersonalCarScreen";
 import SelectColorScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen";
 import BackButton from "../../widget/Buttons/BackButton";
+import CNICFrontCameraScreen from "../../screens/AthScreens/Verificationscreens/CNICFrontCameraScreen";
 
 const AuthStack = createStackNavigator();
 
@@ -83,6 +84,7 @@ const AuthNavigation = () => {
       />
       <AuthStack.Screen name="License-front" component={LicenseFrontScreen} />
       <AuthStack.Screen name="upload-front" component={UploadFrontLicense} />
+      <AuthStack.Screen name="front-side" component={CNICFrontCameraScreen} />
       <AuthStack.Screen name="Account-ready" component={AccountReadyScreen} />
     </AuthStack.Navigator>
   );

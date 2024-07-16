@@ -8,16 +8,17 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface AuthProps {
-  isVerified: "Submitted" | "Completed" | "unCompleted";
+  status?: "Submitted" | "completed" | "unCompleted" | undefined;
+  profilePic?: String
   title: String;
   route: String;
 }
 
-const AuthItem: React.FC<AuthProps> = ({ title, route, isVerified }) => {
+const SatusItem: React.FC<AuthProps> = ({ title, route, status, profilePic }) => {
   const navigation = useNavigation() as any;
   return (
     <>
-      {isVerified === "unCompleted" ? (
+      {status === "unCompleted" ? (
         <TouchableOpacity
           onPress={() => route && navigation.navigate(route)}
           style={styles.authContainer}
@@ -36,7 +37,7 @@ const AuthItem: React.FC<AuthProps> = ({ title, route, isVerified }) => {
           </View>
           <Ionicons name="chevron-forward" size={24} color="black" />
         </TouchableOpacity>
-      ) : isVerified === "Submitted" ? (
+      ) : status === "Submitted" ? (
         <View>
           <Text className="text-lg font-bold">Submitted</Text>
           <View style={styles.submittedContainer}>
@@ -56,7 +57,7 @@ const AuthItem: React.FC<AuthProps> = ({ title, route, isVerified }) => {
           </View>
         </View>
       ) : (
-        isVerified === "Completed" && (
+        status === "completed" && (
           <View>
             <Text className="text-lg font-bold">Completed</Text>
             <View style={styles.authContainer}>
@@ -77,11 +78,26 @@ const AuthItem: React.FC<AuthProps> = ({ title, route, isVerified }) => {
           </View>
         )
       )}
+      <>{profilePic && (
+          <View>
+            <Text className="text-lg font-bold">Completed</Text>
+            <View style={styles.authContainer}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <AntDesign style={{marginRight: wp(2)}} name="checkcircle" size={wp(8)} color="lightgreen" />
+                <View>
+                  <Text style={styles.txt}>{title}</Text>
+                  <Text className="text-green-300">Uploaded succefully</Text>
+                </View>
+              </View>
+              <Ionicons name="chevron-forward" size={24} color="black" />
+            </View>
+          </View>
+        )}</>
     </>
   );
 };
 
-export default AuthItem;
+export default SatusItem;
 
 const styles = StyleSheet.create({
   backButton: {

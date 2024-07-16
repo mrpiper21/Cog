@@ -9,7 +9,7 @@ import OpportunityScreen from "../../screens/ProtectedScreens/OpportunityScreens
 import ProfileStack from "./ProfileNavigationSack/ProfileStack";
 import EarningStack from "./EarnigNavigator";
 import HelpNavigator from "./HelpNavigator";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
@@ -20,6 +20,9 @@ import CashoutScreen from "../../screens/ProtectedScreens/WalletScreens/CashoutS
 import WalletScreen from "../../screens/ProtectedScreens/WalletScreens/WalletScreen";
 import PaymentMethodScreen from "../../screens/ProtectedScreens/WalletScreens/PaymentMethodScreen";
 import AccountStack from './AccountNavigator/index';
+import ReferralScreen from "../../screens/ProtectedScreens/Referral/ReferralScreen";
+import CancelBtn from "../../widget/Buttons/CancelBtn";
+import Responsiveness from "../../helpers/Responsiveness";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -75,6 +78,7 @@ const ProtectStack = () => {
       <Stack.Screen name="Earnings" component={EarningStack} />
       <Stack.Screen name="Helproute" component={HelpNavigator} />
       <Stack.Screen name="Accountroute" component={AccountStack}/>
+      <Stack.Screen options={{headerShown: true, headerTitle: '', headerLeft: ()=> <View className="ml-4"><Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '500'}}>Refer Friends</Text></View>, headerRight: ()=> <View className="mr-4"><CancelBtn /></View>}} name="referral" component={ReferralScreen}/>
     </Stack.Navigator>
   );
 };

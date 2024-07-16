@@ -1,19 +1,24 @@
 import axios from "axios";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, Dispatch } from "react";
 import { baseURL, config, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, Alert } from "react-native";
+import { mytoken } from "../../Services/authorization";
+import { useNavigation } from "@react-navigation/native";
 // import { writeImageAsync } from "../../Global/UploadImage";
 
+type HandleSubmitType = (setIsLoading: Dispatch<React.SetStateAction<boolean>>, setPhoto: (value: any)=> void, photo: String, edit?: boolean | never ) => Promise<void>
 interface UserContextProps {
   user: UserInterface;
   updateUser: (name: string, email: string) => void;
   updateUserProfile: (
     UserData: UserInterface,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLoading: Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   getUser: () => Promise<void>;
   loginUser: (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>)=> Promise<void>;
+  handleLicenseSubmit: HandleSubmitType
+  handleProfilePhotoSubmit: HandleSubmitType
 }
 
 export const useUserContext = React.createContext<UserContextProps | undefined>(
@@ -24,6 +29,8 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
+  console.log("User from hook...", user)
+  const navigation = useNavigation() as any
 
   const updateUser = useCallback((name: string, email: string) => {
     if (name) {
@@ -41,19 +48,19 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 
   const updateUserProfile = useCallback(async (
     UserData: UserInterface,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLoading?: Dispatch<React.SetStateAction<boolean>>
   ) => {
     try {
-      setIsLoading(true);
+      setIsLoading && setIsLoading(true);
       await axios
         .put(baseURL + "user/update-user/" + user._id, UserData, config)
         .then((res) => {
           setUser(res.data.user);
-          setIsLoading(false);
+          setIsLoading && setIsLoading(false);
           console.log("User profile updated", res.data);
         })
         .catch((err) => {
-          setIsLoading(false);
+          setIsLoading && setIsLoading(false);
           console.log("There was an Error: ", err);
         });
     } catch (err) {
@@ -66,12 +73,12 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
       setUser(res?.data.user);
+      console.log("User data from api... ",res?.data.user)
 
       res.data && setUser(res.data.user);
 
       if (res.data && res.data.user && res.data.user.profilePic) {
         const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
-        console.log("user in my context...", user);
         // await writeImageAsync(profilePicUrl, "profile-Pic");
         console.log("Image saved successfully");
       } else {
@@ -82,7 +89,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const loginUser = async (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+  const loginUser = async (email: String, setIsLoading: Dispatch<React.SetStateAction<boolean>>) => {
     console.log(email)
       try {
         setIsLoading(true)
@@ -101,12 +108,122 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
       }
   }
 
+  const handleLicenseSubmit = useCallback(async (
+    setIsLoading: Dispatch<React.SetStateAction<boolean>>,
+    setPhoto: (value: any) => void,
+    photo: any
+  ) => {
+    setIsLoading(true);
+    const formData = new FormData();
+    let uri = photo?.uri;
+
+    try {
+      let uriParts = uri.split(".");
+      let fileType = uriParts[uriParts.length - 1];
+
+      formData.append("driversLicense", {
+        uri: uri,
+        type: "image/jpg",
+        name: `driversLicense.${fileType}`,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${mytoken}`,
+        },
+        transformRequest: () => {
+          return formData;
+        },
+      };
+
+      const response = await axios.post(
+        baseURL + "user/upload/drivers-license",
+        formData,
+        config
+      );
+
+      if (response.status === 201) {
+        console.log("Image uploaded successfully!");
+        console.log(response.headers);
+        Alert.alert("Success", "Image uploaded successfully!");
+        setIsLoading(false);
+        updateUserProfile({ driversLicenseStatus: "Submitted" }).then((res)=> console.log(res)).catch((err)=> Alert.alert("Failed", "Something went wrong", err))
+        navigation.navigate("Verification");
+      } else {
+        alert(`Error uploading image try again`);
+        setIsLoading(false);
+        setPhoto(undefined);
+      }
+    } catch (error) {
+      alert(`Error uploading image try again`);
+      console.error("Error uploading image:", error);
+      setPhoto(undefined);
+      setIsLoading(false);
+    }
+  },[])
+
+  const handleProfilePhotoSubmit = useCallback(async (
+    setIsLoading: (value: boolean) => void,
+    setPhoto: (value: any) => void,
+    photo: any,
+    edit?: boolean
+  ) => {
+    setIsLoading(true);
+    const formData = new FormData();
+    // console.log("base....", photo.base64);
+    let ProfilePhoto_Url
+
+    try {
+      ProfilePhoto_Url = "data:image/jpg;base64" + photo.base64;
+      formData.append("file", {
+        uri: photo.uri,
+        type: "image/jpeg",
+        name: "profile_picture.jpg",
+      });
+
+      const response = await fetch(baseURL + "user/profile-pic", {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${mytoken}`,
+        },
+        body: formData,
+      });
+
+      if (response.status === 201) {
+        console.log(response.json());
+        setIsLoading(false);
+        setPhoto(undefined);
+
+        Alert.alert("Submitted", "Image submitted succefully");
+        navigation.navigate("Verification");
+      } else {
+        // console.log(response.headers);
+        Alert.alert(
+          "Error",
+          "There was an error while uploading your photo, Please try again"
+        );
+        setIsLoading(false);
+        setPhoto(undefined);
+      }
+    } catch (error) {
+      Alert.alert(
+        "Error",
+        "There was an error while uploading your photo, Please try again"
+      );
+      setPhoto(undefined);
+      setIsLoading(false);
+    }
+  },[])
+
   useEffect(() => {
     getUser();
   }, []);
   return (
     <useUserContext.Provider
-      value={{ user, updateUser, updateUserProfile, getUser, loginUser }}
+      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit }}
     >
       {children}
     </useUserContext.Provider>

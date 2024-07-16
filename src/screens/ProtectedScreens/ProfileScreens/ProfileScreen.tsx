@@ -8,7 +8,6 @@ import StatisticCard from "../../../component/Profile/StatisticCard";
 import HeaderContainer from "../../../component/Profile/HeaderContainer";
 import HightlightsCard from "../../../component/Profile/HightlightsCard";
 import { useUserContext } from "../../../hooks/Usercontext/UserContext";
-import STATUSBAR from "../../../widget/STATUSBAR";
 
 const ProfileScreen = () => {
   const [driverRatingPreview, setDriverRatingPreview] = useState(false);
@@ -21,7 +20,6 @@ const ProfileScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
       {/**Profile header container */}
-      <STATUSBAR />
       <HeaderContainer />
       {/**Statistic card */}
       <View style={{ marginTop: hp(1.2), backgroundColor: "white" }}>

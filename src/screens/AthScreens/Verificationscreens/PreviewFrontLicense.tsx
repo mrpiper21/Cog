@@ -1,5 +1,5 @@
 import { View, Text, Image, Button, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import {
@@ -9,8 +9,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../widget/Buttons/BackButton";
 import Btn from "../../../widget/Btn";
-import { useVerificationContext } from "../../../Context";
 import Loading from "../../../widget/Loading";
+import { useUserContext } from "../../../hooks/Usercontext/UserContext";
 
 interface PreviewProps {
   photo: any;
@@ -23,7 +23,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
   setPhoto,
   hasMediaLibraryPermission,
 }) => {
-  const { uploadLicense, handleLicenseSubmit } = useVerificationContext();
+  const User = useContext(useUserContext)
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation() as any;
   let sharePhoto = () => {
@@ -72,7 +72,7 @@ const PreviewFrontLicense: React.FC<PreviewProps> = ({
           <Btn
             type="action"
             label={"Submit"}
-            callback={() => handleLicenseSubmit(setIsLoading, setPhoto, photo)}
+            callback={() => User?.handleLicenseSubmit(setIsLoading, setPhoto, photo)}
           />
         </View>
         <Btn

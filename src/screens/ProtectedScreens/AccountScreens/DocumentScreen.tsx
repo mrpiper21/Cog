@@ -1,11 +1,13 @@
 import { View, Text, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Responsiveness from '../../../helpers/Responsiveness'
 import Checkebox from '../../../component/Checkebox'
 import RequirementCard from '../../../component/Account/RequirementCard'
+import { useUserContext } from '../../../hooks/Usercontext/UserContext'
 
 const DocumentScreen = () => {
   const [check, setChecked] = useState<boolean>(true)
+  const User = useContext(useUserContext)
   return (
     <ScrollView showsVerticalScrollIndicator={false} className="flex bg-white px-4">
         <View className='flex'>
@@ -14,16 +16,16 @@ const DocumentScreen = () => {
           </View>
           <View className='flex gap-4 pb-4'>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Background Check"} />
+                <RequirementCard check={check} status={"unCompleted"} requirements={"Background Check"} />
               </View>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Computerized National Identity Card"} />
+                <RequirementCard check={check} status={User?.user.cnicFrontStatus === "Submitted" && User.user.cnicBackStatus === "Submitted" ? "Submitted"  : User?.user.cnicBackStatus === "unCompleted"  && User.user.cnicFrontStatus === "unCompleted"  ? "unCompleted" : "Submitted"} requirements={"Computerized National Identity Card"} />
               </View>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Driver’s License"} />
+                <RequirementCard check={check} status={User?.user.driversLicenseStatus} requirements={"Driver’s License"} />
               </View>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Profile Photo"} />
+                <RequirementCard check={check} profilePic={User?.user.profilePic} requirements={"Profile Photo"} />
               </View>
           </View>
         </View>
@@ -33,10 +35,10 @@ const DocumentScreen = () => {
           </View>
           <View className='flex gap-4'>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Vehicle Insurance"} />
+                <RequirementCard check={check} status={"unCompleted"} requirements={"Vehicle Insurance"} />
               </View>
               <View>
-                <RequirementCard check={check} status={"completed"} requirements={"Vehicle Registration"} />
+                <RequirementCard check={check} status={User?.user.vehicleRegistrationStatus} requirements={"Vehicle Registration"} />
               </View>
           </View>
         </View>

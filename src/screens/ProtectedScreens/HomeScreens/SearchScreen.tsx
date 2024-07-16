@@ -9,7 +9,6 @@ import HomeLoactionItem from "../../../component/Search/HomeLoactionItem";
 import NearbyLocationContainer from "../../../component/Search/NearbyLocationContainer";
 import SearBarContainer from "../../../component/Search/SearBarContainer";
 import { MaterialIcons } from "@expo/vector-icons";
-import STATUSBAR from "../../../widget/STATUSBAR";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,7 +25,6 @@ const SearchScreen: React.FC<searchProps> = ({
   return (
     <View style={{ flex: 1 }}>
       {/**SearchContainer */}
-      <STATUSBAR />
       <SearBarContainer
         // setSearchLoction={setSearchLoction}
         setSearch={setSearch}

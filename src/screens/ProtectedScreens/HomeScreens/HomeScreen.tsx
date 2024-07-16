@@ -18,7 +18,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
-import STATUSBAR from "../../../widget/STATUSBAR";
 
 const HomeScreen = (): React.JSX.Element => {
   const mapRegion = React.useContext(LocationContext);
@@ -103,7 +102,6 @@ const HomeScreen = (): React.JSX.Element => {
   ) : (
     <View style={styles.container}>
       <SafeAreaView>
-        <STATUSBAR />
       <MapView
         initialRegion={mapRegion.mapRegion}
         followsUserLocation={true}

@@ -22,7 +22,6 @@ import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../../Context";
 import { baseURL } from "../../../Services/authorization";
-import STATUSBAR from "../../../widget/STATUSBAR";
 
 const ProfileDetailScreen = () => {
   const navigation = useNavigation() as any;

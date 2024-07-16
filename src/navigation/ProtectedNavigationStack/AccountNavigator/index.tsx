@@ -40,6 +40,7 @@ import FollowMyRideScreen from "../../../screens/ProtectedScreens/AccountScreens
 import ContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/ContactScreen";
 import SetEmengencyContactScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SetEmengencyContactScreen";
 import SpeedLimitScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SpeedLimitScreen";
+import RideCheckScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/RideCheckScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -76,6 +77,7 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'Contacts', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="contact" component={ContactScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Emergency Contacts', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="e-contact" component={SetEmengencyContactScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Speed Limit', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="speed-limit" component={SpeedLimitScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Ride Check', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="check-ride" component={RideCheckScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Night Mode', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="theme" component={NightModeScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>

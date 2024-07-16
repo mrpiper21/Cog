@@ -3,14 +3,12 @@ import { View, Text, Image } from 'react-native'
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Btn from '../../widget/Btn';
 import { useNavigation } from '@react-navigation/native';
-import STATUSBAR from '../../widget/STATUSBAR';
 
 export default function SplashScreen(){
     const bottomSheetRef = useRef<BottomSheet>(null)
     const snapPoints = useMemo(()=> ["27%"], []);
     const navigation = useNavigation() as any;
     return <View className='flex flex-1 bg-[#4460EF] items-center justify-center'>
-        {/* <STATUSBAR  /> */}
         <Image className='overflow-hidden' source={require("../../../assets/splashlogo.png")} />
         <BottomSheet ref={bottomSheetRef} snapPoints={snapPoints}>
             <BottomSheetView>
