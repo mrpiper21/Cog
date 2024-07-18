@@ -4,5 +4,6 @@
     "esModuleInterop": true,
     "strict": true,
     "jsx": "react"
-  }
+  },
+  // "include": ["src", "types.d.ts"]
 }
