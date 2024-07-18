@@ -19,8 +19,7 @@ interface UserContextProps {
   loginUser: (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>)=> Promise<void>;
   handleLicenseSubmit: HandleSubmitType
   handleProfilePhotoSubmit: HandleSubmitType,
-  Apploader: ()=> {appLoading: boolean, setApploading: React.Dispatch<React.SetStateAction<boolean>>
-  }
+  appLoading: boolean
 }
 
 export const useUserContext = React.createContext<UserContextProps | undefined>(
@@ -32,10 +31,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
   console.log("User from hook...", user)
-  const Apploader = ()=> {
-    const [appLoading, setAppLoading] = useState<boolean>(false)
-    return {appLoading, setAppLoading}
-  }
+  const [appLoading, setAppLoading] = useState<boolean>(false)
   const navigation = useNavigation() as any
 
   const updateUser = useCallback((name: string, email: string) => {
@@ -75,13 +71,13 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   },[])
 
   const getUser = async () => {
-    Apploader().setAppLoading(true)
+    setAppLoading(true)
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
       setUser(res?.data.user);
       console.log("User data from api... ",res?.data.user)
-      Apploader().setAppLoading(false)
+      setAppLoading(false)
 
       // res.data && setUser(res.data.user);
 
@@ -91,11 +87,11 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
         console.log("Image saved successfully");
       } else {
         console.log("User data or profilePic not found in response");
-        Apploader().setAppLoading(false)
+        setAppLoading(false)
       }
     } catch (err) {
       console.error("Error fetching user data:", err);
-      Apploader().setAppLoading(false)
+      setAppLoading(false)
     }
   };
 
@@ -233,7 +229,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   }, []);
   return (
     <useUserContext.Provider
-      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit, Apploader: Apploader }}
+      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit, appLoading }}
     >
       {children}
     </useUserContext.Provider>
