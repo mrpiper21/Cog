@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import Responsiveness from '../../../../helpers/Responsiveness'
 import SwitchItem from '../../../../component/SwitchItem'
 import Btn from '../../../../widget/Btn'
+import { useAppContext } from '../../../../hooks/AppSettingContext'
 
 const NotificationScreen = () => {
+  const Settings = useContext(useAppContext)
   return (
     <View className='flex-1 bg-white px-4 justify-between pb-4'>
       <View>
@@ -19,7 +21,7 @@ const NotificationScreen = () => {
                         and additional ways to earn</Text>
                     </View>
                 </View>
-                <SwitchItem />
+                {/* <SwitchItem isEnabled={Settings?.notification.announcements} setIsEnabled={()=> Settings?.sound}/> */}
             </View>
             <View style={{paddingVertical: Responsiveness.getResponsiveHeight(1.5), borderBottomWidth: 1}} className='flex flex-row item-center justify-between border-[#EEEE]'>
                 <View className='flex space-y-1'>

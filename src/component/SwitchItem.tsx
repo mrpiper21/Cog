@@ -1,9 +1,12 @@
 import { View, Text, Switch } from 'react-native'
 import React from 'react'
 
-const SwitchItem = () => {
-    const [isEnabled, setIsEnabled] = React.useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+interface SwitchProps {
+  isEnabled: boolean | undefined, 
+  toggleSwitch: (value?: boolean )=> void
+}
+
+const SwitchItem: React.FC<SwitchProps> = ({isEnabled, toggleSwitch}) => {
   return (
     <Switch
             trackColor={{false: '#767577', true: 'blue'}}

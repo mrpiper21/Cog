@@ -24,6 +24,7 @@ const Checkebox: React.FC<checkboxprops> = ({type, isChecked, callback, id, colo
     // outerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
     // innerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
 />: type === 'box' ? <Checkbox
+                id={id?.toString()}
                 style={styles.checkbox}
                 value={isChecked}
                 // onValueChange={handleValueChange}
