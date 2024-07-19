@@ -2,9 +2,7 @@ import { View, Text } from 'react-native'
 import React, { createContext, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import SwitchItem from '../component/SwitchItem';
-
 const checkIcon = <AntDesign name="check" size={24} color="blue" />
-const Switchtoggle = <SwitchItem />
 
 interface SoundSettings {
     voiceNavigation: boolean;
@@ -28,13 +26,16 @@ type NavigationSettingItem = {
     id: number;
     title: string;
     children: string;
-    switch: React.ReactNode;
+    switch:  React.ReactNode
 }[]
 
-interface NavigationSettings {
+type NavigationSettings = {
     navigationMapItems: NavigationMapItem;
     navigationSettingItems: NavigationSettingItem;
-    updateMapItems: (itemId: number, title: string)=> void
+    autoNavigate: boolean,
+    autaPoolTrip: boolean,
+    updateAutoNavigate: (value: boolean)=> void
+    updateAutoPoolTrip: (value: boolean)=> void
 }
 
 
@@ -87,6 +88,8 @@ interface RideCheckSettings {
 }
 
 export const useAppContext = createContext<{
+    activeNavigationItem: String
+    setActiveNavigationIem: React.Dispatch<React.SetStateAction<String>>
     sound: SoundSettings;
     navigation: NavigationSettings
     accessibility: AccessibilitySettings;
@@ -135,17 +138,24 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         updateVoiceNavigation
     };
     
-    // const updateMapItem = (itemId: number, newTitle: string) => {
-    //     setNavigationSettings((prev) => {
-    //         const updatedItems = prev.navigationMapItems.map((item) => {
-    //             if (item.id === itemId) {
-    //                 return { ...item, title: newTitle };
-    //             }
-    //             return item;
-    //         });
-    //         return { ...prev, navigationMapItems: updatedItems };
-    //     });
-    // };
+
+    const [activeNavigationItem, setActiveNavigationIem] = useState<String>("Glopilot Navigation")
+
+        const updateAutoNavigate = (value: boolean) => {
+            console.log("updating auto navigate")
+            setNavigationSettings((prev)=> ({
+                ...prev,
+                autoNavigate: !value
+            }))
+        }
+
+        const updateAutoPoolTrip = (value: boolean) => {
+            setNavigationSettings((prev)=> ({
+                ...prev,
+                autaPoolTrip: !value
+            }))
+        }
+        
 
     const defaultNavigationSettings: NavigationSettings = {
         navigationMapItems: [
@@ -179,26 +189,19 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
                 id: 1,
                 title: "Auto Navigate",
                 children: "Start trips in turn-by-turn mode. You’ll see a brief route overview first.",
-                switch: Switchtoggle
+                switch: <SwitchItem toggleSwitch={()=> updateAutoNavigate(navigationSettingItems.autoNavigate)} isEnabled={navigationSettingItems.autoNavigate}/>
             },
             {
                 id: 2,
                 title: "Navigation on POOL trips",
                 children: "Use Glopilots navigation on all POOL trips.",
-                switch: Switchtoggle
+                switch: <SwitchItem toggleSwitch={()=> updateAutoPoolTrip(navigationSettingItems.autaPoolTrip)} isEnabled={navigationSettingItems.autaPoolTrip}/>
             }
         ],
-        updateMapItems(itemId, title) {
-            setNavigationSettings((prev) => {
-                const updatedItems = prev.navigationMapItems.map((item) => {
-                    if (item.id === itemId) {
-                        return { ...item, title: title };
-                    }
-                    return item;
-                });
-                return { ...prev, navigationMapItems: updatedItems };
-            });
-        },
+        autoNavigate: navigationSettings.autoNavigate,
+        autaPoolTrip: navigationSettings.autaPoolTrip,
+        updateAutoNavigate: updateAutoNavigate,
+        updateAutoPoolTrip: updateAutoPoolTrip
     };
 
     const defaultAccessibilitySettings = {
@@ -250,7 +253,7 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
 
     const defaultSpeedLimitSettings: SpeedLimitSettings = {
         showSpeedLimit: false,
-        speedLimitBelow55mph: [], // Add your speed limit items here
+        speedLimitBelow55mph: [],
     };
 
     const defaultRideCheckSettings: RideCheckSettings = {
@@ -271,6 +274,8 @@ const [defaultSpeedLimit, setdefaultSpeedLimitSettings] = useState(defaultSpeedL
 const [defaultRideCheck, setdefaultRideCheckSettings] = useState(defaultRideCheckSettings)
 
 const appSettings = {
+    activeNavigationItem,
+    setActiveNavigationIem,
     sound: soundSettings,
     navigation: navigationSettings,
     accessibility: defaultAccessibility,

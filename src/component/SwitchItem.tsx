@@ -3,7 +3,7 @@ import React from 'react'
 
 interface SwitchProps {
   isEnabled: boolean | undefined, 
-  toggleSwitch: (value?: boolean )=> void
+  toggleSwitch: (value?: boolean )=> void 
 }
 
 const SwitchItem: React.FC<SwitchProps> = ({isEnabled, toggleSwitch}) => {

@@ -1,25 +1,29 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import Responsiveness from '../../../helpers/Responsiveness'
+import { useAppContext } from '../../../hooks/AppSettingContext'
 
 interface NavigationProps {
     title: String,
     text: String,
-    rightNode: React.ReactNode | any
-    toggleActiveItem: ()=> void
-    isActive?: String
+    rightNode?: React.ReactNode | any
+    type: "mapItems" | "checksettings"
 }
 
-const NavigationItem: React.FC<NavigationProps> = ({title, text, rightNode, toggleActiveItem, isActive}) => {
+const NavigationItem: React.FC<NavigationProps> = ({title, text, rightNode, type}) => {
+  const Settings = useContext(useAppContext)
   return (
     <>
-        { isActive ? <View style={{borderBottomWidth: 1, paddingVertical: Responsiveness.getResponsiveHeight(1.5)}} className='px-4 border-[#EEE]'>
-        <TouchableOpacity onPress={()=> toggleActiveItem && toggleActiveItem()} className='flex flex-row items-center justify-between'>
+        { type=== "mapItems" ? <View style={{borderBottomWidth: 1, paddingVertical: Responsiveness.getResponsiveHeight(1.5)}} className='px-4 border-[#EEE]'>
+        <TouchableOpacity onPress={()=> {
+          Settings?.setActiveNavigationIem(title)
+          console.log("isActive...", Settings?.activeNavigationItem)
+        }} className='flex flex-row items-center justify-between'>
           <View className='space-y-1'>
             <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '500'}}>{title}</Text>
             <Text>{text}</Text>
           </View>
-          {isActive === title && <View>{rightNode}</View>}
+          {Settings?.activeNavigationItem=== title && <View>{rightNode}</View>}
         </TouchableOpacity>
     </View> : <View style={{borderBottomWidth: 1, paddingVertical: Responsiveness.getResponsiveHeight(1.5)}} className='px-4 border-[#EEE]'>
         <View className='flex flex-row items-center justify-between'>
