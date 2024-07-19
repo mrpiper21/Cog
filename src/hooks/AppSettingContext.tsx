@@ -17,23 +17,23 @@ interface SoundSettings {
     updateSeatBeltReminder: (newValue: boolean)=> void
 }
 
-interface NavigationMapItem {
+type NavigationMapItem = {
     id: number;
     title: string;
     children: string;
     check: React.ReactNode;
-}
+}[]
 
-interface NavigationSettingItem {
+type NavigationSettingItem = {
     id: number;
     title: string;
     children: string;
     switch: React.ReactNode;
-}
+}[]
 
 interface NavigationSettings {
-    navigationMapItems: NavigationMapItem[];
-    navigationSettingItems: NavigationSettingItem[];
+    navigationMapItems: NavigationMapItem;
+    navigationSettingItems: NavigationSettingItem;
     updateMapItems: (itemId: number, title: string)=> void
 }
 
@@ -88,10 +88,7 @@ interface RideCheckSettings {
 
 export const useAppContext = createContext<{
     sound: SoundSettings;
-    navigation: {
-        navigationMapItems: NavigationMapItem[];
-        navigationSettingItems: NavigationSettingItem[];
-    };
+    navigation: NavigationSettings
     accessibility: AccessibilitySettings;
     notification: NotificationSettings;
     nightMode: NightModeSettings;
@@ -138,17 +135,17 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         updateVoiceNavigation
     };
     
-    const updateMapItem = (itemId: number, newTitle: string) => {
-        setNavigationSettings((prev) => {
-            const updatedItems = prev.navigationMapItems.map((item) => {
-                if (item.id === itemId) {
-                    return { ...item, title: newTitle };
-                }
-                return item;
-            });
-            return { ...prev, navigationMapItems: updatedItems };
-        });
-    };
+    // const updateMapItem = (itemId: number, newTitle: string) => {
+    //     setNavigationSettings((prev) => {
+    //         const updatedItems = prev.navigationMapItems.map((item) => {
+    //             if (item.id === itemId) {
+    //                 return { ...item, title: newTitle };
+    //             }
+    //             return item;
+    //         });
+    //         return { ...prev, navigationMapItems: updatedItems };
+    //     });
+    // };
 
     const defaultNavigationSettings: NavigationSettings = {
         navigationMapItems: [
@@ -191,7 +188,17 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
                 switch: Switchtoggle
             }
         ],
-        updateMapItems: updateMapItem
+        updateMapItems(itemId, title) {
+            setNavigationSettings((prev) => {
+                const updatedItems = prev.navigationMapItems.map((item) => {
+                    if (item.id === itemId) {
+                        return { ...item, title: title };
+                    }
+                    return item;
+                });
+                return { ...prev, navigationMapItems: updatedItems };
+            });
+        },
     };
 
     const defaultAccessibilitySettings = {

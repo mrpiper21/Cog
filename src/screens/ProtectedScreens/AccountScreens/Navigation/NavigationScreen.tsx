@@ -23,9 +23,9 @@ const NavigationScreen = () => {
         <View className='px-4'>
           <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '600'}}>Navigation App</Text>
         </View>
-        {NavigationSettingItems.map((item)=> (
-          <NavigationItem key={item.id} title={item.title} text={item.children} rightNode={item.switch}/>
-        ))}
+        {/* {Settings?.navigation.navigationSettingItems.map((item)=> (
+          <NavigationItem key={item.id} title={item.title} text={item.children} rightNode={item.switch} toggleActiveItem={}/>
+        ))} */}
         <View className='flex flex-row items-center justify-between p-4'>
           <Text>Routing</Text>
           <Ionicons name="chevron-forward" size={24} color="black" />
