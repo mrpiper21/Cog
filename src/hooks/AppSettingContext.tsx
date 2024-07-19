@@ -1,133 +1,50 @@
-import { View, Text } from 'react-native'
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import { AntDesign } from '@expo/vector-icons';
-import SwitchItem from '../component/SwitchItem';
+import {  SoundSettingsType, AccessibilitySettingsType, NotificationSettingsType, NightModeSettingsType, CommunicationSettingsType, SpeedLimitSettingsType, RideCheckSettingsType, EmergencyContactType, NavigationMapItemType, NavigationSettingItemType } from '../Mock/DefaultAppSettings';
 const checkIcon = <AntDesign name="check" size={24} color="blue" />
-
-interface SoundSettings {
-    voiceNavigation: boolean;
-    readRiderMessage: boolean;
-    announceTripEvents: boolean;
-    seatBeltReminder: boolean;
-    updateVoiceNavigation: (newValue: boolean)=> void
-    updateReadRiderMessage: (newValue: boolean)=> void
-    updateAnnounceTripEvents: (newValue: boolean)=> void
-    updateSeatBeltReminder: (newValue: boolean)=> void
-}
-
-type NavigationMapItem = {
-    id: number;
-    title: string;
-    children: string;
-    check: React.ReactNode;
-}[]
-
-type NavigationSettingItem = {
-    id: number;
-    title: string;
-    children: string;
-    switch:  React.ReactNode
-}[]
-
-type NavigationSettings = {
-    navigationMapItems: NavigationMapItem;
-    navigationSettingItems: NavigationSettingItem;
-    autoNavigate: boolean,
-    autaPoolTrip: boolean,
-    updateAutoNavigate: (value: boolean)=> void
-    updateAutoPoolTrip: (value: boolean)=> void
-}
-
-
-interface AccessibilitySettings {
-    screenFlash: boolean;
-    vibrationRequest: boolean;
-    impairment: boolean;
-}
-
-interface NotificationSettings {
-    earningOpportunities: boolean;
-    announcements: boolean;
-}
-
-interface NightModeItem {
-    id: number;
-    label: string;
-    checkIcon: React.ReactNode;
-}
-
-interface NightModeSettings {
-    nightMode: NightModeItem[];
-}
-
-interface CommunicationSettings {
-    callOrChat: boolean;
-    call: boolean;
-    chat: boolean;
-}
-
-interface EmergencyContact {
-    name: string;
-    number: number;
-}
-
-interface SpeedLimitItem {
-    mph3: boolean;
-    mph5: boolean;
-    mph7: boolean;
-}
-
-interface SpeedLimitSettings {
-    showSpeedLimit: boolean;
-    speedLimitBelow55mph: SpeedLimitItem[];
-}
-
-interface RideCheckSettings {
-    rideCheckNotification: boolean;
-    crashDetect: boolean;
-}
+const Icon = <AntDesign name="check" size={24} color="blue" />
 
 export const useAppContext = createContext<{
-    activeNavigationItem: String
-    setActiveNavigationIem: React.Dispatch<React.SetStateAction<String>>
-    sound: SoundSettings;
-    navigation: NavigationSettings
-    accessibility: AccessibilitySettings;
-    notification: NotificationSettings;
-    nightMode: NightModeSettings;
-    communication: CommunicationSettings;
-    emergencyContact: EmergencyContact;
-    speedLimit: SpeedLimitSettings;
-    rideCheck: RideCheckSettings;
-} | null>(null);
+    activeNavigationItem: String;
+    setActiveNavigationItem: React.Dispatch<React.SetStateAction<String>>;
+    navigationMapSettings: NavigationMapItemType;
+    navigationSettings: NavigationSettingItemType;
+    sound: SoundSettingsType;
+    accessibility: AccessibilitySettingsType;
+    notification: NotificationSettingsType;
+    nightMode: NightModeSettingsType;
+    communication: CommunicationSettingsType;
+    emergencyContact: EmergencyContactType;
+    speedLimit: SpeedLimitSettingsType;
+    rideCheck: RideCheckSettingsType;
+  } | null>(null);
 
 const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const Icon = <AntDesign name="check" size={24} color="blue" />
     const updateVoiceNavigation =(value: boolean)=> {
-        setSoundSettings((prev)=> ({
+        setSoundSettings((prev: SoundSettingsType)=> ({
             ...prev,
             voiceNavigation: !value
         }))
     }
     const updateReadRiderMessage =(value: boolean)=> {
-        setSoundSettings((prev)=> ({
+        setSoundSettings((prev: SoundSettingsType)=> ({
             ...prev,
             readRiderMessage: !value
         }))
     }
     const updateAnnounceTripEvents =(value: boolean)=> {
-        setSoundSettings((prev)=> ({
+        setSoundSettings((prev: SoundSettingsType)=> ({
             ...prev,
             announceTripEvents: !value
         }))
     }
     const updateSeatBeltReminder =(value: boolean)=> {
-        setSoundSettings((prev)=> ({
+        setSoundSettings((prev: SoundSettingsType)=> ({
             ...prev,
             seatBeltReminder: !value
         }))
     }
-    const defaultSoundSettings: SoundSettings = {
+    const defaultSoundSettings: SoundSettingsType = {
         voiceNavigation: false,
         readRiderMessage: false,
         announceTripEvents: false,
@@ -137,28 +54,9 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         updateSeatBeltReminder,
         updateVoiceNavigation
     };
-    
 
-    const [activeNavigationItem, setActiveNavigationIem] = useState<String>("Glopilot Navigation")
-
-        const updateAutoNavigate = (value: boolean) => {
-            console.log("updating auto navigate")
-            setNavigationSettings((prev)=> ({
-                ...prev,
-                autoNavigate: !value
-            }))
-        }
-
-        const updateAutoPoolTrip = (value: boolean) => {
-            setNavigationSettings((prev)=> ({
-                ...prev,
-                autaPoolTrip: !value
-            }))
-        }
-        
-
-    const defaultNavigationSettings: NavigationSettings = {
-        navigationMapItems: [
+    const defaultMapNavigationSettings: NavigationMapItemType = 
+        [
             {
                 id: 1,
                 title: "Glopilot Navigation",
@@ -183,39 +81,50 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
                 children: "Launches in separate app",
                 check: checkIcon
             },
-        ], // Add your navigation items here
-        navigationSettingItems: [
-            {
-                id: 1,
-                title: "Auto Navigate",
-                children: "Start trips in turn-by-turn mode. You’ll see a brief route overview first.",
-                switch: <SwitchItem toggleSwitch={()=> updateAutoNavigate(navigationSettingItems.autoNavigate)} isEnabled={navigationSettingItems.autoNavigate}/>
-            },
-            {
-                id: 2,
-                title: "Navigation on POOL trips",
-                children: "Use Glopilots navigation on all POOL trips.",
-                switch: <SwitchItem toggleSwitch={()=> updateAutoPoolTrip(navigationSettingItems.autaPoolTrip)} isEnabled={navigationSettingItems.autaPoolTrip}/>
-            }
-        ],
-        autoNavigate: navigationSettings.autoNavigate,
-        autaPoolTrip: navigationSettings.autaPoolTrip,
-        updateAutoNavigate: updateAutoNavigate,
-        updateAutoPoolTrip: updateAutoPoolTrip
-    };
+        ]
+
+    const toggleAutoNavigateSettings = (value: boolean)=> {
+        setdefaultnavigationSettingItems((prev: NavigationSettingItemType)=> ({
+            ...prev,
+            autoNavigate: !value
+        }))
+    }
+    const toggleAutoPoolTripSettings = (value: boolean)=> {
+        setdefaultnavigationSettingItems((prev: NavigationSettingItemType)=> ({
+            ...prev,
+            autaPoolTrip: !value
+        }))
+    }
+
+    const defaultnavigationSettingItems: NavigationSettingItemType = {
+        AutoNavigate: {
+            id: 1,
+            title: "Auto Navigate",
+            children: "Start trips in turn-by-turn mode. You’ll see a brief route overview first.",
+        },
+        AutoPoolTrip: {
+            id: 2,
+            title: "Navigation on POOL trips",
+            children: "Use Glopilots navigation on all POOL trips.",
+        },
+        autoNavigate: false,
+        autaPoolTrip: false,
+        toggleAutoNavigate: toggleAutoNavigateSettings,
+        toggleAutoPoolTrip: toggleAutoPoolTripSettings
+    }
 
     const defaultAccessibilitySettings = {
         screenFlash: false,
         vibrationRequest: false,
         impairment: false,
     };
-
-    const defaultNotificationSettings = {
+    
+     const defaultNotificationSettings = {
         earningOpportunities: false,
         announcements: false,
     };
-
-    const defaultNightModeSettings = {
+    
+     const defaultNightModeSettings = {
         nightMode: [
             {
                 id: 1,
@@ -236,56 +145,58 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
                 id: 4,
                 label: "Use phone Setting",
                 checkIcon: Icon
-            }, // Add your night mode items here
+            },
         ]
     }
-
-    const defaultCommunicationSettings = {
+    
+     const defaultCommunicationSettings = {
         callOrChat: false,
         call: false,
         chat: false,
     };
-
-    const defaultEmergencyContact: EmergencyContact = {
+    
+     const defaultEmergencyContact: EmergencyContactType = {
         name: '',
         number: 0,
     };
-
-    const defaultSpeedLimitSettings: SpeedLimitSettings = {
+    
+     const defaultSpeedLimitSettings: SpeedLimitSettingsType = {
         showSpeedLimit: false,
         speedLimitBelow55mph: [],
     };
-
-    const defaultRideCheckSettings: RideCheckSettings = {
+    
+     const defaultRideCheckSettings: RideCheckSettingsType = {
         rideCheckNotification: false,
         crashDetect: false,
     };
-    const icon = <AntDesign name="check" size={24} color="blue" />
+    
 
+    const [activeNavigationItem, setActiveNavigationItem] = useState<String>("Glopilot Navigation")
+    const [soundSettings, setSoundSettings] = useState<SoundSettingsType>(defaultSoundSettings);
+    const [navigationMapSettings, setNavigationMapSettings] = useState<NavigationMapItemType>(defaultMapNavigationSettings)
+    const [defaultNavigationSettings, setdefaultnavigationSettingItems] = useState<NavigationSettingItemType>(defaultnavigationSettingItems)
+    const [defaultAccessibility, setdefaultAccessibilitySettings] = useState<AccessibilitySettingsType>(defaultAccessibilitySettings)
+    const [defaultNotification, setdefaultNotificationSettings] = useState<NotificationSettingsType>(defaultNotificationSettings)
+    const [defaultNightMode, setdefaultNightModeSettings] = useState<NightModeSettingsType>(defaultNightModeSettings)
+    const [defaultCommunication, setdefaultCommunicationSettings] = useState<CommunicationSettingsType>(defaultCommunicationSettings)
+    const [defaultEmergency, setdefaultEmergencyContact] = useState<EmergencyContactType>(defaultEmergencyContact)
+    const [defaultSpeedLimit, setdefaultSpeedLimitSettings] = useState<SpeedLimitSettingsType>(defaultSpeedLimitSettings)
+    const [defaultRideCheck, setdefaultRideCheckSettings] = useState<RideCheckSettingsType>(defaultRideCheckSettings)
 
-const [soundSettings, setSoundSettings] = useState<SoundSettings>(defaultSoundSettings);
-const [navigationSettings, setNavigationSettings] = useState(defaultNavigationSettings);
-const [defaultAccessibility, setdefaultAccessibilitySettings] = useState(defaultAccessibilitySettings)
-const [defaultNotification, setdefaultNotificationSettings] = useState(defaultNotificationSettings)
-const [defaultNightMode, setdefaultNightModeSettings] = useState(defaultNightModeSettings)
-const [defaultCommunication, setdefaultCommunicationSettings] = useState(defaultCommunicationSettings)
-const [defaultEmergency, setdefaultEmergencyContact] = useState(defaultEmergencyContact)
-const [defaultSpeedLimit, setdefaultSpeedLimitSettings] = useState(defaultSpeedLimitSettings)
-const [defaultRideCheck, setdefaultRideCheckSettings] = useState(defaultRideCheckSettings)
-
-const appSettings = {
-    activeNavigationItem,
-    setActiveNavigationIem,
-    sound: soundSettings,
-    navigation: navigationSettings,
-    accessibility: defaultAccessibility,
-    notification: defaultNotification,
-    nightMode: defaultNightMode,
-    communication: defaultCommunication,
-    emergencyContact: defaultEmergency,
-    speedLimit: defaultSpeedLimit,
-    rideCheck: defaultRideCheck,
-};
+    const appSettings = {
+        activeNavigationItem,
+        setActiveNavigationItem,
+        navigationMapSettings,
+        navigationSettings: defaultNavigationSettings,
+        sound: soundSettings,
+        accessibility: defaultAccessibility,
+        notification: defaultNotification,
+        nightMode: defaultNightMode,
+        communication: defaultCommunication,
+        emergencyContact: defaultEmergency,
+        speedLimit: defaultSpeedLimit,
+        rideCheck: defaultRideCheck,
+      };
 
   return (
     <useAppContext.Provider value={appSettings}>
