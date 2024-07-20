@@ -20,6 +20,7 @@ export const useAppContext = createContext<{
     emergencyContact: EmergencyContactType;
     filteredContacts: Contact[];
     selectedContacts: string[];
+    contacts: Contact[];
     speedLimit: SpeedLimitSettingsType;
     rideCheck: RideCheckSettingsType;
   } | null>(null);
@@ -184,10 +185,22 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         ]
     }
     
-     const defaultCommunicationSettings = {
-        callOrChat: false,
+     const defaultCommunicationSettings: CommunicationSettingsType = {
+        callOrChat: true,
         call: false,
         chat: false,
+        toggleCheck: (property: 'callOrChat' | 'call' | 'chat') => {
+            // Create a new object with the updated state
+            const updatedSettings = {
+                ...defaultCommunicationSettings,
+                    callOrChat: false,
+                    call: false,
+                    chat: false,
+                [property]: true,
+              };
+            console.log("presses toggle")
+            setdefaultCommunicationSettings(updatedSettings);
+          },
     };
 
     const updateContacts = (newContacts: Contact[], type?: "filter" | never) => {
@@ -258,6 +271,7 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         emergencyContact: defaultEmergency,
         filteredContacts,
         selectedContacts,
+        contacts,
         speedLimit: defaultSpeedLimit,
         rideCheck: defaultRideCheck,
       };

@@ -8,29 +8,31 @@ import Checkbox from 'expo-checkbox'
 interface checkboxprops {
     type: 'rounded' | 'box' | 'check',
     children?: String,
-    isChecked: boolean
+    isChecked: boolean | undefined
     color: string
     id?: number
-    callback?: (id: number)=> void
+    callback: (value?: boolean)=> void
 }
 
 const Checkebox: React.FC<checkboxprops> = ({type, isChecked, callback, id, color}) => {
+  console.log("is checked", isChecked)
   return (
     type === 'check' ? <BouncyCheckbox
-    onPress={()=> callback && id && callback(id)}
-    isChecked={isChecked}
-    disableText
-    fillColor={color}
-    // outerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
-    // innerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
-/>: type === 'box' ? <Checkbox
-                id={id?.toString()}
-                style={styles.checkbox}
-                value={isChecked}
-                // onValueChange={handleValueChange}
-                color={isChecked ? "#4630EB" : undefined}
-                // onChange={callback}
-        /> : <RoundedCheckbox />
+      onPress={()=>  callback()}
+      isChecked={isChecked}
+      disableText
+      fillColor='#4630EB'
+      // outerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
+      // innerStyle={{width: Responsiveness.getResponsiveWidth(5), height: Responsiveness.getResponsiveWidth(5)}}
+    />: type === 'box' ? 
+    <Checkbox
+      id={id?.toString()}
+      style={styles.checkbox}
+      value={isChecked}
+      // onValueChange={handleValueChange}
+      color={isChecked ? "#4630EB" : undefined}
+      // onChange={callback}
+    /> : <RoundedCheckbox isChecked={isChecked} active={false} innerStyle={{height: Responsiveness.getResponsiveWidth(6), width: Responsiveness.getResponsiveWidth(6)}} outerStyle={{height: Responsiveness.getResponsiveWidth(7.5), width: Responsiveness.getResponsiveWidth(7.5), borderRadius: 20}} checkedColor='#4460EF' text='' onPress={(checked)=> callback()} />
   )
 }
 

@@ -75,6 +75,7 @@ export interface CommunicationSettingsType {
     callOrChat: boolean;
     call: boolean;
     chat: boolean;
+    toggleCheck(property: 'callOrChat' | 'call' | 'chat'): void;
 }
   
  export type EmergencyContactType = {
