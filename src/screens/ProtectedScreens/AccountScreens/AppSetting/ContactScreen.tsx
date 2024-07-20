@@ -44,7 +44,7 @@ const ContactScreen = () => {
       const filtered = AppSettings?.contacts && AppSettings?.contacts.filter((contact: any) =>
         contact?.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      AppSettings?.emergencyContact.updateContacts(filtered, 'filter')
+      AppSettings?.emergencyContact?.updateContacts(filtered, 'filter')
       /*setFilteredContacts(filtered); */// Update filteredContacts when searchQuery changes
     }, [searchQuery, AppSettings?.emergencyContact.contacts]);
 

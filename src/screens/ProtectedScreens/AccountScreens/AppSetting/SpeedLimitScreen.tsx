@@ -1,18 +1,21 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import SwitchItem from '../../../../component/SwitchItem'
 import Responsiveness from '../../../../helpers/Responsiveness'
 import Checkebox from '../../../../component/Checkebox'
+import { useAppContext } from '../../../../hooks/AppSettingContext'
 
 const SpeedLimitScreen = () => {
     const [check, setCheck] = useState<boolean>(false)
+    const AppSettings = useContext(useAppContext)
   return (
     <View>
      <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}} className='items-center flex-row justify-between bg-white px-4'>
         <Text>Show Speed Limit</Text>
-        <SwitchItem />
+        <SwitchItem isEnabled={AppSettings?.speedLimit.showSpeedLimit} toggleSwitch={()=> AppSettings?.speedLimit.toggleSpeedLimit(AppSettings?.speedLimit.showSpeedLimit)} />
      </View>
-     <View className='px-4' style={{marginVertical: Responsiveness.getResponsiveHeight(2.5)}}>
+     {AppSettings?.speedLimit.showSpeedLimit && <>
+        <View className='px-4' style={{marginVertical: Responsiveness.getResponsiveHeight(2.5)}}>
         <Text style={{fontWeight: '600'}}>Speeding alerts</Text>
         <Text>Set when you want to get alerts</Text>
      </View>
@@ -50,6 +53,8 @@ const SpeedLimitScreen = () => {
             </View>
         </View>
      </View>
+     </>}
+     
     </View>
   )
 }

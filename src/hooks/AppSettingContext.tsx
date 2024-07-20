@@ -232,11 +232,29 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
      const defaultSpeedLimitSettings: SpeedLimitSettingsType = {
         showSpeedLimit: false,
         speedLimitBelow55mph: [],
+        toggleSpeedLimit: (value: boolean)=> {
+            setdefaultSpeedLimitSettings((prev)=> ({
+                ...prev,
+                showSpeedLimit: !value
+            }))
+        }
     };
     
      const defaultRideCheckSettings: RideCheckSettingsType = {
         rideCheckNotification: false,
         crashDetect: false,
+        togglerideCheckNotification: (value: boolean)=> {
+            setdefaultRideCheckSettings((prev)=> ({
+                ...prev,
+                rideCheckNotification: !value
+            }))
+        },
+        togglecrashDetect: (value: boolean)=> {
+            setdefaultRideCheckSettings((prev)=> ({
+                ...prev,
+                crashDetect: !value
+            }))
+        }
     };
     
 
