@@ -21,7 +21,7 @@ const NotificationScreen = () => {
                         and additional ways to earn</Text>
                     </View>
                 </View>
-                {/* <SwitchItem isEnabled={Settings?.notification.announcements} setIsEnabled={()=> Settings?.sound}/> */}
+                <SwitchItem isEnabled={Settings?.notification.earningOpportunities} toggleSwitch={()=> Settings?.notification.toggleEarningOpportunities(Settings?.notification.earningOpportunities)} />
             </View>
             <View style={{paddingVertical: Responsiveness.getResponsiveHeight(1.5), borderBottomWidth: 1}} className='flex flex-row item-center justify-between border-[#EEEE]'>
                 <View className='flex space-y-1'>
@@ -30,7 +30,7 @@ const NotificationScreen = () => {
                         <Text>News from Glopilots and other messages</Text>
                     </View>
                 </View>
-                <SwitchItem />
+                <SwitchItem isEnabled={Settings?.notification.announcements} toggleSwitch={()=> Settings?.notification.toggleAnnouncements(Settings?.notification.announcements)} />
             </View>
       </View>
       <View className='flex items-center'>

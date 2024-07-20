@@ -3,10 +3,13 @@ import { AntDesign } from '@expo/vector-icons';
 import {  SoundSettingsType, AccessibilitySettingsType, NotificationSettingsType, NightModeSettingsType, CommunicationSettingsType, SpeedLimitSettingsType, RideCheckSettingsType, EmergencyContactType, NavigationMapItemType, NavigationSettingItemType } from '../Mock/DefaultAppSettings';
 const checkIcon = <AntDesign name="check" size={24} color="blue" />
 const Icon = <AntDesign name="check" size={24} color="blue" />
+import { Contact } from 'expo-contacts';
 
 export const useAppContext = createContext<{
     activeNavigationItem: String;
     setActiveNavigationItem: React.Dispatch<React.SetStateAction<String>>;
+    defaultTheme: String;
+    setdefaultTheme: React.Dispatch<React.SetStateAction<String>>;
     navigationMapSettings: NavigationMapItemType;
     navigationSettings: NavigationSettingItemType;
     sound: SoundSettingsType;
@@ -15,6 +18,8 @@ export const useAppContext = createContext<{
     nightMode: NightModeSettingsType;
     communication: CommunicationSettingsType;
     emergencyContact: EmergencyContactType;
+    filteredContacts: Contact[];
+    selectedContacts: string[];
     speedLimit: SpeedLimitSettingsType;
     rideCheck: RideCheckSettingsType;
   } | null>(null);
@@ -113,18 +118,48 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         toggleAutoPoolTrip: toggleAutoPoolTripSettings
     }
 
-    const defaultAccessibilitySettings = {
+    const defaultAccessibilitySettings: AccessibilitySettingsType = {
         screenFlash: false,
         vibrationRequest: false,
         impairment: false,
+        toggleScreenFlash: (value: boolean)=> {
+            setdefaultAccessibilitySettings((prev)=> ({
+                ...prev,
+                screenFlash: !value
+            }))
+        },
+        toggleVibration: (value: boolean)=> {
+            setdefaultAccessibilitySettings((prev)=> ({
+                ...prev,
+                vibrationRequest: !value
+            }))
+        },
+        toggleImpairment: (value: boolean)=> {
+            setdefaultAccessibilitySettings((prev)=> ({
+                ...prev,
+                impairment: !value
+            }))
+        }
     };
     
-     const defaultNotificationSettings = {
+    const defaultNotificationSettings: NotificationSettingsType = {
         earningOpportunities: false,
         announcements: false,
+        toggleEarningOpportunities: (value: boolean) => {
+          setdefaultNotificationSettings((prev) => ({
+            ...prev,
+            earningOpportunities: !value,
+          }));
+        },
+        toggleAnnouncements: (value: boolean) => {
+          setdefaultNotificationSettings((prev) => ({
+            ...prev,
+            announcements: !value,
+          }));
+        },
     };
     
-     const defaultNightModeSettings = {
+     const defaultNightModeSettings: NightModeSettingsType = {
         nightMode: [
             {
                 id: 1,
@@ -154,10 +189,31 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         call: false,
         chat: false,
     };
+
+    const updateContacts = (newContacts: Contact[], type?: "filter" | never) => {
+        if(type=== "filter"){
+            setFilteredContacts(newContacts)
+        } else {
+            setContacts(newContacts);
+            setFilteredContacts(newContacts)
+        }
+    };
     
      const defaultEmergencyContact: EmergencyContactType = {
-        name: '',
-        number: 0,
+        contacts: [],
+        selectedContacts: [],
+        filterdedContacts: [],
+        updateContacts,
+        handleSelectedContacts(contactName: string) {
+            if (selectedContacts.includes(contactName)) {
+                // Remove contact from selectedContacts
+                setSelectedContacts(selectedContacts.filter((name) => name !== contactName));
+              } else {
+                // Add contact to selectedContacts
+                setSelectedContacts([...selectedContacts, contactName]);
+              }
+        },
+        
     };
     
      const defaultSpeedLimitSettings: SpeedLimitSettingsType = {
@@ -172,6 +228,10 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
     
 
     const [activeNavigationItem, setActiveNavigationItem] = useState<String>("Glopilot Navigation")
+    const [defaultTheme, setdefaultTheme] = useState<String>("Automatic")
+    const [contacts, setContacts] = useState<Contact[]>([]);
+    const [selectedContacts, setSelectedContacts] = useState<string[]>([])
+    const [filteredContacts, setFilteredContacts] = useState<Contact[] | any>([]);
     const [soundSettings, setSoundSettings] = useState<SoundSettingsType>(defaultSoundSettings);
     const [navigationMapSettings, setNavigationMapSettings] = useState<NavigationMapItemType>(defaultMapNavigationSettings)
     const [defaultNavigationSettings, setdefaultnavigationSettingItems] = useState<NavigationSettingItemType>(defaultnavigationSettingItems)
@@ -186,6 +246,8 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
     const appSettings = {
         activeNavigationItem,
         setActiveNavigationItem,
+        defaultTheme,
+        setdefaultTheme,
         navigationMapSettings,
         navigationSettings: defaultNavigationSettings,
         sound: soundSettings,
@@ -194,6 +256,8 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         nightMode: defaultNightMode,
         communication: defaultCommunication,
         emergencyContact: defaultEmergency,
+        filteredContacts,
+        selectedContacts,
         speedLimit: defaultSpeedLimit,
         rideCheck: defaultRideCheck,
       };

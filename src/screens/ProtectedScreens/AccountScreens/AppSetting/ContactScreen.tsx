@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState, } from 'react';
+import React, { useContext, useEffect, useState, } from 'react';
 import * as Contacts from 'expo-contacts';
 import { AntDesign } from '@expo/vector-icons';
 import Responsiveness from '../../../../helpers/Responsiveness';
 import Btn from '../../../../widget/Btn';
+import { useAppContext } from '../../../../hooks/AppSettingContext';
 
 const ContactScreen = () => {
     const [myContact, setMyContact] = useState<any>([]);
@@ -11,18 +12,20 @@ const ContactScreen = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedContacts, setSelectedContacts] = useState<string[]>([])
 
-    const handleContactPress = (contactName: string) => {
-      if (selectedContacts.includes(contactName)) {
-        // Remove contact from selectedContacts
-        setSelectedContacts(selectedContacts.filter((name) => name !== contactName));
-      } else {
-        // Add contact to selectedContacts
-        setSelectedContacts([...selectedContacts, contactName]);
-      }
-    };
+    const AppSettings = useContext(useAppContext)
+
+    // const handleContactPress = (contactName: string) => {
+    //   if (selectedContacts.includes(contactName)) {
+    //     // Remove contact from selectedContacts
+    //     setSelectedContacts(selectedContacts.filter((name) => name !== contactName));
+    //   } else {
+    //     // Add contact to selectedContacts
+    //     setSelectedContacts([...selectedContacts, contactName]);
+    //   }
+    // };
 
     const renderItem = ({ item }: any) => (
-      <TouchableOpacity onPress={()=> handleContactPress(item.name)} style={styles.contactItem}>
+      <TouchableOpacity onPress={()=> AppSettings?.emergencyContact.handleSelectedContacts(item.name)} style={styles.contactItem}>
         <View>
           <Text style={styles.contactName}>{item.name}</Text>
           {item.phoneNumbers && (
@@ -31,7 +34,7 @@ const ContactScreen = () => {
             </Text>
           )}
         </View>
-        {selectedContacts.includes(item.name) && (
+        {AppSettings?.selectedContacts.includes(item.name) && (
         <AntDesign name="check" size={24} color="blue" />
       )}
       </TouchableOpacity>
@@ -41,8 +44,9 @@ const ContactScreen = () => {
       const filtered = myContact.filter((contact: any) =>
         contact?.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredContacts(filtered); // Update filteredContacts when searchQuery changes
-    }, [searchQuery, myContact]);
+      AppSettings?.emergencyContact.updateContacts(filtered, 'filter')
+      /*setFilteredContacts(filtered); */// Update filteredContacts when searchQuery changes
+    }, [searchQuery, AppSettings?.emergencyContact.contacts]);
 
     useEffect(() => {
         (async () => {
@@ -55,8 +59,9 @@ const ContactScreen = () => {
             if (data.length > 0) {
               const contact = data[0];
               // setMyContact(contact)
-              setMyContact(data);
-              setFilteredContacts(data)
+              AppSettings?.emergencyContact.updateContacts(data)
+              // setMyContact(data);
+              // setFilteredContacts(data)
               console.log("Mycontact: ...", contact);
             }
           }
@@ -72,7 +77,7 @@ const ContactScreen = () => {
       />
     </View>
     <FlatList
-      data={filteredContacts}
+      data={AppSettings?.filteredContacts}
       keyExtractor={(item: any) => item?.id}
       renderItem={renderItem}
     />

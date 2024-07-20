@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useAppContext } from '../hooks/AppSettingContext';
 const checkIcon = <AntDesign name="check" size={24} color="blue" />
 const Icon = <AntDesign name="check" size={24} color="blue" />
+import { Contact } from 'expo-contacts';
 
 
 const AppSetting = useContext(useAppContext)
@@ -44,24 +45,29 @@ export type NavigationSettingItemType = {
 }
 
 
-export interface AccessibilitySettingsType {
+export type AccessibilitySettingsType = {
     screenFlash: boolean;
     vibrationRequest: boolean;
     impairment: boolean;
+    toggleScreenFlash: (Value: boolean)=> void
+    toggleVibration: (Value: boolean)=> void
+    toggleImpairment: (Value: boolean)=> void
 }
 
-export interface NotificationSettingsType {
+export type NotificationSettingsType = {
     earningOpportunities: boolean;
     announcements: boolean;
-}
+    toggleEarningOpportunities: (value: boolean) => void;
+    toggleAnnouncements: (value: boolean) => void;
+  };
 
-export interface NightModeItemType {
+export type NightModeItemType ={
     id: number;
     label: string;
     checkIcon: React.ReactNode;
 }
 
-export interface NightModeSettingsType {
+export type NightModeSettingsType = {
     nightMode: NightModeItemType[];
 }
 
@@ -70,11 +76,14 @@ export interface CommunicationSettingsType {
     call: boolean;
     chat: boolean;
 }
-
-export interface EmergencyContactType {
-    name: string;
-    number: number;
-}
+  
+ export type EmergencyContactType = {
+    contacts: Contact[];
+    selectedContacts: string[]
+    filterdedContacts: Contact[],
+    updateContacts: (newContacts: Contact[], type?: "filter" | never) => void;
+    handleSelectedContacts: (contactName: string) => void
+  };
 
 export interface SpeedLimitItemType {
     mph3: boolean;
