@@ -3,14 +3,19 @@ import React, {useState} from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Responsiveness from '../helpers/Responsiveness';
-import { OptionsTypes } from '../Data/Options';
+import { OptionsTypes } from '../Mock/Options';
 import { useNavigation } from '@react-navigation/native';
+import { ColorType } from '../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen';
+import { CarInfoType } from '../screens/AthScreens/AuthrizationScreens/Registeration/AddPersonalCarScreen';
 
 interface DropdownProps {
     placeholder: string
     label: String
     data?: OptionsTypes
-    color?: boolean
+    value?: string | number
+    setValue?: React.Dispatch<React.SetStateAction<CarInfoType>>
+    selectedColor?: ColorType
+    name?: any
 }
 
 export const Data = [
@@ -24,8 +29,7 @@ export const Data = [
     { label: 'Item 8', value: '8' },
   ];
 
-const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color}) => {
-    const [value, setValue] = useState<string>('');
+const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color, value, setValue, selectedColor, name}) => {
     const [isFocus, setIsFocus] = useState(false);
     const navigation = useNavigation() as any;
 
@@ -39,12 +43,6 @@ const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color
       }
       return null;
     };
-
-    if (color) {
-      return <TouchableOpacity onPress={()=> navigation.navigate("select-color")} style={{width: Responsiveness.getResponsiveWidth(93), paddingVertical: Responsiveness.getResponsiveWidth(5), paddingHorizontal: Responsiveness.getResponsiveWidth(4), borderWidth: 1, borderColor: 'lightgray', borderRadius: 5}}>
-        <Text>Select color</Text>
-      </TouchableOpacity>
-    }
 
   return (
     <View style={{marginTop: Responsiveness.getResponsiveWidth(3)}}>
@@ -69,6 +67,10 @@ const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color
           onBlur={() => setIsFocus(false)}
           onChange={item => {
             // setValue(item?.value);
+            setValue && setValue((prev)=> ({
+              ...prev,
+              [name]: item.value
+            }))
             setIsFocus(false);
           }}
           // renderItem={() => (

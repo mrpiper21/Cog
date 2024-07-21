@@ -2,21 +2,23 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Responsiveness from '../../helpers/Responsiveness'
 import { Feather } from '@expo/vector-icons';
+import { ColorType } from '../../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen';
 
 interface selectedColorProps {
     data: any
     selectedColor: String
-    callback: (value: String)=> void
+    callback: (value: String, data?: any)=> void
 }
 
 const SelectedcolorItem: React.FC<selectedColorProps> = ({data, selectedColor, callback}) => {
   return (
-    <View
+    <TouchableOpacity
+    onPress={() => callback(data.name, data)}
     key={data.name}
     style={{ paddingVertical: Responsiveness.getResponsiveWidth(1), borderBottomWidth: 2, borderColor: '#EEEE' }}
     className='flex flex-row items-center justify-between'
   >
-    <TouchableOpacity className='flex flex-row items-center space-x-3' onPress={() => callback(data.name)}>
+    <View className='flex flex-row items-center space-x-3'>
       <View
         style={{
           height: Responsiveness.getResponsiveWidth(13),
@@ -26,9 +28,9 @@ const SelectedcolorItem: React.FC<selectedColorProps> = ({data, selectedColor, c
         className={`rounded-full ${data.name === 'White' && 'border-[.05px] border-gray-500'}`}
       />
       <Text style={{ fontSize: Responsiveness.getResponsiveWidth(4), color: selectedColor === data.name ? "blue" : "black" }}>{data.name}</Text>
-    </TouchableOpacity>
+    </View>
     {selectedColor === data.name && <Feather name="check" size={24} color="blue" />}
-  </View>
+  </TouchableOpacity>
   )
 }
 

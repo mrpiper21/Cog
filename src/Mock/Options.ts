@@ -27,3 +27,14 @@ export const ColorOptions: OptionsTypes = [
     {label: "Orange", value: ''},
     {label: "Yellow", value: ''}
 ]
+
+export const DoorOptions: OptionsTypes = [
+    {label: "Two", value: 2},
+    {label: "Four", value: 4}
+]
+
+export const SeatOption: OptionsTypes = [
+    {label: "One", value: 2},
+    {label: "Two", value: 2},
+    {label: "Four", value: 4}
+]

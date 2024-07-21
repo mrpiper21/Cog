@@ -32,9 +32,9 @@ import DriverSurverScreen from "../../screens/AthScreens/AuthrizationScreens/Reg
 import VehicleOwnerShipScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/VehicleOwnerShipScreen";
 import AddCarDetailsScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/AddCarDetailsScreen";
 import AddPersonalCarScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/AddPersonalCarScreen";
-import SelectColorScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen";
 import BackButton from "../../widget/Buttons/BackButton";
 import CNICFrontCameraScreen from "../../screens/AthScreens/Verificationscreens/CNICFrontCameraScreen";
+import SelectColorScreen from "../../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen";
 
 const AuthStack = createStackNavigator();
 
@@ -56,22 +56,10 @@ const AuthNavigation = () => {
       <AuthStack.Screen name="inputDriver-location" component={InputDriveLocation} />
       <AuthStack.Screen name="vehicle-type" component={VehicleTypeScreen} />
       <AuthStack.Screen options={{headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerShown: true, headerTitle: ""}} name="driver-survey" component={DriverSurverScreen} />
+      <AuthStack.Screen options={{headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerShown: true, headerTitle: ""}} name="select-color" component={SelectColorScreen}/>
       <AuthStack.Screen name="vehicle-ownership" component={VehicleOwnerShipScreen} />
       <AuthStack.Screen name="addCar-details" component={AddCarDetailsScreen} />
-      <AuthStack.Screen name="addPersonalCar" component={AddPersonalCarScreen} />
-      <AuthStack.Screen name="select-color"  options={{headerShown: true, headerTitle: "Color", headerTitleAlign: 'center', headerLeft: ()=> (
-          <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={styles.backButton}
-      className="ml-3"
-    >
-      <MaterialCommunityIcons
-        name="keyboard-backspace"
-        size={hp(3)}
-        color="black"
-      />
-    </TouchableOpacity>
-        )}} component={SelectColorScreen} />
+      <AuthStack.Screen options={{headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerShown: true, headerTitleAlign: 'center', headerTitle: "Add Personal Car"}} name="addPersonalCar" component={AddPersonalCarScreen} />
       <AuthStack.Screen name="Verification" component={VerificationScreen} />
       <AuthStack.Screen name="Profile-photo" component={ProfilePhotoScreen} />
       <AuthStack.Screen
