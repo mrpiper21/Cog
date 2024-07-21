@@ -12,7 +12,7 @@ interface DropdownProps {
     placeholder: string
     label: String
     data?: OptionsTypes
-    value?: string | number
+    value?: string | number | boolean
     setValue?: React.Dispatch<React.SetStateAction<CarInfoType>>
     selectedColor?: ColorType
     name?: any
@@ -29,7 +29,7 @@ export const Data = [
     { label: 'Item 8', value: '8' },
   ];
 
-const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, color, value, setValue, selectedColor, name}) => {
+const DropdownInput: React.FC<DropdownProps> = ({placeholder, label, data, value, setValue, selectedColor, name}) => {
     const [isFocus, setIsFocus] = useState(false);
     const navigation = useNavigation() as any;
 

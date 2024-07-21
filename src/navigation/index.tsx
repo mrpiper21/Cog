@@ -11,18 +11,21 @@ const AuthStackNavigator = createStackNavigator();
 const AppNavigation = () => {
   const User = useContext(useUserContext)
 
-  return User?.user.profilePic && User.user.driversLicenseStatus ? (
-    <LocationHook>
-      <PreferenceProvider>
-        <DrawerNavigation />
-      </PreferenceProvider>
-    </LocationHook>
-  ) : (
-    <AuthStackNavigator.Navigator>
-      <AuthStackNavigator.Screen options={{headerShown: false}} name="AuthStack"  component={AuthNavigation} />
-    </AuthStackNavigator.Navigator>
-  );
+  return (<AuthStackNavigator.Navigator>
+    <AuthStackNavigator.Screen options={{headerShown: false}} name="AuthStack"  component={AuthNavigation} />
+  </AuthStackNavigator.Navigator>)
 };
 
 export default AppNavigation;
 
+// return User?.user.profilePic && User.user.driversLicenseStatus ? (
+//   <LocationHook>
+//     <PreferenceProvider>
+//       <DrawerNavigation />
+//     </PreferenceProvider>
+//   </LocationHook>
+// ) : (
+//   <AuthStackNavigator.Navigator>
+//     <AuthStackNavigator.Screen options={{headerShown: false}} name="AuthStack"  component={AuthNavigation} />
+//   </AuthStackNavigator.Navigator>
+// );
