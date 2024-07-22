@@ -13,7 +13,8 @@ interface UserContextProps {
   updateUser: (name: string, email: string) => void;
   updateUserProfile: (
     UserData: UserInterface,
-    setIsLoading: Dispatch<React.SetStateAction<boolean>>
+    setIsLoading: Dispatch<React.SetStateAction<boolean>>,
+    errormsg?: string
   ) => Promise<void>;
   getUser: () => Promise<void>;
   loginUser: (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>)=> Promise<void>;
@@ -50,7 +51,8 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 
   const updateUserProfile = useCallback(async (
     UserData: UserInterface,
-    setIsLoading?: Dispatch<React.SetStateAction<boolean>>
+    setIsLoading?: Dispatch<React.SetStateAction<boolean>>,
+    errorMsg?: string
   ) => {
     try {
       setIsLoading && setIsLoading(true);
@@ -59,14 +61,17 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
         .then((res) => {
           setUser(res.data.user);
           setIsLoading && setIsLoading(false);
+          Alert.alert("✔✔✔", errorMsg)
           console.log("User profile updated", res.data);
         })
         .catch((err) => {
           setIsLoading && setIsLoading(false);
           console.log("There was an Error: ", err);
+          Alert.alert("❌❌❌❌", "There was an Error Please try again")
         });
     } catch (err) {
       console.error("Error updating user data:", err);
+      Alert.alert("❌❌❌❌", "There was an Error Please try again")
     }
   },[])
 

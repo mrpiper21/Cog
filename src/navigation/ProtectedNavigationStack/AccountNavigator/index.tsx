@@ -47,6 +47,10 @@ import PhotoSubmittedScreen from "../../../screens/AthScreens/Verificationscreen
 import LicenseFrontScreen from "../../../screens/AthScreens/Verificationscreens/LicenseFrontScreen";
 import UploadFrontLicense from "../../../screens/AthScreens/Verificationscreens/UploadFrontLicense";
 import CNICFrontCameraScreen from "../../../screens/AthScreens/Verificationscreens/CNICFrontCameraScreen";
+import SecurePasswordScreen from "../../../screens/ProtectedScreens/AccountScreens/Security/SecurePasswordScreen";
+import CreateNewPasswordScreen from "../../../screens/ProtectedScreens/AccountScreens/Security/CreateNewPasswordScreen";
+import OTPVerificationScren from "../../../screens/ProtectedScreens/AccountScreens/Security/OTPVerificationScren";
+import SubmitEmail from "../../../screens/ProtectedScreens/AccountScreens/Security/SubmitEmail";
 
 const AccountNavigator = createStackNavigator();
 
@@ -80,6 +84,10 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: 'Account', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="manage-account" component={ManageAccountScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="acountPhone-number" component={AccountPhoneNumberScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="otp-verification" component={AccountPhoneNumberOPTScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="otpEmail-verification" component={OTPVerificationScren}/>
+        <AccountNavigator.Screen options={{ headerTitle: "Verify Password", headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="verify-password" component={SecurePasswordScreen}/>
+        <AccountNavigator.Screen options={{headerShown: false}} name="verify-email" component={SubmitEmail}/>
+        <AccountNavigator.Screen options={{ headerTitle: "Create New Password", headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="new-password" component={CreateNewPasswordScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Security', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="security" component={AccountSecurityScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="twoStep-verification" component={TwoStepVerificationScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="verifyText-Message" component={VerifyTextMessageScreen}/>

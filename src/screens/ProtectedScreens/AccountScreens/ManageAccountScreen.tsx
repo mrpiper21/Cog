@@ -20,7 +20,7 @@ const ManageAccountScreen = () => {
       <HelpItem type='forward-title-children' title={"Name"} children={"Femi Vanzedkin"}/>
       <HelpItem type='forward-title-children' title={"Pronouns"} children={"Add your Pronouns"}/>
       <HelpItem type='forward-title-children' title={"Phone number"} children={"+1  557  984  1249"} navigateTo='acountPhone-number'/>
-      <HelpItem type='forward-title-children' title={"Email"} children={User?.user?.email}/>
+      <HelpItem type='forward-title-children' title={"Email"} children={User?.user?.email} navigateTo='verify-email'/>
     </View>
   )
 }

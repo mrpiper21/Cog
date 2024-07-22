@@ -4,9 +4,14 @@ import Header from '../../../../widget/Header'
 import InputTextItem from '../../../../widget/InputTextItem'
 import Btn from '../../../../widget/Btn'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
+import { baseURL } from '../../../../Services/authorization'
 
 const SubmitEmail = () => {
     const navigation = useNavigation() as any;
+    const handleSubmit = async ()=> {
+      const res = await axios.post(baseURL)
+    }
   return (
     <View className='flex flex-1 bg-white px-4'>
       <View className='mt-4'>
@@ -25,7 +30,7 @@ const SubmitEmail = () => {
         and its affiliates to the number provided.
         </Text>
         <View className='items-center'>
-            <Btn type='action' label={"Submit"} callback={()=> navigation.navigate("createnew-password")}/>
+            <Btn type='action' label={"Verify"} callback={()=> navigation.navigate("otpEmail-verification")}/>
         </View>
     </View>
     </View>

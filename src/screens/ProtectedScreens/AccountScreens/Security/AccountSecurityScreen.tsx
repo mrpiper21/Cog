@@ -11,14 +11,14 @@ const AccountSecurityScreen = () => {
       <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}}>
         <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Logging in to Glopilots</Text>
       </View>
-      <TouchableOpacity onPress={()=> navigation.navigate("account-password", { type: "verify", HeaderTitle: "Verify Password", message: "For your security, please enter your old password.", btnText: "Verify Password", placeHolderText: "Enter your password" })} style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1, borderColor: 'lightgray'}} className='flex flex-row justify-between'>
+      <TouchableOpacity onPress={()=> navigation.navigate("verify-password", { type: "verify", HeaderTitle: "Verify Password", message: "For your security, please enter your old password.", btnText: "Verify Password", placeHolderText: "Enter your password" })} style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1, borderColor: 'lightgray'}} className='flex flex-row justify-between'>
         <View className='flex space-y-2'>
             <Text style={{fontWeight: '500', fontSize: Responsiveness.getResponsiveWidth(3.5)}}>Password</Text>
             <Text style={{fontWeight: '700', fontSize: Responsiveness.getResponsiveWidth(4)}}>**********</Text>
         </View>
         <Ionicons name="chevron-forward-outline" size={24} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate("verifyText-Message")} style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1, borderColor: 'lightgray'}} className='flex flex-row justify-between'>
+      <TouchableOpacity onPress={()=> navigation.navigate("twoStep-verification")} style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1, borderColor: 'lightgray'}} className='flex flex-row justify-between'>
         <View className='flex space-y-2'>
             <Text style={{fontWeight: '500', fontSize: Responsiveness.getResponsiveWidth(3.5)}}>2-Step verification</Text>
             <Text>OFF</Text>

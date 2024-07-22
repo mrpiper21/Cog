@@ -4,6 +4,7 @@ import AppNavigation from '../navigation';
 import AppSettingContext from '../hooks/AppSettingContext';
 
 import React from 'react'
+import PreferenceProvider from '../hooks/PrefrenceContext/PreferenceContext';
 
 function buildProviderTree(providers: any, AppComponent: any) {
     return providers.reduceRight((acc: any, Provider: any) => {
@@ -12,7 +13,7 @@ function buildProviderTree(providers: any, AppComponent: any) {
 }
 
 const Providers = ()=> {
-  const Hooks = [ UserContext, LocationHook, AppSettingContext ];
+  const Hooks = [ UserContext, LocationHook, AppSettingContext, PreferenceProvider ];
   return buildProviderTree(Hooks, AppNavigation)
 }
 

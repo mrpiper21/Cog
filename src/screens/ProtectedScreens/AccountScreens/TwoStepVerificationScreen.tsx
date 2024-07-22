@@ -4,8 +4,7 @@ import Responsiveness from '../../../helpers/Responsiveness'
 import Btn from '../../../widget/Btn'
 import { useNavigation } from '@react-navigation/native'
 
-const TwoStepVerificationScreen = ({ route }: any) => {
-  const { type, title, message, btnText } = route.params;
+const TwoStepVerificationScreen = () => {
   const navigation = useNavigation() as any;
   return (
     <View className='flex-1 bg-white px-4 justify-between mb-4'>
@@ -13,13 +12,14 @@ const TwoStepVerificationScreen = ({ route }: any) => {
         <View className='bg-slate-200 flex items-center justify-center rounded-full' style={{height: Responsiveness.getResponsiveWidth(40), width: Responsiveness.getResponsiveWidth(40)}}>
             <Image source={require("../../../../assets/icons/PhoneSecure.png")}/>
         </View>
-        <View style={{marginTop: Responsiveness.getResponsiveHeight(3)}} className='items-center space-y-2'>
-            <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>{title}</Text>
-            <Text>{message}</Text>
+        <View style={{marginTop: Responsiveness.getResponsiveHeight(3)}} className='items-center justify-center space-y-2'>
+            <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Security beyond your password</Text>
+            <Text>To keep your account more secure, we’ll ask you for
+            you password and verification code at sign-in.</Text>
         </View>
       </View>
       <View className='items-center'>
-        <Btn type='action' label={btnText ? btnText : "Set up now"} />
+        <Btn type='action' label={"Set up now"} />
       </View>
     </View>
   )

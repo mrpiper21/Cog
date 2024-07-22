@@ -14,6 +14,8 @@ export const baseURL = "https://bookish-octo-barnacle-2.onrender.com/"
 export const config = {
     headers: {
       "Authorization": `Bearer ${mytoken}`,
+      "content-type": "application/json",
+      "Accept": "application/json"
     }
 }
 

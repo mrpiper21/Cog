@@ -18,13 +18,19 @@ import { useUserContext } from '../../../../hooks/Usercontext/UserContext';
 import ButtonLoader from '../../../../widget/ButtonLoader';
 
 export interface CarInfoType {
+    type: string
     owner: String,
-    image: string,
+    picture: string,
+    carMillage: string,
+    bags: string,
     Make: string,
-    Year: string,
-    Doors: number,
-    Seats: number,
-    VehicleType: string
+    Year: number,
+    pricePerDay: string,
+    additionalPrice: string,
+    noOfDoors: number,
+    seats: number,
+    vehicleType: string,
+    isAvailable: boolean,
     WheelChair: boolean
 }
 
@@ -36,14 +42,20 @@ const AddPersonalCarScreen = ({route}: any) => {
     const [selectedColor, setSelectedColor] = useState<ColorType>({name: "", value: ""})
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [carInfo, setCarInfo] = useState<CarInfoType>({
+        type: 'car',
         owner: "",
-        image: "",
+        picture: "",
+        bags: "N/A",
+        carMillage: "N/A",
+        pricePerDay: "N/A",
+        additionalPrice: "NA",
         Make: "",
-        Year: "",
-        Doors: 0,
-        Seats: 0,
-        VehicleType: "",
+        Year: 0,
+        noOfDoors: 0,
+        seats: 0,
+        vehicleType: "",
         WheelChair: false,
+        isAvailable: true
     })
 
     console.log("Car info...", carInfo)
@@ -93,13 +105,14 @@ const AddPersonalCarScreen = ({route}: any) => {
                 <Text>{color.name}</Text>
             </View>) : <Text>Select color</Text>}
             </TouchableOpacity>
-        <DropdownInput name={"Doors"} placeholder='Select Number of Doors' label={"Number of Doors"} value={carInfo.Doors} data={DoorOptions} setValue={setCarInfo} />
-        <DropdownInput name={"Seats"} placeholder='Select Number of Seat Belts' label={"Number of Seat Belts"} value={carInfo.Seats} data={SeatOption} setValue={setCarInfo}/>
-        <DropdownInput name={"VehicleType"} placeholder='Select Vehicle Type' label={"Vehicle Type"} data={VehicleTypeOptions} value={carInfo.VehicleType} setValue={setCarInfo}/>
+        <DropdownInput name={"Doors"} placeholder='Select Number of Doors' label={"Number of Doors"} value={carInfo.noOfDoors} data={DoorOptions} setValue={setCarInfo} />
+        <DropdownInput name={"Seats"} placeholder='Select Number of Seat Belts' label={"Number of Seat Belts"} value={carInfo.seats} data={SeatOption} setValue={setCarInfo}/>
+        <DropdownInput name={"VehicleType"} placeholder='Select Vehicle Type' label={"Vehicle Type"} data={VehicleTypeOptions} value={carInfo.vehicleType} setValue={setCarInfo}/>
         <DropdownInput name={"WheelChair"} placeholder='Vehicle has a Wheelchair Accessible Ramp' label={"Select Wheelchair Accessible Ramp "} data={WheelChairOptions} value={carInfo.WheelChair} setValue={setCarInfo}/>
 
         <View style={{marginVertical: Responsiveness.getResponsiveWidth(5)}} className='items-center mx-5'>
-            <Btn type={isLoading ? "cancel" : 'action'} label={isLoading ? undefined : "Next"} callback={()=> handleVehicleSubmit()} loader={ButtonLoader} />
+            {/* <Btn type={isLoading ? "cancel" : 'action'} label={isLoading ? undefined : "Next"} callback={()=> handleVehicleSubmit()} loader={ButtonLoader} /> */}
+            <Btn type='action' label={"next"} callback={()=> navigation.navigate("Verification")}/>
         </View>
     </ScrollView>
   )

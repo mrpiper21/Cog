@@ -7,8 +7,9 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
-import MapView, { Callout, Marker } from "react-native-maps";
+import MapView, { Callout, Marker, Polyline } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
+import * as Location from 'expo-location';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import {
@@ -18,6 +19,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
+import MapViewDirections from 'react-native-maps-directions';
+import { API_KEY } from "../../../Services/authorization";
 
 const HomeScreen = (): React.JSX.Element => {
   const mapRegion = React.useContext(LocationContext);
@@ -31,7 +34,8 @@ const HomeScreen = (): React.JSX.Element => {
     lat: 0,
     lng: 0,
   });
-
+  const [driverLocation, setDriverLocation] = useState<any>(null);
+  const [pickupPoint, setPickupPoint] = useState({ latitude: 37.7749, longitude: -122.4194 });
   const userLocation = async () => {
     mapRef.current?.animateToRegion(mapRegion.mapRegion);
   };
@@ -70,6 +74,21 @@ const HomeScreen = (): React.JSX.Element => {
       description: "My third marker",
     },
   ];
+
+  useEffect(() => {
+    // Get the driver's location (you can use more accurate methods)
+    Location.getCurrentPositionAsync()
+      .then((location) => {
+        setDriverLocation({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+      })
+      .catch((error) => console.error('Error getting location:', error));
+  }, []);
+
+  const pickpPoint = { latitude: 37.7749, longitude: -122.4194 }
+         const destination = { latitude: 34.0522, longitude: -118.2437 };
 
   const showLocationOfInterest = () => {
     return locationOfInterest.map((item, index) => {
@@ -115,6 +134,24 @@ const HomeScreen = (): React.JSX.Element => {
         style={styles.map}
         ref={mapRef}
       >
+         
+        {driverLocation && <Marker coordinate={driverLocation} title="Driver" />}
+      {pickupPoint && <Marker coordinate={pickupPoint} title="Pickup Point" />}
+      {driverLocation && pickupPoint && (
+        <Polyline
+          coordinates={[driverLocation, pickupPoint]}
+          strokeColor="#3498db"
+          strokeWidth={3}
+        />
+      )}
+
+        {/* <MapViewDirections
+          origin={pickupPoint}
+          destination={driverLocation}
+          apikey={API_KEY}
+          strokeWidth={3}
+          strokeColor="blue"
+        /> */}
         <Marker
           pinColor="#0000ff"
           coordinate={mapRegion.mapRegion}

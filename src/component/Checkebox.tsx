@@ -32,7 +32,13 @@ const Checkebox: React.FC<checkboxprops> = ({type, isChecked, callback, id, colo
       // onValueChange={handleValueChange}
       color={isChecked ? "#4630EB" : undefined}
       // onChange={callback}
-    /> : <RoundedCheckbox isChecked={isChecked} active={false} innerStyle={{height: Responsiveness.getResponsiveWidth(6), width: Responsiveness.getResponsiveWidth(6)}} outerStyle={{height: Responsiveness.getResponsiveWidth(7.5), width: Responsiveness.getResponsiveWidth(7.5), borderRadius: 20}} checkedColor='#4460EF' text='' onPress={(checked)=> callback()} />
+    /> : <CircleCheckBox
+    checked={isChecked}
+    onToggle={(checked: boolean) => {
+      console.log('My state is: ', checked)
+      callback()
+    }}
+  />
   )
 }
 

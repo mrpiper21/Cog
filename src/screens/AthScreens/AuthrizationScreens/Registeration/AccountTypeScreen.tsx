@@ -1,12 +1,18 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../../../widget/Header'
 import Responsiveness from '../../../../helpers/Responsiveness'
 import Btn from '../../../../widget/Btn'
 import { useNavigation } from '@react-navigation/native'
+import { useUserContext } from '../../../../hooks/Usercontext/UserContext'
+import Loading from '../../../../widget/Loading'
 
 const AccountTypeScreen = () => {
     const navigation = useNavigation() as any;
+    const [loading, setLoading] = useState<boolean>(false)
+    const User = useContext(useUserContext)
+
+    if(loading) return <Loading />    
   return (
     <View className='flex flex-1 bg-white px-4'>
         <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
@@ -19,7 +25,7 @@ const AccountTypeScreen = () => {
 
       <View style={{gap: Responsiveness.getResponsiveWidth(3), marginTop: Responsiveness.getResponsiveWidth(5)}} className='flex'>
        <View style={{gap: Responsiveness.getResponsiveWidth(3)}} className='flex flex-row'>
-            <TouchableOpacity style={{width: Responsiveness.getResponsiveWidth(45),borderWidth: 1, borderColor: '#EEEE'}} className='rounded-lg'>
+            <TouchableOpacity onPress={()=> User?.updateUserProfile({userType: "driver"}, setLoading, 'user update successfully. You are welcome as a Driver')} style={{width: Responsiveness.getResponsiveWidth(45),borderWidth: 1, borderColor: '#EEEE'}} className='rounded-lg'>
                 <View className='flex items-center bg-blue-50'>
                     <Image source={require("../../../../../assets/icons/DriverSVG.png")}/>
                 </View>

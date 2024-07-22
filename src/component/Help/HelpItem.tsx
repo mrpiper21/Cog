@@ -17,14 +17,7 @@ interface HelpItemProps {
   children: String | string | undefined;
   title?: String;
   type?: "Trips" | "Fixtures" | "Call support" | "forward" | "Check" | "forward-title-children";
-  navigateTo?:
-    | "Help-Trip"
-    | "Account-App"
-    | "Tracking-Acceptance"
-    | "ChangeAcc-Setting"
-    | "DeleteDriver-Acc"
-    | "Remove-Vehicle" 
-    | "acountPhone-number";
+  navigateTo?:string
 }
 
 const HelpItem: React.FC<HelpItemProps> = ({ children, type, navigateTo, title }) => {
