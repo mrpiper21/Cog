@@ -36,6 +36,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
+  const [LOCATION, SETLOCATION] = useState()
   // const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
   const [isOnline, setIsOnline] = useState(false);
   const [coordinates, setCoordinates] = useState([
@@ -58,6 +59,10 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       })
       .catch((error) => console.error('Error getting location:', error));
   }, []);
+  // useEffect(() => {
+  //   SETLOCATION
+  // }, []);
+  
 
   const showLocationOfInterest = () => {
     return locationOfInterest.map((item, index) => {
@@ -119,11 +124,11 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       >
         <AntDesign name="search1" size={wp(6)} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navigationIcon}>
+      {/* <TouchableOpacity style={styles.navigationIcon}>
         <Image source={require("../../../../assets/navigateIcon.png")}/>
         <Text className="text-white">Navigate</Text>
-      </TouchableOpacity>
-      {!location && <ToggleUserActiveLocation mapRegion={mapRegion} mapRef={mapRef}/>}
+      </TouchableOpacity> */}
+      <ToggleUserActiveLocation mapRegion={mapRegion} mapRef={mapRef}/>
       </SafeAreaView>
     </View>
   );
