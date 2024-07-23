@@ -13,18 +13,20 @@ import React, { useRef, useMemo, useState, useEffect } from "react";
 import * as Location from 'expo-location';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import Responsiveness from "../../../helpers/Responsiveness";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
-import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
+import { LocationContext } from "../../../hooks/LocationContext/LocationHook";
 import DriverMarker from "../../../Global/DriverMarker";
 import BottomSheetItem from "../../../component/BottomSheetItem";
 import ToggleUserActiveLocation from "../../../component/Home/ToggleUserActiveLocation";
 import NavBarIcon from './../../../component/Home/NavBarIcon';
 import MapViewDirectionItem from "../../../component/Home/MapViewDirectionItem";
+import { locationOfInterest } from "../../../Mock/LocationOfInterest";
 
 const HomeScreen = ({route}: any): React.JSX.Element => {
   const location = route.params?.location
@@ -34,53 +36,17 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
-  const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
+  // const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
   const [isOnline, setIsOnline] = useState(false);
   const [coordinates, setCoordinates] = useState([
     { latitude: 37.3317876, longitude: -122.0054812 },
     { latitude: 37.771707, longitude: -122.4053769 },
   ]);
   const [driverLocation, setDriverLocation] = useState<any>(null);
-  const [pickupPoint, setPickupPoint] = useState({ latitude: 37.7749, longitude: -122.4194 });
 
   const onMapPress = (e: any) => {
     setCoordinates([...coordinates, e.nativeEvent.coordinate]);
   };
-
-  let locationOfInterest = [
-    {
-      title: "First",
-      loaction: {
-        latitude: 5.65531261192447,
-        longitude: -0.1846793107688,
-      },
-      description: "My first marker",
-    },
-    {
-      title: "second",
-      loaction: {
-        latitude: 5.652918042212605,
-        longitude: -0.18952036276,
-      },
-      description: "My second marker",
-    },
-    {
-      title: "third",
-      loaction: {
-        latitude: 5.65730212914574,
-        longitude: -0.181071739643,
-      },
-      description: "My third marker",
-    },
-    {
-      title: "third",
-      loaction: {
-        latitude: 5.643699360367113,
-        longitude: -0.181071739643,
-      },
-      description: "My third marker",
-    },
-  ];
 
   useEffect(() => {
     Location.getCurrentPositionAsync()
@@ -136,18 +102,14 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
         <Marker key={`coordinate_${index}`} coordinate={coordinate} />
       ))}
 
-      {/* {location && <Marker coordinate={location} />} */}
-
-      {coordinates.length >= 2 && (
-        <MapViewDirectionItem />
-      )}
+      {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={location} />}
         {/* {showLocationOfInterest()} */}
         {isOnline && (
           <Marker coordinate={mapRegion.mapRegion}>
             <DriverMarker />
           </Marker>
         )}
-        {/* <Marker coordinate={searchedLocation} /> */}
+        {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>}
       </MapView>
       <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>
       <NavBarIcon />
@@ -157,7 +119,11 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       >
         <AntDesign name="search1" size={wp(6)} color="black" />
       </TouchableOpacity>
-      <ToggleUserActiveLocation mapRegion={mapRegion} mapRef={mapRef}/>
+      <TouchableOpacity style={styles.navigationIcon}>
+        <Image source={require("../../../../assets/navigateIcon.png")}/>
+        <Text className="text-white">Navigate</Text>
+      </TouchableOpacity>
+      {!location && <ToggleUserActiveLocation mapRegion={mapRegion} mapRef={mapRef}/>}
       </SafeAreaView>
     </View>
   );
@@ -194,22 +160,18 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: wp(2),
     borderBottomLeftRadius: wp(2),
   },
-  arrowBtn: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderLeftWidth: 1,
-    borderColor: "white",
-    height: hp(7),
-    width: wp(15),
+  navigationIcon: {
+    position: "absolute",
+    height: Responsiveness.getResponsiveWidth(15),
+    width: Responsiveness.getResponsiveWidth(30),
+    borderRadius: Responsiveness.getResponsiveWidth(10),
     backgroundColor: "#4460EF",
-    borderTopRightRadius: wp(2),
-    borderBottomRightRadius: wp(2),
-  },
-  bottomSheetContainer: {
     alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    paddingHorizontal: Responsiveness.getResponsiveWidth(4),
+    gap: Responsiveness.getResponsiveWidth(4),
+    bottom: Responsiveness.getResponsiveHeight(15),
+    flexDirection: 'row',
+    marginLeft: Responsiveness.getResponsiveWidth(65),
   },
 });
 

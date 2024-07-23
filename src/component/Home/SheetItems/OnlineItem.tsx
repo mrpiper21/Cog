@@ -7,7 +7,11 @@ import {
 import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 
-const OnlineItem = () => {
+// interface Props {
+//     callback: ()=> void
+// }
+
+const OnlineItem /*React.FC<Props>*/= () => {
     const navigation = useNavigation() as any
     const [isOnline, setIsOnline] = useState(false)
 

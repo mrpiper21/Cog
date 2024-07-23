@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LocationHook from "../hooks/Usercontext/LocationHook";
+import LocationHook from "../hooks/LocationContext/LocationHook";
 import DrawerNavigation from "./ProtectedNavigationStack/DrawNavigation";
 import AuthNavigation from "./authNavigationStack/AuthNavigation";
 import PreferenceProvider from "../hooks/PrefrenceContext/PreferenceContext";

@@ -4,25 +4,27 @@ import MapViewDirections from 'react-native-maps-directions'
 import { API_KEY } from '../../Services/authorization'
 import MapView from 'react-native-maps'
 
-const MapViewDirectionItem = () => {
+interface Props {
+    orginCoordinates: {
+        latitude: number,
+        longitude: number,
+    },
+    destinationCoordinates: {
+        lat: number,
+        lng: number,
+    }
+}
+
+const MapViewDirectionItem: React.FC<Props>= ({orginCoordinates, destinationCoordinates}) => {
     const mapRef = useRef<MapView>(null)
-    const [coordinates, setCoordinates] = useState([
-        { latitude: 37.3317876, longitude: -122.0054812 },
-        { latitude: 37.771707, longitude: -122.4053769 },
-      ]);
 
       const { width, height } = Dimensions.get('window');
-    const ASPECT_RATIO = width / height;
-    const LATITUDE = 37.771707;
-    const LONGITUDE = -122.4053769;
-    const LATITUDE_DELTA = 0.0922;
-    const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
   return (
     <MapViewDirections
-          origin={coordinates[0]}
-          waypoints={coordinates.length > 2 ? coordinates.slice(1, -1) : undefined}
-          destination={coordinates[coordinates.length - 1]}
+          origin={orginCoordinates}
+        //   waypoints={coordinates.length > 2 ? coordinates.slice(1, -1) : undefined}
+          destination={{ latitude: destinationCoordinates.lat, longitude: destinationCoordinates.lng }}
           apikey={API_KEY}
           strokeWidth={3}
           strokeColor="blue"

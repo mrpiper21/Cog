@@ -1,5 +1,5 @@
 import { UserContext } from '../hooks/Usercontext/UserContext';
-import LocationHook from '../hooks/Usercontext/LocationHook';
+import LocationHook from '../hooks/LocationContext/LocationHook';
 import AppNavigation from '../navigation';
 import AppSettingContext from '../hooks/AppSettingContext';
 
