@@ -20,10 +20,15 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
-import MapViewDirections from 'react-native-maps-directions';
-import { API_KEY } from "../../../Services/authorization";
+import DriverMarker from "../../../Global/DriverMarker";
+import BottomSheetItem from "../../../component/BottomSheetItem";
+import ToggleUserActiveLocation from "../../../component/Home/ToggleUserActiveLocation";
+import NavBarIcon from './../../../component/Home/NavBarIcon';
+import MapViewDirectionItem from "../../../component/Home/MapViewDirectionItem";
 
-const HomeScreen = (): React.JSX.Element => {
+const HomeScreen = ({route}: any): React.JSX.Element => {
+  const location = route.params?.location
+  console.log("search loction...", location)
   const mapRegion = React.useContext(LocationContext);
   const mapRef = useRef<MapView>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -41,13 +46,6 @@ const HomeScreen = (): React.JSX.Element => {
   const onMapPress = (e: any) => {
     setCoordinates([...coordinates, e.nativeEvent.coordinate]);
   };
-
-  const userLocation = async () => {
-    mapRef.current?.animateToRegion(mapRegion.mapRegion);
-  };
-
-  const origin = {latitude: 37.3318456, longitude: -122.0296002};
-const destinatio = {latitude: 37.771707, longitude: -122.4053769};
 
   let locationOfInterest = [
     {
@@ -85,7 +83,6 @@ const destinatio = {latitude: 37.771707, longitude: -122.4053769};
   ];
 
   useEffect(() => {
-    // Get the driver's location (you can use more accurate methods)
     Location.getCurrentPositionAsync()
       .then((location) => {
         setDriverLocation({
@@ -95,9 +92,6 @@ const destinatio = {latitude: 37.771707, longitude: -122.4053769};
       })
       .catch((error) => console.error('Error getting location:', error));
   }, []);
-
-  const pickpPoint = { latitude: 37.7749, longitude: -122.4194 }
-         const destination = { latitude: 34.0522, longitude: -118.2437 };
 
   const showLocationOfInterest = () => {
     return locationOfInterest.map((item, index) => {
@@ -111,14 +105,6 @@ const destinatio = {latitude: 37.771707, longitude: -122.4053769};
       );
     });
   };
-
-  const { width, height } = Dimensions.get('window');
-  const ASPECT_RATIO = width / height;
-  const LATITUDE = 37.771707;
-  const LONGITUDE = -122.4053769;
-  const LATITUDE_DELTA = 0.0922;
-  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
   const snapPoints = useMemo(() => ["12%"], []);
 
   const goOnline = () => {
@@ -149,130 +135,29 @@ const destinatio = {latitude: 37.771707, longitude: -122.4053769};
         {coordinates.map((coordinate, index) => (
         <Marker key={`coordinate_${index}`} coordinate={coordinate} />
       ))}
-         
-        {/* {driverLocation && <Marker coordinate={driverLocation} title="Driver" />}
-      {pickupPoint && <Marker coordinate={pickupPoint} title="Pickup Point" />}
-      {driverLocation && pickupPoint && (
-        <Polyline
-          coordinates={[driverLocation, pickupPoint]}
-          strokeColor="#3498db"
-          strokeWidth={3}
-        />
-      )} */}
+
+      {/* {location && <Marker coordinate={location} />} */}
 
       {coordinates.length >= 2 && (
-        <MapViewDirections
-          origin={coordinates[0]}
-          waypoints={coordinates.length > 2 ? coordinates.slice(1, -1) : undefined}
-          destination={coordinates[coordinates.length - 1]}
-          apikey={API_KEY}
-          strokeWidth={3}
-          strokeColor="blue"
-          optimizeWaypoints
-          onStart={(params) => {
-            console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
-          }}
-          onReady={(result) => {
-            console.log(`Distance: ${result.distance} km`);
-            console.log(`Duration: ${result.duration} min.`);
-
-            // Fit the map view to the route coordinates
-            mapRef?.current?.fitToCoordinates(result.coordinates, {
-              edgePadding: {
-                right: width / 20,
-                bottom: height / 20,
-                left: width / 20,
-                top: height / 20,
-              },
-            });
-          }}
-          onError={(errorMessage) => {
-            // Handle errors
-          }}
-        />
+        <MapViewDirectionItem />
       )}
-        <Marker
-          pinColor="#0000ff"
-          coordinate={mapRegion.mapRegion}
-          title="Marker"
-          onDragEnd={(e: any) => setDragableMarker(e.nativeEvent.coordinate)}
-        >
-          <Callout>
-            {/* <MaterialIcons name="location-city" size={24} color="black" /> */}
-            <Entypo name="home" size={30} color="#028391" />
-          </Callout>
-        </Marker>
         {/* {showLocationOfInterest()} */}
         {isOnline && (
           <Marker coordinate={mapRegion.mapRegion}>
-            <Callout>
-              <Image source={require("../../../../assets/userNavigator.png")} />
-            </Callout>
+            <DriverMarker />
           </Marker>
         )}
         {/* <Marker coordinate={searchedLocation} /> */}
       </MapView>
-      <View style={{ position: "absolute", marginTop: wp(20) }}></View>
-      <BottomSheet snapPoints={snapPoints} ref={bottomSheetRef}>
-        <BottomSheetView>
-          <View style={styles.bottomSheetContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Preference")}>
-              {/* <Ionicons name="options-outline" size={wp(8)} color="black" /> */}
-              <Image
-                source={require("../../../../assets/preferenceIcon.png")}
-                style={{ width: 40, height: 30 }}
-              />
-            </TouchableOpacity>
-            <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity
-                onPress={() => goOnline()}
-                style={
-                  isOnline
-                    ? [styles.goOnlineBtn, { backgroundColor: "red" }]
-                    : styles.goOnlineBtn
-                }
-              >
-                <Text style={{ color: "white" }}>
-                  {isOnline ? "Go Offline" : "Go Online"}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={
-                  isOnline
-                    ? [styles.arrowBtn, { backgroundColor: "red" }]
-                    : styles.arrowBtn
-                }
-              >
-                <MaterialIcons
-                  name="arrow-outward"
-                  size={wp(8)}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Recommendation")}
-            >
-              <AntDesign name="bars" size={wp(8)} color="black" />
-            </TouchableOpacity>
-          </View>
-        </BottomSheetView>
-      </BottomSheet>
-      <TouchableOpacity
-        onPress={() => navigation.toggleDrawer()}
-        style={styles.twoBarIcon}
-      >
-        <Ionicons name="reorder-two-outline" size={wp(8)} color="black" />
-      </TouchableOpacity>
+      <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>
+      <NavBarIcon />
       <TouchableOpacity
         onPress={() => setSearchView(!searchView)}
         style={styles.searcBar}
       >
         <AntDesign name="search1" size={wp(6)} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={userLocation} style={styles.locationIcon}>
-        <MaterialIcons name="my-location" size={wp(8)} color="black" />
-      </TouchableOpacity>
+      <ToggleUserActiveLocation mapRegion={mapRegion} mapRef={mapRef}/>
       </SafeAreaView>
     </View>
   );
@@ -288,17 +173,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  twoBarIcon: {
-    position: "absolute",
-    height: wp(10),
-    width: wp(10),
-    marginTop: hp(5),
-    marginLeft: hp(3),
-    borderRadius: wp(10),
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   searcBar: {
     position: "absolute",
     height: wp(10),
@@ -309,17 +183,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-  },
-  locationIcon: {
-    position: "absolute",
-    height: wp(10),
-    width: wp(10),
-    borderRadius: wp(10),
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: hp(15),
-    marginLeft: wp(85),
   },
   goOnlineBtn: {
     alignItems: "center",
