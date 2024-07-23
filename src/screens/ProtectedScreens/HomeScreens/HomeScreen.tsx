@@ -6,6 +6,7 @@ import {
   Alert,
   Image,
   SafeAreaView,
+  Dimensions
 } from "react-native";
 import MapView, { Callout, Marker, Polyline } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
@@ -30,15 +31,23 @@ const HomeScreen = (): React.JSX.Element => {
   const [searchView, setSearchView] = useState(false);
   const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
   const [isOnline, setIsOnline] = useState(false);
-  const [searchedLocation, setSearchedLocation] = useState({
-    lat: 0,
-    lng: 0,
-  });
+  const [coordinates, setCoordinates] = useState([
+    { latitude: 37.3317876, longitude: -122.0054812 },
+    { latitude: 37.771707, longitude: -122.4053769 },
+  ]);
   const [driverLocation, setDriverLocation] = useState<any>(null);
   const [pickupPoint, setPickupPoint] = useState({ latitude: 37.7749, longitude: -122.4194 });
+
+  const onMapPress = (e: any) => {
+    setCoordinates([...coordinates, e.nativeEvent.coordinate]);
+  };
+
   const userLocation = async () => {
     mapRef.current?.animateToRegion(mapRegion.mapRegion);
   };
+
+  const origin = {latitude: 37.3318456, longitude: -122.0296002};
+const destinatio = {latitude: 37.771707, longitude: -122.4053769};
 
   let locationOfInterest = [
     {
@@ -103,11 +112,14 @@ const HomeScreen = (): React.JSX.Element => {
     });
   };
 
-  const snapPoints = useMemo(() => ["12%"], []);
+  const { width, height } = Dimensions.get('window');
+  const ASPECT_RATIO = width / height;
+  const LATITUDE = 37.771707;
+  const LONGITUDE = -122.4053769;
+  const LATITUDE_DELTA = 0.0922;
+  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-  // const onRegionChange = (region: any) => {
-  //   console.log(region);
-  // };
+  const snapPoints = useMemo(() => ["12%"], []);
 
   const goOnline = () => {
     setIsOnline(!isOnline);
@@ -128,14 +140,17 @@ const HomeScreen = (): React.JSX.Element => {
         showsBuildings={true}
         userLocationUpdateInterval={5000}
         showsUserLocation={isOnline ? false : true}
-        showsCompass={false}
         userLocationPriority="high"
         region={mapRegion.mapRegion}
         style={styles.map}
         ref={mapRef}
+        onPress={onMapPress}
       >
+        {coordinates.map((coordinate, index) => (
+        <Marker key={`coordinate_${index}`} coordinate={coordinate} />
+      ))}
          
-        {driverLocation && <Marker coordinate={driverLocation} title="Driver" />}
+        {/* {driverLocation && <Marker coordinate={driverLocation} title="Driver" />}
       {pickupPoint && <Marker coordinate={pickupPoint} title="Pickup Point" />}
       {driverLocation && pickupPoint && (
         <Polyline
@@ -143,15 +158,39 @@ const HomeScreen = (): React.JSX.Element => {
           strokeColor="#3498db"
           strokeWidth={3}
         />
-      )}
+      )} */}
 
-        {/* <MapViewDirections
-          origin={pickupPoint}
-          destination={driverLocation}
+      {coordinates.length >= 2 && (
+        <MapViewDirections
+          origin={coordinates[0]}
+          waypoints={coordinates.length > 2 ? coordinates.slice(1, -1) : undefined}
+          destination={coordinates[coordinates.length - 1]}
           apikey={API_KEY}
           strokeWidth={3}
           strokeColor="blue"
-        /> */}
+          optimizeWaypoints
+          onStart={(params) => {
+            console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
+          }}
+          onReady={(result) => {
+            console.log(`Distance: ${result.distance} km`);
+            console.log(`Duration: ${result.duration} min.`);
+
+            // Fit the map view to the route coordinates
+            mapRef?.current?.fitToCoordinates(result.coordinates, {
+              edgePadding: {
+                right: width / 20,
+                bottom: height / 20,
+                left: width / 20,
+                top: height / 20,
+              },
+            });
+          }}
+          onError={(errorMessage) => {
+            // Handle errors
+          }}
+        />
+      )}
         <Marker
           pinColor="#0000ff"
           coordinate={mapRegion.mapRegion}
