@@ -12,7 +12,7 @@ import MapView, { Callout, Marker, Polyline } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import * as Location from 'expo-location';
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import Responsiveness from "../../../helpers/Responsiveness";
 import {
   widthPercentageToDP as wp,
@@ -38,13 +38,14 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   const [searchView, setSearchView] = useState(false);
   const [LOCATION, SETLOCATION] = useState()
   // const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
+  const [routeInfo, setRouteInfo] = useState(false)
   const [isOnline, setIsOnline] = useState(false);
   const [coordinates, setCoordinates] = useState([
     { latitude: 37.3317876, longitude: -122.0054812 },
     { latitude: 37.771707, longitude: -122.4053769 },
   ]);
   const [driverLocation, setDriverLocation] = useState<any>(null);
-
+ 
   const onMapPress = (e: any) => {
     setCoordinates([...coordinates, e.nativeEvent.coordinate]);
   };
@@ -59,9 +60,12 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       })
       .catch((error) => console.error('Error getting location:', error));
   }, []);
-  // useEffect(() => {
-  //   SETLOCATION
-  // }, []);
+
+  useEffect(() => {
+    if(location){
+      setRouteInfo(true)
+    }
+  }, [location]);
   
 
   const showLocationOfInterest = () => {
@@ -90,6 +94,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   ) : (
     <View style={styles.container}>
       <SafeAreaView>
+        
       <MapView
         initialRegion={mapRegion.mapRegion}
         followsUserLocation={true}
@@ -108,13 +113,16 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       ))}
 
       {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={location} />}
+      {location && <Marker coordinate={{longitude: location.lng, latitude: location.lat}}>
+          <Image source={require("../../../../assets/destinationIcon.png")}/>
+        </Marker>}
         {/* {showLocationOfInterest()} */}
         {isOnline && (
           <Marker coordinate={mapRegion.mapRegion}>
             <DriverMarker />
           </Marker>
         )}
-        {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>}
+        {/* {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>} */}
       </MapView>
       <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>
       <NavBarIcon />
@@ -124,6 +132,25 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       >
         <AntDesign name="search1" size={wp(6)} color="black" />
       </TouchableOpacity>
+      {routeInfo && 
+      <View style={{height: Responsiveness.getResponsiveHeight(18), width: Responsiveness.getResponsiveWidth(100), backgroundColor: "#4460EF", marginTop: hp(4), position: 'absolute'}} className="justify-center">
+        <View style={{paddingVertical: Responsiveness.getResponsiveHeight(1), paddingHorizontal: Responsiveness.getResponsiveWidth(5), borderBottomWidth: 0.5, borderBottomColor: "white"
+        }} className="flex-row items-center space-x-2">
+          <View>
+            <Image source={require("../../../../assets/directionIcon.png")}/>
+            <Text className="text-white">Distance</Text>
+          </View>
+          <Text className="text-xl text-white font-bold">Loaction</Text>
+        </View>
+        <View style={{paddingVertical: Responsiveness.getResponsiveHeight(1),  paddingHorizontal: Responsiveness.getResponsiveWidth(5)}} className="flex-row items-center space-x-3">
+          <FontAwesome6 name="location-dot" size={24} color="white" />
+          <View>
+            <Text className="text-white">Pickup on Fairlands Drive</Text>
+            <Text className="text-white">Near Orchard View</Text>
+          </View>
+        </View>
+      </View>}
+      
       {/* <TouchableOpacity style={styles.navigationIcon}>
         <Image source={require("../../../../assets/navigateIcon.png")}/>
         <Text className="text-white">Navigate</Text>

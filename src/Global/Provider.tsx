@@ -9,7 +9,7 @@ import PreferenceProvider from '../hooks/PrefrenceContext/PreferenceContext';
 function buildProviderTree(providers: any, AppComponent: any) {
     return providers.reduceRight((acc: any, Provider: any) => {
       return <Provider>{acc}</Provider>;
-    }, <AppComponent />);
+    }, <AppComponent />)
 }
 
 const Providers = ()=> {
@@ -17,4 +17,4 @@ const Providers = ()=> {
   return buildProviderTree(Hooks, AppNavigation)
 }
 
-export default Providers
+export default Providers;
