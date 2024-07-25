@@ -23,7 +23,7 @@ const SetDestinationItem = () => {
             <MaterialIcons name="mode-edit" size={24} color="black" />
          </TouchableOpacity>
       </View>
-      <View>
+      <View className='items-center'>
         <Btn type='action' label={"SET DESTINATION"}/>
       </View>
     </View>

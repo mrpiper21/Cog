@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 
+interface LocationType {
+  latitude: number,
+  longitude: number
+}
 interface LocationInterface {
   longitude: number;
   latitude: number;
@@ -18,19 +22,14 @@ const initailLocationState: LocationInterface = {
   longitudeDelta: 0,
 };
 
-// interface LocationEncapsulationInterface extends LocationInterface {
-//   setMapRegion: React.Dispatch<React.SetStateAction<LocationInterface>>;
-// }
-
-export const LocationContext = React.createContext<{
+interface LocationContextProps {
+  location: LocationType;
+  setLocation: React.Dispatch<React.SetStateAction<LocationType>>
   mapRegion: LocationInterface;
   setMapRegion: React.Dispatch<React.SetStateAction<LocationInterface>>;
-}>({
-  mapRegion: initailLocationState,
-  setMapRegion: () => {
-    // No-op
-  },
-});
+}
+
+export const LocationContext = React.createContext<LocationContextProps | undefined>(undefined);
 
 export const LocationHook: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -45,6 +44,7 @@ export const LocationHook: React.FC<{ children: React.ReactNode }> = ({
     longitudeDelta: 0.0421,
   });
 
+  const [location, setLocation] = useState<LocationType>({latitude: 0, longitude: 0})
   const userLocation = async () => {
     mapRef.current?.animateToRegion(mapRegion);
   };
@@ -65,7 +65,7 @@ export const LocationHook: React.FC<{ children: React.ReactNode }> = ({
     func();
   }, []);
   return (
-    <LocationContext.Provider value={{ mapRegion, setMapRegion }}>
+    <LocationContext.Provider value={{ location, setLocation, mapRegion, setMapRegion }}>
       {children}
     </LocationContext.Provider>
   );
