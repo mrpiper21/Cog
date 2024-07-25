@@ -11,10 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 
 interface searchProps {
   setSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  // searchLocation:
-  // setSearchLoction: React.Dispatch<
-  //   React.SetStateAction<{ lat: number; lng: number }>
-  // >;
   setTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
 // console.log("api key...", process.env.API_KEY);
@@ -46,8 +42,8 @@ const SearBarContainer: React.FC<searchProps> = ({
         onPress={(data, details = null) => {
           const loc = details?.geometry.location;
           console.log("marker coordinate...", loc?.lat, loc?.lng);
-          const LOCATION = loc
-          nav.navigate("Home", {LOCATION})
+          const location = loc
+          nav.navigate("Home", {location})
           
           // setSearchLoction({ lat: loc?.lat, lng: loc?.lng });
           setSearch(false);

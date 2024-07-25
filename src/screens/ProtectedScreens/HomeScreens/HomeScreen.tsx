@@ -29,8 +29,8 @@ import MapViewDirectionItem from "../../../component/Home/MapViewDirectionItem";
 import { locationOfInterest } from "../../../Mock/LocationOfInterest";
 
 const HomeScreen = ({route}: any): React.JSX.Element => {
-  const LOCATION = route.params?.LOCATION
-  console.log("search loction...", LOCATION)
+  const location = route.params?.location
+  console.log("search loction...", location)
   const mapRegion = React.useContext(LocationContext);
   const mapRef = useRef<MapView>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -59,13 +59,13 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
         });
       })
       .catch((error) => console.error('Error getting location:', error));
-  }, [location]);
+  }, []);
 
   useEffect(() => {
-    if(LOCATION){
+    if(location){
       setRouteInfo(true)
     }
-  }, [LOCATION]);
+  }, [location]);
   
 
   const showLocationOfInterest = () => {
@@ -112,8 +112,8 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
         <Marker key={`coordinate_${index}`} coordinate={coordinate} />
       ))} */}
 
-      {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={LOCATION} />}
-      {location && <Marker coordinate={{longitude: LOCATION.lng, latitude: LOCATION.lat}}>
+      {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={location} />}
+      {location && <Marker coordinate={{longitude: location.lng, latitude: location.lat}}>
           <Image source={require("../../../../assets/destinationIcon.png")}/>
         </Marker>}
         {/* {showLocationOfInterest()} */}
