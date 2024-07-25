@@ -80,7 +80,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       );
     });
   };
-  const snapPoints = useMemo(() => ["12%"], []);
+  const snapPoints = useMemo(() => ["12%", "30%"], []);
 
   const goOnline = () => {
     setIsOnline(!isOnline);
