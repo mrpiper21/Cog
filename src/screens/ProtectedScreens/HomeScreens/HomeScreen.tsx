@@ -51,15 +51,16 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   };
 
   useEffect(() => {
-    Location.getCurrentPositionAsync()
-      .then((location) => {
+    Location.getLastKnownPositionAsync()
+      .then((Location) => {
+        console.log("current location...", Location)
         setDriverLocation({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
+          latitude: Location?.coords.latitude,
+          longitude: Location?.coords.longitude,
         });
       })
       .catch((error) => console.error('Error getting location:', error));
-  }, []);
+  }, [Location, driverLocation]);
 
   useEffect(() => {
     if(location){
@@ -117,9 +118,9 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
           <Image source={require("../../../../assets/destinationIcon.png")}/>
         </Marker>}
         {/* {showLocationOfInterest()} */}
-          <Marker coordinate={driverLocation}>
+          {driverLocation && <Marker coordinate={driverLocation}>
             <DriverMarker />
-          </Marker>
+          </Marker>}
         {/* {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>} */}
       </MapView>
       <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>

@@ -5,7 +5,7 @@ import * as Animatable from 'react-native-animatable';
 const DriverMarker = ({coordinate }: any) => {
   return (
     <Animatable.View animation="fadeIn" duration={1000} delay={200}>
-      <Image source={require("../../assets/userNavigator.png")} resizeMode='contain'/>
+      <Image source={require("../../../../assets/userNavigator.png")} resizeMode='contain'/>
     </Animatable.View>
   )
 }
