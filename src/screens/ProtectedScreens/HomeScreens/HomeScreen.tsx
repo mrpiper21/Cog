@@ -29,14 +29,14 @@ import MapViewDirectionItem from "../../../component/Home/MapViewDirectionItem";
 import { locationOfInterest } from "../../../Mock/LocationOfInterest";
 
 const HomeScreen = ({route}: any): React.JSX.Element => {
-  const location = route.params?.location
-  console.log("search loction...", location)
+  const LOCATION = route.params?.LOCATION
+  console.log("search loction...", LOCATION)
   const mapRegion = React.useContext(LocationContext);
   const mapRef = useRef<MapView>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const navigation = useNavigation() as any;
   const [searchView, setSearchView] = useState(false);
-  const [LOCATION, SETLOCATION] = useState()
+  // const [LOCATION, SETLOCATION] = useState()
   // const [dragableMarker, setDragableMarker] = useState(mapRegion.mapRegion);
   const [routeInfo, setRouteInfo] = useState(false)
   const [isOnline, setIsOnline] = useState(false);
@@ -59,13 +59,13 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
         });
       })
       .catch((error) => console.error('Error getting location:', error));
-  }, []);
+  }, [location]);
 
   useEffect(() => {
-    if(location){
+    if(LOCATION){
       setRouteInfo(true)
     }
-  }, [location]);
+  }, [LOCATION]);
   
 
   const showLocationOfInterest = () => {
@@ -96,32 +96,30 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       <SafeAreaView>
         
       <MapView
-        initialRegion={mapRegion.mapRegion}
+        initialRegion={mapRegion?.mapRegion}
         followsUserLocation={true}
          // onRegionChange={onRegionChange}
         showsBuildings={true}
-        userLocationUpdateInterval={5000}
-        showsUserLocation={isOnline ? false : true}
+        // userLocationUpdateInterval={5000}
+        // showsUserLocation={isOnline ? false : true}
         userLocationPriority="high"
-        region={mapRegion.mapRegion}
+        region={mapRegion?.mapRegion}
         style={styles.map}
         ref={mapRef}
         onPress={onMapPress}
       >
-        {coordinates.map((coordinate, index) => (
+        {/* {coordinates.map((coordinate, index) => (
         <Marker key={`coordinate_${index}`} coordinate={coordinate} />
-      ))}
+      ))} */}
 
-      {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={location} />}
-      {location && <Marker coordinate={{longitude: location.lng, latitude: location.lat}}>
+      {location && <MapViewDirectionItem orginCoordinates={driverLocation} destinationCoordinates={LOCATION} />}
+      {location && <Marker coordinate={{longitude: LOCATION.lng, latitude: LOCATION.lat}}>
           <Image source={require("../../../../assets/destinationIcon.png")}/>
         </Marker>}
         {/* {showLocationOfInterest()} */}
-        {isOnline && (
-          <Marker coordinate={mapRegion.mapRegion}>
+          <Marker coordinate={driverLocation}>
             <DriverMarker />
           </Marker>
-        )}
         {/* {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>} */}
       </MapView>
       <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>

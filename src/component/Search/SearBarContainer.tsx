@@ -46,11 +46,12 @@ const SearBarContainer: React.FC<searchProps> = ({
         onPress={(data, details = null) => {
           const loc = details?.geometry.location;
           console.log("marker coordinate...", loc?.lat, loc?.lng);
-          const location = loc
-          nav.navigate("Home", {location})
+          const LOCATION = loc
+          nav.navigate("Home", {LOCATION})
           
           // setSearchLoction({ lat: loc?.lat, lng: loc?.lng });
           setSearch(false);
+          console.log(data)
           console.log(JSON.stringify(details));
         }}
         fetchDetails={true}
