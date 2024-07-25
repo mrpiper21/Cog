@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 type HandleSubmitType = (setIsLoading: Dispatch<React.SetStateAction<boolean>>, setPhoto: (value: any)=> void, photo: String, edit?: boolean | never ) => Promise<void>
 interface UserContextProps {
   user: UserInterface;
-  updateUser: (name: string, email: string) => void;
+  updateUser: (updatedFields: Partial<UserInterface>) => void;
   updateUserProfile: (
     UserData: UserInterface,
     setIsLoading: Dispatch<React.SetStateAction<boolean>>,
@@ -35,19 +35,12 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   const [appLoading, setAppLoading] = useState<boolean>(false)
   const navigation = useNavigation() as any
 
-  const updateUser = useCallback((name: string, email: string) => {
-    if (name) {
-      setUser((prevState) => ({
-        ...prevState,
-        name: name,
-      }));
-    } else if (email) {
-      setUser((prevState) => ({
-        ...prevState,
-        email: email,
-      }));
-    }
-  },[])
+  const updateUser = useCallback((updatedFields: Partial<UserInterface>) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      ...updatedFields,
+    }));
+  }, [])
 
   const updateUserProfile = useCallback(async (
     UserData: UserInterface,

@@ -1,6 +1,8 @@
 export type UserInterface = {
   __v?: number;
   _id?: string;
+  firstName?: string;
+  lastName?: string;
   cnicBackStatus?: "Submitted" | "unCompleted" | "completed",
   cnicFrontStatus?: "Submitted" | "unCompleted" | "completed",
   createdAt?: string;
@@ -39,6 +41,8 @@ export type UserInterface = {
 export const  initialUserState: UserInterface =  {
   __v: 0,
   _id: '',
+  firstName: "",
+  lastName: "",
   cnicBackStatus: "unCompleted",
   cnicFrontStatus: "unCompleted",
   createdAt: '',
