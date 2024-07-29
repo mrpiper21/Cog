@@ -23,7 +23,7 @@ const AddVehicleScreen = () => {
       <DropdownInput placeholder='Select Year' label={"Year"}/>
       <DropdownInput placeholder='Enter License plate number ' label={"License plate number"}/>
       <View style={{marginTop: Responsiveness.getResponsiveHeight(3), alignItems: 'center'}}>
-        <Btn type='cancel' label={"Continue"} callback={()=> navigation.navigate("register-certificate")}/>
+        <Btn type='action' label={"Continue"}/>
       </View>
     </View>
   )

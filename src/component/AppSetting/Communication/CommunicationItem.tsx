@@ -6,8 +6,8 @@ import { useAppContext } from '../../../hooks/AppSettingContext'
 
 interface CommunicationItemProps {
     icon?: React.ReactNode,
-    label: String,
-    value: string
+    label: String | number,
+    value?: string | never
 }
 
 const CommunicationItem: React.FC<CommunicationItemProps> = ( {icon, label, value}) => {

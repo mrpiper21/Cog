@@ -9,7 +9,7 @@ import { useUserContext } from '../../../../hooks/Usercontext/UserContext'
 
 const RegisterFullName = () => {
     const navigation = useNavigation() as any;
-    const [name, setName] = useState<{firstName: String, lastName: string}>(undefined)
+    const [name, setName] = useState<{firstName: string, lastName: string}>({firstName: "", lastName: ""})
     const User = useContext(useUserContext)
     const handleFirstName = (text: string)=> {
       console.log(text)
@@ -45,7 +45,7 @@ const RegisterFullName = () => {
             <InputTextItem placeHolderText='Enter last name' TextOnChangeCallback={handleLasttName} />
         </View>
         <View>
-            <Btn type={`${name.firstName && name.lastName ? "action" : "cancel"}`} label={"Next"} callback={()=> navigation.navigate("account-type")} />
+            <Btn type={`${name.firstName.length> 3 && name.lastName.length > 3 ? "action" : "cancel"}`} label={"Next"} callback={()=> name.firstName.length> 3 && name.lastName.length > 3 && navigation.navigate("account-type")} />
         </View>
       </View>
     </View>

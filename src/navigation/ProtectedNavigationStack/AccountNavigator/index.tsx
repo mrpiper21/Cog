@@ -7,14 +7,13 @@ import {
   } from "react-native-responsive-screen";
 import React from "react";
 import AccountScreen from './../../../screens/ProtectedScreens/AccountScreens/AccountScreen';
-import Responsiveness from "../../../helpers/Responsiveness";
 import CancelBtn from "../../../widget/Buttons/CancelBtn";
 import VehiclesScreen from "../../../screens/ProtectedScreens/AccountScreens/VehiclesScreen";
 import BackButton from "../../../widget/Buttons/BackButton";
 import AddVehicleScreen from "../../../screens/ProtectedScreens/AccountScreens/AddVehicleScreen";
 import RegisterCertificateScreen from "../../../screens/ProtectedScreens/AccountScreens/RegisterCertificateScreen";
 import CerificateCamera from "../../../screens/ProtectedScreens/AccountScreens/CerificateCamera";
-import CarunderReviewScreen from "../../../screens/ProtectedScreens/AccountScreens/CarunderReviewScreen";
+import RemoveVehicleAccountScreen from "../../../screens/ProtectedScreens/AccountScreens/RemoveVehicleAccountScreen";
 import DocumentScreen from "../../../screens/ProtectedScreens/AccountScreens/DocumentScreen";
 import PaymentScreen from "../../../screens/ProtectedScreens/AccountScreens/PaymentScreen";
 import AddPaymentScreen from "../../../screens/ProtectedScreens/AccountScreens/AddPaymentScreen";
@@ -61,7 +60,7 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{headerTitleAlign: 'center', headerTitle: "Vehicle", headerTitleStyle: {fontWeight: '700', fontSize: 24}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="add-vehicle" component={AddVehicleScreen}/>
         <AccountNavigator.Screen options={{headerTitleStyle: {fontWeight: '700', fontSize: 24}, headerTitle: '', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="register-certificate" component={RegisterCertificateScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="certificate-camera" component={CerificateCamera}/>
-        <AccountNavigator.Screen options={{ headerTitle: '', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="car-underReview" component={CarunderReviewScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: '', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="removeVehicle-account" component={RemoveVehicleAccountScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Documents', headerTitleAlign: 'center', headerBackTitleStyle: {fontWeight: '700'}, headerLeft: ()=> <View className="ml-4"><BackButton /></View>, headerRight: ()=> <TouchableOpacity style={styles.helpIcon}>
           <AntDesign name="questioncircle" size={24} color="black" />
         </TouchableOpacity>}} name="documents" component={DocumentScreen}/>

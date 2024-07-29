@@ -1,15 +1,12 @@
-import { View, Text, Image } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { View, Text } from 'react-native'
+import React from 'react'
 import Responsiveness from '../../../../helpers/Responsiveness'
-import Checkebox from '../../../../component/Checkebox'
 import HelpItem from '../../../../component/Help/HelpItem'
 import Btn from '../../../../widget/Btn'
-import { useAppContext } from '../../../../hooks/AppSettingContext'
 import { CommunicationOptions } from '../../../../Mock/Options'
 import CommunicationItem from '../../../../component/AppSetting/Communication/CommunicationItem'
 
 const CommunicationScreen = () => {
-  const AppSettings = useContext(useAppContext)
   return (
     <View className='flex-1 bg-white'>
       <View style={{margin: Responsiveness.getResponsiveWidth(3)}}>

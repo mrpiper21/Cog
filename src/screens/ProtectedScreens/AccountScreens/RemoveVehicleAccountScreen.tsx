@@ -3,7 +3,7 @@ import React from 'react'
 import Responsiveness from '../../../helpers/Responsiveness'
 import UnderReviewItem from '../../../component/UnderReviewItem'
 
-const CarunderReviewScreen = () => {
+const RemoveVehicleAccountScreen = () => {
   return (
     <View className='flex flex-1 bg-white px-4 justify-between mb-4'>
       <View>
@@ -23,4 +23,4 @@ const CarunderReviewScreen = () => {
   )
 }
 
-export default CarunderReviewScreen
+export default RemoveVehicleAccountScreen

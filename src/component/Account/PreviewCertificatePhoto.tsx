@@ -1,5 +1,5 @@
 import { View, Text, Image, Button } from 'react-native'
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import BackButton from '../../widget/Buttons/BackButton';
 import { shareAsync } from "expo-sharing";
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Btn from '../../widget/Btn';
+import { useUserContext } from '../../hooks/Usercontext/UserContext';
 
 interface PreviewProps {
     photo: any;
@@ -18,7 +19,7 @@ interface PreviewProps {
 }
 
 const PreviewCertificatePhoto: React.FC<PreviewProps> = ({photo, setPhoto, hasMediaLibraryPermission}) => {
-    // const { uploadLicense, handleLicenseSubmit } = useVerificationContext();
+  const User = useContext(useUserContext)
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation() as any;
   let sharePhoto = () => {
@@ -70,7 +71,7 @@ const PreviewCertificatePhoto: React.FC<PreviewProps> = ({photo, setPhoto, hasMe
         <Btn
           type="action"
           label={"Submit"}
-          callback={() => navigation.navigate("car-underReview")}
+          callback={() => User?.handleVehicleRegisteration(setIsLoading={setIsLoading}, photo={photo}, setPhoto={setPhoto})}
         />
       </View>
       <View>

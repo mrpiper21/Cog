@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 type HandleSubmitType = (setIsLoading: Dispatch<React.SetStateAction<boolean>>, setPhoto: (value: any)=> void, photo: String, edit?: boolean | never ) => Promise<void>
 interface UserContextProps {
   user: UserInterface;
-  updateUser: (updatedFields: Partial<UserInterface>) => void;
+  updateUser: (updatedFields: UserInterface) => void;
   updateUserProfile: (
     UserData: UserInterface,
     setIsLoading: Dispatch<React.SetStateAction<boolean>>,
@@ -21,6 +21,7 @@ interface UserContextProps {
   handleLicenseSubmit: HandleSubmitType
   handleProfilePhotoSubmit: HandleSubmitType,
   appLoading: boolean
+  handleVehicleRegisteration: HandleSubmitType
 }
 
 export const useUserContext = React.createContext<UserContextProps | undefined>(
@@ -35,7 +36,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   const [appLoading, setAppLoading] = useState<boolean>(false)
   const navigation = useNavigation() as any
 
-  const updateUser = useCallback((updatedFields: Partial<UserInterface>) => {
+  const updateUser = useCallback((updatedFields: UserInterface) => {
     setUser((prevUser) => ({
       ...prevUser,
       ...updatedFields,
@@ -166,6 +167,60 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
     }
   },[])
+  
+  const handleVehicleRegisteration = useCallback(async (
+    setIsLoading: Dispatch<React.SetStateAction<boolean>>,
+    setPhoto: (value: any) => void,
+    photo: any
+  ) => {
+    setIsLoading(true);
+    const formData = new FormData();
+    let uri = photo?.uri;
+
+    try {
+      let uriParts = uri.split(".");
+      let fileType = uriParts[uriParts.length - 1];
+
+      formData.append("vehicleRegistration", {
+        uri: uri,
+        type: "image/jpg",
+        name: `vehicleRegistration.${fileType}`,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${mytoken}`,
+        },
+        transformRequest: () => {
+          return formData;
+        },
+      };
+
+      const response = await axios.post(
+        baseURL + "user/upload/vehicle-registration",
+        formData,
+        config
+      );
+
+      if (response.status === 201) {
+        console.log("Image uploaded successfully!");
+        console.log(response.headers);
+        Alert.alert("Success", "Image uploaded successfully!");
+        setIsLoading(false);
+        navigation.navigate("document");
+      } else {
+        Alert.alert(`Error uploading image try again`);
+        setIsLoading(false);
+        setPhoto(undefined);
+      }
+    } catch (error) {
+      alert(`Error uploading image try again`);
+      console.error("Error uploading image:", error);
+      setPhoto(undefined);
+      setIsLoading(false);
+    }
+  },[])
 
   const handleProfilePhotoSubmit = useCallback(async (
     setIsLoading: (value: boolean) => void,
@@ -227,7 +282,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   }, []);
   return (
     <useUserContext.Provider
-      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit, appLoading }}
+      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit, appLoading, handleVehicleRegisteration }}
     >
       {children}
     </useUserContext.Provider>

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { AntDesign } from '@expo/vector-icons';
-import {  SoundSettingsType, AccessibilitySettingsType, NotificationSettingsType, NightModeSettingsType, CommunicationSettingsType, SpeedLimitSettingsType, RideCheckSettingsType, EmergencyContactType, NavigationMapItemType, NavigationSettingItemType } from '../Mock/DefaultAppSettings';
+import {  SoundSettingsType, AccessibilitySettingsType, NotificationSettingsType, NightModeSettingsType, SpeedLimitSettingsType, RideCheckSettingsType, EmergencyContactType, NavigationMapItemType, NavigationSettingItemType } from '../Mock/DefaultAppSettings';
 const checkIcon = <AntDesign name="check" size={24} color="blue" />
 const Icon = <AntDesign name="check" size={24} color="blue" />
 import { Contact } from 'expo-contacts';

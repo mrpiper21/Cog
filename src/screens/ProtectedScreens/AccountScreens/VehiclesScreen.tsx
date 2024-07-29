@@ -2,11 +2,12 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import Header from '../../../widget/Header'
 import Responsiveness from '../../../helpers/Responsiveness'
-import { RoundedCheckbox } from 'react-native-rounded-checkbox'
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import Btn from '../../../widget/Btn'
 import { useNavigation } from '@react-navigation/native'
 import UnderReviewItem from '../../../component/UnderReviewItem'
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Radio from '../../../component/Radio'
 
 const VehiclesScreen = () => {
     const navigation = useNavigation() as any;
@@ -18,23 +19,27 @@ const VehiclesScreen = () => {
         </View>
         <View style={{marginTop: Responsiveness.getResponsiveHeight(1), paddingVertical: Responsiveness.getResponsiveHeight(2)}} className='flex flex-row items-center justify-between border-b-[1px] border-gray-300'>
             <View className="flex flex-row items-center">
-                <Image className="mr-3" source={require("../../../../assets/carRMV-img.png")} />
+                <View style={{marginRight: Responsiveness.getResponsiveWidth(3)}}>
+                    <FontAwesome6 name="car-side" size={24} color="blue" />
+                </View>
                 <View>
                     <Text>Kia Sportage</Text>
                     <Text>5GIT444 SUV</Text>
                 </View>
             </View>
-            <RoundedCheckbox checkedColor='blue' text='' />
+            <Radio />
         </View>
         <View style={{marginTop: Responsiveness.getResponsiveHeight(1), paddingVertical: Responsiveness.getResponsiveHeight(2)}} className='flex flex-row items-center justify-between border-b-[1px] border-gray-300'>
             <View className="flex flex-row items-center">
-                <Image className="mr-3" source={require("../../../../assets/carRMV-img.png")} />
+                <View style={{marginRight: Responsiveness.getResponsiveWidth(3)}}>
+                    <FontAwesome6 name="car-side" size={24} color="blue" />
+                </View>
                 <View>
                     <Text>Kia Sportage</Text>
                     <Text>5GIT444 SUV</Text>
                 </View>
             </View>
-            <RoundedCheckbox checkedColor='blue' text='' />
+            <Radio />
         </View>
         <View>
             <View style={{marginTop: Responsiveness.getResponsiveHeight(3), marginBottom: 15}}>

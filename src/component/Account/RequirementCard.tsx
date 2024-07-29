@@ -23,7 +23,7 @@ const RequirementCard: React.FC<Cardprops> = ({status, check, requirements, prof
             <Text>{status}</Text>
             <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '700'}}>{requirements}</Text>
         </View>
-      <Checkebox type='check' color='#04AA6D' isChecked={check} />
+        <AntDesign name="checkcircle" size={24} color="green" />
       </View>
       ) : status === "unCompleted" ? (
         <TouchableOpacity onPress={()=> route && navigation.navigate(route)} style={{height: Responsiveness.getResponsiveHeight(10)}} className='flex flex-row justify-between items-center bg-red-200 p-4 rounded-xl'>
@@ -47,7 +47,7 @@ const RequirementCard: React.FC<Cardprops> = ({status, check, requirements, prof
               <Text>completed</Text>
               <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '700'}}>{requirements}</Text>
           </View>
-          <Checkebox type='check' color='#04AA6D' isChecked={check} />
+          <AntDesign name="checkcircle" size={24} color="green" />
         </View>)}
     </>
   )
