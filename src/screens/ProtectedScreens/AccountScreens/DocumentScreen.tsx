@@ -35,10 +35,10 @@ const DocumentScreen = () => {
           </View>
           <View className='flex gap-4'>
               <View>
-                <RequirementCard check={check} status={"unCompleted"} requirements={"Vehicle Insurance"} route={"register-certificate"} />
+                <RequirementCard check={check} status={"unCompleted"} requirements={"Vehicle Insurance"}/>
               </View>
               <View>
-                <RequirementCard check={check} status={User?.user.vehicleRegistrationStatus} requirements={"Vehicle Registration"} />
+                <RequirementCard check={check} status={User?.user.vehicleRegistrationStatus} requirements={"Vehicle Registration"} route={"register-certificate"}/>
               </View>
           </View>
         </View>

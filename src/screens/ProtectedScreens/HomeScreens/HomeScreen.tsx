@@ -30,7 +30,7 @@ import { locationOfInterest } from "../../../Mock/LocationOfInterest";
 
 const HomeScreen = ({route}: any): React.JSX.Element => {
   const location = route.params?.location
-  console.log("search loction...", location)
+  // console.log("search loction...", location)
   const mapRegion = React.useContext(LocationContext);
   const mapRef = useRef<MapView>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -53,7 +53,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
   useEffect(() => {
     Location.getLastKnownPositionAsync()
       .then((Location) => {
-        console.log("current location...", Location)
+        // console.log("current location...", Location)
         setDriverLocation({
           latitude: Location?.coords.latitude,
           longitude: Location?.coords.longitude,
@@ -81,7 +81,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       );
     });
   };
-  const snapPoints = useMemo(() => ["12%", "30%"], []);
+  const snapPoints = useMemo(() => ["45%"], []);
 
   const goOnline = () => {
     setIsOnline(!isOnline);

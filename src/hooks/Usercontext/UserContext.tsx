@@ -205,7 +205,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 
       if (response.status === 201) {
         console.log("Image uploaded successfully!");
-        console.log(response.headers);
+        console.log(response.data);
         Alert.alert("Success", "Image uploaded successfully!");
         setIsLoading(false);
         navigation.navigate("document");

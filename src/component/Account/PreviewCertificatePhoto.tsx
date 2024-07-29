@@ -71,7 +71,7 @@ const PreviewCertificatePhoto: React.FC<PreviewProps> = ({photo, setPhoto, hasMe
         <Btn
           type="action"
           label={"Submit"}
-          callback={() => User?.handleVehicleRegisteration(setIsLoading={setIsLoading}, photo={photo}, setPhoto={setPhoto})}
+          callback={() => User?.handleVehicleRegisteration(setIsLoading, setPhoto, photo)}
         />
       </View>
       <View>
