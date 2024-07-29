@@ -16,7 +16,8 @@ export const useAppContext = createContext<{
     accessibility: AccessibilitySettingsType;
     notification: NotificationSettingsType;
     nightMode: NightModeSettingsType;
-    communication: CommunicationSettingsType;
+    activeCommunicationSetting: string;
+    setActiveCommunicationSetting: React.Dispatch<React.SetStateAction<string>>;
     emergencyContact: EmergencyContactType;
     filteredContacts: Contact[];
     selectedContacts: string[];
@@ -185,23 +186,23 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         ]
     }
     
-     const defaultCommunicationSettings: CommunicationSettingsType = {
-        callOrChat: true,
-        call: false,
-        chat: false,
-        toggleCheck: (property: 'callOrChat' | 'call' | 'chat') => {
-            // Create a new object with the updated state
-            const updatedSettings = {
-                ...defaultCommunicationSettings,
-                    callOrChat: false,
-                    call: false,
-                    chat: false,
-                [property]: true,
-              };
-            console.log("presses toggle")
-            setdefaultCommunicationSettings(updatedSettings);
-          },
-    };
+    //  const defaultCommunicationSettings: CommunicationSettingsType = {
+    //     callOrChat: true,
+    //     call: false,
+    //     chat: false,
+    //     toggleCheck: (property: 'callOrChat' | 'call' | 'chat') => {
+    //         // Create a new object with the updated state
+    //         const updatedSettings = {
+    //             ...defaultCommunicationSettings,
+    //                 callOrChat: false,
+    //                 call: false,
+    //                 chat: false,
+    //             [property]: true,
+    //           };
+    //         console.log("presses toggle")
+    //         setdefaultCommunicationSettings(updatedSettings);
+    //       },
+    // };
 
     const updateContacts = (newContacts: Contact[], type?: "filter" | never) => {
         if(type=== "filter"){
@@ -269,7 +270,7 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
     const [defaultAccessibility, setdefaultAccessibilitySettings] = useState<AccessibilitySettingsType>(defaultAccessibilitySettings)
     const [defaultNotification, setdefaultNotificationSettings] = useState<NotificationSettingsType>(defaultNotificationSettings)
     const [defaultNightMode, setdefaultNightModeSettings] = useState<NightModeSettingsType>(defaultNightModeSettings)
-    const [defaultCommunication, setdefaultCommunicationSettings] = useState<CommunicationSettingsType>(defaultCommunicationSettings)
+    const [activeCommunicationSetting, setActiveCommunicationSetting] = useState<string>('')
     const [defaultEmergency, setdefaultEmergencyContact] = useState<EmergencyContactType>(defaultEmergencyContact)
     const [defaultSpeedLimit, setdefaultSpeedLimitSettings] = useState<SpeedLimitSettingsType>(defaultSpeedLimitSettings)
     const [defaultRideCheck, setdefaultRideCheckSettings] = useState<RideCheckSettingsType>(defaultRideCheckSettings)
@@ -285,7 +286,8 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         accessibility: defaultAccessibility,
         notification: defaultNotification,
         nightMode: defaultNightMode,
-        communication: defaultCommunication,
+        activeCommunicationSetting,
+        setActiveCommunicationSetting,
         emergencyContact: defaultEmergency,
         filteredContacts,
         selectedContacts,

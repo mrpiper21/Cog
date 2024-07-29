@@ -11,7 +11,7 @@ const AuthStackNavigator = createStackNavigator();
 const AppNavigation = () => {
   const User = useContext(useUserContext)
 
-  return (<AuthNavigation />)
+  return (<DrawerNavigation />)
 };
 
 export default AppNavigation;

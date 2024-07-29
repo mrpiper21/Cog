@@ -5,6 +5,8 @@ import Checkebox from '../../../../component/Checkebox'
 import HelpItem from '../../../../component/Help/HelpItem'
 import Btn from '../../../../widget/Btn'
 import { useAppContext } from '../../../../hooks/AppSettingContext'
+import { CommunicationOptions } from '../../../../Mock/Options'
+import CommunicationItem from '../../../../component/AppSetting/Communication/CommunicationItem'
 
 const CommunicationScreen = () => {
   const AppSettings = useContext(useAppContext)
@@ -13,30 +15,9 @@ const CommunicationScreen = () => {
       <View style={{margin: Responsiveness.getResponsiveWidth(3)}}>
         <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Contact preferences</Text>
       </View>
-      <View style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1}} className='flex flex-row items-center justify-between px-4 border-[#EEEE]'>
-        <View className='flex flex-row items-center'>
-            <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../../../../assets/icons/settings/CallorChat.png")}/>
-            <View className='space-y-1'>
-                <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '600'}}>Call or chat</Text>
-                <Text>Recommeded</Text>
-            </View>
-        </View>
-        <Checkebox type='rounded' isChecked={AppSettings?.communication.callOrChat} callback={()=> AppSettings?.communication.toggleCheck('callOrChat')} color='blue'/>
-      </View>
-      <View style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1}} className='flex flex-row items-center justify-between px-4 border-[#EEEE]'>
-        <View className='flex flex-row items-center'>
-            <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../../../../assets/icons/settings/callemergency.png")}/>
-            <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '600'}}>Call</Text>
-        </View>
-        <Checkebox type='rounded' isChecked={AppSettings?.communication.call} color='blue' callback={()=> AppSettings?.communication.toggleCheck('call')}/>
-      </View>
-      <View style={{paddingVertical: Responsiveness.getResponsiveHeight(2), borderBottomWidth: 1}} className='flex flex-row items-center justify-between px-4 border-[#EEEE]'>
-        <View className='flex flex-row items-center'>
-            <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../../../../assets/icons/settings/chat.png")}/>
-            <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5), fontWeight: '600'}}>Chat</Text>
-        </View>
-        <Checkebox type='rounded' isChecked={AppSettings?.communication.chat} callback={()=> AppSettings?.communication.toggleCheck('chat')} color='blue' />
-      </View>
+      {CommunicationOptions.map((Option)=> 
+         (<CommunicationItem icon={Option.icon} label={Option.label} value={Option.value}/>)
+      )}
       <View className='p-4 space-y-1'>
         <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '600'}}>Marketing Preferences</Text>
         <Text>Choose how to get special offers, promos, personalized suggestions, and more.</Text>

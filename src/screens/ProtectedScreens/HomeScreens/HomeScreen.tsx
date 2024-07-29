@@ -21,7 +21,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/LocationContext/LocationHook";
-import DriverMarker from "../../../Global/DriverMarker";
+import DriverMarker from "../../../component/Home/Markers/DriverMarker";
 import BottomSheetItem from "../../../component/BottomSheetItem";
 import ToggleUserActiveLocation from "../../../component/Home/ToggleUserActiveLocation";
 import NavBarIcon from './../../../component/Home/NavBarIcon';

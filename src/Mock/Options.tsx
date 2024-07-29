@@ -1,4 +1,7 @@
-export type OptionsTypes = {label: String | number, value:boolean | number | String | null}[]
+import React from 'react'
+import {Image} from "react-native"
+import Responsiveness from '../helpers/Responsiveness'
+export type OptionsTypes = {icon?: React.ReactNode | never | undefined, label: String | number, value:boolean | number | String | null}[]
 
 export const MakeOptions: OptionsTypes = [
     { label: "Toyota", value: "Toyota" },
@@ -55,7 +58,13 @@ export const WheelChairOptions: OptionsTypes = [
     {label: "False", value: false},
 ]
 export const VehicleTypeOptions: OptionsTypes = [
-    {label: "Personal", value: "Personal car"},
-    {label: "Company", value: "Company car"},
-    {label: "Rent", value: "Rented car"},
+    {label: "Personal", value: 'Personal car'},
+    {label: "Company", value: 'Company car'},
+    {label: "Rent", value: 'Rented car'},
+]
+
+export const CommunicationOptions: OptionsTypes = [
+    {icon: <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../assets/icons/settings/CallorChat.png")}/>, label: "Call or Chat", value: "callOrchat"},
+    {icon: <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../assets/icons/settings/callemergency.png")}/>, label: "Call", value: "call"},
+    {icon: <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../assets/icons/settings/chat.png")}/>, label: "Chat", value: "chat"},
 ]
