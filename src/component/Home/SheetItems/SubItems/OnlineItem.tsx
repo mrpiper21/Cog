@@ -1,33 +1,19 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
+import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from "react-native-responsive-screen";
-import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
-import { useNavigation } from '@react-navigation/native';
 
-// interface Props {
-//     callback: ()=> void
-// }
-
-const OnlineItem /*React.FC<Props>*/= () => {
-    const navigation = useNavigation() as any
+const OnlineItem = () => {
     const [isOnline, setIsOnline] = useState(false)
 
     const goOnline = () => {
         setIsOnline(!isOnline);
       };
   return (
-    <View style={styles.bottomSheetContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Preference")}>
-              {/* <Ionicons name="options-outline" size={wp(8)} color="black" /> */}
-              <Image
-                source={require("../../../../assets/preferenceIcon.png")}
-                style={{ width: 40, height: 30 }}
-              />
-            </TouchableOpacity>
-            <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row" }}>
               <TouchableOpacity
                 onPress={() => goOnline()}
                 style={
@@ -54,12 +40,6 @@ const OnlineItem /*React.FC<Props>*/= () => {
                 />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Recommendation")}
-            >
-              <AntDesign name="bars" size={wp(8)} color="black" />
-            </TouchableOpacity>
-          </View>
   )
 }
 
@@ -134,4 +114,3 @@ const styles = StyleSheet.create({
       justifyContent: "space-evenly",
     },
   });
-  
