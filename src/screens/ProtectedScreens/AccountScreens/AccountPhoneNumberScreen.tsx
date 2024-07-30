@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, {useState, useRef} from 'react'
 import Responsiveness from '../../../helpers/Responsiveness'
-import PhoneInput from "react-native-phone-number-input";
+// import PhoneInput from "react-native-phone-number-input";
 import Btn from '../../../widget/Btn';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +10,7 @@ const AccountPhoneNumberScreen = () => {
   const [formattedValue, setFormattedValue] = useState("");
   const [valid, setValid] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const phoneInput = useRef<PhoneInput>(null);
+  // const phoneInput = useRef<PhoneInput>(null);
   const navigation = useNavigation() as any;
 
   return (
@@ -20,7 +20,7 @@ const AccountPhoneNumberScreen = () => {
             <Text style={{fontWeight:'700', fontSize: Responsiveness.getResponsiveWidth(4)}}>Phone Number</Text>
         </View>
         <View>
-            <PhoneInput
+            {/* <PhoneInput
                 ref={phoneInput}
                 defaultValue={value}
                 defaultCode="DM"
@@ -37,7 +37,7 @@ const AccountPhoneNumberScreen = () => {
                 textContainerStyle={styles.textInput}
                 countryPickerButtonStyle={styles.countryPicker}
                 containerStyle={{width: Responsiveness.getResponsiveWidth(93)}}
-            />    
+            /> */}
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveHeight(3)}} className='flex items-center'>
