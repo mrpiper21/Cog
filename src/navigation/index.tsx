@@ -6,12 +6,16 @@ import PreferenceProvider from "../hooks/PrefrenceContext/PreferenceContext";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useUserContext } from "../hooks/Usercontext/UserContext";
 // import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-const AuthStackNavigator = createStackNavigator();
+const NavigationRoute = createStackNavigator();
 
 const AppNavigation = () => {
   const User = useContext(useUserContext)
 
-  return (<DrawerNavigation />)
+  return (
+  <NavigationRoute.Navigator screenOptions={{headerShown: false}}>
+    <NavigationRoute.Screen name="auth-route" component={AuthNavigation} />
+    <NavigationRoute.Screen name="protected-route" component={DrawerNavigation}/>
+  </NavigationRoute.Navigator>)
 };
 
 export default AppNavigation;

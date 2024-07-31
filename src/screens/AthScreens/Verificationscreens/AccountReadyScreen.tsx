@@ -5,10 +5,11 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Btn from "../../../widget/Btn";
-import { UserInfoContext, useVerificationContext } from "../../../Context";
+import { UserInfoContext } from "../../../Context";
+import { useNavigation } from "@react-navigation/native";
 
 const AccountReadyScreen = () => {
-  const Verification = useVerificationContext();
+  const navigation = useNavigation() as any;
   const User = UserInfoContext();
   return (
     <View style={{ flex: 1 }}>
@@ -28,7 +29,7 @@ const AccountReadyScreen = () => {
           <Btn
             type="action"
             label={"let's go"}
-            callback={Verification.AuthenticateUser}
+            callback={()=> navigation.navigate("protected-route")}
           />
         </View>
       </View>

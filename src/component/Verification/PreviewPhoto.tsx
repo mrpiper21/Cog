@@ -1,14 +1,14 @@
 import { View, Text, Image, TouchableOpacity, Button } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useVerificationContext } from "../../Context";
 import Btn from "../../widget/Btn";
 import Loading from "../../widget/Loading";
+import { useUserContext } from "../../hooks/Usercontext/UserContext";
 
 interface PreviewProps {
   photo: any;
@@ -25,7 +25,8 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
   setIsLoading,
   isLoading,
 }) => {
-  const { handleProfilePhotoSubmit } = useVerificationContext();
+  const User = useContext(useUserContext)
+  const handleProfilePhotoSubmit  = User?.handleProfilePhotoSubmit;
   let sharePhoto = () => {
     shareAsync(photo.uri).then(() => {
       setPhoto(undefined);
@@ -67,6 +68,7 @@ const PreviewPhoto: React.FC<PreviewProps> = ({
         <Btn
           type="action"
           callback={() =>
+            handleProfilePhotoSubmit &&
             handleProfilePhotoSubmit(setIsLoading, setPhoto, photo)
           }
           label={"Submit"}

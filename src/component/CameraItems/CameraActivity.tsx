@@ -11,7 +11,6 @@ import * as FileSystem from "expo-file-system";
 import { useNavigation } from "@react-navigation/native";
 import PreviewFrontLicense from "../../screens/AthScreens/Verificationscreens/PreviewFrontLicense";
 import ShutterItem from "./ShutterItem";
-import { useVerificationContext } from "../../Context";
 import CancelBtn from "../../widget/Buttons/CancelBtn";
 
 
@@ -28,7 +27,6 @@ const CameraActivity: React.FC<CameraProps> = ({type, setPhoto, photo}) => {
   const [hasCameraaPermission, setHasCameraPermission] = useState(Boolean);
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(Boolean);
-  const { handleProfilePhotoSubmit } = useVerificationContext();
 
   const cameraRef = useRef<CameraView>(null);
   const navigation = useNavigation();
