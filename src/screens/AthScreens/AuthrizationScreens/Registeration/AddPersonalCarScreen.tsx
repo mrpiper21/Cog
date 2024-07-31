@@ -115,7 +115,7 @@ const AddPersonalCarScreen = ({route}: any) => {
 
         <View style={{marginVertical: Responsiveness.getResponsiveWidth(5)}} className='items-center mx-5'>
             {/* <Btn type={isLoading ? "cancel" : 'action'} label={isLoading ? undefined : "Next"} callback={()=> handleVehicleSubmit()} loader={ButtonLoader} /> */}
-            <Btn type={isLoading ? 'cancel' : 'action'} label={isLoading ? undefined : "next"} callback={handleVehicleSubmit} loader={ButtonLoader }/>
+            <Btn type={isLoading ? 'cancel' : 'action'} label={isLoading ? undefined : "next"} callback={handleVehicleSubmit} loader={ButtonLoader}/>
         </View>
     </ScrollView>
   )
