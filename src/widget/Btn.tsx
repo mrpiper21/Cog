@@ -24,9 +24,10 @@ const Btn: React.FC<ButtonProps> = ({ route, label, type, callback, loader }) =>
     <TouchableOpacity
       disabled={loader && type == "cancel" ? true : false}
       onPress={() => callback && callback()}
-        style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEE" }]}
-      >
-        {label ? <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
+      style={ type === "action" ? [styles.button, { backgroundColor: "#4460EF" }] : [styles.button, { backgroundColor: "#EEEE" }]}
+    >
+      {label ? 
+      <Text style={type === "action" && [styles.labeltxt, { color: "white" }]}>
           {label}
         </Text> : loader}
     </TouchableOpacity>

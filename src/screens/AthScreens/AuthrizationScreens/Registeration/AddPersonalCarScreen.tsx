@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import React, { useEffect, useState, useRef, useContext } from 'react'
 import Header from '../../../../widget/Header'
 import ProgressBar from '../../../../component/Verification/ProgressBar'
@@ -16,6 +16,7 @@ import axios from 'axios';
 import { baseURL, config } from '../../../../Services/authorization';
 import { useUserContext } from '../../../../hooks/Usercontext/UserContext';
 import ButtonLoader from '../../../../widget/ButtonLoader';
+import Loading from '../../../../widget/Loading';
 
 export interface CarInfoType {
     type: string
@@ -69,13 +70,15 @@ const AddPersonalCarScreen = ({route}: any) => {
             const response = await axios.post(baseURL + "vehicle/add-vehicle", carData, config)
             if(response.status === 201){
                 setIsLoading(false)
-                console.log("car infor submited successfully")
+                Alert.alert("✔✔✔","car info submited successfully")
                 navigation.navigate("Verification")
             }else {
-                console.log("Something went wront")
+                Alert.alert("❌❌❌","Something went wrong")
+                console.log("Something went wrong")
                 setIsLoading(false)
             }
         }catch(error){
+            Alert.alert("❌❌❌",`${error}`)
             console.log(error)
             setIsLoading(false)
         }
@@ -112,7 +115,7 @@ const AddPersonalCarScreen = ({route}: any) => {
 
         <View style={{marginVertical: Responsiveness.getResponsiveWidth(5)}} className='items-center mx-5'>
             {/* <Btn type={isLoading ? "cancel" : 'action'} label={isLoading ? undefined : "Next"} callback={()=> handleVehicleSubmit()} loader={ButtonLoader} /> */}
-            <Btn type='action' label={"next"} callback={()=> navigation.navigate("Verification")}/>
+            <Btn type={isLoading ? 'cancel' : 'action'} label={isLoading ? undefined : "next"} callback={handleVehicleSubmit} loader={ButtonLoader }/>
         </View>
     </ScrollView>
   )

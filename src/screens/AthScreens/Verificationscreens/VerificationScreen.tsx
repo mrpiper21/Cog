@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import SatusItem from "../../../component/Verification/SatusItem";
 import BackButton from "../../../widget/Buttons/BackButton";
 import Btn from "../../../widget/Btn";
