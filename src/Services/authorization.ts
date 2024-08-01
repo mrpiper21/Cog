@@ -8,6 +8,7 @@ import axios from "axios"
 
 export const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVsQGdtYWlsLmNvbSIsImlhdCI6MTcwMTY5NjEwNCwiZXhwIjoxNzMzMjUzNzA0fQ.sX9RqJM6hPdyRrYolPOzDa1lddPMhP0HVdwPg5pbKIQ"
 export const mytoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlbmJhYWgxMDRAZ21haWwuY29tIiwiaWF0IjoxNzE3NTIyNTY5LCJleHAiOjE3NDkwODAxNjl9.l23c7t7gfB1GZwRFJw2e4Ib-R0RbTgYn7MQRSzd3UnI"
+const admintoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFtdXNpbGVmcmFuY2lzY29AZ21haWwuY29tIiwiaWF0IjoxNzIyNDQxNzY5LCJleHAiOjE3NTM5OTkzNjl9.Dv7htjow90NkLVxAkX-OdIO1QFa8B3UJSwrNAQk9Mqs"
 export const API_KEY = "AIzaSyAMK0gm6FqImxY1oLDQ72UcTuZzybFl7Lw"
 export const baseURL = "https://bookish-octo-barnacle-2.onrender.com/"
 

@@ -153,15 +153,15 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
         console.log(response.headers);
         Alert.alert("Success", "Image uploaded successfully!");
         setIsLoading(false);
-        updateUserProfile({ driversLicenseStatus: "Submitted" }).then((res)=> console.log(res)).catch((err)=> Alert.alert("Failed", "Something went wrong", err))
+        // updateUserProfile({ driversLicenseStatus: "Submitted" }).then((res)=> console.log(res)).catch((err)=> Alert.alert("Failed", "Something went wrong", err))
         navigation.navigate("Verification");
       } else {
-        alert(`Error uploading image try again`);
+        alert(`❌❌❌Error uploading image try again`);
         setIsLoading(false);
         setPhoto(undefined);
       }
     } catch (error) {
-      alert(`Error uploading image try again`);
+      alert(`something went wrong whiles uploading image! try again`);
       console.error("Error uploading image:", error);
       setPhoto(undefined);
       setIsLoading(false);

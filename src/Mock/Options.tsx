@@ -10,6 +10,15 @@ export const MakeOptions: OptionsTypes = [
     {label: "Mercedes", value: "Mercedes"}
 ]
 
+export const ModelOptions: OptionsTypes = [
+    {label: "Toyota Camry", value: "camry"},
+    {label: "Toyota Corolla", value: "corolla"},
+    {label: "Toyota Aygo", value: "Aygo"},
+    {label: "Kia Picanto", value: "picanto"},
+    {label: "Nissan Micro", value: "micro"},
+    {label: "Nissan Macro", value: "macro"},
+    {label: "Nissan March", value: "march"}
+]
 export const YearOptions: OptionsTypes = [
     {label: "2010", value: 2010},
     {label: "2011", value: 2011},
