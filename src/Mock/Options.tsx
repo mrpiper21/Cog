@@ -77,3 +77,14 @@ export const CommunicationOptions: OptionsTypes = [
     {icon: <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../assets/icons/settings/callemergency.png")}/>, label: "Call", value: "call"},
     {icon: <Image style={{marginRight: Responsiveness.getResponsiveWidth(3)}} source={require("../../assets/icons/settings/chat.png")}/>, label: "Chat", value: "chat"},
 ]
+
+export const SpeedLimitBelow55mphOptions: OptionsTypes = [
+    {label: "3 mph", value: "3"},
+    {label: "5 mph", value: "5"},
+    {label: "7 mph", value: "7"}
+]
+export const SpeedLimitAbove55mphOptions: OptionsTypes = [
+    {label: "7 mph", value: "7"},
+    {label: "10 mph", value: "10"},
+    {label: "15 mph", value: "15"}
+]

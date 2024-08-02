@@ -18,6 +18,10 @@ export const useAppContext = createContext<{
     nightMode: NightModeSettingsType;
     activeCommunicationSetting: string;
     setActiveCommunicationSetting: React.Dispatch<React.SetStateAction<string>>;
+    speedLimitAbove55mph: string;
+    setSpeedLimitAbove55mph: React.Dispatch<React.SetStateAction<string>>;
+    speedLimitBelow55mph: string;
+    setSpeedLimitBelow55mph: React.Dispatch<React.SetStateAction<string>>;
     emergencyContact: EmergencyContactType;
     filteredContacts: Contact[];
     selectedContacts: string[];
@@ -186,24 +190,6 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         ]
     }
     
-    //  const defaultCommunicationSettings: CommunicationSettingsType = {
-    //     callOrChat: true,
-    //     call: false,
-    //     chat: false,
-    //     toggleCheck: (property: 'callOrChat' | 'call' | 'chat') => {
-    //         // Create a new object with the updated state
-    //         const updatedSettings = {
-    //             ...defaultCommunicationSettings,
-    //                 callOrChat: false,
-    //                 call: false,
-    //                 chat: false,
-    //             [property]: true,
-    //           };
-    //         console.log("presses toggle")
-    //         setdefaultCommunicationSettings(updatedSettings);
-    //       },
-    // };
-
     const updateContacts = (newContacts: Contact[], type?: "filter" | never) => {
         if(type=== "filter"){
             setFilteredContacts(newContacts)
@@ -271,6 +257,8 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
     const [defaultNotification, setdefaultNotificationSettings] = useState<NotificationSettingsType>(defaultNotificationSettings)
     const [defaultNightMode, setdefaultNightModeSettings] = useState<NightModeSettingsType>(defaultNightModeSettings)
     const [activeCommunicationSetting, setActiveCommunicationSetting] = useState<string>('')
+    const [speedLimitAbove55mph, setSpeedLimitAbove55mph] = useState<string>('')
+    const [speedLimitBelow55mph, setSpeedLimitBelow55mph] = useState<string>('')
     const [defaultEmergency, setdefaultEmergencyContact] = useState<EmergencyContactType>(defaultEmergencyContact)
     const [defaultSpeedLimit, setdefaultSpeedLimitSettings] = useState<SpeedLimitSettingsType>(defaultSpeedLimitSettings)
     const [defaultRideCheck, setdefaultRideCheckSettings] = useState<RideCheckSettingsType>(defaultRideCheckSettings)
@@ -288,6 +276,10 @@ const AppSettingContext: React.FC<{ children: React.ReactNode }> = ({children}) 
         nightMode: defaultNightMode,
         activeCommunicationSetting,
         setActiveCommunicationSetting,
+        speedLimitAbove55mph,
+        setSpeedLimitAbove55mph,
+        speedLimitBelow55mph,
+        setSpeedLimitBelow55mph,
         emergencyContact: defaultEmergency,
         filteredContacts,
         selectedContacts,
