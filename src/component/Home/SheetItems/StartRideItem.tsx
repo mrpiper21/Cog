@@ -3,6 +3,7 @@ import React from 'react'
 import RideInfoItem from './SubItems/RideInfoItem'
 import ToggleActiveUserItem from './ToggleActiveUserItem'
 import ClientItem from './ClientItem'
+// import Swipeable from 'react-native-swipeable';
 
 
 const StartRideItem = () => {

@@ -5,53 +5,23 @@ import Responsiveness from '../../../../helpers/Responsiveness'
 import ProgressBar from '../../../../component/Verification/ProgressBar'
 import SurveyItem from '../../../../component/Registeration/SurveyItem'
 import Btn from '../../../../widget/Btn'
-import { WhyDriveGlopilots, HowManyHours, WhenToDrive, ApplyToDriveWihtOtherApp } from '../../../../component/Registeration/SurveyItem'
+import { WhyDriveGlopilots, HowManyHours, WhenToDrive, ApplyToDriveWihtOtherApp } from '../../../../Mock/DriversurveyData'
 import { useNavigation } from '@react-navigation/native'
 
 const DriverSurverScreen = () => {
     const navigation = useNavigation() as any;
-    const [SuveyState, setSurveyState] = React.useState({
-        WhyDriveGlopilots,
-        HowManyHours,
-        WhenToDrive,
-        ApplyToDriveWihtOtherApp
-    })
-    const handleWhyDriveGlopilots = (id: number) => {
-        console.log("handling callback");
-        setSurveyState((prev) => ({
-          ...prev,
-          WhyDriveGlopilots: prev.WhyDriveGlopilots.map((data) =>
-            data.id === id ? { ...data, checked: false } : data
-          ),
-        }));
-      };
-    const handleHowManyHours = (id: number) => {
-        console.log("handling callback");
-        setSurveyState((prev) => ({
-          ...prev,
-          HowManyHours: prev.HowManyHours.map((data) =>
-            data.id === id ? { ...data, checked: false } : data
-          ),
-        }));
-      };
-    const handleWhenToDrive = (id: number) => {
-        console.log("handling callback");
-        setSurveyState((prev) => ({
-          ...prev,
-          WhenToDrive: prev.WhenToDrive.map((data) =>
-            data.id === id ? { ...data, checked: false } : data
-          ),
-        }));
-      };
-    const handleApplyToDriveWihtOtherApp = (id: number) => {
-        console.log("handling callback");
-        setSurveyState((prev) => ({
-          ...prev,
-          ApplyToDriveWihtOtherApp: prev.ApplyToDriveWihtOtherApp.map((data) =>
-            data.id === id ? { ...data, checked: false } : data
-          ),
-        }));
-      };
+    const [whyDriveGlopilots, setWhyDriveGlopilots] = React.useState<number>(0)
+    const [whenToDrive, setWhenToDrive] = React.useState<number>(0)
+    const [applyToDriveWihtOtherApp, setApplyToDriveWihtOtherApp] = React.useState<number>(0)
+    // const handleApplyToDriveWihtOtherApp = (id: number) => {
+    //     console.log("handling callback");
+    //     setSurveyState((prev) => ({
+    //       ...prev,
+    //       ApplyToDriveWihtOtherApp: prev.ApplyToDriveWihtOtherApp.map((data) =>
+    //         data.id === id ? { ...data, checked: false } : data
+    //       ),
+    //     }));
+    //   };
       
       
   return (
@@ -64,8 +34,8 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            {SuveyState.WhyDriveGlopilots?.map((data: any)=> (
-                <SurveyItem key={data.id} type='rounded' children={data.text} isChecked={data.checked} callback={handleWhyDriveGlopilots} id={data.id} />
+            {WhyDriveGlopilots?.map((data: any)=> (
+                <SurveyItem id={data.id} key={data.id} type='rounded' children={data.text} activeItem={whyDriveGlopilots} setActiveItem={setWhyDriveGlopilots} />
             ))}
         </View>
       </View>
@@ -76,8 +46,8 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            {SuveyState.HowManyHours?.map((data)=> (
-                <SurveyItem key={data.id} type='rounded' children={data.text} isChecked={data.checked} callback={handleHowManyHours} id={data.id}/>
+            {HowManyHours?.map((data)=> (
+                <SurveyItem key={data.id} type='box' children={data.text} id={data.id}/>
             ))}
         </View>
       </View>
@@ -87,8 +57,8 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            {SuveyState.WhenToDrive.map((data)=> (
-                <SurveyItem key={data.id} type='box' children={data.text} isChecked={data.checked} id={data.id} />
+            {WhenToDrive.map((data)=> (
+                <SurveyItem key={data.id} type='rounded' children={data.text} activeItem={whenToDrive} setActiveItem={setWhenToDrive} id={data.id}  />
             ))}
         </View>
       </View>
@@ -99,8 +69,8 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            {SuveyState.ApplyToDriveWihtOtherApp.map((data)=> (
-                <SurveyItem key={data.id} type="rounded" children={data.text} isChecked={data.checked}id={data.id} />
+            {ApplyToDriveWihtOtherApp.map((data)=> (
+                <SurveyItem key={data.id} type="rounded" children={data.text} activeItem={applyToDriveWihtOtherApp} setActiveItem={setApplyToDriveWihtOtherApp} id={data.id} />
             ))}
         </View>
       </View>
