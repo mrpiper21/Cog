@@ -17,8 +17,8 @@ const AddCarDetailsScreen = () => {
             <Image source={require("../../../../../assets/icons/CarXpersonIcon.png")} />
         </View>
         <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}} className='space-y-2'>
-            <Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Add Car Details</Text>
-            <Text>We need your vehicle's make, model, year, and
+            <Text className='text-center' style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '700'}}>Add Car Details</Text>
+            <Text className='text-center'>We need your vehicle's make, model, year, and
                 other specifications to enhance your trips and
                 ensure you receive the most suitable ride requests.
                 By providing accurate car details, you'll receive

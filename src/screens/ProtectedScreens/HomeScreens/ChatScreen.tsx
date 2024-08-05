@@ -6,7 +6,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 
 export default function ChatScreen() {
   return (
-    <View style={{paddingBottom: Responsiveness.getResponsiveHeight(1.5)}} className='flex-1 bg-white justify-between'>
+    <View style={{paddingBottom: Responsiveness.getResponsiveHeight(1)}} className='flex-1 bg-white justify-between'>
      <View>
         <View className='flex items-center justify-center space-y-2 py-2 border-b-[1px] border-gray-200'>
             <Text>Mon, Apr 289 04:56PM</Text>

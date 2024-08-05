@@ -13,6 +13,7 @@ const DriverSurverScreen = () => {
     const [whyDriveGlopilots, setWhyDriveGlopilots] = React.useState<number>(0)
     const [whenToDrive, setWhenToDrive] = React.useState<number>(0)
     const [applyToDriveWihtOtherApp, setApplyToDriveWihtOtherApp] = React.useState<number>(0)
+    const [howManyHours, setHowManyHours] = React.useState<boolean>(false)
     // const handleApplyToDriveWihtOtherApp = (id: number) => {
     //     console.log("handling callback");
     //     setSurveyState((prev) => ({

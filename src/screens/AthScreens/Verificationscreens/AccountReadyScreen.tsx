@@ -18,10 +18,10 @@ const AccountReadyScreen = () => {
       </View>
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ fontSize: wp(4), fontWeight: "600" }}>
+          <Text className="text-center" style={{ fontSize: wp(4), fontWeight: "600" }}>
             Hi {User?.user.email}, your account is almost ready
           </Text>
-          <Text style={{ fontSize: wp(4) }}>
+          <Text className="text-center" style={{ fontSize: wp(4) }}>
             Start connecting with passengers and enjoy driving.
           </Text>
         </View>
