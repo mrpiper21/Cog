@@ -11,7 +11,7 @@ import EarningStack from "./EarnigNavigator";
 import HelpNavigator from "./HelpNavigator";
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,6 +23,7 @@ import AccountStack from './AccountNavigator/index';
 import ReferralScreen from "../../screens/ProtectedScreens/Referral/ReferralScreen";
 import CancelBtn from "../../widget/Buttons/CancelBtn";
 import Responsiveness from "../../helpers/Responsiveness";
+import ChatScreen from "../../screens/ProtectedScreens/HomeScreens/ChatScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -79,6 +80,7 @@ const ProtectStack = () => {
       <Stack.Screen name="Helproute" component={HelpNavigator} />
       <Stack.Screen name="Accountroute" component={AccountStack}/>
       <Stack.Screen options={{headerShown: true, headerTitle: '', headerLeft: ()=> <View className="ml-4"><Text style={{fontSize: Responsiveness.getResponsiveWidth(4), fontWeight: '500'}}>Refer Friends</Text></View>, headerRight: ()=> <View className="mr-4"><CancelBtn /></View>}} name="referral" component={ReferralScreen}/>
+      <Stack.Screen options={{headerShown: true, headerTitleAlign: "center", headerTitle: 'Client', headerLeft: ()=> <View className="ml-4"><CancelBtn /></View>, headerRight: ()=> <TouchableOpacity style={{width: Responsiveness.getResponsiveWidth(12), height: Responsiveness.getResponsiveWidth(12)}} className="mr-4 border-[1px] items-center justify-center rounded-full border-gray-200"><FontAwesome name="phone" size={20} color="blue" /></TouchableOpacity>}} name="chat" component={ChatScreen}/>
     </Stack.Navigator>
   );
 };

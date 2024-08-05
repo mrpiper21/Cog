@@ -8,7 +8,7 @@ const ClientItem = () => {
     const navigation = useNavigation() as any;
   return (
     <View style={{paddingHorizontal: Responsiveness.getResponsiveWidth(5), marginVertical: Responsiveness.getResponsiveHeight(3)}} className='flex flex-row items-center justify-between'>
-      <TouchableOpacity className='border-[1px] p-3 rounded-full border-gray-200' onPress={() => navigation.navigate("Preference")}>
+      <TouchableOpacity className='border-[1px] p-3 rounded-full border-gray-200' onPress={() => navigation.navigate("chat")}>
         {/* <Ionicons name="options-outline" size={wp(8)} color="black" /> */}
         <MaterialCommunityIcons name="chat-processing" size={Responsiveness.getResponsiveWidth(7)} color="black" />
       </TouchableOpacity>
