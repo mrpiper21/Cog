@@ -9,11 +9,11 @@ import { useNavigation } from '@react-navigation/native';
 import OnlineItem from './SubItems/OnlineItem';
 import RideInfoItem from './SubItems/RideInfoItem';
 
-// interface Props {
-//     callback: ()=> void
-// }
+interface Props {
+    type: "info" | "ActiveUser"
+}
 
-const ToggleActiveUserItem /*React.FC<Props>*/= () => {
+const ToggleActiveUserItem: React.FC<Props>= ({type}) => {
     const navigation = useNavigation() as any
     const [isOnline, setIsOnline] = useState(false)
 
@@ -29,8 +29,7 @@ const ToggleActiveUserItem /*React.FC<Props>*/= () => {
           style={{ width: 40, height: 30 }}
         />
       </TouchableOpacity>
-        {/* <OnlineItem /> */}
-        <RideInfoItem />
+      {type === "ActiveUser" ? <OnlineItem /> : <RideInfoItem/>}
       <TouchableOpacity
         onPress={() => navigation.navigate("Recommendation")}
       >

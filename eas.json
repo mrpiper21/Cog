@@ -11,17 +11,6 @@
       "ios": {
         "resourceClass": "large"
       }
-    },
-    "development": {
-      "extends": "production",
-      "developmentClient": true,
-      "distribution": "internal"
-    },
-    "preview2": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      },
-      "channel": "preview2"
     }
   }
 }

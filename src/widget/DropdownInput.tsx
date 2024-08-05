@@ -7,13 +7,14 @@ import { OptionsTypes } from '../Mock/Options';
 import { useNavigation } from '@react-navigation/native';
 import { ColorType } from '../screens/AthScreens/AuthrizationScreens/Registeration/SelectColorScreen';
 import { CarInfoType } from '../screens/AthScreens/AuthrizationScreens/Registeration/AddPersonalCarScreen';
+import { VehicleType } from '../screens/ProtectedScreens/AccountScreens/AddVehicleScreen';
 
 interface DropdownProps {
     placeholder: string
     label: String
     data?: OptionsTypes
     value?: string | number | boolean
-    setValue?: React.Dispatch<React.SetStateAction<CarInfoType>>
+    setValue?: React.Dispatch<React.SetStateAction<CarInfoType | VehicleType >>
     selectedColor?: ColorType
     name?: any
 }

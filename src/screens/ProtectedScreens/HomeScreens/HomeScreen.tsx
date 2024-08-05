@@ -81,7 +81,6 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
       );
     });
   };
-  const snapPoints = useMemo(() => ["45%"], []);
 
   const goOnline = () => {
     setIsOnline(!isOnline);
@@ -123,7 +122,7 @@ const HomeScreen = ({route}: any): React.JSX.Element => {
           </Marker>}
         {/* {location && <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>} */}
       </MapView>
-      <BottomSheetItem snapPoints={snapPoints} bottomSheetRef={bottomSheetRef}/>
+      <BottomSheetItem bottomSheetRef={bottomSheetRef}/>
       <NavBarIcon />
       <TouchableOpacity
         onPress={() => setSearchView(!searchView)}

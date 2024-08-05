@@ -42,6 +42,7 @@
     "react-native-animated-otp-input": "^0.1.7",
     "react-native-bouncy-checkbox": "^4.0.1",
     "react-native-circle-checkbox": "^0.1.6",
+    "react-native-draggable": "^3.3.0",
     "react-native-element-dropdown": "^2.12.1",
     "react-native-flags": "^1.0.0",
     "react-native-gesture-handler": "~2.16.1",
