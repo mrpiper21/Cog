@@ -1,10 +1,6 @@
 import axios from "axios"
 
-// axios.defaults.baseURL = "http://bookish-octo-barnacle-2.onrender.com/"
-
-// axios.defaults.headers.common = {
-//     'Authorization': `Bearer ${token}`
-//   }
+const api = axios.create({"baseURL": "https://bookish-octo-barnacle-2.onrender.com/",})
 
 export const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVsQGdtYWlsLmNvbSIsImlhdCI6MTcwMTY5NjEwNCwiZXhwIjoxNzMzMjUzNzA0fQ.sX9RqJM6hPdyRrYolPOzDa1lddPMhP0HVdwPg5pbKIQ"
 export const mytoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlbmJhYWgxMDRAZ21haWwuY29tIiwiaWF0IjoxNzE3NTIyNTY5LCJleHAiOjE3NDkwODAxNjl9.l23c7t7gfB1GZwRFJw2e4Ib-R0RbTgYn7MQRSzd3UnI"
@@ -17,12 +13,12 @@ export const config = {
       "Authorization": `Bearer ${mytoken}`,
       "content-type": "application/json",
       "Accept": "application/json"
-    }
+    },
 }
 
 export const getUserConfig = {
   headers: {
-    "Authorization": `Bearer ${mytoken}`
+    "Authorization": `Bearer ${admintoken}`
   }
 }
 
@@ -43,3 +39,5 @@ axios.interceptors.response.use((response) => {
     // Do something with response error
     return Promise.reject(error);
   });
+
+  export default api;
