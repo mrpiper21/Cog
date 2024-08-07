@@ -48,6 +48,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
     setIsLoading?: Dispatch<React.SetStateAction<boolean>>,
     errorMsg?: string
   ) => {
+    console.log("User id", user._id)
     try {
       setIsLoading && setIsLoading(true);
       await axios

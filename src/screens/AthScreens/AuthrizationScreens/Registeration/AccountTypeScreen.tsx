@@ -25,7 +25,7 @@ const AccountTypeScreen = () => {
 
       <View style={{gap: Responsiveness.getResponsiveWidth(3), marginTop: Responsiveness.getResponsiveWidth(5)}} className='flex'>
        <View style={{gap: Responsiveness.getResponsiveWidth(3)}} className='flex flex-row'>
-            <TouchableOpacity onPress={()=> User?.updateUserProfile({userType: "driver"}, setLoading, 'user update successfully. You are welcome as a Driver')} style={{width: Responsiveness.getResponsiveWidth(45),borderWidth: 1, borderColor: '#EEEE'}} className='rounded-lg'>
+            <TouchableOpacity onPress={()=> User?.updateUserProfile({userType: "carOwner"}, setLoading, 'user update successfully. You are welcome as a Driver')} style={{width: Responsiveness.getResponsiveWidth(45),borderWidth: 1, borderColor: '#EEEE'}} className='rounded-lg'>
                 <View className='flex items-center bg-blue-50'>
                     <Image source={require("../../../../../assets/icons/DriverSVG.png")}/>
                 </View>
