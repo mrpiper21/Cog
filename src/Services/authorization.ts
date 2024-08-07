@@ -18,7 +18,7 @@ export const config = {
 
 export const getUserConfig = {
   headers: {
-    "Authorization": `Bearer ${admintoken}`
+    "Authorization": `Bearer ${mytoken}`
   }
 }
 

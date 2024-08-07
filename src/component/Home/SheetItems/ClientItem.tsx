@@ -1,8 +1,10 @@
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import Responsiveness from '../../../helpers/Responsiveness';
 import { useNavigation } from '@react-navigation/native';
+import Swipeable from 'react-native-swipeable-item';
+import RideItem from './RideItem';
 
 const ClientItem = () => {
     const navigation = useNavigation() as any;
